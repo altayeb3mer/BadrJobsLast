@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Login">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_normal_size">
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.9"
+            android:orientation="horizontal"
+            android:id="@+id/g1"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/g1"
+            android:padding="@dimen/margin_normal_size">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="الرجاء اختيار الموقع الصحيح لعرض علانك"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="@dimen/margin_large_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.33"
+                        android:id="@+id/g2"/>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.66"
+                        android:id="@+id/g3"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/g2"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center">
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الدولة"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txt_normal_size"/>
+
+                        <RelativeLayout
+                            android:layout_margin="@dimen/margin_small_size"
+                            android:background="@drawable/shape_btn_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            >
+                            <ImageView
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_centerVertical="true"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/ic_arrow_drop_down"
+                                android:layout_marginRight="@dimen/margin_small_size"
+                                android:layout_marginLeft="@dimen/margin_small_size"
+                                android:layout_alignParentRight="true" />
+
+                            <Spinner
+                                android:id="@+id/spinner1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="30dp"
+                                android:background="@android:color/transparent"
+                                android:minWidth="120dp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toLeftOf="@+id/g2"
+                        app:layout_constraintLeft_toRightOf="@+id/g3"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center">
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="القسم الرئيسي"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txt_normal_size"/>
+
+                        <RelativeLayout
+                            android:layout_margin="@dimen/margin_small_size"
+                            android:background="@drawable/shape_btn_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            >
+                            <ImageView
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_centerVertical="true"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/ic_arrow_drop_down"
+                                android:layout_marginRight="@dimen/margin_small_size"
+                                android:layout_marginLeft="@dimen/margin_small_size"
+                                android:layout_alignParentRight="true" />
+
+                            <Spinner
+                                android:id="@+id/spinner2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="30dp"
+                                android:background="@android:color/transparent"
+                                android:minWidth="120dp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:visibility="invisible"
+                        android:id="@+id/laySub"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toLeftOf="@+id/g3"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center">
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="القسم الفرعي"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/txt_normal_size"/>
+
+                        <RelativeLayout
+                            android:layout_margin="@dimen/margin_small_size"
+                            android:background="@drawable/shape_btn_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            >
+                            <ImageView
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_centerVertical="true"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/ic_arrow_drop_down"
+                                android:layout_marginRight="@dimen/margin_small_size"
+                                android:layout_marginLeft="@dimen/margin_small_size"
+                                android:layout_alignParentRight="true" />
+
+                            <Spinner
+                                android:id="@+id/spinner3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="30dp"
+                                android:background="@android:color/transparent"
+                                android:minWidth="120dp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="استمرار"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_large_size"
+                android:background="@drawable/shape_btn_bg"/>
+        </RelativeLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/progressLay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            app:indicatorColor="@color/colorPrimary"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

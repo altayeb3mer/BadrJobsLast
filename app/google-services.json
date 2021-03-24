@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "563206235791",
+    "project_id": "wathaaifauth",
+    "storage_bucket": "wathaaifauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563206235791:android:734d219010c290cac9b2fa",
+        "android_client_info": {
+          "package_name": "com.example.badrjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563206235791-86jkm4m9chtbd4uacgoq5poe2r3us4lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.badrjobs",
+            "certificate_hash": "163027644b700f47acd3cbe9361cea7092a7ef81"
+          }
+        },
+        {
+          "client_id": "563206235791-r2d1co3obrg7ekpr0al0scud130fj66q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.badrjobs",
+            "certificate_hash": "6088288dcc85c24e85ae96a9a0f0969cdb9d6547"
+          }
+        },
+        {
+          "client_id": "563206235791-ktt28rrvjm5p8hgddte4usiija3bomkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8LmgeUt0MrmK7v0VwBA4vB6VoMPw9V78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563206235791-ktt28rrvjm5p8hgddte4usiija3bomkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

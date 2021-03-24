@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="0dp"
+    android:elevation="@dimen/margin_small_size"
+    android:background="@drawable/shape_toolbar_bg">
+
+        <androidx.appcompat.widget.Toolbar
+            app:navigationIcon="@drawable/ic_arrow_back"
+            android:id="@+id/public_toolbar"
+            app:layout_collapseMode="pin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:titleTextColor="@android:color/white"
+
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            />
+
+</LinearLayout>

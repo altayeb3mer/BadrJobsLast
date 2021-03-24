@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@drawable/shape_splash_bg" />
+    <item
+        android:gravity="center"
+        android:bottom="50dp"
+        android:height="120dp"
+        android:width="120dp"
+        android:drawable="@drawable/ic_logo"
+        >
+
+    </item>
+<!--    <item-->
+<!--        android:bottom="@dimen/splashLogoMargin">-->
+<!--        <bitmap-->
+<!--            android:gravity="bottom"-->
+<!--            android:src="@drawable/logo"-->
+<!--            />-->
+<!--    </item>-->
+</layer-list>

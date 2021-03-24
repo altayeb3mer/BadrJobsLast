@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none"
+        android:id="@+id/hall_menu_group">
+
+<!--        <group android:checkableBehavior="none"-->
+<!--            android:id="@+id/second_menu_group">-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_my_order"-->
+<!--                android:title="طلبات سابقة"-->
+<!--                />-->
+<!--        </group>-->
+
+        <group android:checkableBehavior="none"
+            android:id="@+id/third_menu_group">
+            <item
+                android:id="@+id/nav_menu_1"
+                android:title="مراكز الخدمات"
+                />
+            <item
+                android:id="@+id/nav_menu_2"
+                android:title="بيانات الحساب"
+                />
+            <item
+                android:id="@+id/nav_menu_3"
+                android:title="العمليات السابقة"
+                />
+        </group>
+<!--        <group android:checkableBehavior="none"-->
+<!--            android:id="@+id/fourth_menu_group">-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc1"-->
+<!--                android:title=" تسجيل الدخول"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc2"-->
+<!--                android:title=" تسجيل جديد"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc3"-->
+<!--                android:title=" كود التاكيد"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc4"-->
+<!--                android:title=" طلب حالي"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc5"-->
+<!--                android:title=" السلة"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc6"-->
+<!--                android:title=" عرض الخرائط"-->
+<!--                />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_menu_sc7"-->
+<!--                android:title=" الدفع الالكتروني"-->
+<!--                />-->
+<!--        </group>-->
+        <group>
+            <item
+                android:id="@+id/nav_menu_4"
+                android:title="تواصل"
+                />
+<!--            <item-->
+<!--                android:icon="@drawable/ic_log_out"-->
+<!--                android:title="خروج"-->
+<!--                />-->
+        </group>
+    </group>
+</menu>

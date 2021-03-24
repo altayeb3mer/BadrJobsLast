@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Login">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_normal_size">
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.8"
+            android:orientation="horizontal"
+            android:id="@+id/g1"/>
+
+        <RelativeLayout
+            android:layout_margin="@dimen/margin_normal_size"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/g1"
+            android:padding="@dimen/margin_normal_size">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="end"
+                    android:background="@drawable/shape_btn_bg"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    >
+                    <ImageView
+                        android:layout_alignParentEnd="true"
+                        android:scaleType="fitXY"
+                        android:layout_centerVertical="true"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:layout_marginRight="@dimen/margin_small_size"
+                        android:layout_marginLeft="@dimen/margin_small_size"/>
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:background="@android:color/transparent"
+                        android:minWidth="120dp"
+                        />
+                </RelativeLayout>
+                <TextView
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:text="@string/welcome"
+                    android:textColor="@android:color/black"/>
+                <TextView
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_large_size"
+                    android:text="@string/login"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_marginTop="@dimen/margin_large_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:text="@string/logi_or_register"
+                    android:textStyle="bold"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_small_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/grayCardEdt"
+                    app:cardCornerRadius="@dimen/margin_normal_size">
+                    <EditText
+                        android:layout_marginLeft="@dimen/margin_normal_size"
+                        android:layout_marginRight="@dimen/margin_normal_size"
+                        android:id="@+id/edtPhoneOrEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"/>
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_marginTop="@dimen/margin_large_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:text="@string/pass"
+                    android:textStyle="bold"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_small_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/grayCardEdt"
+                    app:cardCornerRadius="@dimen/margin_normal_size">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:passwordToggleEnabled="true">
+                        <EditText
+                            android:layout_marginLeft="@dimen/margin_normal_size"
+                            android:layout_marginRight="@dimen/margin_normal_size"
+                            android:id="@+id/password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPassword"
+                            android:background="@android:color/transparent"
+                            android:text="123456"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/margin_small_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <ImageView
+                        android:id="@+id/ic_remind_me"
+                        android:scaleType="fitXY"
+                        android:layout_centerVertical="true"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_notifications"
+                        android:layout_marginRight="@dimen/margin_small_size"
+                        android:layout_marginLeft="@dimen/margin_small_size"
+                        />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/margin_large_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_normal_size"
+                        android:text="@string/remember_me"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/ic_remind_me"
+                        android:layout_toRightOf="@+id/ic_remind_me" />
+                    <TextView
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/margin_large_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_normal_size"
+                        android:text="@string/forgit_pass"
+                        android:textStyle="bold"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/colorPrimary"/>
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/go"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_large_size"
+                android:background="@drawable/shape_btn_bg"/>
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_margin="@dimen/margin_small_size"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/g1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/register"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/txt_large_size"
+                android:layout_marginLeft="@dimen/margin_large_size"
+                android:layout_marginRight="@dimen/margin_large_size"
+                android:background="@drawable/shape_btn_bg2"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/progressLay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            app:indicatorColor="@color/colorPrimary"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

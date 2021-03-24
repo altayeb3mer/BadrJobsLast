@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2700F1</color>
+    <color name="colorPrimaryDark">#140079</color>
+    <color name="colorAccent">#D4B90D</color>
+
+    //green
+    <color name="colorGreen1">#0EB208</color>
+    <color name="colorGreen2">#075904</color>
+
+
+    <color name="toolBorderColor">#1F707070</color>
+    <color name="layoutBg">#F4F2FF</color>
+
+    <color name="grayCardEdt">#DBDADC</color>
+    <color name="red">#F30E0E</color>
+    <color name="black30">#4D000000</color>
+
+
+</resources>

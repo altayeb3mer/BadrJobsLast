@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChattingActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/public_toolbar"
+            />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintBottom_toTopOf="@+id/container2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_margin="@dimen/margin_normal_size"
+        android:nestedScrollingEnabled="false"
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:listitem="@layout/chatting_item"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="15"
+        app:spanCount="1"
+        />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container2"
+        android:background="@drawable/shape_container_lay_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="@dimen/margin_normal_size">
+        <ImageView
+            android:scaleType="center"
+            android:id="@+id/ic_micro"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="@dimen/margin_normal_size"
+            android:src="@drawable/ic_microphone"/>
+
+
+        <LinearLayout
+            android:id="@+id/ic_send"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/margin_normal_size"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_circle">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_small_size"
+                android:src="@drawable/ic_send"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layoutDirection="rtl"
+            android:layout_marginLeft="@dimen/margin_normal_size"
+            android:background="@drawable/shape_chat_edt_bg"
+            app:layout_constraintRight_toLeftOf="@+id/ic_micro"
+            app:layout_constraintLeft_toRightOf="@+id/ic_send"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_size"
+            android:layout_width="0dp"
+            android:layout_height="40dp">
+            <LinearLayout
+                android:id="@+id/layAttach"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_atach_btn_bg">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_small_size"
+                    android:src="@drawable/ic_plus"
+                    />
+
+            </LinearLayout>
+            <EditText
+                android:paddingLeft="@dimen/margin_normal_size"
+                android:paddingRight="@dimen/margin_normal_size"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/layAttach"
+                android:hint="اكتب رسالتك .."
+                android:background="@android:color/transparent"
+                />
+
+
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
