@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -74,7 +75,7 @@ public class Api {
     }
 
     public interface RetrofitSignContract {
-        @POST("api/v1/contract/{contractId}")
+        @PUT("api/v1/contract/{contractId}")
         Call<String> putParam(@Path("contractId") String search,@Body HashMap<String, String> param);
     }
     public interface RetrofitGetJobDetails {
