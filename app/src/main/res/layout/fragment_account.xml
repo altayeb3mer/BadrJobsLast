@@ -293,6 +293,7 @@
                 android:orientation="horizontal"
                 android:gravity="center">
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPayPackage"
                     app:cardBackgroundColor="@color/colorPrimary"
                     app:cardCornerRadius="10dp"
                     android:layout_margin="@dimen/margin_small_size"

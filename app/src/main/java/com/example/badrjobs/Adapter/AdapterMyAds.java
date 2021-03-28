@@ -19,7 +19,7 @@ import com.example.badrjobs.R;
 import java.util.ArrayList;
 
 
-public class AdapterJobs extends RecyclerView.Adapter<AdapterJobs.ViewHolder> {
+public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> {
 
 //    Typeface tf;
     int current_page, last_page;
@@ -28,7 +28,7 @@ public class AdapterJobs extends RecyclerView.Adapter<AdapterJobs.ViewHolder> {
     private ItemClickListener mClickListener;
     private Activity activity;
 //    RelativeLayout container;
-    public AdapterJobs(Activity activity, ArrayList<ModelJob> r) {
+    public AdapterMyAds(Activity activity, ArrayList<ModelJob> r) {
         this.mInflater = LayoutInflater.from(activity);
         this.arrayList = r;
         this.activity = activity;
@@ -36,7 +36,7 @@ public class AdapterJobs extends RecyclerView.Adapter<AdapterJobs.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.ads_item, parent, false);
+        View view = mInflater.inflate(R.layout.my_ads_item, parent, false);
 
         return new ViewHolder(view);
     }
@@ -95,7 +95,7 @@ public class AdapterJobs extends RecyclerView.Adapter<AdapterJobs.ViewHolder> {
 
         ImageView imageView;
         ConstraintLayout container;
-        TextView textViewTitle,textViewOwnerName, textViewFixName;
+        TextView textViewTitle, textViewOwnerName, textViewFixName;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -20,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.badrjobs.Activity.Login;
+import com.example.badrjobs.Activity.MyAds;
+import com.example.badrjobs.Activity.PaymentPackage;
 import com.example.badrjobs.Activity.ProfileEdit;
 import com.example.badrjobs.Activity.SignatureForm2;
 import com.example.badrjobs.R;
@@ -45,7 +47,7 @@ public class FragmentMyProfile extends Fragment {
 
     ImageView imgProfileEdt, imgLogOut;
     View view;
-    CardView cardViewMyAds;
+    CardView cardViewMyAds, cardPayPackage;
     Context context;
     LinearLayout progressLay;
 
@@ -78,7 +80,14 @@ public class FragmentMyProfile extends Fragment {
         cardViewMyAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), SignatureForm2.class));
+                startActivity(new Intent(getActivity(), MyAds.class));
+            }
+        });
+        cardPayPackage = view.findViewById(R.id.cardPayPackage);
+        cardPayPackage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), PaymentPackage.class));
             }
         });
         progressLay = view.findViewById(R.id.progressLay);

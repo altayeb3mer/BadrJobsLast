@@ -127,8 +127,8 @@ public class JobsActivity extends AppCompatActivity {
                         ongoing.addHeader("Content-Type", "application/json;");
                         ongoing.addHeader("Accept", "application/json");
                         ongoing.addHeader("lang", SharedPrefManager.getInstance(getApplicationContext()).GetAppLanguage());
-//                        String token = SharedPrefManager.getInstance(context).GetToken();
-//                        ongoing.addHeader("Authorization", token);
+                        String token = SharedPrefManager.getInstance(getApplicationContext()).getAppToken();
+                        ongoing.addHeader("Authorization", token);
                         return chain.proceed(ongoing.build());
                     }
                 })

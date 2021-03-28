@@ -1,4 +1,9 @@
 <resources>
+    <array name="lang">
+        <item>Language</item>
+        <item>Arabic</item>
+        <item>English</item>
+    </array>
     <string name="register">Register</string>
     <string name="go">Go</string>
     <string name="welcome">Welcome</string>
@@ -16,8 +21,8 @@
     <string name="confirm_new_pass">Confirm New Password</string>
     <string name="update">Update</string>
     <string name="reset_password">Reset The Password</string>
-    <string name="reset_pass1_hint">Enter your email to your account</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="reset_pass1_hint">Enter your email to your account</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="welcome2">Welcome</string>
     <string name="register_txt2">Hope you to find your job short</string>
@@ -36,13 +41,8 @@
     <string name="share">Share App</string>
     <string name="copy">"Copy of "</string>
     <string name="lang">Language</string>
+
+
     <string name="option">Optinal</string>
-
-
-    <array name="lang">
-        <item>Language</item>
-        <item>Arabic</item>
-        <item>English</item>
-    </array>
 
 </resources>

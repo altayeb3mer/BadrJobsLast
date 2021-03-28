@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.badrjobs">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -18,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.ConfirmPhoneReset"></activity>
+        <activity android:name=".Activity.MyAds"></activity>
+        <activity android:name=".Activity.ConfirmPhoneReset" />
         <activity android:name=".Activity.ResetPhone" />
         <activity android:name=".Activity.NickNameEdit" />
         <activity android:name=".Activity.SignatureForm2" />
@@ -73,5 +69,10 @@
             </intent-filter>
         </service>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
