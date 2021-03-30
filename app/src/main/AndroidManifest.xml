@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.MyAds"></activity>
+        <activity android:name=".Activity.MyAds"/>
         <activity android:name=".Activity.ConfirmPhoneReset" />
         <activity android:name=".Activity.ResetPhone" />
         <activity android:name=".Activity.NickNameEdit" />
