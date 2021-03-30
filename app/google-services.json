@@ -45,6 +45,13 @@
             {
               "client_id": "563206235791-ktt28rrvjm5p8hgddte4usiija3bomkd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "563206235791-im9fkk9emq7qnec0gjeeaf2p54fk66p2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Jobs.badr"
+              }
             }
           ]
         }

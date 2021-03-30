@@ -18,7 +18,13 @@ public class FireBaseService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+//       startActivity(new Intent(getApplicationContext(),));
         super.onMessageReceived(remoteMessage);
     }
 
+
+
 }
+
+
+

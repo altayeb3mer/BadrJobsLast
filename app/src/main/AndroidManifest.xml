@@ -38,7 +38,12 @@
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.ContactUs" />
         <activity android:name=".Activity.NotificationDetails" />
-        <activity android:name=".Activity.NotificationActivity" />
+        <activity android:name=".Activity.NotificationActivity">
+            <intent-filter>
+                <action android:name="NotificationActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.ConfirmPhone" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.JobsActivity" />
