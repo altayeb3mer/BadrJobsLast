@@ -47,6 +47,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/profileImageLay"
                         android:layout_gravity="center"
                         android:layout_width="170dp"
                         android:layout_height="170dp"

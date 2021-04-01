@@ -5,16 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +35,14 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -41,6 +55,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
             textViewPasswordReset, textViewPhone;
+    RelativeLayout profileImageLay;
+    CircleImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +66,9 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     }
 
     private void init() {
+        profileImageLay = findViewById(R.id.profileImageLay);
+        profileImageLay.setOnClickListener(this);
+        profileImage = findViewById(R.id.img);
         progressLay = findViewById(R.id.progressLay);
 
         textViewPhone = findViewById(R.id.phone);
@@ -158,7 +177,11 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                     String statusCode = object.getString("code");
                     switch (statusCode) {
                         case "200": {
-                            warningMsg("تم التعديل بنجاح\n"+value);
+                            if (key.equals("image")){
+                                warningMsg("تم اضافة صورة البروفايل");
+                            }else{
+                                warningMsg("تم التعديل بنجاح\n"+value);
+                            }
 //                            SharedPrefManager.getInstance(getContext()).storeAppToken("");
 //                            startActivity(new Intent(getActivity(),Login.class));
 //                            getActivity().finish();
@@ -257,8 +280,106 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                startActivity(new Intent(getApplicationContext(),ResetPhone.class));
                 break;
             }
+            case R.id.profileImageLay:{
+                checkPermission();
+                break;
+            }
         }
     }
+
+
+
+    public void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(ProfileEdit.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(ProfileEdit.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(ProfileEdit.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            1);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            } else {
+                pickImage();
+            }
+        } else {
+            pickImage();
+        }
+
+
+    }
+    public static final int PICK_IMAGE = 1;
+
+    private void pickImage() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                profileImage.setImageBitmap(selectedImage);
+                doEdition("image",getStringFromImg(selectedImage));
+
+
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(ProfileEdit.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+
+        } else {
+            Toast.makeText(ProfileEdit.this, "لم تقم باختيار صورة", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String getStringFromImg(Bitmap bitmap){
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+        byte[] byteArray = byteStream.toByteArray();
+        String baseString = Base64.encodeToString(byteArray,Base64.DEFAULT);
+        return baseString;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -281,5 +402,12 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         super.onDestroy();
         ActivityRecreationHelper.onDestroy(this);
     }
+
+
+
+
+
+
+
 
 }
