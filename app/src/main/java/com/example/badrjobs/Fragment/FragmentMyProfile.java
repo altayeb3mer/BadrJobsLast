@@ -23,7 +23,6 @@ import com.example.badrjobs.Activity.Login;
 import com.example.badrjobs.Activity.MyAds;
 import com.example.badrjobs.Activity.PaymentPackage;
 import com.example.badrjobs.Activity.ProfileEdit;
-import com.example.badrjobs.Activity.SignatureForm2;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;

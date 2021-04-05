@@ -17,11 +17,11 @@
         <activity android:name=".Activity.ConfirmPhoneReset" />
         <activity android:name=".Activity.ResetPhone" />
         <activity android:name=".Activity.NickNameEdit" />
-        <activity android:name=".Activity.SignatureForm2" />
+        <activity android:name=".Activity.SignatureForm1" />
         <activity
             android:name=".Activity.SignatureDraw"
             android:screenOrientation="landscape" />
-        <activity android:name=".Activity.SignatureForm1" />
+        <activity android:name=".Activity.SignatureForm2" />
         <activity android:name=".Activity.JobsContracts" />
         <activity android:name=".Activity.ProfileEdit" />
         <activity android:name=".Activity.PaymentPackage" />

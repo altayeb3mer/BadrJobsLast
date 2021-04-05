@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Activity.NotificationDetails;
+import com.example.badrjobs.Activity.SignatureForm1;
+import com.example.badrjobs.Activity.SignatureForm2;
 import com.example.badrjobs.Model.ModelNotification;
 import com.example.badrjobs.R;
 
@@ -54,7 +55,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, NotificationDetails.class);
+//                Intent intent = new Intent(activity, NotificationDetails.class);
+                Intent intent = new Intent(activity, SignatureForm1.class);
                 activity.startActivity(intent);
             }
         });

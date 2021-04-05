@@ -1,5 +1,11 @@
 package com.example.badrjobs.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -17,12 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
@@ -51,21 +51,20 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
     TextView textViewName;
     Bitmap bitmap;
     ImageView imgSignature;
-    LinearLayout sigSomeoneLay, sigCompany1Lay, sigCompany2Lay;
+    LinearLayout sigSomeoneLay, sigCompany1Lay;
     //edt
     EditText editTextPersonName, editTextPersonalId,
-    editTextComName,editTextAddress, editTextOwnerName, editTextOwnerId,editTextSalary,
-    editTextAgreeable_money,editTextJob,editTextCountry,editTextNationality,
-    editTextContractPeriod;
-    String companyName="",address="",ownerName="",ownerId="",salary="",agreeableMoney="",
-            job="",country="", nationality="",contractPeriod="";
+            editTextComName,editTextAddress, editTextOwnerName, editTextOwnerId,editTextSalary,
+            editTextAgreeable_money,editTextJob,editTextCountry,editTextNationality,
+            editTextContractPeriod;
+//    String companyName="",address="",ownerName="",ownerId="",salary="",agreeableMoney="",
+//            job="",country="", nationality="",contractPeriod="";
+    String companyName="",address="";
     String type = "PERSONAL";
     String contractId = "1";
     LinearLayout progressLay;
     String s_name = "", s_personal_id = "";
     String image = "";
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
         sigSomeoneLay = findViewById(R.id.sigSomeone);
         sigCompany1Lay = findViewById(R.id.sigCompany1);
-        sigCompany2Lay = findViewById(R.id.sigCompany2);
+
 
         textViewName = findViewById(R.id.name);
 
@@ -120,7 +119,7 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
                         sigSomeoneLay.setVisibility(View.VISIBLE);
                         sigCompany1Lay.setVisibility(View.GONE);
-                        sigCompany2Lay.setVisibility(View.GONE);
+
                         break;
                     }
                     case R.id.radioBtnType2: {
@@ -129,13 +128,14 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
                         sigSomeoneLay.setVisibility(View.VISIBLE);
                         sigCompany1Lay.setVisibility(View.VISIBLE);
-                        sigCompany2Lay.setVisibility(View.VISIBLE);
+
                         break;
                     }
                 }
             }
         });
     }
+
 
     //get countries
     private void addSignatureFun(HashMap<String, String> hashMap) {
@@ -205,7 +205,7 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
         radioGroup.check(R.id.radioBtnType1);
         sigSomeoneLay.setVisibility(View.VISIBLE);
         sigCompany1Lay.setVisibility(View.GONE);
-        sigCompany2Lay.setVisibility(View.GONE);
+        textViewName.setText("اسم الشخص الموقع");
     }
 
     @Override
@@ -244,10 +244,10 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
                 //init the hashMap
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("first_side_type", type);
+                hashMap.put("second_side_type", type);
                 hashMap.put("name", s_name);
                 hashMap.put("personal_id", s_personal_id);
-                hashMap.put("first_side_signature", image);
+                hashMap.put("second_side_signature", image);
                 addSignatureFun(hashMap);
 
 
@@ -258,14 +258,14 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
                 address = editTextAddress.getText().toString().trim();
                 s_name = editTextPersonName.getText().toString().trim();
                 s_personal_id = editTextPersonalId.getText().toString().trim();
-                ownerName = editTextOwnerName.getText().toString().trim();
-                ownerId = editTextOwnerId.getText().toString().trim();
-                salary = editTextSalary.getText().toString().trim();
-                agreeableMoney = editTextAgreeable_money.getText().toString().trim();
-                job = editTextJob.getText().toString().trim();
-                country = editTextCountry.getText().toString().trim();
-                nationality = editTextNationality.getText().toString().trim();
-                contractPeriod = editTextContractPeriod.getText().toString().trim();
+//                ownerName = editTextOwnerName.getText().toString().trim();
+//                ownerId = editTextOwnerId.getText().toString().trim();
+//                salary = editTextSalary.getText().toString().trim();
+//                agreeableMoney = editTextAgreeable_money.getText().toString().trim();
+//                job = editTextJob.getText().toString().trim();
+//                country = editTextCountry.getText().toString().trim();
+//                nationality = editTextNationality.getText().toString().trim();
+//                contractPeriod = editTextContractPeriod.getText().toString().trim();
 
 
                 if (companyName.isEmpty()) {
@@ -288,46 +288,46 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
                     editTextPersonalId.requestFocus();
                     return;
                 }
-                if (ownerName.isEmpty()) {
-                    editTextOwnerName.setError("الرجاء كتابة اسم صاحب المهنة");
-                    editTextOwnerName.requestFocus();
-                    return;
-                }
-                if (ownerId.isEmpty()) {
-                    editTextOwnerId.setError("الرجاء كتابة الرقم المدني لصاحب المهنة");
-                    editTextOwnerId.requestFocus();
-                    return;
-                }
-                if (salary.isEmpty()) {
-                    editTextSalary.setError("الرجاء كتابة الراتب الشهري");
-                    editTextSalary.requestFocus();
-                    return;
-                }
-                if (agreeableMoney.isEmpty()) {
-                    editTextAgreeable_money.setError("الرجاء كتابة الراتب الشهري");
-                    editTextAgreeable_money.requestFocus();
-                    return;
-                }
-                if (job.isEmpty()) {
-                    editTextJob.setError("الرجاء كتابة المهنة");
-                    editTextJob.requestFocus();
-                    return;
-                }
-                if (country.isEmpty()) {
-                    editTextCountry.setError("الرجاء كتابة الدولة");
-                    editTextCountry.requestFocus();
-                    return;
-                }
-                if (nationality.isEmpty()) {
-                    editTextNationality.setError("الرجاء كتابة الجنسية");
-                    editTextNationality.requestFocus();
-                    return;
-                }
-                if (contractPeriod.isEmpty()) {
-                    editTextContractPeriod.setError("الرجاء مدة العقد");
-                    editTextContractPeriod.requestFocus();
-                    return;
-                }
+//                if (ownerName.isEmpty()) {
+//                    editTextOwnerName.setError("الرجاء كتابة اسم صاحب المهنة");
+//                    editTextOwnerName.requestFocus();
+//                    return;
+//                }
+//                if (ownerId.isEmpty()) {
+//                    editTextOwnerId.setError("الرجاء كتابة الرقم المدني لصاحب المهنة");
+//                    editTextOwnerId.requestFocus();
+//                    return;
+//                }
+//                if (salary.isEmpty()) {
+//                    editTextSalary.setError("الرجاء كتابة الراتب الشهري");
+//                    editTextSalary.requestFocus();
+//                    return;
+//                }
+//                if (agreeableMoney.isEmpty()) {
+//                    editTextAgreeable_money.setError("الرجاء كتابة الراتب الشهري");
+//                    editTextAgreeable_money.requestFocus();
+//                    return;
+//                }
+//                if (job.isEmpty()) {
+//                    editTextJob.setError("الرجاء كتابة المهنة");
+//                    editTextJob.requestFocus();
+//                    return;
+//                }
+//                if (country.isEmpty()) {
+//                    editTextCountry.setError("الرجاء كتابة الدولة");
+//                    editTextCountry.requestFocus();
+//                    return;
+//                }
+//                if (nationality.isEmpty()) {
+//                    editTextNationality.setError("الرجاء كتابة الجنسية");
+//                    editTextNationality.requestFocus();
+//                    return;
+//                }
+//                if (contractPeriod.isEmpty()) {
+//                    editTextContractPeriod.setError("الرجاء مدة العقد");
+//                    editTextContractPeriod.requestFocus();
+//                    return;
+//                }
                 if (image.isEmpty()) {
                     warningMsg("الرجاء اضافة التوقيع",false);
                     return;
@@ -335,75 +335,26 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
                 //init the hashMap
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("first_side_type", type);
-                hashMap.put("name", s_name);
-                hashMap.put("personal_id", s_personal_id);
-                hashMap.put("first_side_signature", image);
+                hashMap.put("second_side_type", type);
+                hashMap.put("org_owner_name", s_name);
+                hashMap.put("signature_personal_id", s_personal_id);
+                hashMap.put("second_side_signature", image);
 
                 hashMap.put("org_name", companyName);
                 hashMap.put("org_address", address);
-                hashMap.put("org_owner_name", ownerName);
-                hashMap.put("signature_personal_id", ownerId);
-                hashMap.put("salary", salary);
-                hashMap.put("agreeable_money", agreeableMoney);
-                hashMap.put("job", job);
-                hashMap.put("country", country);
-                hashMap.put("nationality", nationality);
-                hashMap.put("contract_period", contractPeriod);
+//                hashMap.put("org_owner_name", ownerName);
+//                hashMap.put("signature_personal_id", ownerId);
+//                hashMap.put("salary", salary);
+//                hashMap.put("agreeable_money", agreeableMoney);
+//                hashMap.put("job", job);
+//                hashMap.put("country", country);
+//                hashMap.put("nationality", nationality);
+//                hashMap.put("contract_period", contractPeriod);
                 addSignatureFun(hashMap);
                 break;
             }
         }
     }
-
-    @NonNull
-    @Override
-    public AppCompatDelegate getDelegate() {
-        if (localeChangerAppCompatDelegate == null) {
-            localeChangerAppCompatDelegate = new LocaleChangerAppCompatDelegate(super.getDelegate());
-        }
-
-        return localeChangerAppCompatDelegate;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ActivityRecreationHelper.onResume(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityRecreationHelper.onDestroy(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (data.hasExtra("bitmap")) {
-                bitmap = BitmapFactory.decodeByteArray(
-                        data.getByteArrayExtra("bitmap"), 0, data.getByteArrayExtra("bitmap").length);
-                imgSignature.setImageBitmap(bitmap);
-
-                image = getStringFromImg(bitmap);
-            } else {
-                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
-                image = "";
-            }
-
-
-        }
-        if (resultCode == Activity.RESULT_CANCELED) {
-            //Write your code if there's no result
-            Toast.makeText(this, "لم تقم بكتابة توقيع", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
     //get string from bitmap
     private String getStringFromImg(Bitmap bitmap) {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -454,5 +405,52 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (data.hasExtra("bitmap")) {
+                bitmap = BitmapFactory.decodeByteArray(
+                        data.getByteArrayExtra("bitmap"), 0, data.getByteArrayExtra("bitmap").length);
+                imgSignature.setImageBitmap(bitmap);
+
+                image = getStringFromImg(bitmap);
+            } else {
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+                image = "";
+            }
+
+
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            //Write your code if there's no result
+            Toast.makeText(this, "لم تقم بكتابة توقيع", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+    @NonNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        if (localeChangerAppCompatDelegate == null) {
+            localeChangerAppCompatDelegate = new LocaleChangerAppCompatDelegate(super.getDelegate());
+        }
+
+        return localeChangerAppCompatDelegate;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ActivityRecreationHelper.onResume(this);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityRecreationHelper.onDestroy(this);
+    }
 
 }
