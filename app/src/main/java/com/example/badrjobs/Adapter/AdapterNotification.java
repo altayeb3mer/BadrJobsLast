@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.badrjobs.Activity.NotificationDetails;
 import com.example.badrjobs.Activity.SignatureForm1;
 import com.example.badrjobs.Activity.SignatureForm2;
 import com.example.badrjobs.Model.ModelNotification;
@@ -55,13 +56,39 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                switch (item.getType()){
+                    case "NORMAL":{
+                        Intent intent = new Intent(activity, NotificationDetails.class);
+                        intent.putExtra("title",item.getTitle());
+                        intent.putExtra("body",item.getBody());
+                        intent.putExtra("date",item.getDate());
+                        activity.startActivity(intent);
+                        break;
+                    }
+                    case "CONTRACT_REQUEST":{
+                        Intent intent = new Intent(activity,SignatureForm1.class);
+                        intent.putExtra("contractId",item.getContractId());
+                        activity.startActivity(intent);
+                        break;
+                    }
+                    case "SECOND_SIDE_SIGNATURE_REQUEST":{
+                        Intent intent = new Intent(activity,SignatureForm2.class);
+                        intent.putExtra("contractId",item.getContractId());
+                        activity.startActivity(intent);
+                        break;
+                    }
+                }
+
 //                Intent intent = new Intent(activity, NotificationDetails.class);
-                Intent intent = new Intent(activity, SignatureForm1.class);
-                activity.startActivity(intent);
+//                Intent intent = new Intent(activity, SignatureForm2.class);
+//                activity.startActivity(intent);
             }
         });
-//        holder.textViewTitle.setText(item.getTitle());
-//        holder.textViewPrice.setText(item.getPrice()+" "+"جنيه سوداني");
+        holder.textViewTitle.setText(item.getTitle());
+        holder.textViewBody.setText(item.getBody());
+        holder.textViewDate.setText(item.getDate());
+
 //
 //
 //
@@ -95,15 +122,16 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
         ImageView imageView;
         ConstraintLayout container;
-        TextView textViewTitle, textViewPrice;
+        TextView textViewTitle, textViewBody,textViewDate;
 
         ViewHolder(View itemView) {
             super(itemView);
 //            layDel = itemView.findViewById(R.id.layDel);
 //            imageView = itemView.findViewById(R.id.img);
             container = itemView.findViewById(R.id.container);
-//            textViewTitle = itemView.findViewById(R.id.title);
-//            textViewPrice = itemView.findViewById(R.id.price);
+            textViewTitle = itemView.findViewById(R.id.title);
+            textViewBody = itemView.findViewById(R.id.body);
+            textViewDate = itemView.findViewById(R.id.date);
 
         }
 

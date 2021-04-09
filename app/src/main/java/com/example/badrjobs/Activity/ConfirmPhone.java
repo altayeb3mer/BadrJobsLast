@@ -1,18 +1,23 @@
 package com.example.badrjobs.Activity;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
@@ -46,11 +51,11 @@ public class ConfirmPhone extends AppCompatActivity {
     EditText edtCode;
     AppCompatButton button;
     LinearLayout progressLay;
-
+    HashMap<String, String> hashMap = new HashMap<>();
+    String otp = "", verifyId = "", phone = "";
     private FirebaseAuth mAuth;
-
-    HashMap<String,String> hashMap = new HashMap<>();
-
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +68,13 @@ public class ConfirmPhone extends AppCompatActivity {
         phone = args.getString("phone");
         verifyId = args.getString("verifyId");
         try {
-            hashMap = (HashMap<String, String>)getIntent().getSerializableExtra("hashMap");
-        }catch (Exception e){
+            hashMap = (HashMap<String, String>) getIntent().getSerializableExtra("hashMap");
+        } catch (Exception e) {
 
         }
         init();
     }
 
-    String otp="",verifyId="",phone="";
     private void init() {
         edtCode = findViewById(R.id.edtCode);
         button = findViewById(R.id.btn);
@@ -79,17 +83,16 @@ public class ConfirmPhone extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 otp = edtCode.getText().toString().trim();
-                if (!otp.isEmpty()){
+                if (!otp.isEmpty()) {
                     progressLay.setVisibility(View.VISIBLE);
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyId, otp);
                     signInWithPhoneAuthCredential(credential);
-                }else{
+                } else {
                     Toast.makeText(ConfirmPhone.this, "الرجاء ادخال كود مقبول من 6 ارقام", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -105,7 +108,7 @@ public class ConfirmPhone extends AppCompatActivity {
                             //store token
                             SharedPrefManager.getInstance(getApplicationContext()).storeFirebaseToken(user.getUid());
 
-                            hashMap.put("fb_token",user.getUid());
+                            hashMap.put("fb_token", user.getUid());
                             doRegister();
 
                             // ...
@@ -160,7 +163,9 @@ public class ConfirmPhone extends AppCompatActivity {
                     switch (statusCode) {
                         case "200": {
                             Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            warningMsg("تم اتمام تسجيلك\n قم بتجيل الدخول");
+
                             finish();
                             break;
                         }
@@ -185,14 +190,51 @@ public class ConfirmPhone extends AppCompatActivity {
         });
     }
 
+    //dialog message
+    private void warningMsg(String message) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_yes_no);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextView textViewMsg = dialog.findViewById(R.id.msg);
+        textViewMsg.setText(message);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        no.setVisibility(View.GONE);
+        yes.setText("موافق");
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                dialog.dismiss();
+
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-   }
+    }
 
-
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull
     @Override
     public AppCompatDelegate getDelegate() {
@@ -202,11 +244,13 @@ public class ConfirmPhone extends AppCompatActivity {
 
         return localeChangerAppCompatDelegate;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -61,7 +61,7 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
 //            job="",country="", nationality="",contractPeriod="";
     String companyName="",address="";
     String type = "PERSONAL";
-    String contractId = "1";
+    String contractId = "";
     LinearLayout progressLay;
     String s_name = "", s_personal_id = "";
     String image = "";
@@ -70,6 +70,10 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signature_form2);
+        Bundle args = getIntent().getExtras();
+        if (args !=null){
+            contractId = args.getString("contractId");
+        }
         init();
     }
 
@@ -137,7 +141,7 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    //get countries
+    //get add signature
     private void addSignatureFun(HashMap<String, String> hashMap) {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()

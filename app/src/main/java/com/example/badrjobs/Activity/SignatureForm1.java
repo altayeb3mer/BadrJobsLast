@@ -60,7 +60,7 @@ public class SignatureForm1 extends AppCompatActivity implements View.OnClickLis
     String companyName="",address="",ownerName="",ownerId="",salary="",agreeableMoney="",
             job="",country="", nationality="",contractPeriod="";
     String type = "PERSONAL";
-    String contractId = "1";
+    String contractId = "0";
     LinearLayout progressLay;
     String s_name = "", s_personal_id = "";
     String image = "";
@@ -71,6 +71,10 @@ public class SignatureForm1 extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signature_form1);
+        Bundle args = getIntent().getExtras();
+        if (args !=null){
+            contractId = args.getString("contractId");
+        }
         init();
     }
 

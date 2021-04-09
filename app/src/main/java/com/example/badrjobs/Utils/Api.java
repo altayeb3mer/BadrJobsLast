@@ -57,6 +57,11 @@ public class Api {
         @GET("api/v1/favorite")
         Call<String> putParam();
     }
+    //notification
+    public interface RetrofitGetNotification {
+        @GET("api/v1/notifactions")
+        Call<String> putParam();
+    }
 
     //get category
     public interface RetrofitGetCategory {
