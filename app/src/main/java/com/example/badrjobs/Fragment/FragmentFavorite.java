@@ -2,9 +2,12 @@ package com.example.badrjobs.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,8 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.badrjobs.Activity.JobsActivity;
 import com.example.badrjobs.Adapter.AdapterJobs;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.Model.ModelJob;
@@ -28,7 +29,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -45,9 +45,10 @@ public class FragmentFavorite extends Fragment {
     View view;
     TextView textViewTitle;
     RecyclerView recyclerView;
-    AdapterJobs adapterDept;
+    AdapterJobs adapterJobs;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
+    EditText edtSearch;
 
     //progressLay
     LinearLayout progressLay;
@@ -62,6 +63,7 @@ public class FragmentFavorite extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        arrayList = new ArrayList<>();
         init();
         getFavorite();
         return view;
@@ -69,6 +71,28 @@ public class FragmentFavorite extends Fragment {
 
     private void init() {
         //textView title
+        edtSearch = view.findViewById(R.id.edtSearch);
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
         textViewTitle = view.findViewById(R.id.txtTitle);
         progressLay = view.findViewById(R.id.progressLay);
 //        SpannableString content = new SpannableString("عند ما يكون الإعلان منتهي سوف يتم حذفه من المفضلة تلقائي");
@@ -78,13 +102,27 @@ public class FragmentFavorite extends Fragment {
     }
 
 
+    void filter(String text){
+        text = text.toLowerCase();
+        ArrayList<ModelJob> temp = new ArrayList();
+        for(ModelJob d: arrayList){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getTitle().toLowerCase().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        adapterJobs.updateList(temp);
+    }
+
     private void initAdapter(ArrayList<ModelJob> jobArrayList){
         recyclerView = view.findViewById(R.id.recycler);
 
         gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapterDept = new AdapterJobs(getActivity(),jobArrayList);
-        recyclerView.setAdapter(adapterDept);
+        adapterJobs = new AdapterJobs(getActivity(),jobArrayList);
+        recyclerView.setAdapter(adapterJobs);
     }
 
     @Override
@@ -95,7 +133,6 @@ public class FragmentFavorite extends Fragment {
 
 
     private void getFavorite() {
-        arrayList = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {

@@ -12,7 +12,7 @@
     <string name="pass">password</string>
     <string name="forgit_pass">Forgit Password?</string>
     <string name="remember_me">Remember me</string>
-    <string name="app_name">تطبيق بدر</string>
+    <string name="app_name" translatable="false">Cut Short</string>
     <string name="_8">Must contain char and more than 8</string>
     <string name="update_pass">Update Password</string>
     <string name="email">Email</string>

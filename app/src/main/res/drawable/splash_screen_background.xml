@@ -7,7 +7,7 @@
         android:bottom="50dp"
         android:height="120dp"
         android:width="120dp"
-        android:drawable="@drawable/ic_logo"
+        android:drawable="@drawable/bdrlogo"
         >
 
     </item>

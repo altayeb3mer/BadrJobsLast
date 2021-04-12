@@ -60,6 +60,7 @@ public class JobsActivity extends AppCompatActivity {
 
     TextView textViewDept,textViewSupDept;
     ImageView imageViewFlag;
+    LinearLayout noDataLay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class JobsActivity extends AppCompatActivity {
 
 
     private void init() {
+        noDataLay = findViewById(R.id.noDataLay);
         textViewDept = findViewById(R.id.txtDept);
         textViewSupDept = findViewById(R.id.txtSupDept);
         imageViewFlag = findViewById(R.id.imgFlag);
@@ -201,8 +203,10 @@ public class JobsActivity extends AppCompatActivity {
                             if (arrayList.size()>0){
 //                                setRecycler(arrayList);
                                 adapterDept.notifyItemInserted(arrayList.size()-Integer.parseInt(s_perPage));
+                                noDataLay.setVisibility(View.GONE);
                             }else{
                                 Toast.makeText(getApplicationContext(), "لاتوجد عناصر", Toast.LENGTH_SHORT).show();
+                                noDataLay.setVisibility(View.VISIBLE);
                             }
                             break;
                         }

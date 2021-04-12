@@ -42,6 +42,7 @@ public class DeptsActivity extends ToolbarClass {
     ArrayList<ModelDept> arrayList;
     GridLayoutManager gridLayoutManager;
     String countryId = "";
+    LinearLayout noDataLay;
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_depts, "");
@@ -55,6 +56,7 @@ public class DeptsActivity extends ToolbarClass {
 
 
     private void init() {
+        noDataLay = findViewById(R.id.noDataLay);
         recyclerView = findViewById(R.id.recycler);
         progressLay = findViewById(R.id.progressLay);
     }
@@ -120,8 +122,10 @@ public class DeptsActivity extends ToolbarClass {
 
                             if (arrayList.size()>0){
                                 setRecycler(arrayList);
+                                noDataLay.setVisibility(View.GONE);
                             }else{
                                 Toast.makeText(getApplicationContext(), "لاتوجد عناصر", Toast.LENGTH_SHORT).show();
+                                noDataLay.setVisibility(View.VISIBLE);
                             }
                             break;
                         }

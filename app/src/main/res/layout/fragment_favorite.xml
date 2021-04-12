@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/edtSearch"
             android:background="@drawable/shape_edt_search_bg"
             android:paddingRight="@dimen/margin_small_size"
             android:paddingLeft="@dimen/margin_small_size"

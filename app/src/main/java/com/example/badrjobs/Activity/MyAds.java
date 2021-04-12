@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -38,27 +41,50 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MyAds extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    AdapterMyAds adapterDept;
+    AdapterMyAds adapterMyAds;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
     LinearLayout progressLay;
+    EditText edtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ads);
+        arrayList = new ArrayList<>();
         init();
         getMyAds();
     }
 
     private void init() {
+        edtSearch = findViewById(R.id.edtSearch);
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
         recyclerView = findViewById(R.id.recycler);
         progressLay = findViewById(R.id.progressLay);
     }
 
 
     private void getMyAds() {
-        arrayList = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -149,10 +175,23 @@ public class MyAds extends AppCompatActivity {
     private void setRecycler(ArrayList<ModelJob> arrayList) {
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapterDept = new AdapterMyAds(this,arrayList);
-        recyclerView.setAdapter(adapterDept);
+        adapterMyAds = new AdapterMyAds(this,arrayList);
+        recyclerView.setAdapter(adapterMyAds);
     }
 
+    void filter(String text){
+        text = text.toLowerCase();
+        ArrayList<ModelJob> temp = new ArrayList();
+        for(ModelJob d: arrayList){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getTitle().toLowerCase().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        adapterMyAds.updateList(temp);
+    }
 
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull

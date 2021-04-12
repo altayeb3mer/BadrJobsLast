@@ -42,6 +42,7 @@ public class SubDeptActivity extends AppCompatActivity {
     ArrayList<ModelDept> arrayList;
     GridLayoutManager gridLayoutManager;
     String categoryId = "",countryId = "";
+    LinearLayout noDataLay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class SubDeptActivity extends AppCompatActivity {
         getSubDept();
     }
     private void init() {
+        noDataLay = findViewById(R.id.noDataLay);
         recyclerView = findViewById(R.id.recycler);
         progressLay = findViewById(R.id.progressLay);
 
@@ -122,9 +124,11 @@ public class SubDeptActivity extends AppCompatActivity {
 
 
                             if (arrayList.size()>0){
-                                setRecycler(arrayList);
+                                setRecycler(arrayList);                                noDataLay.setVisibility(View.GONE);
+                                noDataLay.setVisibility(View.GONE);
                             }else{
                                 Toast.makeText(getApplicationContext(), "لاتوجد عناصر", Toast.LENGTH_SHORT).show();
+                                noDataLay.setVisibility(View.VISIBLE);
                             }
                             break;
                         }

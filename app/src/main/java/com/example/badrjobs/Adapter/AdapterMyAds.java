@@ -114,5 +114,9 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
         }
     }
 
+    public void updateList(ArrayList<ModelJob> list){
+        arrayList = list;
+        notifyDataSetChanged();
+    }
 
 }

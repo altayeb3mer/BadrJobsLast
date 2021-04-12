@@ -48,6 +48,7 @@ public class NotificationActivity extends ToolbarClass {
     GridLayoutManager gridLayoutManager;
     ImageView icNotification;
     LinearLayout progressLay;
+    LinearLayout noDataLay;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
@@ -58,6 +59,7 @@ public class NotificationActivity extends ToolbarClass {
     }
 
     private void init() {
+        noDataLay = findViewById(R.id.noDataLay);
         progressLay = findViewById(R.id.progressLay);
         recyclerView = findViewById(R.id.recycler);
         icNotification = findViewById(R.id.icNotification);
@@ -130,10 +132,11 @@ public class NotificationActivity extends ToolbarClass {
 
                     if (arrayList.size()>0){
                         initAdapter(arrayList);
+                        noDataLay.setVisibility(View.GONE);
                     }else {
                         warningMsg("ليس لديك اشعارات حتى الان", true);
+                        noDataLay.setVisibility(View.VISIBLE);
                     }
-
 
                     progressLay.setVisibility(View.GONE);
                 } catch (Exception e) {
