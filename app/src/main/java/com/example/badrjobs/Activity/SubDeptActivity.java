@@ -18,6 +18,7 @@ import com.example.badrjobs.Model.ModelDept;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class SubDeptActivity extends AppCompatActivity {
+public class SubDeptActivity extends ToolbarClass {
     RecyclerView recyclerView;
     AdapterSubDept adapterDept;
     ArrayList<ModelDept> arrayList;
@@ -44,10 +45,9 @@ public class SubDeptActivity extends AppCompatActivity {
     String categoryId = "",countryId = "";
     LinearLayout noDataLay;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_dept);
+        super.onCreate(R.layout.activity_sub_dept, "");
         Bundle arg = getIntent().getExtras();
         if (arg!=null){
             categoryId = arg.getString("categoryId");

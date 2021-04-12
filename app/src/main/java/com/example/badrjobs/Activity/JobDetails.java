@@ -17,8 +17,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.badrjobs.Adapter.SlideShow_adapter;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
@@ -27,10 +29,12 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.relex.circleindicator.CircleIndicator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -50,7 +54,12 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     CircleImageView circleImageViewOwner;
 
     String ownerId="";
-    ImageView imgFlag;
+    ImageView imgFlag,imageViewBack;
+
+    ViewPager viewPager;
+    SlideShow_adapter slideShow_adapter;
+    ArrayList<String> arrayListImages;
+    CircleIndicator circleIndicator;
 
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -68,6 +77,9 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     }
 
     private void init() {
+
+        imageViewBack = findViewById(R.id.back);
+        imageViewBack.setOnClickListener(this);
         addToFavorite = findViewById(R.id.AddToFavorite);
         addToFavorite.setOnClickListener(this);
         progressLay = findViewById(R.id.progressLay);
@@ -96,6 +108,14 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    private void initSlider(ArrayList<String> list){
+        viewPager = findViewById(R.id.viewpager);
+        circleIndicator = findViewById(R.id.indicator);
+        slideShow_adapter = new SlideShow_adapter(this,list);
+        viewPager.setAdapter(slideShow_adapter);
+        circleIndicator.setViewPager(viewPager);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -106,6 +126,10 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
             }
             case R.id.AddToFavorite: {
                 addToFavoriteFun();
+                break;
+            }
+            case R.id.back: {
+                onBackPressed();
                 break;
             }
         }
@@ -246,6 +270,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     }
 
     private void getJobDetails() {
+        arrayListImages = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -289,6 +314,23 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                             ownerId = owner_info.getString("id");
                             textViewName.setText( owner_info.getString("name"));
                             //job info
+
+                            String img1 = data.getString("image1");
+                            if (!img1.isEmpty()&&img1.equals("null")){
+                                arrayListImages.add(img1);
+                            }
+                            String img2 = data.getString("image2");
+                            if (!img2.isEmpty()&&img2.equals("null")){
+                                arrayListImages.add(img2);
+                            }
+                            String img3 = data.getString("image3");
+                            if (!img3.isEmpty()&&img3.equals("null")){
+                                arrayListImages.add(img3);
+                            }
+                            if (arrayListImages.size()>0){
+                                initSlider(arrayListImages);
+                            }
+
                             textViewOwnerName.setText(data.getString("owner_name"));
                             textViewType.setText(data.getString("owner_type"));
                             textViewBirthday.setText(data.getString("birthday"));
@@ -305,15 +347,12 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
 
 
 
+
+
                             boolean is_liked = data.getBoolean("is_liked");
                             if (is_liked){
                                 addToFavorite.setText("ازالة من المفضلة");
                             }
-
-
-
-
-
 
                             warningMsg("تم اضافة الاعلان للمفضلة");
                             break;

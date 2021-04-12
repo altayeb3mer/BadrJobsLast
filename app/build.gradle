@@ -76,5 +76,7 @@ dependencies {
 
     //compile 'com.github.franmontiel:LocaleChanger:1.1'
 
+    implementation 'com.jsibbold:zoomage:1.3.1'
+
 
 }

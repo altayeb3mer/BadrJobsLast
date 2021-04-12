@@ -16,12 +16,13 @@ import android.widget.Spinner;
 
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.LocaleChanger;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import java.util.Locale;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends ToolbarClass {
 
     RelativeLayout layContactUs,layAbout,layTerm,layShare;
 
@@ -29,9 +30,10 @@ public class MenuActivity extends AppCompatActivity {
     Spinner spinnerLanguage;
     String lang="";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        super.onCreate(R.layout.activity_menu, "");
         init();
         initSpinnerLang();
     }

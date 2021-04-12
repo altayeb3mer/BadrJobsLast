@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONObject;
@@ -44,7 +45,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class SignatureForm2 extends AppCompatActivity implements View.OnClickListener {
+public class SignatureForm2 extends ToolbarClass implements View.OnClickListener {
     static final int REQUEST_CODE = 1;
     AppCompatButton button, addSignature;
     RadioGroup radioGroup;
@@ -66,16 +67,16 @@ public class SignatureForm2 extends AppCompatActivity implements View.OnClickLis
     String s_name = "", s_personal_id = "";
     String image = "";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signature_form2);
+        super.onCreate(R.layout.activity_signature_form2, "");
         Bundle args = getIntent().getExtras();
         if (args !=null){
             contractId = args.getString("contractId");
         }
         init();
     }
+
 
     private void init() {
         progressLay = findViewById(R.id.progressLay);

@@ -15,6 +15,7 @@
     <color name="grayCardEdt">#DBDADC</color>
     <color name="red">#F30E0E</color>
     <color name="black30">#4D000000</color>
+    <color name="black">#000000</color>
 
 
 </resources>

@@ -78,6 +78,14 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                         activity.startActivity(intent);
                         break;
                     }
+                    default:{
+                        Intent intent = new Intent(activity, NotificationDetails.class);
+                        intent.putExtra("title",item.getTitle());
+                        intent.putExtra("body",item.getBody());
+                        intent.putExtra("date",item.getDate());
+                        activity.startActivity(intent);
+                        break;
+                    }
                 }
 
 //                Intent intent = new Intent(activity, NotificationDetails.class);

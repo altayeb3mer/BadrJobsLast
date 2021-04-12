@@ -23,6 +23,7 @@ import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.content.ContentValues.TAG;
 
-public class JobsActivity extends AppCompatActivity {
+public class JobsActivity extends ToolbarClass {
 
     RecyclerView recyclerView;
     AdapterJobs adapterDept;
@@ -62,10 +63,11 @@ public class JobsActivity extends AppCompatActivity {
     ImageView imageViewFlag;
     LinearLayout noDataLay;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jobs);
+        super.onCreate(R.layout.activity_jobs, "");
         arrayList = new ArrayList<>();
         Bundle arg = getIntent().getExtras();
         if (arg!=null){
@@ -76,7 +78,6 @@ public class JobsActivity extends AppCompatActivity {
         setRecycler(arrayList);
         getJobs(s_current_page);
     }
-
 
     private void init() {
         noDataLay = findViewById(R.id.noDataLay);
