@@ -58,6 +58,7 @@
                         android:layout_marginLeft="@dimen/margin_normal_size"
                         android:layout_marginRight="@dimen/margin_normal_size"/>
                     <TextView
+                        android:id="@+id/nicename"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
                         app:cardBackgroundColor="@color/grayCardEdt"
                         app:cardCornerRadius="@dimen/margin_normal_size">
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layPass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:passwordToggleEnabled="true">
@@ -90,7 +92,6 @@
                                 android:layout_height="match_parent"
                                 android:inputType="textPassword"
                                 android:background="@android:color/transparent"
-                                android:text="123456"
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -57,6 +58,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             textViewPasswordReset, textViewPhone;
     RelativeLayout profileImageLay;
     CircleImageView profileImage;
+    CardView cardBio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     }
 
     private void init() {
+        cardBio = findViewById(R.id.bio);
+        cardBio.setOnClickListener(this);
         profileImageLay = findViewById(R.id.profileImageLay);
         profileImageLay.setOnClickListener(this);
         profileImage = findViewById(R.id.img);
@@ -258,6 +262,10 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             }
             case R.id.job:{
                 dialogEdit("تعديل المهنة","job");
+                break;
+            }
+            case R.id.bio:{
+                dialogEdit("تديل الوصف","bio");
                 break;
             }
             case R.id.contracts:{

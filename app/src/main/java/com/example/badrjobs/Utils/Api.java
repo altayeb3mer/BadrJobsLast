@@ -40,6 +40,11 @@ public class Api {
         @GET("api/v1/profile")
         Call<String> putParam();
     }
+    //get prevContract
+    public interface RetrofitGetPrevContracts {
+        @GET("api/v1/prevContract")
+        Call<String> putParam();
+    }
     //add job
     public interface RetrofitAddJob {
         @POST("api/v1/job")
@@ -66,6 +71,11 @@ public class Api {
     //get category
     public interface RetrofitGetCategory {
         @GET("api/v1/jobCategory")
+        Call<String> putParam(@QueryMap HashMap<String,String> hashMap);
+    }
+    //del account
+    public interface RetrofitDeleteAccount {
+        @GET("api/v1/profile")
         Call<String> putParam(@QueryMap HashMap<String,String> hashMap);
     }
     //get sub category

@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.badrjobs.Activity.Login;
 import com.example.badrjobs.Activity.MyAds;
 import com.example.badrjobs.Activity.PaymentPackage;
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -44,7 +46,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class FragmentMyProfile extends Fragment {
 
 
-    ImageView imgProfileEdt, imgLogOut;
+    ImageView imgProfileEdt, imgLogOut,coverImg;
     View view;
     CardView cardViewMyAds, cardPayPackage;
     Context context;
@@ -53,6 +55,7 @@ public class FragmentMyProfile extends Fragment {
     TextView textViewDesc,textViewName,textViewPhone,textViewEmail,textViewJob,
             textViewNationality,textViewFixName;
 
+    CircleImageView circleImageViewMyImg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +76,8 @@ public class FragmentMyProfile extends Fragment {
         textViewEmail = view.findViewById(R.id.email);
         textViewJob = view.findViewById(R.id.job);
         textViewNationality = view.findViewById(R.id.nationality);
+        circleImageViewMyImg = view.findViewById(R.id.img);
+        coverImg = view.findViewById(R.id.coverImg);
 
 
         cardViewMyAds = view.findViewById(R.id.myAds);
@@ -250,12 +255,18 @@ public class FragmentMyProfile extends Fragment {
                             JSONObject dataObject = jsonObjectOfArray.getJSONObject("user");
 
                             textViewFixName.setText(dataObject.getString("fixName"));
-                            textViewDesc.setText(dataObject.getString("fixName"));
+                            textViewDesc.setText(dataObject.getString("bio"));
                             textViewName.setText(dataObject.getString("name"));
                             textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));
                             textViewEmail.setText(dataObject.getString("email"));
                             textViewJob.setText(dataObject.getString("job"));
-                            textViewNationality.setText(dataObject.getString("name"));//no nationality on response
+                            textViewNationality.setText(dataObject.getString("name"));
+
+                            //images
+                            Glide.with(context).load(dataObject.getString("image")).into(circleImageViewMyImg);
+                            Glide.with(context).load(dataObject.getString("header_image")).into(coverImg);
+
+                            //no nationality on response
 
 
                             break;

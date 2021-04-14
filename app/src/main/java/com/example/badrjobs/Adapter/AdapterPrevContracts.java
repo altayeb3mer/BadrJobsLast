@@ -10,23 +10,22 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Model.ModelJobContracts;
-import com.example.badrjobs.Model.ModelUserBlocked;
+import com.example.badrjobs.Model.ModelPrevContracts;
 import com.example.badrjobs.R;
 
 import java.util.ArrayList;
 
 
-public class AdapterJobContracts extends RecyclerView.Adapter<AdapterJobContracts.ViewHolder> {
+public class AdapterPrevContracts extends RecyclerView.Adapter<AdapterPrevContracts.ViewHolder> {
 
 //    Typeface tf;
     int current_page, last_page;
-    private ArrayList<ModelJobContracts> arrayList;
+    private ArrayList<ModelPrevContracts> arrayList;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Activity activity;
 //    RelativeLayout container;
-    public AdapterJobContracts(Activity activity, ArrayList<ModelJobContracts> r) {
+    public AdapterPrevContracts(Activity activity, ArrayList<ModelPrevContracts> r) {
         this.mInflater = LayoutInflater.from(activity);
         this.arrayList = r;
         this.activity = activity;
@@ -42,7 +41,10 @@ public class AdapterJobContracts extends RecyclerView.Adapter<AdapterJobContract
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        final ModelJobContracts item = arrayList.get(position);
+        final ModelPrevContracts item = arrayList.get(position);
+
+        holder.textViewDate.setText(item.getDate().substring(0,10));
+
 //        try {
 //            Glide.with(activity).load(Api.ROOT_URL+item.getImage())
 //                    .into(holder.imageView);
@@ -92,14 +94,14 @@ public class AdapterJobContracts extends RecyclerView.Adapter<AdapterJobContract
 
         ImageView imageView;
         ConstraintLayout container;
-        TextView textViewTitle, textViewPrice;
+        TextView textViewDate, textViewPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
 //            layDel = itemView.findViewById(R.id.layDel);
 //            imageView = itemView.findViewById(R.id.img);
 //            container = itemView.findViewById(R.id.container);
-//            textViewTitle = itemView.findViewById(R.id.title);
+            textViewDate = itemView.findViewById(R.id.date);
 //            textViewPrice = itemView.findViewById(R.id.price);
 
         }

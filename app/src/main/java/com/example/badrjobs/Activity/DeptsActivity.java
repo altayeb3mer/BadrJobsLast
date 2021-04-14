@@ -43,6 +43,7 @@ public class DeptsActivity extends ToolbarClass {
     GridLayoutManager gridLayoutManager;
     String countryId = "";
     LinearLayout noDataLay;
+
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_depts, "");
