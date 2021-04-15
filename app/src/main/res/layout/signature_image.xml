@@ -8,6 +8,46 @@
 
     <include layout="@layout/public_toolbar"
         android:id="@+id/toolbar"/>
+    <TableLayout
+        android:layoutDirection="rtl"
+        android:id="@+id/la2"
+        android:layout_margin="@dimen/margin_normal_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:textSize="@dimen/txt_small_size"
+                android:layout_width="wrap_content"
+                android:text="توقيع الطرف الاول"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+            <View
+                android:id="@+id/view1"
+                android:layout_marginRight="@dimen/margin_small_size"
+                android:layout_marginLeft="@dimen/margin_small_size"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="@dimen/margin_small_size"
+            android:gravity="center">
+            <TextView
+                android:textSize="@dimen/txt_small_size"
+                android:layout_width="wrap_content"
+                android:text="توقيع الطرف الثاني"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+            <View
+                android:id="@+id/view2"
+                android:layout_marginRight="@dimen/margin_small_size"
+                android:layout_marginLeft="@dimen/margin_small_size"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+        </TableRow>
+    </TableLayout>
     <LinearLayout
         android:id="@+id/layBtn"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +66,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSign"
             android:layout_marginLeft="@dimen/margin_normal_size"
             android:layout_marginRight="@dimen/margin_normal_size"
             android:layout_width="100dp"
@@ -40,15 +81,15 @@
         android:layout_margin="@dimen/margin_normal_size"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/la2"
         app:layout_constraintBottom_toTopOf="@+id/layBtn"
         android:background="@drawable/shape_ads_item_bg">
         <ImageView
+            android:id="@+id/signatureImg"
             android:layout_margin="@dimen/margin_small_size"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_shake_hands"
-            android:scaleType="fitXY"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/progressLay"

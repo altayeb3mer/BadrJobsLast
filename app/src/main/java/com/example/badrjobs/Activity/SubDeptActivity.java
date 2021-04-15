@@ -45,6 +45,7 @@ public class SubDeptActivity extends ToolbarClass {
     String categoryId = "",countryId = "";
     LinearLayout noDataLay;
 
+
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_sub_dept, "");

@@ -265,7 +265,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 break;
             }
             case R.id.bio:{
-                dialogEdit("تديل الوصف","bio");
+                dialogEdit("تعديل الوصف","bio");
                 break;
             }
             case R.id.contracts:{

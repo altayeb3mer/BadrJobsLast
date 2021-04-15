@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.badrjobs.Activity.NotificationDetails;
 import com.example.badrjobs.Activity.SignatureForm1;
 import com.example.badrjobs.Activity.SignatureForm2;
+import com.example.badrjobs.Activity.SignatureImage;
 import com.example.badrjobs.Model.ModelNotification;
 import com.example.badrjobs.R;
 
@@ -66,15 +67,11 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                         activity.startActivity(intent);
                         break;
                     }
-                    case "CONTRACT_REQUEST":{
-                        Intent intent = new Intent(activity,SignatureForm1.class);
+                    case "CONTRACT_REQUEST":
+                    case "SECOND_SIDE_SIGNATURE_REQUEST": {
+                        Intent intent = new Intent(activity, SignatureImage.class);
                         intent.putExtra("contractId",item.getContractId());
-                        activity.startActivity(intent);
-                        break;
-                    }
-                    case "SECOND_SIDE_SIGNATURE_REQUEST":{
-                        Intent intent = new Intent(activity,SignatureForm2.class);
-                        intent.putExtra("contractId",item.getContractId());
+                        intent.putExtra("type",item.getType());
                         activity.startActivity(intent);
                         break;
                     }

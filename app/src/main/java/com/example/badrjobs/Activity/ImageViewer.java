@@ -1,7 +1,5 @@
 package com.example.badrjobs.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -13,15 +11,16 @@ import com.example.badrjobs.Utils.ToolbarClass;
 import com.jsibbold.zoomage.ZoomageView;
 
 public class ImageViewer extends ToolbarClass {
-    String imgUrl="";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    String imgUrl = "";
+    ZoomageView myZoomageView;
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_viewer);
+        super.onCreate(R.layout.activity_image_viewer, "");
         changeStatusBarColor();
         init();
         Bundle args = getIntent().getExtras();
-        if (args!=null){
+        if (args != null) {
             imgUrl = args.getString("imgUrl");
             Glide.with(ImageViewer.this).load(imgUrl)
                     .into(myZoomageView);
@@ -36,7 +35,6 @@ public class ImageViewer extends ToolbarClass {
         }
     }
 
-    ZoomageView myZoomageView;
     private void init() {
         myZoomageView = findViewById(R.id.myZoomageView);
     }

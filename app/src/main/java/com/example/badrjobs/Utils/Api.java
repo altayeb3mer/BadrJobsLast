@@ -93,6 +93,11 @@ public class Api {
         @PUT("api/v1/contract/{contractId}")
         Call<String> putParam(@Path("contractId") String search,@Body HashMap<String, String> param);
     }
+
+    public interface RetrofitContractDetails {
+        @GET("api/v1/contractDetails/{contractId}")
+        Call<String> putParam(@Path("contractId") String search);
+    }
     public interface RetrofitGetJobDetails {
         @GET("api/v1/job/{JobId}")
         Call<String> putParam(@Path("JobId") String search);
