@@ -309,6 +309,7 @@
                         android:textColor="@android:color/white"/>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/balance"
                     app:cardBackgroundColor="@color/colorPrimary"
                     app:cardCornerRadius="10dp"
                     android:layout_margin="@dimen/margin_small_size"

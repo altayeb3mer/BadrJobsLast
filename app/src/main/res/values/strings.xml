@@ -44,5 +44,6 @@
 
 
     <string name="option">Optinal</string>
+    <string name="confirm">Confirm</string>
 
 </resources>

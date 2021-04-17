@@ -58,13 +58,36 @@
                         android:text="یحق للجھات الرسمیة او المخولة بالتأكد من صحة وسلامة بیانات عقد العمل واعتماده وطباعتة مقابل رسوم رمزیة"
                         android:textColor="@android:color/black"
                         android:textStyle="normal"/>
-                    <TextView
+                    <RelativeLayout
                         android:layout_marginTop="@dimen/margin_large_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/txt_normal_size"
-                        android:text="ادخل رقم العقد"
-                        android:textStyle="bold"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_normal_size"
+                            android:text="ادخل رقم العقد"
+                            android:textStyle="bold"/>
+                        <LinearLayout
+                            android:id="@+id/lay1"
+                            android:background="@drawable/shape_circle_white"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true">
+                            <ImageView
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="@dimen/txt_normal_size"
+                               android:src="@drawable/ic_q_mark"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+
                     <androidx.cardview.widget.CardView
                         android:layout_marginTop="@dimen/margin_small_size"
                         android:layout_width="match_parent"
@@ -74,18 +97,39 @@
                         <EditText
                             android:layout_marginLeft="@dimen/margin_normal_size"
                             android:layout_marginRight="@dimen/margin_normal_size"
-                            android:id="@+id/edtPhoneOrEmail"
+                            android:id="@+id/edtContractNo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"/>
                     </androidx.cardview.widget.CardView>
-                    <TextView
+                    <RelativeLayout
                         android:layout_marginTop="@dimen/margin_large_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/txt_normal_size"
-                        android:text="ادخل كود العقد"
-                        android:textStyle="bold"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_normal_size"
+                            android:text="ادخل كود العقد"
+                            android:textStyle="bold"/>
+                        <LinearLayout
+                            android:id="@+id/lay2"
+                            android:background="@drawable/shape_circle_white"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true">
+                            <ImageView
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="@dimen/txt_normal_size"
+                                android:src="@drawable/ic_q_mark"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
                     <androidx.cardview.widget.CardView
                         android:layout_marginTop="@dimen/margin_small_size"
                         android:layout_width="match_parent"
@@ -93,6 +137,7 @@
                         app:cardBackgroundColor="@color/grayCardEdt"
                         app:cardCornerRadius="@dimen/margin_normal_size">
                         <EditText
+                            android:id="@+id/edtContractCode"
                             android:layout_marginLeft="@dimen/margin_normal_size"
                             android:layout_marginRight="@dimen/margin_normal_size"
                             android:layout_width="match_parent"
@@ -116,7 +161,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/go"
+                android:text="@string/confirm"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/txt_large_size"

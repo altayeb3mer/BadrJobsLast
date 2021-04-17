@@ -73,6 +73,11 @@ public class Api {
         @GET("api/v1/jobCategory")
         Call<String> putParam(@QueryMap HashMap<String,String> hashMap);
     }
+    //get category
+    public interface RetrofitConfirmContract {
+        @GET("api/v1/confirmContract")
+        Call<String> putParam(@QueryMap HashMap<String,String> hashMap);
+    }
     //del account
     public interface RetrofitDeleteAccount {
         @GET("api/v1/profile")

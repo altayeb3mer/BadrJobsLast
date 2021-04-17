@@ -20,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.badrjobs.Activity.ConfirmDeal;
 import com.example.badrjobs.Activity.Login;
 import com.example.badrjobs.Activity.MyAds;
 import com.example.badrjobs.Activity.PaymentPackage;
@@ -48,7 +49,7 @@ public class FragmentMyProfile extends Fragment {
 
     ImageView imgProfileEdt, imgLogOut,coverImg;
     View view;
-    CardView cardViewMyAds, cardPayPackage;
+    CardView cardViewMyAds, cardPayPackage,cardViewBalance;
     Context context;
     LinearLayout progressLay;
 
@@ -79,7 +80,13 @@ public class FragmentMyProfile extends Fragment {
         circleImageViewMyImg = view.findViewById(R.id.img);
         coverImg = view.findViewById(R.id.coverImg);
 
-
+        cardViewBalance = view.findViewById(R.id.balance);
+        cardViewBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ConfirmDeal.class));
+            }
+        });
         cardViewMyAds = view.findViewById(R.id.myAds);
         cardViewMyAds.setOnClickListener(new View.OnClickListener() {
             @Override
