@@ -19,6 +19,11 @@ public class Api {
         @POST("api/v1/auth/signUp")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+    //FixedAvailability
+    public interface RetrofitFixedAvailability {
+        @GET("api/v1/auth/isFixNameAvalible")
+        Call<String> putParam(@QueryMap HashMap<String, String> param);
+    }
 
     //login
     public interface RetrofitLogin {
@@ -38,6 +43,11 @@ public class Api {
     //get my profile
     public interface RetrofitGetMyProfile {
         @GET("api/v1/profile")
+        Call<String> putParam();
+    }
+    //get nationality
+    public interface RetrofitGetNationality {
+        @GET("api/v1/nationality")
         Call<String> putParam();
     }
     //get prevContract

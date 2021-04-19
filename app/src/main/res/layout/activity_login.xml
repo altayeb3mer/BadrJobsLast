@@ -122,7 +122,6 @@
                                 android:layout_height="match_parent"
                                 android:inputType="textPassword"
                                 android:background="@android:color/transparent"
-                                android:text="123456"
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.cardview.widget.CardView>

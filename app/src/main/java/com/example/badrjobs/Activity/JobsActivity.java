@@ -1,7 +1,6 @@
 package com.example.badrjobs.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.core.widget.NestedScrollView;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.badrjobs.Adapter.AdapterJobs;
+import com.example.badrjobs.Adapter.AdapterAds;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
@@ -47,7 +46,7 @@ import static android.content.ContentValues.TAG;
 public class JobsActivity extends ToolbarClass {
 
     RecyclerView recyclerView;
-    AdapterJobs adapterDept;
+    AdapterAds adapterDept;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
     LinearLayout progressLay;
@@ -194,7 +193,8 @@ public class JobsActivity extends ToolbarClass {
                                 item.setOwnerName(owner_info.getString("name"));
                                 item.setOwnerNiceName(owner_info.getString("fixName"));
                                 item.setOwnerImage(owner_info.getString("image"));
-//                                item.setLiked(owner_info.getBoolean("is_liked"));
+                                item.setActive(arrayObj.getString("active"));
+                                item.setLiked(arrayObj.getBoolean("is_liked"));
 
                                 arrayList.add(item);
                             }
@@ -239,7 +239,7 @@ public class JobsActivity extends ToolbarClass {
     private void setRecycler(ArrayList<ModelJob> arrayList) {
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapterDept = new AdapterJobs(this,arrayList);
+        adapterDept = new AdapterAds(this,arrayList);
         recyclerView.setAdapter(adapterDept);
     }
 

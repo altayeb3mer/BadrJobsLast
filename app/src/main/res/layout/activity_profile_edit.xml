@@ -28,15 +28,18 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/headerImageLay"
                         android:layout_width="match_parent"
                         android:layout_height="100dp">
                         <ImageView
+                            android:id="@+id/headerImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="center"
                             android:src="@drawable/shape_btn_nav_bg"
                             />
                         <ImageButton
+                            android:id="@+id/addHeaderImg"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_plus"
@@ -104,6 +107,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <TextView
+                                    android:layout_margin="@dimen/margin_normal_size"
+                                    android:id="@+id/description"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin_small_size"

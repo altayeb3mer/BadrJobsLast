@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.badrjobs.Adapter.AdapterJobs;
 import com.example.badrjobs.Adapter.AdapterMyAds;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
@@ -131,6 +130,7 @@ public class MyAds extends AppCompatActivity {
                                 ModelJob item = new ModelJob();
                                 item.setId(itemData.getString("id"));
                                 item.setTitle(itemData.getString("job_title"));
+                                item.setActive(itemData.getString("active"));
 
                                 JSONObject owner_info = itemData.getJSONObject("owner_info");
 

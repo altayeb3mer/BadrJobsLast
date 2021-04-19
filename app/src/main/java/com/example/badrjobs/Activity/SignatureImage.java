@@ -1,16 +1,31 @@
 package com.example.badrjobs.Activity;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
@@ -21,7 +36,13 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -36,7 +57,7 @@ public class SignatureImage extends ToolbarClass {
 
     View view1,view2;
     ImageView imageViewSignature;
-    AppCompatButton buttonSignature;
+    AppCompatButton buttonSignature,button2;
 
     String contractId="",type="",contractImgUrl="";
 
@@ -53,9 +74,14 @@ public class SignatureImage extends ToolbarClass {
         }
         init();
         getContractImage();
+        if (type.equals("prevContract")){
+            buttonSignature.setText("حفظ");
+            button2.setText("مشاركة");
+        }
     }
 
     private void init() {
+        button2 = findViewById(R.id.btn2);
         progressLay = findViewById(R.id.progressLay);
         view1 = findViewById(R.id.view1);
         view2 = findViewById(R.id.view2);
@@ -87,12 +113,198 @@ public class SignatureImage extends ToolbarClass {
                         startActivity(intent);
                         break;
                     }
+                    case "prevContract": {
+                        if (isStoragePermissionGranted()) {
+                            TakeScreenshot();
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (type) {
+                    case "prevContract": {
+                        if (isStoragePermissionGranted()) {
+                            TakeScreenshotAndShare();
+
+                        }
+                        break;
+                    }
                 }
             }
         });
     }
 
+
+    private void TakeScreenshotAndShare() {
+
+
+        try {
+            File folder = new File(Environment.getExternalStorageDirectory() +
+                    File.separator + "cotShort");
+            boolean success = true;
+            if (!folder.exists()) {
+                success = folder.mkdirs();
+            }
+            if (success) {
+                // image naming and path  to include sd card  appending name you choose for file, you can change it to your path
+                String mPath = "";
+                mPath = folder.toString() + "/" +
+                        "" + contractNo + ".jpg";
+
+                // create bitmap screen capture
+                View v1 = getWindow().getDecorView().getRootView();
+                v1.setDrawingCacheEnabled(true);
+                Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+                v1.setDrawingCacheEnabled(false);
+
+                File imageFile = new File(mPath);
+
+                FileOutputStream outputStream = new FileOutputStream(imageFile);
+                int quality = 100;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+                outputStream.flush();
+                outputStream.close();
+                shareImage(imageFile);
+                // Do something on success
+            } else {
+                // Do something else on failure
+                Toast.makeText(this, "خطأ اثناء انشاء المجلد حاول مجددا", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Toast.makeText(this, "حدث خطأ اثناء حفظ الصورة", Toast.LENGTH_SHORT).show();
+        }
+    }
     LinearLayout progressLay;
+
+    private void shareImage(File file) {
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", file);
+
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+//        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+//        intent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            startActivity(Intent.createChooser(intent, "ارسال الفاتورة"));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "حدث خطأ حاول ثانية", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private static final String TAG = "PERMISSION";
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG, "Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG, "Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG, "Permission is granted");
+            return true;
+        }
+    }
+    private void TakeScreenshot() {
+
+        try {
+            File folder = new File(Environment.getExternalStorageDirectory() +
+                    File.separator + "cotShort");
+            boolean success = true;
+            if (!folder.exists()) {
+                success = folder.mkdirs();
+            }
+            if (success) {
+                // image naming and path  to include sd card  appending name you choose for file, you can change it to your path
+                String mPath =  folder.toString() + "/" +
+                        "" +contractNo + ".jpg";
+
+                // create bitmap screen capture
+                View v1 = getWindow().getDecorView().getRootView();
+                v1.setDrawingCacheEnabled(true);
+                Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+                v1.setDrawingCacheEnabled(false);
+
+                File imageFile = new File(mPath);
+
+                FileOutputStream outputStream = new FileOutputStream(imageFile);
+                int quality = 100;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+                outputStream.flush();
+                outputStream.close();
+//                openScreenshot(imageFile);
+                warningMsg("تم حفظ الصورة");
+
+                // Do something on success
+            } else {
+                // Do something else on failure
+                Toast.makeText(this, "خطأ اثناء انشاء المجلد حاول مجددا", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            Toast.makeText(this, "حدث خطأ اثناء حفظ الصورة", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    String contractNo="";
+
+    //dialog message
+    private void warningMsg(String message) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_yes_no);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextView textViewMsg = dialog.findViewById(R.id.msg);
+        textViewMsg.setText(message);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        no.setVisibility(View.GONE);
+        yes.setText("موافق");
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
 
     private void getContractImage() {
         progressLay.setVisibility(View.VISIBLE);
@@ -136,6 +348,7 @@ public class SignatureImage extends ToolbarClass {
                         view2.setBackgroundColor(getResources().getColor(R.color.colorGreen1));
                     }
                     contractImgUrl = data.getString("image");
+                    contractNo = data.getString("uid");
                     Glide.with(getApplicationContext()).load(contractImgUrl).into(imageViewSignature);
                     switch (type) {
                         case "CONTRACT_REQUEST": {

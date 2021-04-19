@@ -22,6 +22,8 @@
         app:layout_constraintLeft_toLeftOf="@+id/g1"
         >
         <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_color="#FFF643"
+            app:civ_border_width="2.5dp"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/flag"

@@ -68,7 +68,6 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
-                        android:text="name"
                         android:id="@+id/name"
                         android:visibility="visible"
                         android:layout_marginRight="@dimen/margin_small_size"
@@ -93,7 +92,6 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
-                        android:text="name"
                         android:id="@+id/nicename"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -112,6 +110,8 @@
                         app:layout_constraintGuide_percent="0.5"
                         android:id="@+id/g1"/>
                     <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/layNotAvailable"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -138,6 +138,8 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/layAvailable"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -206,7 +208,6 @@
                             android:layout_height="match_parent"
                             android:inputType="textPassword"
                             android:background="@android:color/transparent"
-                            android:text="123456"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
@@ -239,7 +240,6 @@
                             android:layout_height="match_parent"
                             android:inputType="textPassword"
                             android:background="@android:color/transparent"
-                            android:text="123456"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
@@ -262,7 +262,6 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
-                        android:text="altayeb3mer@gmail.com"
                         android:id="@+id/email"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -288,7 +287,6 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
-                        android:text="altayeb3mer@gmail.com"
                         android:id="@+id/confirm_email"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -385,6 +383,7 @@
                         android:layout_alignParentRight="true" />
 
                     <Spinner
+                        android:id="@+id/spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingLeft="30dp"
@@ -410,7 +409,6 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
-                        android:text="test"
                         android:hint="@string/option"
                         android:id="@+id/job"
                         android:layout_marginRight="@dimen/margin_small_size"

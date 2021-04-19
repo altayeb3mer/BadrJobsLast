@@ -8,11 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.widget.TextView;
 
-import com.example.badrjobs.Adapter.AdapterJobs;
+import com.example.badrjobs.Adapter.AdapterAds;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
@@ -24,7 +22,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     TextView textViewTitle;
     RecyclerView recyclerView;
-    AdapterJobs adapterDept;
+    AdapterAds adapterDept;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
 
@@ -55,7 +53,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
             arrayList.add(item);
         }
-        adapterDept = new AdapterJobs(this,arrayList);
+        adapterDept = new AdapterAds(this,arrayList);
         recyclerView.setAdapter(adapterDept);
     }
 

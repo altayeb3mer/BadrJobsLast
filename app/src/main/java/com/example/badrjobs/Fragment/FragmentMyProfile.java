@@ -106,7 +106,11 @@ public class FragmentMyProfile extends Fragment {
         imgProfileEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ProfileEdit.class));
+                Intent intent = new Intent(getActivity(),ProfileEdit.class);
+                intent.putExtra("profile",imgProfileUrl);
+                intent.putExtra("header",imgHeaderUrl);
+                intent.putExtra("bio",bio);
+                startActivity(intent);
             }
         });
         imgLogOut = view.findViewById(R.id.imgLogOut);
@@ -219,6 +223,9 @@ public class FragmentMyProfile extends Fragment {
         });
     }
 
+
+    String imgProfileUrl="",imgHeaderUrl="",bio="";
+
     private void getMyProfile() {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -262,7 +269,8 @@ public class FragmentMyProfile extends Fragment {
                             JSONObject dataObject = jsonObjectOfArray.getJSONObject("user");
 
                             textViewFixName.setText(dataObject.getString("fixName"));
-                            textViewDesc.setText(dataObject.getString("bio"));
+                            bio = dataObject.getString("bio");
+                            textViewDesc.setText(bio);
                             textViewName.setText(dataObject.getString("name"));
                             textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));
                             textViewEmail.setText(dataObject.getString("email"));
@@ -270,8 +278,10 @@ public class FragmentMyProfile extends Fragment {
                             textViewNationality.setText(dataObject.getString("name"));
 
                             //images
-                            Glide.with(context).load(dataObject.getString("image")).into(circleImageViewMyImg);
-                            Glide.with(context).load(dataObject.getString("header_image")).into(coverImg);
+                            imgProfileUrl = dataObject.getString("image");
+                            imgHeaderUrl = dataObject.getString("header_image");
+                            Glide.with(context).load(imgProfileUrl).into(circleImageViewMyImg);
+                            Glide.with(context).load(imgHeaderUrl).into(coverImg);
 
                             //no nationality on response
 

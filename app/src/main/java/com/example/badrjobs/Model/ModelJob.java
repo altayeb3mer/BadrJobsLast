@@ -7,6 +7,15 @@ public class ModelJob {
     private String ownerNiceName;
     private String ownerImage;
     private boolean isLiked;
+    private String isActive;
+
+    public String isActive() {
+        return isActive;
+    }
+
+    public void setActive(String active) {
+        isActive = active;
+    }
 
     public String getOwnerName() {
         return ownerName;

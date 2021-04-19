@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,8 @@ import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> {
@@ -45,10 +48,18 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final ModelJob item = arrayList.get(position);
+
         try {
-            Glide.with(activity).load(item.getOwnerImage())
-                    .into(holder.imageView);
+            if (!item.getOwnerImage().isEmpty()&&!item.getOwnerImage().equals("null")){
+                Glide.with(activity).load(item.getOwnerImage())
+                        .into(holder.imageViewProfile);
+
+            }else{
+                Glide.with(activity).load(ContextCompat.getDrawable(activity,R.drawable.ic_baseline_account_circle_24))
+                        .into(holder.imageViewProfile);
+            }
         } catch (Exception e) {
+
             e.printStackTrace();
         }
 //
@@ -63,6 +74,9 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
         holder.textViewTitle.setText(item.getTitle());
         holder.textViewOwnerName.setText(item.getOwnerName());
         holder.textViewFixName.setText(item.getOwnerNiceName());
+
+        if (item.isActive().equals("YES"))
+            holder.imageViewProfile.setBorderColor(activity.getResources().getColor(R.color.colorGreen1));
 //
 //
 //
@@ -93,14 +107,14 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView imageView;
+        CircleImageView imageViewProfile;
         ConstraintLayout container;
         TextView textViewTitle, textViewOwnerName, textViewFixName;
 
         ViewHolder(View itemView) {
             super(itemView);
 //            layDel = itemView.findViewById(R.id.layDel);
-            imageView = itemView.findViewById(R.id.img);
+            imageViewProfile = itemView.findViewById(R.id.img);
             container = itemView.findViewById(R.id.container);
             textViewTitle = itemView.findViewById(R.id.title);
             textViewOwnerName = itemView.findViewById(R.id.name);

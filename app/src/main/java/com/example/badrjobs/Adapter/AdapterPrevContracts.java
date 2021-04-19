@@ -1,15 +1,18 @@
 package com.example.badrjobs.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.badrjobs.Activity.SignatureImage;
 import com.example.badrjobs.Model.ModelPrevContracts;
 import com.example.badrjobs.R;
 
@@ -52,13 +55,15 @@ public class AdapterPrevContracts extends RecyclerView.Adapter<AdapterPrevContra
 //            e.printStackTrace();
 //        }
 //
-//        holder.container.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(activity, DeptsActivity.class);
-//                activity.startActivity(intent);
-//            }
-//        });
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, SignatureImage.class);
+                intent.putExtra("contractId",item.getId());
+                intent.putExtra("type","prevContract");
+                activity.startActivity(intent);
+            }
+        });
 //        holder.textViewTitle.setText(item.getTitle());
 //        holder.textViewPrice.setText(item.getPrice()+" "+"جنيه سوداني");
 //
@@ -93,14 +98,14 @@ public class AdapterPrevContracts extends RecyclerView.Adapter<AdapterPrevContra
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        ConstraintLayout container;
+        CardView container;
         TextView textViewDate, textViewPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
 //            layDel = itemView.findViewById(R.id.layDel);
 //            imageView = itemView.findViewById(R.id.img);
-//            container = itemView.findViewById(R.id.container);
+            container = itemView.findViewById(R.id.container);
             textViewDate = itemView.findViewById(R.id.date);
 //            textViewPrice = itemView.findViewById(R.id.price);
 

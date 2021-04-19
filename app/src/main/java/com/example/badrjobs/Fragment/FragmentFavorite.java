@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Adapter.AdapterJobs;
+import com.example.badrjobs.Adapter.AdapterAds;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
@@ -45,7 +45,7 @@ public class FragmentFavorite extends Fragment {
     View view;
     TextView textViewTitle;
     RecyclerView recyclerView;
-    AdapterJobs adapterJobs;
+    AdapterAds adapterJobs;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
     EditText edtSearch;
@@ -121,7 +121,7 @@ public class FragmentFavorite extends Fragment {
 
         gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapterJobs = new AdapterJobs(getActivity(),jobArrayList);
+        adapterJobs = new AdapterAds(getActivity(),jobArrayList);
         recyclerView.setAdapter(adapterJobs);
     }
 
@@ -185,6 +185,7 @@ public class FragmentFavorite extends Fragment {
                                 item.setOwnerNiceName(owner_info.getString("fixName"));
                                 item.setOwnerImage(owner_info.getString("image"));
                                 item.setLiked(job.getBoolean("is_liked"));
+                                item.setActive(job.getString("active"));
 
                                 arrayList.add(item);
                             }

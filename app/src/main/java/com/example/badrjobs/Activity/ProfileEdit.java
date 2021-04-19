@@ -24,11 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
@@ -55,19 +58,43 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ProfileEdit extends AppCompatActivity implements View.OnClickListener {
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
-            textViewPasswordReset, textViewPhone;
+            textViewPasswordReset, textViewPhone,textViewDescription;
     RelativeLayout profileImageLay;
     CircleImageView profileImage;
     CardView cardBio;
+    ImageView imageViewHeader;
+    RelativeLayout layHeader;
+    ImageButton addHeaderImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
         init();
+        loadImages();
+    }
+
+    private void loadImages() {
+        Bundle args = getIntent().getExtras();
+        if (args!=null){
+            String imgProfileUrl = args.getString("profile");
+            String imgHeaderUrl = args.getString("header");
+            String bio = args.getString("bio");
+            Glide .with(this).load(imgProfileUrl).into(profileImage);
+            Glide .with(this).load(imgHeaderUrl).into(imageViewHeader);
+            textViewDescription = findViewById(R.id.description);
+            textViewDescription.setText(bio);
+        }
     }
 
     private void init() {
+
+        addHeaderImg = findViewById(R.id.addHeaderImg);
+        addHeaderImg.setOnClickListener(this);
+        layHeader = findViewById(R.id.headerImageLay);
+        layHeader.setOnClickListener(this);
+        imageViewHeader = findViewById(R.id.headerImage);
+        imageViewHeader.setOnClickListener(this);
         cardBio = findViewById(R.id.bio);
         cardBio.setOnClickListener(this);
         profileImageLay = findViewById(R.id.profileImageLay);
@@ -183,6 +210,9 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                         case "200": {
                             if (key.equals("image")){
                                 warningMsg("تم اضافة صورة البروفايل");
+                            }
+                            else if (key.equals("header_image")){
+                                warningMsg("تم اضافة صورة الغلاف");
                             }else{
                                 warningMsg("تم التعديل بنجاح\n"+value);
                             }
@@ -289,13 +319,28 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 break;
             }
             case R.id.profileImageLay:{
+                imageType = "profile";
+                checkPermission();
+                break;
+            }
+            case R.id.headerImageLay:{
+                imageType = "header";
+                checkPermission();
+                break;
+            }
+            case R.id.headerImage:{
+                imageType = "header";
+                checkPermission();
+                break;
+            }
+
+            case R.id.addHeaderImg:{
+                imageType = "header";
                 checkPermission();
                 break;
             }
         }
     }
-
-
 
     public void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -329,6 +374,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
 
 
     }
+
     public static final int PICK_IMAGE = 1;
 
     private void pickImage() {
@@ -337,6 +383,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         startActivityForResult(photoPickerIntent, PICK_IMAGE);
     }
 
+    String imageType="profile";
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
@@ -350,8 +397,14 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-                profileImage.setImageBitmap(selectedImage);
-                doEdition("image",getStringFromImg(selectedImage));
+                if (imageType.equals("profile")){
+                    profileImage.setImageBitmap(selectedImage);
+                    doEdition("image",getStringFromImg(selectedImage));
+                }else{
+                    imageViewHeader.setImageBitmap(selectedImage);
+                    doEdition("header_image",getStringFromImg(selectedImage));
+                }
+
 
 
 
@@ -359,7 +412,6 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(ProfileEdit.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
             }
 
         } else {

@@ -1,30 +1,18 @@
 package com.example.badrjobs.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Activity.BlockedUser;
-import com.example.badrjobs.Activity.BlockedUsersActivity;
-import com.example.badrjobs.Activity.DeleteAccount;
-import com.example.badrjobs.Activity.FavoriteActivity;
-import com.example.badrjobs.Activity.Register;
-import com.example.badrjobs.Activity.UserViewedProfile;
 import com.example.badrjobs.Adapter.AdapterChatList;
-import com.example.badrjobs.Adapter.AdapterCountry;
-import com.example.badrjobs.Adapter.AdapterJobs;
 import com.example.badrjobs.Model.ModelChatList;
-import com.example.badrjobs.Model.ModelCountry;
-import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
 
 import java.util.ArrayList;

@@ -8,13 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.widget.TextView;
 
 import com.example.badrjobs.Adapter.AdapterBlockedUser;
-import com.example.badrjobs.Adapter.AdapterJobs;
-import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.Model.ModelUserBlocked;
 import com.example.badrjobs.R;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
