@@ -275,7 +275,7 @@ public class FragmentMyProfile extends Fragment {
                             textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));
                             textViewEmail.setText(dataObject.getString("email"));
                             textViewJob.setText(dataObject.getString("job"));
-                            textViewNationality.setText(dataObject.getString("name"));
+                            textViewNationality.setText(dataObject.getString("nationality"));
 
                             //images
                             imgProfileUrl = dataObject.getString("image");

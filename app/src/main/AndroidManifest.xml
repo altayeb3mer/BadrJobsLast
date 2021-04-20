@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.ImageViewer"></activity>
+        <activity android:name=".Activity.ImageViewer"/>
         <activity android:name=".Activity.SignatureImage" />
         <activity android:name=".Activity.MyAds" />
         <activity android:name=".Activity.ConfirmPhoneReset" />
@@ -23,20 +23,23 @@
         <activity
             android:name=".Activity.SignatureDraw"
             android:screenOrientation="landscape" />
-        <activity android:name=".Activity.SignatureForm2" />
+        <activity android:name=".Activity.SignatureForm2"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.JobsContracts" />
         <activity android:name=".Activity.ProfileEdit" />
         <activity android:name=".Activity.PaymentPackage" />
         <activity android:name=".Activity.JobDetails" />
         <activity android:name=".Activity.ChattingActivity" />
         <activity android:name=".Activity.TestingAc" />
-        <activity android:name=".Activity.AddJob" />
+        <activity android:name=".Activity.AddJob"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.BlockedUsersActivity" />
         <activity android:name=".Activity.FavoriteActivity" />
         <activity android:name=".Activity.UserViewedProfile" />
         <activity android:name=".Activity.BlockedUser" />
         <activity android:name=".Activity.DeleteAccount" />
-        <activity android:name=".Activity.ConfirmDeal" />
+        <activity android:name=".Activity.ConfirmDeal"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.ContactUs" />
         <activity android:name=".Activity.NotificationDetails" />
@@ -47,7 +50,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ConfirmPhone" />
+        <activity android:name=".Activity.ConfirmPhone"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.JobsActivity" />
         <activity android:name=".Activity.SubDeptActivity" />
@@ -61,10 +65,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ResetPassword2" />
-        <activity android:name=".Activity.ResetPassword1" />
-        <activity android:name=".Activity.Register" />
-        <activity android:name=".Activity.Login" />
+        <activity android:name=".Activity.ResetPassword2"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.ResetPassword1"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.Register"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.Login"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
