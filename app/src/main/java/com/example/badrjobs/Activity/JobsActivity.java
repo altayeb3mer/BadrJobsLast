@@ -63,7 +63,6 @@ public class JobsActivity extends ToolbarClass {
     LinearLayout noDataLay;
 
 
-
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_jobs, "");
@@ -116,7 +115,6 @@ public class JobsActivity extends ToolbarClass {
             }
         });
     }
-
 
     private void getJobs(String page) {
         progressLay.setVisibility(View.VISIBLE);

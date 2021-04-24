@@ -81,10 +81,11 @@ public class AddJob extends AppCompatActivity {
             edtSalary,edtBill,edtRegion,edtDescription,edtPhone;
     String officeName="",address="",ownerName="",birthDay="",job="",experience="",
     salary="",bill="", religion ="",description="",phone="",
-    applicationType="",ownerType="",sex="",region="";
+    applicationType="NEW",ownerType="",sex="",region="";
 
     AppCompatButton button;
     private boolean additionPhone=false;
+    LinearLayout layOffice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,7 @@ public class AddJob extends AppCompatActivity {
         initSpinnerSalary();
         initSpinnerBill();
         initRadios();
+        setAplicationType("OFFICE");
     }
 
     private void getBundles() {
@@ -143,7 +145,7 @@ public class AddJob extends AppCompatActivity {
         radioGroupReligion = findViewById(R.id.radioGroupReligion);
         radioGroupSex = findViewById(R.id.radioGroupSex);
         radioGroupContactType = findViewById(R.id.radioGroupContactPhone);
-
+        radioGroupType.check(R.id.radioBtnType1);
         radioGroupType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -172,6 +174,7 @@ public class AddJob extends AppCompatActivity {
                         break;
                     }
                 }
+                setAplicationType(ownerType);
             }
         });
         radioGroupReligion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -223,6 +226,21 @@ public class AddJob extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setAplicationType(String oType) {
+        switch (oType){
+            case "PERSONAL":{
+                layOffice.setVisibility(View.GONE);
+                radioGroupApplication.check(R.id.radioBtnOwnerType1);
+                break;
+            }
+            case "OFFICE":{
+                layOffice.setVisibility(View.VISIBLE);
+                radioGroupApplication.check(R.id.radioBtnOwnerType2);
+                break;
+            }
+        }
     }
 
     private void preAddJob() {
@@ -296,6 +314,7 @@ public class AddJob extends AppCompatActivity {
     }
 
     private void init() {
+        layOffice = findViewById(R.id.layOffice);
         button = findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

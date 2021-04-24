@@ -6,6 +6,7 @@ import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,7 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
     String no="", code="";
     AppCompatButton button;
     LinearLayout layout1,layout2,progressLay;
+    private String contractId="";
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,12 +108,18 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
                     String message = object.getString("message");
                     switch (statusCode) {
                         case "200": {
-                            warningMsg(message);
+                            JSONObject objectData = object.getJSONObject("response");
+                            contractId = objectData.getString("id");
+                            Intent intent = new Intent(ConfirmDeal.this, SignatureImage.class);
+                            intent.putExtra("contractId",contractId);
+                            intent.putExtra("type","prevContract");
+                            startActivity(intent);
+//                            warningMsg(message,true);
                             break;
                         }
 
                         default: {
-                            warningMsg(message);
+                            warningMsg(message,false);
                             break;
                         }
                     }
@@ -119,6 +127,7 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    warningMsg(e.getMessage(),false);
                 }
                 progressLay.setVisibility(View.GONE);
             }
@@ -126,13 +135,13 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);
-
+                warningMsg("Time out .Try again",false);
             }
         });
     }
 
     //dialog message
-    private void warningMsg(String message) {
+    private void warningMsg(String message,boolean verified) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -150,9 +159,18 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
         no.setVisibility(View.GONE);
         yes.setText("موافق");
 
+
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if (verified){
+//                    Intent intent = new Intent(ConfirmDeal.this, SignatureImage.class);
+//                    intent.putExtra("contractId",contractId);
+//                    intent.putExtra("type","prevContract");
+//                    startActivity(intent);
+//                }else{
+//                    dialog.dismiss();
+//                }
                 dialog.dismiss();
 
             }
@@ -198,11 +216,11 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
                 break;
             }
             case R.id.lay1:{
-                warningMsg("الرقم موجود في عقد العمل في اعلى الصفحة جهة اليسار");
+                warningMsg("الرقم موجود في عقد العمل في اعلى الصفحة جهة اليسار",false);
                 break;
             }
             case R.id.lay2:{
-                warningMsg("تم ارسالة لصاحب الاعلان عبر الايميل");
+                warningMsg("تم ارسالة لصاحب الاعلان عبر الايميل",false);
                 break;
             }
         }

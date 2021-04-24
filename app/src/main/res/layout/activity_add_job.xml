@@ -265,42 +265,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@android:color/darker_gray"/>
-            <TextView
-                android:layout_marginTop="@dimen/margin_normal_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_large_size"
-                android:text="اسم المكتب او المؤسسة"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/edtOfficeName"
-                android:layout_marginTop="@dimen/margin_normal_size"
-                android:gravity="center_vertical"
-                android:background="@drawable/shape_edt_search_bg"
-                android:paddingRight="@dimen/margin_small_size"
-                android:paddingLeft="@dimen/margin_small_size"
+            <LinearLayout
+                android:id="@+id/layOffice"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-            <TextView
-                android:layout_marginTop="@dimen/margin_normal_size"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_large_size"
-                android:text="عنوان المكتب او المؤسسة حسب الدولة"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/edtAddress"
-                android:layout_marginTop="@dimen/margin_normal_size"
-                android:gravity="center_vertical"
-                android:background="@drawable/shape_edt_search_bg"
-                android:paddingRight="@dimen/margin_small_size"
-                android:paddingLeft="@dimen/margin_small_size"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_large_size"
+                    android:text="اسم المكتب او المؤسسة"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/edtOfficeName"
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/shape_edt_search_bg"
+                    android:paddingRight="@dimen/margin_small_size"
+                    android:paddingLeft="@dimen/margin_small_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+                <TextView
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_large_size"
+                    android:text="عنوان المكتب او المؤسسة حسب الدولة"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_marginTop="@dimen/margin_normal_size"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/shape_edt_search_bg"
+                    android:paddingRight="@dimen/margin_small_size"
+                    android:paddingLeft="@dimen/margin_small_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
             <TextView
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="wrap_content"
