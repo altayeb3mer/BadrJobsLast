@@ -7,6 +7,7 @@
     tools:context=".Activity.Login">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/shape_container_lay_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_normal_size">

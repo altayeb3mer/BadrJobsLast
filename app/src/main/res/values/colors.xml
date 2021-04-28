@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#140079</color>
     <color name="colorAccent">#D4B90D</color>
 
+
+    <color name="mainBg">#F3F2FD</color>
+
+
+
     //green
     <color name="colorGreen1">#0EB208</color>
     <color name="colorGreen2">#075904</color>

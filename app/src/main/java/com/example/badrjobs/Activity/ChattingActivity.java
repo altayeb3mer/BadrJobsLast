@@ -1,5 +1,6 @@
 package com.example.badrjobs.Activity;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -18,18 +19,25 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import java.util.ArrayList;
 
+
 public class ChattingActivity extends AppCompatActivity {
     //recycler
     RecyclerView recyclerView;
     AdapterChatMsg adapterChatMsg;
     ArrayList<ModelChatMsg> arrayList;
     GridLayoutManager gridLayoutManager;
-    
+
+
+//    protected @LayoutRes
+//    int getLayout() {
+//        return R.layout.activity_chat;
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chating);
-        initAdapter();
+//        setContentView(R.layout.activity_chating);
+//        initAdapter();
     }
 
 

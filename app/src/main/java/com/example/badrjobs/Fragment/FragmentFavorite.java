@@ -2,6 +2,7 @@ package com.example.badrjobs.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.badrjobs.Adapter.AdapterAds;
 import com.example.badrjobs.GlobalVar;
@@ -39,7 +41,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class FragmentFavorite extends Fragment {
+public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     Context context;
     View view;
@@ -57,19 +59,21 @@ public class FragmentFavorite extends Fragment {
         // Required empty public constructor
     }
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorite, container, false);
-        arrayList = new ArrayList<>();
         init();
         getFavorite();
         return view;
     }
 
     private void init() {
+        mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         //textView title
         edtSearch = view.findViewById(R.id.edtSearch);
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -133,6 +137,7 @@ public class FragmentFavorite extends Fragment {
 
 
     private void getFavorite() {
+        arrayList = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -221,5 +226,15 @@ public class FragmentFavorite extends Fragment {
     }
 
 
+    @Override
+    public void onRefresh() {
+        getFavorite();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
 
+            }
+        }, 1000);
+    }
 }

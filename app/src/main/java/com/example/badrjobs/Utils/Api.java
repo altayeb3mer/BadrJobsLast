@@ -40,6 +40,11 @@ public class Api {
         @PATCH("api/v1/updateMyProfile")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+    //report job
+    public interface RetrofitReportJob {
+        @POST("api/v1/reportJob")
+        Call<String> putParam(@Body HashMap<String, String> param);
+    }
     //get my profile
     public interface RetrofitGetMyProfile {
         @GET("api/v1/profile")
@@ -107,6 +112,11 @@ public class Api {
     public interface RetrofitSignContract {
         @PUT("api/v1/contract/{contractId}")
         Call<String> putParam(@Path("contractId") String search,@Body HashMap<String, String> param);
+    }
+    //show some user profile
+    public interface RetrofitShowProfileOther {
+        @GET("api/v1/user/{userId}")
+        Call<String> putParam(@Path("userId") String userId);
     }
 
     public interface RetrofitContractDetails {

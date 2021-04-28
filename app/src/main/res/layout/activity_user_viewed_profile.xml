@@ -32,9 +32,10 @@
                 android:background="@android:color/white">
 
                 <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/headerImg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/flag"/>
+                    android:layout_height="match_parent"/>
 
                     <LinearLayout
                         android:layout_margin="@dimen/margin_normal_size"
@@ -47,12 +48,12 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/flag"
                             android:id="@+id/img"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/margin_normal_size"
                             android:layout_marginRight="@dimen/margin_normal_size"/>
                         <TextView
+                            android:id="@+id/fixName"
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -66,6 +67,10 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
+        android:layout_marginTop="@dimen/margin_small_size"
+        android:layout_marginRight="@dimen/margin_small_size"
+        android:layout_marginLeft="@dimen/margin_small_size"
+        android:background="@drawable/shape_container_lay_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -77,10 +82,10 @@
             android:orientation="vertical"
             android:layout_margin="@dimen/margin_large_size">
             <ImageView
+                android:id="@+id/imgFlag"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:src="@drawable/flag"
                 android:layout_marginLeft="@dimen/margin_large_size"
                 android:layout_marginRight="@dimen/margin_large_size" />
             <androidx.cardview.widget.CardView
@@ -90,9 +95,10 @@
                 app:cardCornerRadius="@dimen/margin_large_size"
                 android:layout_marginTop="@dimen/margin_large_size">
                 <TextView
+                    android:id="@+id/bio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/margin_small_size"
+                    android:layout_margin="@dimen/margin_small_size"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
@@ -121,6 +127,7 @@
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
                         <TextView
+                            android:id="@+id/name"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             app:layout_constraintLeft_toLeftOf="parent"
@@ -150,6 +157,7 @@
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
                         <TextView
+                            android:id="@+id/email"
                             android:textDirection="locale"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -180,6 +188,7 @@
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
                         <TextView
+                            android:id="@+id/job"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             app:layout_constraintLeft_toLeftOf="parent"
@@ -209,6 +218,7 @@
                             android:orientation="vertical"
                             android:gravity="center">
                             <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnBlock"
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/shape_btn_block_bg"
@@ -225,6 +235,7 @@
                             android:orientation="vertical"
                             android:gravity="center">
                             <LinearLayout
+                                android:id="@+id/layChat"
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/shape_btn_chat_bg"
@@ -244,4 +255,21 @@
 
 
     </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/progressLay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            app:indicatorColor="@color/colorPrimary"
+            />
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

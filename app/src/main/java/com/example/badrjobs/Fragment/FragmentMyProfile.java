@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.Activity.ConfirmDeal;
@@ -44,7 +46,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class FragmentMyProfile extends Fragment {
+public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     ImageView imgProfileEdt, imgLogOut,coverImg;
@@ -69,6 +71,8 @@ public class FragmentMyProfile extends Fragment {
     }
 
     private void init() {
+        mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         //init textView
         textViewFixName = view.findViewById(R.id.fixName);
         textViewDesc = view.findViewById(R.id.description);
@@ -311,6 +315,20 @@ public class FragmentMyProfile extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+//        getMyProfile();
+    }
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Override
+    public void onRefresh() {
         getMyProfile();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        }, 1000);
     }
 }

@@ -6,8 +6,10 @@ import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,7 +45,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.content.ContentValues.TAG;
 
-public class JobsActivity extends ToolbarClass {
+public class JobsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
     AdapterAds adapterDept;
@@ -76,8 +78,11 @@ public class JobsActivity extends ToolbarClass {
         setRecycler(arrayList);
         getJobs(s_current_page);
     }
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private void init() {
+        mSwipeRefreshLayout =  findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         noDataLay = findViewById(R.id.noDataLay);
         textViewDept = findViewById(R.id.txtDept);
         textViewSupDept = findViewById(R.id.txtSupDept);
@@ -263,4 +268,18 @@ public class JobsActivity extends ToolbarClass {
         ActivityRecreationHelper.onDestroy(this);
     }
 
+    @Override
+    public void onRefresh() {
+        arrayList = new ArrayList<>();
+        setRecycler(arrayList);
+        s_current_page = "";
+        getJobs(s_current_page);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        }, 1000);
+    }
 }

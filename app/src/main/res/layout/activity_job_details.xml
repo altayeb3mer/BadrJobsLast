@@ -16,6 +16,7 @@
         android:background="@drawable/shape_toolbar_bg">
 
         <LinearLayout
+            android:id="@+id/layOwner"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/margin_normal_size"
@@ -202,6 +203,7 @@
 
 
             <LinearLayout
+                android:id="@+id/layOwnerName"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layoutDirection="rtl"
@@ -357,6 +359,7 @@
                     android:textSize="@dimen/txt_normal_size"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/laybailing_money"
                 android:orientation="horizontal"
                 android:layoutDirection="rtl"
                 android:layout_width="match_parent"
@@ -597,6 +600,7 @@
                         android:layout_height="25dp"
                         android:src="@drawable/ic_flag"/>
                     <TextView
+                        android:id="@+id/reportAds"
                         android:gravity="center"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/txt_normal_size"

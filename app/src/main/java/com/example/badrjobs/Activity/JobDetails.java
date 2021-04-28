@@ -1,11 +1,13 @@
 package com.example.badrjobs.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,7 +52,8 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     LinearLayout progressLay;
     TextView addToFavorite, textViewName,textViewFixName,textViewType,textViewOwnerName,textViewBirthday,
     textViewJob,textViewExperience,textViewSalary,textViewBillingMoney,textViewSex,
-    textViewReligion, textViewCountry,textViewDesc,textViewViews;
+    textViewReligion, textViewCountry,textViewDesc,textViewViews,
+    textViewReportAds;
     CircleImageView circleImageViewOwner;
 
     String ownerId="";
@@ -60,6 +63,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     SlideShow_adapter slideShow_adapter;
     ArrayList<String> arrayListImages;
     CircleIndicator circleIndicator;
+    LinearLayout layOwner;
 
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -76,8 +80,136 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
         getJobDetails();
     }
 
+
+    Dialog dialog;
+    private void dialogEdit(String title,String key) {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.diallog_edit_field);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextView textViewTitle = dialog.findViewById(R.id.title);
+        textViewTitle.setText(title);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        yes.setText("تعديل");
+        no.setText("الغاء");
+
+        EditText editTextField = dialog.findViewById(R.id.field);
+
+
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value = editTextField.getText().toString().trim();
+                if (!value.isEmpty()){
+                    doEdition(key,value);
+                    dialog.dismiss();
+                }else {
+                    editTextField.setError("يجب تحديد قيمة للتعديل");
+                    editTextField.requestFocus();
+                }
+
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    private void doEdition(String key, String value) {
+        progressLay.setVisibility(View.VISIBLE);
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
+                        ongoing.addHeader("Content-Type", "application/json;");
+                        ongoing.addHeader("Accept", "application/json");
+                        ongoing.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                        String token = SharedPrefManager.getInstance(getApplicationContext()).getAppToken();
+                        ongoing.addHeader("Authorization", token);
+                        return chain.proceed(ongoing.build());
+                    }
+                })
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.ROOT_URL)
+                .client(httpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api.RetrofitReportJob service = retrofit.create(Api.RetrofitReportJob.class);
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put(key,value);
+        hashMap.put("job_id",id);
+        Call<String> call = service.putParam(hashMap);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                try {
+                    JSONObject object = new JSONObject(response.body());
+                    String statusCode = object.getString("code");
+                    switch (statusCode) {
+                        case "200": {
+                            warningMsg(object.getString("message"));
+                            break;
+                        }
+                        default: {
+                            warningMsg("لقد قم بالابلاغ عن هذا الاعلان مسبقا");
+                            break;
+                        }
+                    }
+                    progressLay.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    warningMsg(e.getMessage());
+                }
+                progressLay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                progressLay.setVisibility(View.GONE);
+                warningMsg("time out");
+            }
+        });
+    }
     private void init() {
 
+        textViewReportAds = findViewById(R.id.reportAds);
+        textViewReportAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogEdit("الابلاغ عن اساءة","reason");
+            }
+        });
+        layOwner = findViewById(R.id.layOwner);
+        layOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(JobDetails.this,UserViewedProfile.class);
+                i.putExtra("userId",ownerId);
+                startActivity(i);
+            }
+        });
         imageViewBack = findViewById(R.id.back);
         imageViewBack.setOnClickListener(this);
         addToFavorite = findViewById(R.id.AddToFavorite);
@@ -87,9 +219,10 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
         cardSignature.setOnClickListener(this);
 
         //textView
+        textViewType = findViewById(R.id.type);
         textViewFixName = findViewById(R.id.fixName);
         textViewName = findViewById(R.id.name);
-        textViewOwnerName = findViewById(R.id.ownerName);
+        textViewOwnerName = findViewById(R.id.jobOwnerName);
         textViewBirthday = findViewById(R.id.birthday);
         textViewJob = findViewById(R.id.job);
         textViewExperience = findViewById(R.id.experience);
@@ -240,7 +373,16 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                     String code = object.getString("code");
                     switch (code) {
                         case "200": {
-                            warningMsg("تم اضافة الاعلان للمفضلة");
+
+                            if (is_liked){
+                                is_liked = false;
+                                addToFavorite.setText("الى مفضلتي");
+                                warningMsg("تم ازالة الاعلان من المفضلة");
+                            }else{
+                                is_liked = true;
+                                addToFavorite.setText("ازالة من المفضلة");
+                                warningMsg("تم اضافة الاعلان للمفضلة");
+                            }
                             break;
                         }
                         default: {
@@ -331,13 +473,24 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                                 initSlider(arrayListImages);
                             }
 
-                            textViewOwnerName.setText(data.getString("owner_name"));
+                            String owner_name = data.getString("owner_name");
+                            if (!owner_name.isEmpty()&&!owner_name.equals("null")){
+                                textViewOwnerName.setText(owner_name);
+                            }else{
+                                findViewById(R.id.layOwnerName).setVisibility(View.GONE);
+                            }
                             textViewType.setText(data.getString("owner_type"));
                             textViewBirthday.setText(data.getString("birthday"));
                             textViewJob.setText(data.getString("job_title"));
                             textViewExperience.setText(data.getString("experience"));
                             textViewSalary.setText(data.getString("salary"));
-                            textViewBillingMoney.setText(data.getString("bailing_money"));
+                            String bailing_money = data.getString("bailing_money");
+                            if (!bailing_money.isEmpty()&&!bailing_money.equals("null")){
+                                textViewBillingMoney.setText(bailing_money);
+                            }else{
+                                findViewById(R.id.laybailing_money).setVisibility(View.GONE);
+                            }
+
                             textViewSex.setText(data.getString("sex"));
                             textViewReligion.setText(data.getString("religion"));
                             textViewCountry.setText(data.getString("country_of_residencey"));
@@ -349,12 +502,10 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
 
 
 
-                            boolean is_liked = data.getBoolean("is_liked");
+                            is_liked = data.getBoolean("is_liked");
                             if (is_liked){
                                 addToFavorite.setText("ازالة من المفضلة");
                             }
-
-                            warningMsg("تم اضافة الاعلان للمفضلة");
                             break;
                         }
                         default: {
@@ -383,6 +534,8 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
+
+    boolean is_liked = false;
 
     //dialog message
     private void warningMsg(String message) {
