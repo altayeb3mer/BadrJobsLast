@@ -39,11 +39,12 @@
     <string name="about">About App</string>
     <string name="term">Term and Policy</string>
     <string name="share">Share App</string>
-    <string name="copy">"Copy of "</string>
+    <string name="copy">"Copy of Contract"</string>
     <string name="lang">Language</string>
 
 
     <string name="option">Optinal</string>
     <string name="confirm">Confirm</string>
+    <string name="send">Send</string>
 
 </resources>

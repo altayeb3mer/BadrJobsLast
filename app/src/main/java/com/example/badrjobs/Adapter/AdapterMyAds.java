@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.badrjobs.Activity.JobDetails;
+import com.example.badrjobs.Activity.AdsDetails;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
 
@@ -66,7 +65,7 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, JobDetails.class);
+                Intent intent = new Intent(activity, AdsDetails.class);
                 intent.putExtra("id",item.getId());
                 activity.startActivity(intent);
             }

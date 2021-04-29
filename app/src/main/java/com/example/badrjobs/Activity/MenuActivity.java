@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class MenuActivity extends ToolbarClass {
 
-    RelativeLayout layContactUs,layAbout,layTerm,layShare;
+    RelativeLayout layContactUs,layAbout,layTerm,layShare,copyFromContract;
 
     //lang
     Spinner spinnerLanguage;
@@ -40,6 +40,13 @@ public class MenuActivity extends ToolbarClass {
 
     private void init() {
         spinnerLanguage = findViewById(R.id.spinner);
+        copyFromContract = findViewById(R.id.copyFromContract);
+        copyFromContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ConfirmDeal.class));
+            }
+        });
         layContactUs = findViewById(R.id.layContactUs);
         layContactUs.setOnClickListener(new View.OnClickListener() {
             @Override

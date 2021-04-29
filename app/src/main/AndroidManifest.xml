@@ -28,7 +28,7 @@
         <activity android:name=".Activity.JobsContracts" />
         <activity android:name=".Activity.ProfileEdit" />
         <activity android:name=".Activity.PaymentPackage" />
-        <activity android:name=".Activity.JobDetails" />
+        <activity android:name=".Activity.AdsDetails" />
         <activity android:name=".Activity.ChattingActivity" />
         <activity android:name=".Activity.TestingAc" />
         <activity android:name=".Activity.AddJob"
@@ -53,7 +53,7 @@
         <activity android:name=".Activity.ConfirmPhone"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.MenuActivity" />
-        <activity android:name=".Activity.JobsActivity" />
+        <activity android:name=".Activity.AdsActivity" />
         <activity android:name=".Activity.SubDeptActivity" />
         <activity android:name=".Activity.DeptsActivity" />
         <activity

@@ -51,7 +51,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
 
     ImageView imgProfileEdt, imgLogOut,coverImg;
     View view;
-    CardView cardViewMyAds, cardPayPackage,cardViewBalance;
+    LinearLayout cardViewMyAds, cardPayPackage,cardViewBalance;
     Context context;
     LinearLayout progressLay;
 
@@ -88,7 +88,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
         cardViewBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ConfirmDeal.class));
+//                startActivity(new Intent(getActivity(), ConfirmDeal.class));
             }
         });
         cardViewMyAds = view.findViewById(R.id.myAds);

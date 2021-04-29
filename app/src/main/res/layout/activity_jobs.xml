@@ -50,9 +50,9 @@
                     android:layout_alignParentLeft="true" />
                 <TextView
                     android:gravity="center"
-                    android:maxWidth="100dp"
+                    android:maxWidth="80dp"
                     android:id="@+id/txtDept"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
@@ -60,7 +60,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_small_size"/>
                 <TextView
-                    android:maxWidth="100dp"
+                    android:maxWidth="80dp"
                     android:id="@+id/txtSupDept"
                     android:layout_marginLeft="@dimen/margin_large_size"
                     android:layout_marginRight="@dimen/margin_large_size"

@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.badrjobs.Activity.JobDetails;
+import com.example.badrjobs.Activity.AdsDetails;
 import com.example.badrjobs.Model.ModelJob;
 import com.example.badrjobs.R;
 
@@ -66,7 +66,7 @@ public class AdapterAds extends RecyclerView.Adapter<AdapterAds.ViewHolder> {
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, JobDetails.class);
+                Intent intent = new Intent(activity, AdsDetails.class);
                 intent.putExtra("id",item.getId());
                 activity.startActivity(intent);
             }

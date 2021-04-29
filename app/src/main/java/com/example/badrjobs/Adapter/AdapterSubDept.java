@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Activity.JobsActivity;
+import com.example.badrjobs.Activity.AdsActivity;
 import com.example.badrjobs.Model.ModelDept;
 import com.example.badrjobs.R;
 
@@ -61,7 +60,7 @@ public class AdapterSubDept extends RecyclerView.Adapter<AdapterSubDept.ViewHold
             public void onClick(View view) {
 //                if (item.isHasSub()) {
 //                    Toast.makeText(activity, "has sub category", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(activity, JobsActivity.class);
+                    Intent intent = new Intent(activity, AdsActivity.class);
                     intent.putExtra("categoryId", item.getId());
                     intent.putExtra("countryId", countryId);
                     activity.startActivity(intent);

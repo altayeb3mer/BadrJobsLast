@@ -46,7 +46,7 @@ public class NotificationActivity extends ToolbarClass {
     AdapterNotification adapterNotification;
     ArrayList<ModelNotification> arrayList;
     GridLayoutManager gridLayoutManager;
-    ImageView icNotification;
+//    ImageView icNotification;
     LinearLayout progressLay;
     LinearLayout noDataLay;
     //language controller
@@ -62,13 +62,13 @@ public class NotificationActivity extends ToolbarClass {
         noDataLay = findViewById(R.id.noDataLay);
         progressLay = findViewById(R.id.progressLay);
         recyclerView = findViewById(R.id.recycler);
-        icNotification = findViewById(R.id.icNotification);
-        icNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), JobsContracts.class));
-            }
-        });
+//        icNotification = findViewById(R.id.icNotification);
+//        icNotification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                startActivity(new Intent(getApplicationContext(), JobsContracts.class));
+//            }
+//        });
         getNotificationFun();
     }
 

@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Activity.JobsActivity;
+import com.example.badrjobs.Activity.AdsActivity;
 import com.example.badrjobs.Activity.SubDeptActivity;
-import com.example.badrjobs.Model.ModelCountry;
 import com.example.badrjobs.Model.ModelDept;
 import com.example.badrjobs.R;
 
@@ -70,7 +67,7 @@ public class AdapterDept extends RecyclerView.Adapter<AdapterDept.ViewHolder> {
                     activity.startActivity(intent);
                 }else{
                     Toast.makeText(activity, "has not", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(activity, JobsActivity.class);
+                    Intent intent = new Intent(activity, AdsActivity.class);
                     intent.putExtra("categoryId", item.getId());
                     intent.putExtra("countryId", countryId);
                     activity.startActivity(intent);

@@ -48,11 +48,13 @@ public class UserViewedProfile extends ToolbarClass {
     CircleImageView circleImageViewProfile;
     TextView textViewFix, textViewBio,textViewName,textViewEmail,textViewJob;
     AppCompatButton buttonBlock;
-    LinearLayout layoutChat;
+    LinearLayout layoutChat,layContainer;
 
 
 
     private void init() {
+        layContainer = findViewById(R.id.layContainer);
+        layContainer.setVisibility(View.GONE);
         progressLay = findViewById(R.id.progressLay);
         imageViewHeader = findViewById(R.id.headerImg);
         imageViewFlag = findViewById(R.id.imgFlag);
@@ -117,6 +119,7 @@ public class UserViewedProfile extends ToolbarClass {
                     String statusCode = object.getString("code");
                     switch (statusCode) {
                         case "200": {
+                            layContainer.setVisibility(View.VISIBLE);
                             JSONArray array = object.getJSONArray("response");
                             JSONObject objectData = array.getJSONObject(0);
                             JSONObject userData = objectData.getJSONObject("user");
@@ -124,7 +127,7 @@ public class UserViewedProfile extends ToolbarClass {
                             Glide.with(UserViewedProfile.this).
                                     load(userData.getString("header_image")).into(imageViewHeader);
                             Glide.with(UserViewedProfile.this).
-                                    load(userData.getString("image")).into(imageViewFlag);//todo load region flag here
+                                    load(userData.getString("nationality_flag")).into(imageViewFlag);
 
                             image = userData.getString("image");
                             Glide.with(UserViewedProfile.this).
@@ -140,6 +143,7 @@ public class UserViewedProfile extends ToolbarClass {
                             textViewJob.setText(userData.getString("job"));
 
                             fcmToken = userData.getString("job");
+
 
 
                             break;

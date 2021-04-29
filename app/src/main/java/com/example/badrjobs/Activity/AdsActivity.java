@@ -45,7 +45,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.content.ContentValues.TAG;
 
-public class JobsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRefreshListener {
+public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
     AdapterAds adapterDept;
@@ -167,14 +167,15 @@ public class JobsActivity extends ToolbarClass implements SwipeRefreshLayout.OnR
 
                     //bread_crumb
                     JSONArray deptInfoArray = responseObj.getJSONArray("bread_crumb");
-                    if (deptInfoArray.length()==2){}else if (deptInfoArray.length()==1){
-                        JSONObject breadObj = deptInfoArray.getJSONObject(0);
-                        String dept = breadObj.getString("transName");
-                        textViewDept.setText(new GlobalVar().underLinerTextView(dept));
-                    }else {
-                        Toast.makeText(JobsActivity.this, ""+deptInfoArray.length(), Toast.LENGTH_SHORT).show();
-                    }
+                    JSONObject breadObj = deptInfoArray.getJSONObject(0);
+                    String dept = breadObj.getString("transName");
+                    textViewDept.setText(new GlobalVar().underLinerTextView(dept));
 
+                    if (deptInfoArray.length()==2){
+                        JSONObject breadObj2 = deptInfoArray.getJSONObject(1);
+                        String sub_dept = breadObj2.getString("transName");
+                        textViewSupDept.setText(new GlobalVar().underLinerTextView(sub_dept));
+                    }
 
 
                     //pagination
@@ -203,9 +204,7 @@ public class JobsActivity extends ToolbarClass implements SwipeRefreshLayout.OnR
                             }
 
 
-
                             if (arrayList.size()>0){
-//                                setRecycler(arrayList);
                                 adapterDept.notifyItemInserted(arrayList.size()-Integer.parseInt(s_perPage));
                                 noDataLay.setVisibility(View.GONE);
                             }else{

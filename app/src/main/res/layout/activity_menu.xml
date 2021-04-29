@@ -124,6 +124,7 @@
             android:layout_toRightOf="@+id/ic4" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/copyFromContract"
         android:background="@drawable/shape_btn_about_bg"
         android:layout_marginTop="@dimen/margin_normal_size"
         android:layout_width="200dp"

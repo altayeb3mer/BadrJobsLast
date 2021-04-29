@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class JobDetails extends AppCompatActivity implements View.OnClickListener {
+public class AdsDetails extends AppCompatActivity implements View.OnClickListener {
 
     CardView cardSignature;
     String id = "";
@@ -53,17 +55,20 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
     TextView addToFavorite, textViewName,textViewFixName,textViewType,textViewOwnerName,textViewBirthday,
     textViewJob,textViewExperience,textViewSalary,textViewBillingMoney,textViewSex,
     textViewReligion, textViewCountry,textViewDesc,textViewViews,
-    textViewReportAds;
+    textViewReportAds,textViewOfficeName,textViewOfficeAddress,textViewDate;
     CircleImageView circleImageViewOwner;
 
-    String ownerId="";
+    String ownerId="",isActive="NO";
     ImageView imgFlag,imageViewBack;
 
     ViewPager viewPager;
     SlideShow_adapter slideShow_adapter;
     ArrayList<String> arrayListImages;
     CircleIndicator circleIndicator;
-    LinearLayout layOwner;
+    LinearLayout layOwner,layOffice;
+    AppCompatButton btnStopAd;
+    NestedScrollView nestedScroll;
+    boolean isMyAd=false;
 
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -97,7 +102,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
         textViewTitle.setText(title);
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
-        yes.setText("تعديل");
+        yes.setText(getResources().getString(R.string.send));
         no.setText("الغاء");
 
         EditText editTextField = dialog.findViewById(R.id.field);
@@ -192,7 +197,22 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
+
     private void init() {
+        nestedScroll = findViewById(R.id.nestedScroll);
+        nestedScroll.setVisibility(View.GONE);
+        btnStopAd = findViewById(R.id.btnStopAd);
+        btnStopAd.setVisibility(View.GONE);
+        btnStopAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activateJob();
+            }
+        });
+        textViewDate = findViewById(R.id.date);
+        textViewOfficeName = findViewById(R.id.officeName);
+        textViewOfficeAddress = findViewById(R.id.officeAddress);
+        layOffice = findViewById(R.id.layOffice);
 
         textViewReportAds = findViewById(R.id.reportAds);
         textViewReportAds.setOnClickListener(new View.OnClickListener() {
@@ -205,7 +225,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
         layOwner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(JobDetails.this,UserViewedProfile.class);
+                Intent i = new Intent(AdsDetails.this,UserViewedProfile.class);
                 i.putExtra("userId",ownerId);
                 startActivity(i);
             }
@@ -306,7 +326,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                     String code = object.getString("code");
                     switch (code) {
                         case "200": {
-                            warningMsg("تم انشاء العقد راجع العقود للتوقيع");
+                            warningMsg("تم انشاء العقد في انتظار موافقة صاحب الاعلان");
                             break;
                         }
                         default: {
@@ -320,6 +340,78 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
 
                 } catch (Exception e) {
 
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                progressLay.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                progressLay.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+    private void activateJob() {
+        progressLay.setVisibility(View.VISIBLE);
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
+                        ongoing.addHeader("Content-Type", "application/json;");
+                        ongoing.addHeader("Accept", "application/json");
+                        ongoing.addHeader("lang", SharedPrefManager.getInstance(getApplicationContext()).GetAppLanguage());
+                        String token = SharedPrefManager.getInstance(getApplicationContext()).getAppToken();
+                        ongoing.addHeader("Authorization", token);
+                        return chain.proceed(ongoing.build());
+                    }
+                })
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.ROOT_URL)
+                .client(httpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api.RetrofitCreateContract service = retrofit.create(Api.RetrofitCreateContract.class);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("job_id", id);
+        Call<String> call = service.putParam(hashMap);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                try {
+                    JSONObject object = new JSONObject(response.body());
+                    String code = object.getString("code");
+                    switch (code) {
+                        case "200": {
+                            if (isActive.equals("YES")){
+                                isActive = "NO";
+                                btnStopAd.setText("تفعيل الاعلان");
+                                warningMsg("تم ايقاف الاعلان");
+                            }else{
+                                isActive = "YES";
+                                btnStopAd.setText("ايقاف مؤقت للاعلان");
+                                warningMsg("تم تفعيل الاعلان");
+                            }
+                            break;
+                        }
+                        default: {
+                            warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                            break;
+                        }
+                    }
+
+                    progressLay.setVisibility(View.GONE);
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -448,25 +540,39 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                     String code = object.getString("code");
                     switch (code) {
                         case "200": {
+                            nestedScroll.setVisibility(View.VISIBLE);
                             JSONObject data = object.getJSONObject("response");
                             //owner info
                             JSONObject owner_info = data.getJSONObject("owner_info");
                             textViewFixName.setText(owner_info.getString("fixName"));
-                            Glide.with(getApplicationContext()).load(owner_info.getString("image"));
+                            String ownerImgProfile = owner_info.getString("image");
+
+                            try {
+                                if (!ownerImgProfile.isEmpty() && !ownerImgProfile.equals("null")) {
+                                    Glide.with(getApplicationContext()).load(ownerImgProfile).into(circleImageViewOwner);
+
+                                } else {
+                                    Glide.with(getApplicationContext()).load(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_account_circle_24))
+                                            .into(circleImageViewOwner);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                             ownerId = owner_info.getString("id");
                             textViewName.setText( owner_info.getString("name"));
                             //job info
 
                             String img1 = data.getString("image1");
-                            if (!img1.isEmpty()&&img1.equals("null")){
+                            if (!img1.isEmpty()&&!img1.equals("null")){
                                 arrayListImages.add(img1);
                             }
                             String img2 = data.getString("image2");
-                            if (!img2.isEmpty()&&img2.equals("null")){
+                            if (!img2.isEmpty()&&!img2.equals("null")){
                                 arrayListImages.add(img2);
                             }
                             String img3 = data.getString("image3");
-                            if (!img3.isEmpty()&&img3.equals("null")){
+                            if (!img3.isEmpty()&&!img3.equals("null")){
                                 arrayListImages.add(img3);
                             }
                             if (arrayListImages.size()>0){
@@ -479,7 +585,17 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                             }else{
                                 findViewById(R.id.layOwnerName).setVisibility(View.GONE);
                             }
-                            textViewType.setText(data.getString("owner_type"));
+                            String owner_type=data.getString("owner_type");
+                            textViewType.setText(owner_type);
+                            if (owner_type.equals("PERSONAL")){
+                                layOffice.setVisibility(View.GONE);
+                            }else if(owner_type.equals("OFFICE")){
+                                layOffice.setVisibility(View.VISIBLE);
+                                textViewOfficeName.setText(data.getString("organization_name"));
+                                textViewOfficeAddress.setText(data.getString("country_of_residencey"));
+                            }
+                            textViewDate.setText(data.getString("before_x_days"));
+
                             textViewBirthday.setText(data.getString("birthday"));
                             textViewJob.setText(data.getString("job_title"));
                             textViewExperience.setText(data.getString("experience"));
@@ -491,6 +607,7 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
                                 findViewById(R.id.laybailing_money).setVisibility(View.GONE);
                             }
 
+                            isActive =  data.getString("active");
                             textViewSex.setText(data.getString("sex"));
                             textViewReligion.setText(data.getString("religion"));
                             textViewCountry.setText(data.getString("country_of_residencey"));
@@ -502,6 +619,18 @@ public class JobDetails extends AppCompatActivity implements View.OnClickListene
 
 
 
+                            isMyAd = data.getBoolean("is_owner");
+                            if (isMyAd||isActive.equals("NO")){
+                                cardSignature.setVisibility(View.GONE);
+                            }
+                            if (isMyAd){
+                                btnStopAd.setVisibility(View.VISIBLE);
+                            }
+                            if (isActive.equals("YES")){
+                                btnStopAd.setText("ايقاف مؤقت للاعلان");
+                            }else {
+                                btnStopAd.setText("تفعيل الاعلان");
+                            }
                             is_liked = data.getBoolean("is_liked");
                             if (is_liked){
                                 addToFavorite.setText("ازالة من المفضلة");

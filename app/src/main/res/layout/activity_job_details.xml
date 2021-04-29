@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -30,7 +27,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/flag"
                 android:id="@+id/img"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_normal_size"
@@ -41,7 +37,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ahmed@"
                 android:textSize="@dimen/txt_normal_size"
                 android:textColor="@android:color/black"/>
         </LinearLayout>
@@ -156,7 +151,8 @@
                         android:layout_height="40dp"
                         android:src="@drawable/ic_date"/>
                     <TextView
-                        android:textSize="@dimen/txt_normal_size"
+                        android:id="@+id/date"
+                        android:textSize="@dimen/txt_small_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="15يوم"/>
@@ -173,13 +169,14 @@
                         android:src="@drawable/ic_shown"/>
                     <TextView
                         android:id="@+id/views"
-                        android:textSize="@dimen/txt_normal_size"
+                        android:textSize="@dimen/txt_small_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="123"/>
                 </LinearLayout>
             </RelativeLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -248,6 +245,57 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_normal_size"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/layOffice">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layoutDirection="rtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="اسم المكتب او المؤسسة : "
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/txt_normal_size"/>
+                    <TextView
+                        android:id="@+id/officeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="..."
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txt_normal_size"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layoutDirection="rtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="موقع المكتب : "
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/txt_normal_size"/>
+                    <TextView
+                        android:id="@+id/officeAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="..."
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txt_normal_size"/>
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layoutDirection="rtl"
@@ -479,6 +527,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStopAd"
                 android:background="@drawable/shape_btn_pause_bg"
                 android:layout_margin="@dimen/margin_large_size"
                 android:layout_width="match_parent"

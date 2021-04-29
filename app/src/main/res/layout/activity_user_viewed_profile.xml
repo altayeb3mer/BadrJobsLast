@@ -57,7 +57,6 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ahmed@"
                             android:textSize="@dimen/txt_normal_size"
                             android:textColor="@android:color/black"/>
                     </LinearLayout>
@@ -77,6 +76,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -105,100 +105,79 @@
                     android:text=" علي احمد خالد مهندس كمبيوتر "/>
             </androidx.cardview.widget.CardView>
 
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layoutDirection="rtl"
-                        android:layout_marginTop="50dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-                        <androidx.constraintlayout.widget.Guideline
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.3"
-                            android:id="@+id/g1"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toRightOf="@+id/g1"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:text="الاسم : "
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                        <TextView
-                            android:id="@+id/name"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toLeftOf="@+id/g1"
-                            android:text="علي احمد خالد"
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layoutDirection="rtl"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-                        <androidx.constraintlayout.widget.Guideline
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.3"
-                            android:id="@+id/g2"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toRightOf="@+id/g2"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:text="الايميل : "
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                        <TextView
-                            android:id="@+id/email"
-                            android:textDirection="locale"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toLeftOf="@+id/g2"
-                            android:text="abc@a.com"
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layoutDirection="rtl"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-                        <androidx.constraintlayout.widget.Guideline
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.3"
-                            android:id="@+id/g3"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toRightOf="@+id/g3"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:text="المهنة : "
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                        <TextView
-                            android:id="@+id/job"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toLeftOf="@+id/g3"
-                            android:text="علي احمد خالد"
-                            android:gravity="center_vertical"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <TextView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/name"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="50dp"
+                    android:text="..."
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <TextView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/email"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="50dp"
+                    android:text="..."
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <TextView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/job"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/job"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="50dp"
+                    android:text="..."
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_normal_size"/>
+            </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_marginTop="50dp"
