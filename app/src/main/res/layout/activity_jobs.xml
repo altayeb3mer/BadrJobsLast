@@ -21,6 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,6 +92,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <LinearLayout
         android:id="@+id/progressLay"
         android:visibility="gone"
@@ -107,6 +109,7 @@
             app:indicatorColor="@color/colorPrimary"
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/noDataLay"
         android:visibility="gone"
