@@ -94,7 +94,6 @@ public class Register extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(false);
 
-
         spinner = findViewById(R.id.spinner);
         layAvailable = findViewById(R.id.layAvailable);
         layNotAvailable = findViewById(R.id.layNotAvailable);
