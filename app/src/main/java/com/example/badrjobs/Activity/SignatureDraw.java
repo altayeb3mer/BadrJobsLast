@@ -26,7 +26,7 @@ public class SignatureDraw extends AppCompatActivity implements View.OnClickList
 
     LinearLayout signatureLay;
     AppCompatButton buttonSave,buttonDel;
-    ImageView imageView;
+    ImageView imageView,imageViewClose;
 
 
     @Override
@@ -38,6 +38,8 @@ public class SignatureDraw extends AppCompatActivity implements View.OnClickList
     CaptureSignatureView mSig;
     Bitmap signatureBitmap;
     private void init() {
+        imageViewClose = findViewById(R.id.close);
+        imageViewClose.setOnClickListener(this);
         buttonDel = findViewById(R.id.btnDel);
         buttonDel.setOnClickListener(this);
         buttonSave = findViewById(R.id.btn);
@@ -79,6 +81,10 @@ public class SignatureDraw extends AppCompatActivity implements View.OnClickList
             }
             case R.id.btnDel:{
                 mSig.ClearCanvas();
+                break;
+            }
+            case R.id.close:{
+                onBackPressed();
                 break;
             }
         }

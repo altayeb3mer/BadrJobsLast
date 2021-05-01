@@ -381,7 +381,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Api.RetrofitCreateContract service = retrofit.create(Api.RetrofitCreateContract.class);
+        Api.RetrofitDoActivation service = retrofit.create(Api.RetrofitDoActivation.class);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("job_id", id);
         Call<String> call = service.putParam(hashMap);

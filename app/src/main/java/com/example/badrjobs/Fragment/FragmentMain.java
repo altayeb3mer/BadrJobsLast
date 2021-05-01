@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
-public class FragmentMain extends Fragment {
+public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
     AdapterCountry adapterCountry;
@@ -50,6 +52,8 @@ public class FragmentMain extends Fragment {
     public FragmentMain() {
         // Required empty public constructor
     }
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     View view;
     @Override
@@ -63,6 +67,9 @@ public class FragmentMain extends Fragment {
     }
 
     private void init() {
+        mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         recyclerView = view.findViewById(R.id.recycler);
         progressLay = view.findViewById(R.id.progressLay);
         recyclerView.addItemDecoration(new DividerItemDecoration(context,
@@ -166,5 +173,16 @@ public class FragmentMain extends Fragment {
         });
     }
 
+    @Override
+    public void onRefresh() {
+        getCountries();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        }, 1000);
+    }
 
 }

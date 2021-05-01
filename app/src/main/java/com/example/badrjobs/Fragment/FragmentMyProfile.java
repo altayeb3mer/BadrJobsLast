@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -284,8 +285,29 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                             //images
                             imgProfileUrl = dataObject.getString("image");
                             imgHeaderUrl = dataObject.getString("header_image");
-                            Glide.with(context).load(imgProfileUrl).into(circleImageViewMyImg);
-                            Glide.with(context).load(imgHeaderUrl).into(coverImg);
+
+                            try {
+                                if (!imgProfileUrl.isEmpty()&&!imgProfileUrl.equals("null")){
+                                    Glide.with(context).load(imgProfileUrl).into(circleImageViewMyImg);
+                                }else{
+                                    Glide.with(context).load(ContextCompat.getDrawable(context,R.drawable.ic_baseline_account_circle_24))
+                                            .into(circleImageViewMyImg);
+                                }
+                            } catch (Exception e) {
+
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                if (!imgHeaderUrl.isEmpty()&&!imgHeaderUrl.equals("null")){
+                                    Glide.with(context).load(imgHeaderUrl).into(coverImg);
+                                }else{
+                                    Glide.with(context).load(ContextCompat.getDrawable(context,R.drawable.shape_btn_nav_bg)).into(coverImg);                                }
+                            } catch (Exception e) {
+
+                                e.printStackTrace();
+                            }
+
 
                             //no nationality on response
 

@@ -53,7 +53,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
     EditText edtSearch;
 
     //progressLay
-    LinearLayout progressLay;
+    LinearLayout progressLay,noDataLay;
 
     public FragmentFavorite() {
         // Required empty public constructor
@@ -72,6 +72,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void init() {
+        noDataLay = view. findViewById(R.id.noDataLay);
         mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         //textView title
@@ -134,7 +135,6 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
         this.context = context;
         super.onAttach(context);
     }
-
 
     private void getFavorite() {
         arrayList = new ArrayList<>();
@@ -199,8 +199,9 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
                             if (arrayList.size()>0){
 //                                setRecycler(arrayList);
                                initAdapter(arrayList);
+                                noDataLay.setVisibility(View.GONE);
                             }else{
-                                Toast.makeText(context, "لاتوجد عناصر", Toast.LENGTH_SHORT).show();
+                                noDataLay.setVisibility(View.VISIBLE);
                             }
                             break;
                         }

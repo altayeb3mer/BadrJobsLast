@@ -80,8 +80,32 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             String imgProfileUrl = args.getString("profile");
             String imgHeaderUrl = args.getString("header");
             String bio = args.getString("bio");
-            Glide .with(this).load(imgProfileUrl).into(profileImage);
-            Glide .with(this).load(imgHeaderUrl).into(imageViewHeader);
+
+            try {
+                if (!imgProfileUrl.isEmpty()&&!imgProfileUrl.equals("null")){
+                    Glide.with(this).load(imgProfileUrl).into(profileImage);
+                }else{
+                    Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24))
+                            .into(profileImage);
+                }
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+            try {
+                if (!imgHeaderUrl.isEmpty()&&!imgHeaderUrl.equals("null")){
+                    Glide.with(this).load(imgHeaderUrl).into(imageViewHeader);
+                }else{
+                    Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.shape_btn_nav_bg))
+                            .into(imageViewHeader);
+                }
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+//            Glide .with(this).load(imgHeaderUrl).into(imageViewHeader);
+//            Glide .with(this).load(imgProfileUrl).into(profileImage);
             textViewDescription = findViewById(R.id.description);
             textViewDescription.setText(bio);
         }

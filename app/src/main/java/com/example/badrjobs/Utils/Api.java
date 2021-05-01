@@ -138,6 +138,10 @@ public class Api {
         @POST("api/v1/favorite")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+    public interface RetrofitDoActivation {
+        @POST("api/v1/jobActivation")
+        Call<String> putParam(@Body HashMap<String, String> param);
+    }
 
 
 

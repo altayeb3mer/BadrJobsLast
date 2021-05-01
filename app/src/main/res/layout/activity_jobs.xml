@@ -29,10 +29,12 @@
         android:id="@+id/swipeContainer"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <androidx.core.widget.NestedScrollView
+        android:layout_margin="@dimen/margin_small_size"
         android:id="@+id/nestedScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:background="@drawable/shape_container_lay_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -74,7 +76,6 @@
                     android:layout_alignParentRight="true" />
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_margin="@dimen/margin_normal_size"
                 android:nestedScrollingEnabled="false"
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"

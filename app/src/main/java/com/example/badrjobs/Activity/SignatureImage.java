@@ -28,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
@@ -349,7 +350,11 @@ public class SignatureImage extends ToolbarClass {
                     }
                     contractImgUrl = data.getString("image");
                     contractNo = data.getString("uid");
-                    Glide.with(getApplicationContext()).load(contractImgUrl).into(imageViewSignature);
+                    Glide.with(getApplicationContext())
+                            .load(contractImgUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true).into(imageViewSignature);
+
                     switch (type) {
                         case "CONTRACT_REQUEST": {
                             if (data.getBoolean("isFirstSideSign")){

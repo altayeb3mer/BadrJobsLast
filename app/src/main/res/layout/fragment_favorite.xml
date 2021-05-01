@@ -77,7 +77,6 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
     <LinearLayout
         android:id="@+id/progressLay"
         android:visibility="gone"
@@ -94,4 +93,23 @@
             app:indicatorColor="@color/colorPrimary"
             />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/noDataLay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large_size"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/txt_large_size"
+            android:textStyle="bold"
+            android:text="عفوا\n ليس لديك عناصر في المفضلة"
+            android:gravity="center"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
