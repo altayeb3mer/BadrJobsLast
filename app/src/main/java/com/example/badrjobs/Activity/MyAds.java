@@ -43,7 +43,7 @@ public class MyAds extends AppCompatActivity {
     AdapterMyAds adapterMyAds;
     ArrayList<ModelJob> arrayList;
     GridLayoutManager gridLayoutManager;
-    LinearLayout progressLay;
+    LinearLayout progressLay,noDataLay;
     EditText edtSearch;
 
     @Override
@@ -56,6 +56,7 @@ public class MyAds extends AppCompatActivity {
     }
 
     private void init() {
+        noDataLay = findViewById(R.id.noDataLay);
         edtSearch = findViewById(R.id.edtSearch);
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,8 +144,9 @@ public class MyAds extends AppCompatActivity {
 
                             if (arrayList.size()>0){
                                 setRecycler(arrayList);
+                                noDataLay.setVisibility(View.GONE);
                             }else {
-
+                                noDataLay.setVisibility(View.VISIBLE);
                             }
 
 

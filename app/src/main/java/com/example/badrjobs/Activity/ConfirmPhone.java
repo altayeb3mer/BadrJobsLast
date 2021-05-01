@@ -162,11 +162,11 @@ public class ConfirmPhone extends AppCompatActivity {
                     String statusCode = object.getString("code");
                     switch (statusCode) {
                         case "200": {
-                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             warningMsg("تم اتمام تسجيلك\n قم بتجيل الدخول");
 
-                            finish();
+//                            finish();
                             break;
                         }
 
