@@ -89,5 +89,9 @@ dependencies {
     //chat sdk
 //    implementation "sdk.chat:firebase-app:5.0.0rc15"
 
+    //animate activity
+    implementation 'com.github.mohammadatif:Animatoo:master'
+
+
 
 }

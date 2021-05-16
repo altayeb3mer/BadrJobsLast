@@ -107,7 +107,11 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
 //            Glide .with(this).load(imgHeaderUrl).into(imageViewHeader);
 //            Glide .with(this).load(imgProfileUrl).into(profileImage);
             textViewDescription = findViewById(R.id.description);
-            textViewDescription.setText(bio);
+            if (!bio.isEmpty()&&!bio.equals("null")){
+                textViewDescription.setText(bio);
+            }else{
+                textViewDescription.setText("");
+            }
         }
     }
 
@@ -323,7 +327,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 break;
             }
             case R.id.contracts:{
-               startActivity(new Intent(getApplicationContext(),JobsContracts.class));
+               startActivity(new Intent(getApplicationContext(), PrevContracts.class));
                 break;
             }
             case R.id.blockedUser:{

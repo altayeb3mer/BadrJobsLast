@@ -8,6 +8,15 @@ public class ModelJob {
     private String ownerImage;
     private boolean isLiked;
     private String isActive;
+    private int index;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public String isActive() {
         return isActive;

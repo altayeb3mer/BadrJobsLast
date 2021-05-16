@@ -12,9 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.badrjobs.Activity.NotificationDetails;
-import com.example.badrjobs.Activity.SignatureForm1;
-import com.example.badrjobs.Activity.SignatureForm2;
-import com.example.badrjobs.Activity.SignatureImage;
+import com.example.badrjobs.Activity.ContractImage;
 import com.example.badrjobs.Model.ModelNotification;
 import com.example.badrjobs.R;
 
@@ -67,9 +65,10 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                         activity.startActivity(intent);
                         break;
                     }
+                    case "CONTRACT_COMPILATION_NOTIFACTION":
                     case "CONTRACT_REQUEST":
                     case "SECOND_SIDE_SIGNATURE_REQUEST": {
-                        Intent intent = new Intent(activity, SignatureImage.class);
+                        Intent intent = new Intent(activity, ContractImage.class);
                         intent.putExtra("contractId",item.getContractId());
                         intent.putExtra("type",item.getType());
                         activity.startActivity(intent);
@@ -92,7 +91,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         });
         holder.textViewTitle.setText(item.getTitle());
         holder.textViewBody.setText(item.getBody());
-        holder.textViewDate.setText(item.getDate());
+        holder.textViewDate.setText(item.getDate().substring(0,10));
 
 //
 //

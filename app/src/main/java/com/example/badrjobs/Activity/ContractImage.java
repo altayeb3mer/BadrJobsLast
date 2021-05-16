@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,16 +33,13 @@ import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
+import com.jsibbold.zoomage.ZoomageView;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -54,10 +50,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class SignatureImage extends ToolbarClass {
+public class ContractImage extends ToolbarClass {
 
     View view1,view2;
-    ImageView imageViewSignature;
+    ZoomageView imageViewSignature;
     AppCompatButton buttonSignature,button2;
 
     String contractId="",type="",contractImgUrl="";
@@ -87,29 +83,29 @@ public class SignatureImage extends ToolbarClass {
         view1 = findViewById(R.id.view1);
         view2 = findViewById(R.id.view2);
         imageViewSignature = findViewById(R.id.signatureImg);
-        imageViewSignature.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!contractImgUrl.isEmpty()){
-                    Intent intent = new Intent(getApplicationContext(),ImageViewer.class);
-                    intent.putExtra("imgUrl",contractImgUrl);
-                    startActivity(intent);
-                }
-            }
-        });
+//        imageViewSignature.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (!contractImgUrl.isEmpty()){
+//                    Intent intent = new Intent(getApplicationContext(),ImageViewer.class);
+//                    intent.putExtra("imgUrl",contractImgUrl);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
         buttonSignature = findViewById(R.id.btnSign);
         buttonSignature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (type) {
                     case "CONTRACT_REQUEST": {
-                        Intent intent = new Intent(SignatureImage.this, SignatureForm1.class);
+                        Intent intent = new Intent(ContractImage.this, SignatureForm1.class);
                         intent.putExtra("contractId", contractId);
                         startActivity(intent);
                         break;
                     }
                     case "SECOND_SIDE_SIGNATURE_REQUEST": {
-                        Intent intent = new Intent(SignatureImage.this, SignatureForm2.class);
+                        Intent intent = new Intent(ContractImage.this, SignatureForm2.class);
                         intent.putExtra("contractId", contractId);
                         startActivity(intent);
                         break;
@@ -138,6 +134,7 @@ public class SignatureImage extends ToolbarClass {
             }
         });
     }
+
 
 
     private void TakeScreenshotAndShare() {
@@ -368,6 +365,10 @@ public class SignatureImage extends ToolbarClass {
                             }
                             break;
                         }
+                        case "CONTRACT_COMPILATION_NOTIFACTION": {
+                                buttonSignature.setVisibility(View.GONE);
+                            break;
+                        }
                     }
 
 
@@ -401,6 +402,11 @@ public class SignatureImage extends ToolbarClass {
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
+        getContractImage();
+        if (type.equals("prevContract")){
+            buttonSignature.setText("حفظ");
+            button2.setText("مشاركة");
+        }
     }
 
     @Override

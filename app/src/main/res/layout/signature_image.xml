@@ -86,12 +86,21 @@
         app:layout_constraintTop_toBottomOf="@+id/la2"
         app:layout_constraintBottom_toTopOf="@+id/layBtn"
         android:background="@drawable/shape_ads_item_bg">
-        <ImageView
-            android:id="@+id/signatureImg"
+        <com.jsibbold.zoomage.ZoomageView
             android:layout_margin="@dimen/margin_small_size"
+            android:id="@+id/signatureImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:zoomage_restrictBounds="false"
+            app:zoomage_animateOnReset="true"
+            app:zoomage_autoResetMode="UNDER"
+            app:zoomage_autoCenter="true"
+            app:zoomage_zoomable="true"
+            app:zoomage_translatable="true"
+            app:zoomage_minScale="0.6"
+            app:zoomage_maxScale="8"
             />
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/progressLay"

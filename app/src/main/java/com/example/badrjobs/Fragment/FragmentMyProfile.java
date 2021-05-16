@@ -275,7 +275,11 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
 
                             textViewFixName.setText(dataObject.getString("fixName"));
                             bio = dataObject.getString("bio");
-                            textViewDesc.setText(bio);
+                            if (!bio.isEmpty()&&!bio.equals("null")){
+                                textViewDesc.setText(bio);
+                            }else{
+                                textViewDesc.setText("");
+                            }
                             textViewName.setText(dataObject.getString("name"));
                             textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));
                             textViewEmail.setText(dataObject.getString("email"));

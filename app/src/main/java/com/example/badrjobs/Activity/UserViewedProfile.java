@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -124,18 +125,42 @@ public class UserViewedProfile extends ToolbarClass {
                             JSONObject objectData = array.getJSONObject(0);
                             JSONObject userData = objectData.getJSONObject("user");
 
-                            Glide.with(UserViewedProfile.this).
-                                    load(userData.getString("header_image")).into(imageViewHeader);
+
+
+
+                            String header_image = userData.getString("header_image");
+
+                                if (!header_image.isEmpty()&&!header_image.equals("null")){
+                                    Glide.with(UserViewedProfile.this).load(header_image).into(imageViewHeader);
+                                }else{
+                                    Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this,R.drawable.shape_btn_nav_bg))
+                                            .into(imageViewHeader);
+                                }
+
+
                             Glide.with(UserViewedProfile.this).
                                     load(userData.getString("nationality_flag")).into(imageViewFlag);
 
                             image = userData.getString("image");
-                            Glide.with(UserViewedProfile.this).
-                                    load(image).into(circleImageViewProfile);
+                            if (!image.isEmpty()&&!image.equals("null")){
+                                Glide.with(UserViewedProfile.this).load(image).into(circleImageViewProfile);
+                            }else{
+                                Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this,R.drawable.ic_baseline_account_circle_24))
+                                        .into(circleImageViewProfile);
+                            }
+//                            Glide.with(UserViewedProfile.this).
+//                                    load(image).into(circleImageViewProfile);
+
+
 
                             fixName = userData.getString("fixName");
                             textViewFix.setText(fixName);
-                            textViewBio.setText(userData.getString("bio"));
+                            String bio = userData.getString("bio");
+                            if (!bio.isEmpty()&&!bio.equals("null")){
+                                textViewBio.setText(bio);
+                            }else{
+                                textViewBio.setText("");
+                            }
 
                             name = userData.getString("name");
                             textViewName.setText(name);

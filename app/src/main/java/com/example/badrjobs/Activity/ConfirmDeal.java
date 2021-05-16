@@ -15,16 +15,13 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.badrjobs.Model.ModelDept;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -110,7 +107,7 @@ public class ConfirmDeal extends ToolbarClass implements View.OnClickListener {
                         case "200": {
                             JSONObject objectData = object.getJSONObject("response");
                             contractId = objectData.getString("id");
-                            Intent intent = new Intent(ConfirmDeal.this, SignatureImage.class);
+                            Intent intent = new Intent(ConfirmDeal.this, ContractImage.class);
                             intent.putExtra("contractId",contractId);
                             intent.putExtra("type","prevContract");
                             startActivity(intent);

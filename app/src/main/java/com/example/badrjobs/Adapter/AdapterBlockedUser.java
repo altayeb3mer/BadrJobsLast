@@ -106,7 +106,9 @@ public class AdapterBlockedUser extends RecyclerView.Adapter<AdapterBlockedUser.
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null)
+                mClickListener.onItemClick(view, getAdapterPosition());
+
         }
     }
 

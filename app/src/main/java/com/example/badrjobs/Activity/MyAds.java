@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -37,7 +39,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class MyAds extends AppCompatActivity {
+public class MyAds extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
     AdapterMyAds adapterMyAds;
@@ -56,6 +58,9 @@ public class MyAds extends AppCompatActivity {
     }
 
     private void init() {
+        mSwipeRefreshLayout =  findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         noDataLay = findViewById(R.id.noDataLay);
         edtSearch = findViewById(R.id.edtSearch);
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -193,6 +198,21 @@ public class MyAds extends AppCompatActivity {
         }
         //update recyclerview
         adapterMyAds.updateList(temp);
+    }
+
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    @Override
+    public void onRefresh() {
+        arrayList = new ArrayList<>();
+        getMyAds();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        }, 1000);
     }
 
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;

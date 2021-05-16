@@ -1,11 +1,14 @@
 package com.example.badrjobs.Fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -80,11 +83,25 @@ public class FragmentAdd extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddJob.class);
-                intent.putExtra("countryId",countryId);
-                intent.putExtra("deptId",deptId);
-                intent.putExtra("supDeptId",subDeptId);
-                startActivity(intent);
+                if (countryId.isEmpty()){
+                    warningMsg("الرجاء اختيار الدولة");
+                    return;
+                }
+                if (deptId.isEmpty()){
+                    warningMsg("الرجاء اختيار قسم");
+                    return;
+                }
+                if (subDeptId.isEmpty()&&hasSub){
+                    warningMsg("الرجاء اختيار قسم فرعي");
+                    return;
+                }
+                    Intent intent = new Intent(getActivity(), AddJob.class);
+                    intent.putExtra("countryId",countryId);
+                    intent.putExtra("deptId",deptId);
+                    intent.putExtra("supDeptId",subDeptId);
+                    startActivity(intent);
+
+
             }
         });
         textViewTitle = view.findViewById(R.id.txtTitle);
@@ -507,6 +524,42 @@ public class FragmentAdd extends Fragment {
     }
 
 
+    //dialog message
+    private void warningMsg(String message) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_yes_no);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextView textViewMsg = dialog.findViewById(R.id.msg);
+        textViewMsg.setText(message);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        no.setVisibility(View.GONE);
+        yes.setText("موافق");
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
 
 
 }

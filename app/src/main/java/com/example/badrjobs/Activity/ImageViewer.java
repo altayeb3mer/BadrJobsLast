@@ -6,13 +6,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.ToolbarClass;
 import com.jsibbold.zoomage.ZoomageView;
 
 public class ImageViewer extends ToolbarClass {
     String imgUrl = "";
-    ZoomageView myZoomageView;
+    ZoomageView zoomageView;
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,12 @@ public class ImageViewer extends ToolbarClass {
         Bundle args = getIntent().getExtras();
         if (args != null) {
             imgUrl = args.getString("imgUrl");
-            Glide.with(ImageViewer.this).load(imgUrl)
-                    .into(myZoomageView);
+
+            Glide.with(getApplicationContext())
+                    .load(imgUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(zoomageView);
+
         }
     }
 
@@ -36,7 +41,7 @@ public class ImageViewer extends ToolbarClass {
     }
 
     private void init() {
-        myZoomageView = findViewById(R.id.myZoomageView);
+        zoomageView = findViewById(R.id.myZoomageView);
     }
 
 }

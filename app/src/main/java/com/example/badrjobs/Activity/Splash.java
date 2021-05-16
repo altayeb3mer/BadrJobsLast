@@ -8,6 +8,9 @@ import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.badrjobs.GlobalVar;
+import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
@@ -18,14 +21,20 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_splash);
 
+        new GlobalVar().changeStatusBarColor(this,getColor(R.color.colorPrimary));
 
-        String token = SharedPrefManager.getInstance(this).getAppToken();
-        if (!token.isEmpty()){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }else{
-            startActivity(new Intent(getApplicationContext(), Login.class));
-        }
+            startActivity(new Intent(getApplicationContext(), Splash2.class));
 
+
+
+
+//        String token = SharedPrefManager.getInstance(this).getAppToken();
+//        Animatoo.animateSlideRight(this);
+//        if (!token.isEmpty()){
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        }else{
+//            startActivity(new Intent(getApplicationContext(), Login.class));
+//        }
         finish();
     }
 

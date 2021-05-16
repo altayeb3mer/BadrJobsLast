@@ -1,13 +1,12 @@
 package com.example.badrjobs.Activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +16,7 @@ import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.badrjobs.Adapter.AdapterNotification;
 import com.example.badrjobs.Model.ModelNotification;
@@ -41,16 +41,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class NotificationActivity extends ToolbarClass {
+public class NotificationActivity extends ToolbarClass implements SwipeRefreshLayout.OnRefreshListener {
     RecyclerView recyclerView;
     AdapterNotification adapterNotification;
     ArrayList<ModelNotification> arrayList;
     GridLayoutManager gridLayoutManager;
-//    ImageView icNotification;
+    //    ImageView icNotification;
     LinearLayout progressLay;
     LinearLayout noDataLay;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,8 @@ public class NotificationActivity extends ToolbarClass {
     }
 
     private void init() {
+        mSwipeRefreshLayout = findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         noDataLay = findViewById(R.id.noDataLay);
         progressLay = findViewById(R.id.progressLay);
         recyclerView = findViewById(R.id.recycler);
@@ -110,7 +114,7 @@ public class NotificationActivity extends ToolbarClass {
                     JSONObject object = new JSONObject(response.body());
                     String statusCode = object.getString("code");
 
-                    if (statusCode.equals("200")){
+                    if (statusCode.equals("200")) {
                         JSONArray data = object.getJSONArray("response");
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject itemData = data.getJSONObject(i);
@@ -120,20 +124,20 @@ public class NotificationActivity extends ToolbarClass {
                             item.setBody(itemData.getString("body"));
                             item.setDate(itemData.getString("created_at"));
                             item.setType(itemData.getString("type"));
-                            if (!item.getType().equals("NORMAL")){
+                            if (!item.getType().equals("NORMAL")) {
                                 JSONObject payload = itemData.getJSONObject("payload");
                                 item.setContractId(payload.getString("contract_id"));
                             }
                             arrayList.add(item);
                         }
-                    }else{
-                        warningMsg(object.getString("message"),false);
+                    } else {
+                        warningMsg(object.getString("message"), false);
                     }
 
-                    if (arrayList.size()>0){
+                    if (arrayList.size() > 0) {
                         initAdapter(arrayList);
                         noDataLay.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         warningMsg("ليس لديك اشعارات حتى الان", true);
                         noDataLay.setVisibility(View.VISIBLE);
                     }
@@ -159,6 +163,18 @@ public class NotificationActivity extends ToolbarClass {
         recyclerView.setLayoutManager(gridLayoutManager);
         adapterNotification = new AdapterNotification(this, array);
         recyclerView.setAdapter(adapterNotification);
+    }
+
+    @Override
+    public void onRefresh() {
+        getNotificationFun();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        }, 1000);
     }
 
     //dialog message
@@ -223,5 +239,6 @@ public class NotificationActivity extends ToolbarClass {
         super.onDestroy();
         ActivityRecreationHelper.onDestroy(this);
     }
+
 
 }

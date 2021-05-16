@@ -3,6 +3,7 @@ package com.example.badrjobs.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     SlideShow_adapter slideShow_adapter;
     ArrayList<String> arrayListImages;
     CircleIndicator circleIndicator;
-    LinearLayout layOwner,layOffice;
+    LinearLayout layOwner,layOffice,layCall,layChat;
     AppCompatButton btnStopAd;
     NestedScrollView nestedScroll;
     boolean isMyAd=false;
@@ -199,6 +200,10 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     }
 
     private void init() {
+        layCall = findViewById(R.id.layCall);
+        layCall.setOnClickListener(this);
+        layChat = findViewById(R.id.layChat);
+        layChat.setOnClickListener(this);
         nestedScroll = findViewById(R.id.nestedScroll);
         nestedScroll.setVisibility(View.GONE);
         btnStopAd = findViewById(R.id.btnStopAd);
@@ -285,7 +290,23 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 onBackPressed();
                 break;
             }
+            case R.id.layCall: {
+                if (!phone.equals("")&&!phone.equals("null")){
+                    call(phone);
+                }else{
+                    warningMsg("لم يتم العثور على رقم الهاتف");
+                }
+
+                break;
+            }
         }
+    }
+
+    String phone="";
+    private void call(String _phone){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+_phone));
+        startActivity(intent);
     }
 
     private void createContract() {
@@ -546,11 +567,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             JSONObject owner_info = data.getJSONObject("owner_info");
                             textViewFixName.setText(owner_info.getString("fixName"));
                             String ownerImgProfile = owner_info.getString("image");
+                            phone = owner_info.getString("full_phone");
 
                             try {
                                 if (!ownerImgProfile.isEmpty() && !ownerImgProfile.equals("null")) {
                                     Glide.with(getApplicationContext()).load(ownerImgProfile).into(circleImageViewOwner);
-
                                 } else {
                                     Glide.with(getApplicationContext()).load(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_account_circle_24))
                                             .into(circleImageViewOwner);
@@ -647,13 +668,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     progressLay.setVisibility(View.GONE);
 
                 } catch (Exception e) {
-
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
                 }
                 progressLay.setVisibility(View.GONE);
-
             }
 
             @Override

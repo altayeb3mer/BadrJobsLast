@@ -67,7 +67,7 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(R.layout.activity_jobs, "");
+        super.onCreate(R.layout.ads_activity, "");
         arrayList = new ArrayList<>();
         Bundle arg = getIntent().getExtras();
         if (arg!=null){
@@ -79,6 +79,7 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
         getJobs(s_current_page);
     }
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
     private void init() {
         mSwipeRefreshLayout =  findViewById(R.id.swipeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -182,6 +183,7 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
                     s_current_page = responseObj.getString("current_page");
                     s_last_page = responseObj.getString("last_page");
                     s_perPage = responseObj.getString("per_page");
+                    String total =  responseObj.getString("total");
                     switch (statusCode) {
                         case "200": {
 
@@ -205,7 +207,12 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
 
 
                             if (arrayList.size()>0){
-                                adapterDept.notifyItemInserted(arrayList.size()-Integer.parseInt(s_perPage));
+                                if (s_current_page==s_last_page){
+                                    int lastItem = Integer.parseInt(total)%Integer.parseInt(s_perPage);
+                                    adapterDept.notifyItemInserted(arrayList.size()-lastItem);
+                                }else{
+                                    adapterDept.notifyItemInserted(arrayList.size()-Integer.parseInt(s_perPage));
+                                }
                                 noDataLay.setVisibility(View.GONE);
                             }else{
                                 Toast.makeText(getApplicationContext(), "لاتوجد عناصر", Toast.LENGTH_SHORT).show();

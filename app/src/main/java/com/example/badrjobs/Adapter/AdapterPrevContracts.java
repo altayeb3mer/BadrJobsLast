@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.badrjobs.Activity.SignatureImage;
+import com.example.badrjobs.Activity.ContractImage;
 import com.example.badrjobs.Model.ModelPrevContracts;
 import com.example.badrjobs.R;
 
@@ -58,7 +57,7 @@ public class AdapterPrevContracts extends RecyclerView.Adapter<AdapterPrevContra
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, SignatureImage.class);
+                Intent intent = new Intent(activity, ContractImage.class);
                 intent.putExtra("contractId",item.getId());
                 intent.putExtra("type","prevContract");
                 activity.startActivity(intent);

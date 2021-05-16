@@ -244,12 +244,12 @@ public class AddJob extends AppCompatActivity {
     }
 
     private void preAddJob() {
-        if (officeName.isEmpty()){
+        if (officeName.isEmpty()&&ownerType.equals("OFFICE")){
             edtOfficeName.setError("الرجاء كتابة اسم صحيح");
             edtOfficeName.requestFocus();
             return;
         }
-        if (address.isEmpty()){
+        if (address.isEmpty()&&ownerType.equals("OFFICE")){
             edtAddress.setError("الرجاء كتابة اسم صحيح");
             edtAddress.requestFocus();
             return;
@@ -274,13 +274,13 @@ public class AddJob extends AppCompatActivity {
             edtExperience.requestFocus();
             return;
         }
-        if (salary.isEmpty()){
-            edtSalary.setError("الرجاء كتابة اسم صحيح");
+        if (salary.isEmpty()&&(salaryType==0||salaryType==1)){
+            edtSalary.setError("الرجاء كتابة رقم صحيح");
             edtSalary.requestFocus();
             return;
         }
-        if (bill.isEmpty()){
-            edtBill.setError("الرجاء كتابة اسم صحيح");
+        if (bill.isEmpty()&&(billType==0||billType==1)){
+            edtBill.setError("الرجاء كتابة رقم صحيح");
             edtBill.requestFocus();
             return;
         }
@@ -330,7 +330,25 @@ public class AddJob extends AppCompatActivity {
                 region = edtRegion.getText().toString().trim();
                 description = edtDescription.getText().toString().trim();
                 phone = edtPhone.getText().toString().trim();
-
+                if (salaryType>1){
+                    salary = "حسب الاتفاق";
+                }
+                if (billType>1){
+                    switch (billType){
+                        case 2:{
+                            bill = "تكلفة اجراءات السفر";
+                            break;
+                        }
+                        case 3:{
+                            bill = "حسب الاتفاق";
+                            break;
+                        }
+                        case 4:{
+                            bill = "لاشئ";
+                            break;
+                        }
+                    }
+                }
                 preAddJob();
             }
         });
@@ -377,6 +395,7 @@ public class AddJob extends AppCompatActivity {
 
     }
 
+    int salaryType=0;
     private void initSpinnerSalary() {
         String[] array = {"اختر","اكتب الرقم","حسب الاتفاق"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
@@ -407,14 +426,7 @@ public class AddJob extends AppCompatActivity {
         spinnerSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-//                    subDeptId = "";
-                } else {
-//                    subDeptId = arrayListSubDeptData.get(position-1).getId();
-                }
-
-//                Toast.makeText(context, ""+countryId, Toast.LENGTH_SHORT).show();
-
+                salaryType = position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -422,6 +434,7 @@ public class AddJob extends AppCompatActivity {
         });
     }
 
+    int billType=0;
     private void initSpinnerBill() {
         String[] array = {"اختر","اكتب الرقم","تكلفة اجراءات السفر","حسب الاتفاق","لاشئ"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
@@ -452,14 +465,7 @@ public class AddJob extends AppCompatActivity {
         spinnerBill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-//                    subDeptId = "";
-                } else {
-//                    subDeptId = arrayListSubDeptData.get(position-1).getId();
-                }
-
-//                Toast.makeText(context, ""+countryId, Toast.LENGTH_SHORT).show();
-
+                billType = position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
