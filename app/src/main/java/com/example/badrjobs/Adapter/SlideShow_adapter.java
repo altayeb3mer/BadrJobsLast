@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 
 import com.bumptech.glide.Glide;
+import com.example.badrjobs.Activity.Gallery;
 import com.example.badrjobs.Activity.ImageViewer;
 import com.example.badrjobs.R;
 
@@ -68,9 +70,17 @@ public class SlideShow_adapter extends PagerAdapter {
         imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, ImageViewer.class);
-                intent.putExtra("imgUrl",urls.get(position));
-                activity.startActivity(intent);
+//                Intent intent = new Intent(activity, ImageViewer.class);
+//                intent.putExtra("imgUrl",urls.get(position));
+//                activity.startActivity(intent);
+                if (urls.size()>0){
+                    Intent intent = new Intent(activity, Gallery.class);
+                    intent.putExtra("list",urls);
+                    activity.startActivity(intent);
+                }else{
+                    Toast.makeText(activity, R.string.no_images, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

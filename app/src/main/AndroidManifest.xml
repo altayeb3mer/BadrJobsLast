@@ -13,8 +13,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.Splash2"
-            android:theme="@style/SplashScreenTheme"/>
+        <activity android:name=".Activity.Gallery"></activity>
+        <activity
+            android:name=".Activity.Splash2"
+            android:theme="@style/SplashScreenTheme" />
         <activity android:name=".Activity.ImageViewer" />
         <activity android:name=".Activity.ContractImage" />
         <activity android:name=".Activity.MyAds" />
@@ -105,10 +107,10 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

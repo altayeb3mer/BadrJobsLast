@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/margin_small_size"
+    android:layout_marginLeft="@dimen/margin_small_size"
+    android:layout_marginRight="@dimen/margin_small_size"
+    android:layout_marginTop="1dp"
     android:background="@drawable/shape_ads_item_bg"
     android:layoutDirection="rtl"
     android:id="@+id/container">
@@ -43,14 +45,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="احمد علي"
-                android:textSize="@dimen/txt_normal_size"/>
+                android:textSize="@dimen/txt_normal_size" android:ellipsize="end"
+                android:maxEms="10"
+                android:maxLines="1"/>
             <TextView
                 android:id="@+id/fixName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ahmed@"
                 android:textSize="@dimen/txt_normal_size"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:maxLines="1"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -74,6 +81,7 @@
             android:layout_marginLeft="@dimen/margin_normal_size"/>
 
         <TextView
+            android:gravity="center"
             android:id="@+id/title"
             android:layout_toStartOf="@+id/ic_favorite"
             android:layout_centerVertical="true"

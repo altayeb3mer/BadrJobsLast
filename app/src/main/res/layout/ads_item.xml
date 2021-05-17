@@ -44,15 +44,21 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="احمد علي"
-                android:textSize="@dimen/txt_normal_size"/>
+                android:text="علي"
+                android:textSize="@dimen/txt_normal_size"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:maxLines="1"/>
             <TextView
                 android:id="@+id/fixName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ahmed@"
                 android:textSize="@dimen/txt_small_size"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:maxLines="1"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -76,6 +82,7 @@
             android:layout_marginLeft="@dimen/margin_small_size"/>
 
         <TextView
+            android:gravity="center"
             android:id="@+id/title"
             android:layout_toStartOf="@+id/ic_favorite"
             android:layout_centerVertical="true"
