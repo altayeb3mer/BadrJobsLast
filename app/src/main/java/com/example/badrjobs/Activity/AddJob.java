@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -29,12 +30,15 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
+import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
 import org.json.JSONObject;
 
@@ -44,6 +48,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -57,6 +62,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AddJob extends AppCompatActivity {
+
+    CountryCodePicker ccp;
 
     Spinner spinnerSalary,spinnerBill;
     RadioGroup radioGroupType,radioGroupApplication,radioGroupReligion,
@@ -86,6 +93,9 @@ public class AddJob extends AppCompatActivity {
     AppCompatButton button;
     private boolean additionPhone=false;
     LinearLayout layOffice;
+    ImageView imageViewFlag;
+    TextView textViewDept,textViewSubDept;
+    ConstraintLayout layPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +109,7 @@ public class AddJob extends AppCompatActivity {
         setAplicationType("OFFICE");
     }
 
+    String countryImage="",deptName="",supDeptName="";
     private void getBundles() {
         Bundle args = getIntent().getExtras();
         if (args!=null){
@@ -110,6 +121,11 @@ public class AddJob extends AppCompatActivity {
             }
 
             countryId = args.getString("countryId");
+
+            countryImage = args.getString("countryImage");
+            deptName = args.getString("deptName");
+            supDeptName = args.getString("supDeptName");
+
 
         }
     }
@@ -214,12 +230,12 @@ public class AddJob extends AppCompatActivity {
                     case R.id.radioBtnContactPhone1:{
                         phone = "";
                         additionPhone = false;
-                        edtPhone.setVisibility(View.GONE);
+                        layPhone.setVisibility(View.GONE);
                         break;
                     }
                     case R.id.radioBtnContactPhone2:{
                         additionPhone = true;
-                        edtPhone.setVisibility(View.VISIBLE);
+                        layPhone.setVisibility(View.VISIBLE);
                         break;
                     }
                 }
@@ -274,13 +290,13 @@ public class AddJob extends AppCompatActivity {
             edtExperience.requestFocus();
             return;
         }
-        if (salary.isEmpty()&&(salaryType==0||salaryType==1)){
-            edtSalary.setError("الرجاء كتابة رقم صحيح");
+        if (salary.isEmpty()){
+            edtSalary.setError("الرجاء اختيار الراتب");
             edtSalary.requestFocus();
             return;
         }
-        if (bill.isEmpty()&&(billType==0||billType==1)){
-            edtBill.setError("الرجاء كتابة رقم صحيح");
+        if (bill.isEmpty()){
+            edtBill.setError("الرجاء اختيار مبلغ توفير المهنة");
             edtBill.requestFocus();
             return;
         }
@@ -314,6 +330,16 @@ public class AddJob extends AppCompatActivity {
     }
 
     private void init() {
+        ccp = findViewById(R.id.ccp);
+        layPhone = findViewById(R.id.layPhone);
+        imageViewFlag = findViewById(R.id.imgFlag);
+        textViewDept = findViewById(R.id.txtDept);
+        textViewSubDept = findViewById(R.id.txtSupDept);
+        textViewDept.setText(deptName);
+        textViewSubDept.setText(supDeptName);
+        Glide.with(this).load(countryImage).into(imageViewFlag);
+
+
         layOffice = findViewById(R.id.layOffice);
         button = findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -330,25 +356,23 @@ public class AddJob extends AppCompatActivity {
                 region = edtRegion.getText().toString().trim();
                 description = edtDescription.getText().toString().trim();
                 phone = edtPhone.getText().toString().trim();
-                if (salaryType>1){
-                    salary = "حسب الاتفاق";
-                }
-                if (billType>1){
-                    switch (billType){
-                        case 2:{
-                            bill = "تكلفة اجراءات السفر";
-                            break;
-                        }
-                        case 3:{
-                            bill = "حسب الاتفاق";
-                            break;
-                        }
-                        case 4:{
-                            bill = "لاشئ";
-                            break;
-                        }
-                    }
-                }
+
+//                if (billType>1){
+//                    switch (billType){
+//                        case 2:{
+//                            bill = "تكلفة اجراءات السفر";
+//                            break;
+//                        }
+//                        case 3:{
+//                            bill = "حسب الاتفاق";
+//                            break;
+//                        }
+//                        case 4:{
+//                            bill = "لاشئ";
+//                            break;
+//                        }
+//                    }
+//                }
                 preAddJob();
             }
         });
@@ -397,7 +421,10 @@ public class AddJob extends AppCompatActivity {
 
     int salaryType=0;
     private void initSpinnerSalary() {
-        String[] array = {"اختر","اكتب الرقم","حسب الاتفاق"};
+        ArrayList<String> array = new ArrayList<>();
+        array.add("اختر");
+        array.add("اكتب الرقم");
+        array.add("حسب الاتفاق");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -407,7 +434,7 @@ public class AddJob extends AppCompatActivity {
 
                 // If this is the selected item position
 //                if (position == 0) {
-//                    v.setBackgroundColor(getResources().getColor(R.color.spinnerHeaderItem));
+//                    v.setVisibility(View.GONE);
 //                }
 //
 //                else {
@@ -419,6 +446,12 @@ public class AddJob extends AppCompatActivity {
 //
 //                }
                 return v;
+            }
+
+            @Override
+            public int getCount() {
+                array.remove("اختر");
+                return array.size();
             }
         };
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -426,7 +459,12 @@ public class AddJob extends AppCompatActivity {
         spinnerSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                salaryType = position;
+               if (position==0){
+                   edtSalary.setText("");
+                   edtSalary.setHint(array.get(0));
+               }else {
+                   edtSalary.setText(array.get(position));
+               }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -434,9 +472,14 @@ public class AddJob extends AppCompatActivity {
         });
     }
 
-    int billType=0;
+//    int billType=0;
     private void initSpinnerBill() {
-        String[] array = {"اختر","اكتب الرقم","تكلفة اجراءات السفر","حسب الاتفاق","لاشئ"};
+        ArrayList<String> array = new ArrayList<>();
+        array.add("اختر");
+        array.add("اكتب الرقم");
+        array.add("تكلفة اجراءات السفر");
+        array.add("حسب الاتفاق");
+        array.add("لاشئ");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -446,7 +489,7 @@ public class AddJob extends AppCompatActivity {
 
                 // If this is the selected item position
 //                if (position == 0) {
-//                    v.setBackgroundColor(getResources().getColor(R.color.spinnerHeaderItem));
+//                    v.setVisibility(View.GONE);
 //                }
 //
 //                else {
@@ -459,13 +502,25 @@ public class AddJob extends AppCompatActivity {
 //                }
                 return v;
             }
+
+            @Override
+            public int getCount() {
+                array.remove("اختر");
+                return array.size();
+            }
         };
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinnerBill.setAdapter(adapter);
         spinnerBill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                billType = position;
+//                billType = position;
+                if (position==0){
+                    edtBill.setText("");
+                    edtBill.setHint(array.get(0));
+                }else {
+                    edtBill.setText(array.get(position));
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -625,7 +680,7 @@ public class AddJob extends AppCompatActivity {
         hashMap.put("religion",religion);
         hashMap.put("sex",sex);
         hashMap.put("description",description);
-        hashMap.put("custom_phone",phone);
+        hashMap.put("custom_phone","00"+ccp.getFullNumber()+phone);
         hashMap.put("housing","YES");
         hashMap.put("birthday",birthDay);
         Call<String> call = service.putParam(hashMap);

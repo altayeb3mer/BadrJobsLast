@@ -55,8 +55,9 @@ public class FragmentAdd extends Fragment {
 
     ArrayList<ModelCountry> arrayListData;
 
-    String countryId = "";
+    String countryId = "",countryImage="";
     private String deptId="",subDeptId="";
+    String deptName="",subDeptName="";
     private boolean hasSub=false;
 
     public FragmentAdd() {
@@ -99,6 +100,13 @@ public class FragmentAdd extends Fragment {
                     intent.putExtra("countryId",countryId);
                     intent.putExtra("deptId",deptId);
                     intent.putExtra("supDeptId",subDeptId);
+
+                    intent.putExtra("countryImage",countryImage);
+                    intent.putExtra("deptName",deptName);
+                    intent.putExtra("supDeptName",subDeptName);
+
+
+
                     startActivity(intent);
 
 
@@ -228,8 +236,10 @@ public class FragmentAdd extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     countryId = "";
+                    countryImage = "";
                 } else {
                     countryId = arrayListData.get(position-1).getId();
+                    countryImage = arrayListData.get(position-1).getImage();
                     getDepts();
                     laySub.setVisibility(View.INVISIBLE);
                 }
@@ -365,8 +375,10 @@ public class FragmentAdd extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     deptId = "";
+                    deptName = "";
                 } else {
                     deptId = arrayListDeptData.get(position-1).getId();
+                    deptName = arrayListDeptData.get(position-1).getName();
                     if (arrayListDeptData.get(position-1).isHasSub()){
                         getSubDept();
                         laySub.setVisibility(View.VISIBLE);
@@ -510,8 +522,10 @@ public class FragmentAdd extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     subDeptId = "";
+                    subDeptName = "";
                 } else {
                     subDeptId = arrayListSubDeptData.get(position-1).getId();
+                    subDeptName = arrayListSubDeptData.get(position-1).getName();
                 }
 
 //                Toast.makeText(context, ""+countryId, Toast.LENGTH_SHORT).show();

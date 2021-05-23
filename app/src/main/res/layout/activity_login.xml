@@ -137,26 +137,15 @@
                         android:layout_marginTop="@dimen/margin_small_size"
                         android:layout_width="match_parent"
                         android:layout_height="50dp">
-                        <ImageView
-                            android:id="@+id/ic_remind_me"
-                            android:scaleType="fitXY"
-                            android:layout_centerVertical="true"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_notifications"
-                            android:layout_marginRight="@dimen/margin_small_size"
-                            android:layout_marginLeft="@dimen/margin_small_size"
-                            />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_centerVertical="true"
                             android:layout_marginTop="@dimen/margin_large_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/txt_normal_size"
                             android:text="@string/remember_me"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/ic_remind_me"
-                            android:layout_toRightOf="@+id/ic_remind_me" />
+                            android:textStyle="bold" />
                         <TextView
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="@dimen/margin_large_size"

@@ -211,7 +211,7 @@ public class Register extends AppCompatActivity {
                 hashMap.put("fixName", nickname);
                 hashMap.put("email", email1);
                 hashMap.put("phone", phone);
-                hashMap.put("codeCountry", ccp.getFullNumberWithPlus());
+                hashMap.put("codeCountry","00"+ccp.getFullNumber());
                 hashMap.put("password", password1);
                 hashMap.put("password_confirmation", password2);
                 hashMap.put("nationality_id", nationality);
@@ -220,7 +220,7 @@ public class Register extends AppCompatActivity {
                 progressLay.setVisibility(View.GONE);
                 Toast.makeText(Register.this, "تم الارسال", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
-                intent.putExtra("phone", ccp.getFullNumber() + phone);
+                intent.putExtra("phone", "00"+ccp.getFullNumber() + phone);
                 intent.putExtra("verifyId", verificationId);
                 intent.putExtra("hashMap", hashMap);
                 startActivity(intent);

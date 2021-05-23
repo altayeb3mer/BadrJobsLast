@@ -23,7 +23,7 @@
     <string name="nicName">اسم المستخدم</string>
     <string name="used">مستخدم</string>
     <string name="avilable">متوفر</string>
-    <string name="confirm_email">تأكيد الايميل</string>
+    <string name="confirm_email">تأكيد البريد الالكتروني</string>
     <string name="phone">رقم الهاتف</string>
     <string name="nationality">الجنسية</string>
     <string name="job">المهنة</string>
@@ -44,6 +44,7 @@
         <item >عربي</item>
         <item >English</item>
     </array>
+    <string name="no_images">لاتوجد صور</string>
 
 
 </resources>
