@@ -91,7 +91,10 @@
             android:text="فني اجهزة كهربائية"
             android:textSize="@dimen/txt_normal_size"
             android:textColor="@android:color/black"
-            android:layout_toLeftOf="@+id/ic_favorite" />
+            android:layout_toLeftOf="@+id/ic_favorite"
+            android:ellipsize="end"
+            android:maxEms="22"
+            android:maxLines="1"/>
 
     </RelativeLayout>
 

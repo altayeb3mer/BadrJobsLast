@@ -1,26 +1,21 @@
 package com.example.badrjobs.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -32,6 +27,16 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
@@ -63,39 +68,53 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AddJob extends AppCompatActivity {
 
+    public static final int PICK_IMAGE = 1;
     CountryCodePicker ccp;
-
-    Spinner spinnerSalary,spinnerBill;
-    RadioGroup radioGroupType,radioGroupApplication,radioGroupReligion,
-            radioGroupSex,radioGroupContactType;
-
+    Spinner spinnerSalary, spinnerBill;
+    RadioGroup radioGroupType, radioGroupApplication, radioGroupReligion,
+            radioGroupSex, radioGroupContactType;
     AppCompatCheckBox checkBoxTermAndPolicy;
     boolean termAndPolicy = false;
-
-    public static final int PICK_IMAGE = 1;
-    Bitmap bitmap1,bitmap2,bitmap3;
-    RelativeLayout imgBtn1,imgBtn2,imgBtn3;
-    ImageView imageViewBtn1,imageViewBtn2,imageViewBtn3;
-    CircleImageView circleImageView1,circleImageView2,circleImageView3;
+    Bitmap bitmap1, bitmap2, bitmap3;
+    RelativeLayout imgBtn1, imgBtn2, imgBtn3;
+    ImageView imageViewBtn1, imageViewBtn2, imageViewBtn3;
+    CircleImageView circleImageView1, circleImageView2, circleImageView3;
 
     //value
-    String categoryId="",countryId="";
+    String categoryId = "", countryId = "";
     //image
-    String image1="",image2="",image3="";
+    String image1 = "", image2 = "", image3 = "";
 
     //edt
-    EditText edtOfficeName,edtAddress,edtOwnerName, edtBirthDay,edtJob,edtExperience,
-            edtSalary,edtBill,edtRegion,edtDescription,edtPhone;
-    String officeName="",address="",ownerName="",birthDay="",job="",experience="",
-    salary="",bill="", religion ="",description="",phone="",
-    applicationType="NEW",ownerType="",sex="",region="";
+    EditText edtOfficeName, edtAddress, edtOwnerName, edtBirthDay, edtJob, edtExperience,
+            edtSalary, edtBill, edtRegion, edtDescription, edtPhone;
+    String officeName = "", address = "", ownerName = "", birthDay = "", job = "", experience = "",
+            salary = "", bill = "", religion = "", description = "", phone = "",
+            applicationType = "NEW", ownerType = "", sex = "", region = "";
 
     AppCompatButton button;
-    private boolean additionPhone=false;
     LinearLayout layOffice;
     ImageView imageViewFlag;
-    TextView textViewDept,textViewSubDept;
+    TextView textViewDept, textViewSubDept, textViewBioCount;
     ConstraintLayout layPhone;
+    String countryImage = "", deptName = "", supDeptName = "";
+    int salaryType = 0;
+    int imagePicker = 1;
+    LinearLayout progressLay;
+    private boolean additionPhone = false;
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+
+    public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,14 +128,13 @@ public class AddJob extends AppCompatActivity {
         setAplicationType("OFFICE");
     }
 
-    String countryImage="",deptName="",supDeptName="";
     private void getBundles() {
         Bundle args = getIntent().getExtras();
-        if (args!=null){
+        if (args != null) {
             String subCategory = args.getString("supDeptId");
-            if (!subCategory.isEmpty()){
+            if (!subCategory.isEmpty()) {
                 categoryId = subCategory;
-            }else{
+            } else {
                 categoryId = args.getString("deptId");
             }
 
@@ -132,12 +150,12 @@ public class AddJob extends AppCompatActivity {
 
     private void initRadios() {
         checkBoxTermAndPolicy = findViewById(R.id.checkbox);
-        checkBoxTermAndPolicy .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBoxTermAndPolicy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     termAndPolicy = true;
-                }else{
+                } else {
                     termAndPolicy = false;
                 }
             }
@@ -153,6 +171,34 @@ public class AddJob extends AppCompatActivity {
         edtRegion = findViewById(R.id.edtRegion);
         edtDescription = findViewById(R.id.edtDescription);
 
+        textViewBioCount = findViewById(R.id.bioCount);
+
+        edtDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                // TODO: 29/05/21
+                int length = s.length();
+
+                textViewBioCount.setText(length + "/" +"120");
+
+
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
 
         edtPhone = findViewById(R.id.edtPhone);
 
@@ -165,12 +211,12 @@ public class AddJob extends AppCompatActivity {
         radioGroupType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioBtnType1:{
+                switch (checkedId) {
+                    case R.id.radioBtnType1: {
                         applicationType = "NEW";
                         break;
                     }
-                    case R.id.radioBtnType2:{
+                    case R.id.radioBtnType2: {
                         applicationType = "NO_NEW";
                         break;
                     }
@@ -180,12 +226,12 @@ public class AddJob extends AppCompatActivity {
         radioGroupApplication.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioBtnOwnerType1:{
+                switch (checkedId) {
+                    case R.id.radioBtnOwnerType1: {
                         ownerType = "PERSONAL";
                         break;
                     }
-                    case R.id.radioBtnOwnerType2:{
+                    case R.id.radioBtnOwnerType2: {
                         ownerType = "OFFICE";
                         break;
                     }
@@ -196,12 +242,12 @@ public class AddJob extends AppCompatActivity {
         radioGroupReligion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioBtnReligion1:{
+                switch (checkedId) {
+                    case R.id.radioBtnReligion1: {
                         religion = "MUSLIM";
                         break;
                     }
-                    case R.id.radioBtnReligion2:{
+                    case R.id.radioBtnReligion2: {
                         religion = "NON_MUSLIM";
                         break;
                     }
@@ -211,12 +257,12 @@ public class AddJob extends AppCompatActivity {
         radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioBtnSex1:{
+                switch (checkedId) {
+                    case R.id.radioBtnSex1: {
                         sex = "MALE";
                         break;
                     }
-                    case R.id.radioBtnSex2:{
+                    case R.id.radioBtnSex2: {
                         sex = "FEMALE";
                         break;
                     }
@@ -226,14 +272,14 @@ public class AddJob extends AppCompatActivity {
         radioGroupContactType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioBtnContactPhone1:{
+                switch (checkedId) {
+                    case R.id.radioBtnContactPhone1: {
                         phone = "";
                         additionPhone = false;
                         layPhone.setVisibility(View.GONE);
                         break;
                     }
-                    case R.id.radioBtnContactPhone2:{
+                    case R.id.radioBtnContactPhone2: {
                         additionPhone = true;
                         layPhone.setVisibility(View.VISIBLE);
                         break;
@@ -245,13 +291,13 @@ public class AddJob extends AppCompatActivity {
     }
 
     private void setAplicationType(String oType) {
-        switch (oType){
-            case "PERSONAL":{
+        switch (oType) {
+            case "PERSONAL": {
                 layOffice.setVisibility(View.GONE);
                 radioGroupApplication.check(R.id.radioBtnOwnerType1);
                 break;
             }
-            case "OFFICE":{
+            case "OFFICE": {
                 layOffice.setVisibility(View.VISIBLE);
                 radioGroupApplication.check(R.id.radioBtnOwnerType2);
                 break;
@@ -260,68 +306,72 @@ public class AddJob extends AppCompatActivity {
     }
 
     private void preAddJob() {
-        if (officeName.isEmpty()&&ownerType.equals("OFFICE")){
+        if (officeName.isEmpty() && ownerType.equals("OFFICE")) {
             edtOfficeName.setError("الرجاء كتابة اسم صحيح");
             edtOfficeName.requestFocus();
             return;
         }
-        if (address.isEmpty()&&ownerType.equals("OFFICE")){
+        if (address.isEmpty() && ownerType.equals("OFFICE")) {
             edtAddress.setError("الرجاء كتابة اسم صحيح");
             edtAddress.requestFocus();
             return;
         }
-        if (ownerName.isEmpty()){
+        if (ownerName.isEmpty()) {
             edtOwnerName.setError("الرجاء كتابة اسم صحيح");
             edtOwnerName.requestFocus();
             return;
         }
-        if (birthDay.isEmpty()){
+        if (birthDay.isEmpty()) {
             edtBirthDay.setError("الرجاء كتابة اسم صحيح");
             edtBirthDay.requestFocus();
             return;
         }
-        if (job.isEmpty()){
+        if (job.isEmpty()) {
             edtJob.setError("الرجاء كتابة اسم صحيح");
             edtJob.requestFocus();
             return;
         }
-        if (experience.isEmpty()){
+        if (experience.isEmpty()) {
             edtExperience.setError("الرجاء كتابة اسم صحيح");
             edtExperience.requestFocus();
             return;
         }
-        if (salary.isEmpty()){
+        if (salary.isEmpty()) {
             edtSalary.setError("الرجاء اختيار الراتب");
             edtSalary.requestFocus();
             return;
         }
-        if (bill.isEmpty()){
+        if (bill.isEmpty()) {
             edtBill.setError("الرجاء اختيار مبلغ توفير المهنة");
             edtBill.requestFocus();
             return;
         }
-        if (region.isEmpty()){
+        if (region.isEmpty()) {
             edtRegion.setError("الرجاء كتابة اسم صحيح");
             edtRegion.requestFocus();
             return;
         }
-        if (description.isEmpty()){
+        if (description.isEmpty()) {
             edtDescription.setError("الرجاء كتابة اسم صحيح");
             edtDescription.requestFocus();
             return;
         }
-        if (additionPhone&&phone.isEmpty()){
+        if (additionPhone && phone.isEmpty()) {
             edtPhone.setError("الرجاء كتابة اسم صحيح");
             edtPhone.requestFocus();
             return;
         }
-        if (!isValidDate(birthDay)){
+        if (!isValidDate(birthDay)) {
             edtBirthDay.setError("صيغة تاريخ الميلاد غير صحيحة");
             edtBirthDay.requestFocus();
             return;
         }
-        if (!termAndPolicy){
+        if (!termAndPolicy) {
             Toast.makeText(this, "لم توافق على صحة بياناتك!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (image1.isEmpty() && image2.isEmpty() && image3.isEmpty()) {
+            warningMsg("الصورة الاولى مطلوبة", false);
             return;
         }
 
@@ -419,7 +469,6 @@ public class AddJob extends AppCompatActivity {
 
     }
 
-    int salaryType=0;
     private void initSpinnerSalary() {
         ArrayList<String> array = new ArrayList<>();
         array.add("اختر");
@@ -459,20 +508,21 @@ public class AddJob extends AppCompatActivity {
         spinnerSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if (position==0){
-                   edtSalary.setText("");
-                   edtSalary.setHint(array.get(0));
-               }else {
-                   edtSalary.setText(array.get(position));
-               }
+                if (position == 0) {
+                    edtSalary.setText("");
+                    edtSalary.setHint(array.get(0));
+                } else {
+                    edtSalary.setText(array.get(position));
+                }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
-//    int billType=0;
+    //    int billType=0;
     private void initSpinnerBill() {
         ArrayList<String> array = new ArrayList<>();
         array.add("اختر");
@@ -515,20 +565,19 @@ public class AddJob extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                billType = position;
-                if (position==0){
+                if (position == 0) {
                     edtBill.setText("");
                     edtBill.setHint(array.get(0));
-                }else {
+                } else {
                     edtBill.setText(array.get(position));
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-
-    int imagePicker = 1;
 
     public void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -579,13 +628,13 @@ public class AddJob extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
-                selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
+//                selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                selectedImage.compress(Bitmap.CompressFormat.JPEG, 70, bytes);
 
 
-                switch (imagePicker){
-                    case 1:{
+                switch (imagePicker) {
+                    case 1: {
                         bitmap1 = selectedImage;
                         imageViewBtn1.setVisibility(View.GONE);
                         circleImageView1.setImageBitmap(selectedImage);
@@ -593,7 +642,7 @@ public class AddJob extends AppCompatActivity {
                         image1 = getStringFromImg(selectedImage);
                         break;
                     }
-                    case 2:{
+                    case 2: {
                         bitmap2 = selectedImage;
                         imageViewBtn2.setVisibility(View.GONE);
                         circleImageView2.setImageBitmap(selectedImage);
@@ -601,7 +650,7 @@ public class AddJob extends AppCompatActivity {
                         image2 = getStringFromImg(selectedImage);
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         bitmap3 = selectedImage;
                         imageViewBtn3.setVisibility(View.GONE);
                         circleImageView3.setImageBitmap(selectedImage);
@@ -610,8 +659,6 @@ public class AddJob extends AppCompatActivity {
                         break;
                     }
                 }
-
-
 
 
             } catch (FileNotFoundException e) {
@@ -625,15 +672,14 @@ public class AddJob extends AppCompatActivity {
         }
     }
 
-    private String getStringFromImg(Bitmap bitmap){
+    private String getStringFromImg(Bitmap bitmap) {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] byteArray = byteStream.toByteArray();
-        String baseString = Base64.encodeToString(byteArray,Base64.DEFAULT);
+        String baseString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return baseString;
     }
 
-    LinearLayout progressLay;
     private void addJob() {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -649,8 +695,8 @@ public class AddJob extends AppCompatActivity {
                         return chain.proceed(ongoing.build());
                     }
                 })
-                .readTimeout(60*5, TimeUnit.SECONDS)
-                .connectTimeout(60*5, TimeUnit.SECONDS)
+                .readTimeout(60 * 5, TimeUnit.SECONDS)
+                .connectTimeout(60 * 5, TimeUnit.SECONDS)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -662,27 +708,33 @@ public class AddJob extends AppCompatActivity {
 
         Api.RetrofitAddJob service = retrofit.create(Api.RetrofitAddJob.class);
 
-        HashMap<String,String> hashMap = new HashMap();
-        hashMap.put("job_category",categoryId);
-        hashMap.put("country",countryId);
-        hashMap.put("job_title",job);
-        hashMap.put("image1","image1");
-        hashMap.put("image2","image2");
-        hashMap.put("image3","image3");
-        hashMap.put("applaction_type",applicationType);
-        hashMap.put("owner_type",ownerType);
-        hashMap.put("organization_name",officeName);
-        hashMap.put("owner_name",ownerName);
-        hashMap.put("experience",experience);
-        hashMap.put("salary",salary);
-        hashMap.put("bailing_money",bill);
-        hashMap.put("country_of_residencey",region);
-        hashMap.put("religion",religion);
-        hashMap.put("sex",sex);
-        hashMap.put("description",description);
-        hashMap.put("custom_phone","00"+ccp.getFullNumber()+phone);
-        hashMap.put("housing","YES");
-        hashMap.put("birthday",birthDay);
+        HashMap<String, String> hashMap = new HashMap();
+        hashMap.put("job_category", categoryId);
+        hashMap.put("country", countryId);
+        hashMap.put("job_title", job);
+
+        if (!image1.isEmpty())
+            hashMap.put("image1", image1);
+        if (!image2.isEmpty())
+            hashMap.put("image2", image2);
+        if (!image3.isEmpty())
+            hashMap.put("image3", image3);
+
+
+        hashMap.put("applaction_type", applicationType);
+        hashMap.put("owner_type", ownerType);
+        hashMap.put("organization_name", officeName);
+        hashMap.put("owner_name", ownerName);
+        hashMap.put("experience", experience);
+        hashMap.put("salary", salary);
+        hashMap.put("bailing_money", bill);
+        hashMap.put("country_of_residencey", region);
+        hashMap.put("religion", religion);
+        hashMap.put("sex", sex);
+        hashMap.put("description", description);
+        hashMap.put("custom_phone", "00" + ccp.getFullNumber() + phone);
+        hashMap.put("housing", "YES");
+        hashMap.put("birthday", birthDay);
         Call<String> call = service.putParam(hashMap);
         call.enqueue(new Callback<String>() {
             @Override
@@ -692,12 +744,13 @@ public class AddJob extends AppCompatActivity {
                     String statusCode = object.getString("code");
                     switch (statusCode) {
                         case "200": {
-                            Toast.makeText(AddJob.this, "تم اضافة الاعلان", Toast.LENGTH_SHORT).show();
+                            warningMsg("تم اضافة الاعلان", true);
                             break;
                         }
 
                         default: {
-                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
+                            warningMsg("حدث خطأ حاول مجددا", false);
                             break;
                         }
                     }
@@ -716,21 +769,48 @@ public class AddJob extends AppCompatActivity {
         });
     }
 
-    public static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        dateFormat.setLenient(false);
+    //dialog message
+    private void warningMsg(String message, boolean finish) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_yes_no);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         try {
-            dateFormat.parse(inDate.trim());
-        } catch (ParseException pe) {
-            return false;
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return true;
+        TextView textViewMsg = dialog.findViewById(R.id.msg);
+        textViewMsg.setText(message);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        no.setVisibility(View.GONE);
+        yes.setText("موافق");
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (finish) {
+                    finish();
+                } else {
+                    dialog.dismiss();
+                }
+
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
     }
 
-
-
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull
     @Override
     public AppCompatDelegate getDelegate() {
@@ -740,11 +820,13 @@ public class AddJob extends AppCompatActivity {
 
         return localeChangerAppCompatDelegate;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -10,7 +10,7 @@
     <string name="remember_me">تذكرني</string>
     <string name="update_pass">تحديث كلمة المرور</string>
     <string name="_8">يجب تضمين رمز او رقم على الأقل وان لا تقل عن 8 احرف</string>
-    <string name="email">البريد الالكتروني</string>
+    <string name="email">البريد الالكتروني :</string>
     <string name="send_link">إرسال رابط إعادة التعيين</string>
     <string name="new_pass">كلمة المرور الجديدة</string>
     <string name="confirm_new_pass">تأكيد كلمة المرور الجديدة</string>
@@ -19,14 +19,14 @@
     <string name="reset_pass1_hint">ادخل عنوان البريد الإلكتروني المرتبط بالحساب , وسوف نرسل إليك بالبريد رابطاً لإعادة تعيين كلمة المرورالخاصة بك</string>
     <string name="welcome2">مرحبا بكم..</string>
     <string name="register_txt2">نتمنى لكم الحصول على فرصة عمل في أقرب وقت</string>
-    <string name="name">الاسم</string>
+    <string name="name">الاسم :</string>
     <string name="nicName">اسم المستخدم</string>
     <string name="used">مستخدم</string>
     <string name="avilable">متوفر</string>
     <string name="confirm_email">تأكيد البريد الالكتروني</string>
-    <string name="phone">رقم الهاتف</string>
-    <string name="nationality">الجنسية</string>
-    <string name="job">المهنة</string>
+    <string name="phone">رقم الهاتف :</string>
+    <string name="nationality">الجنسية :</string>
+    <string name="job">المهنة :</string>
     <string name="term_and_policy">الموافقه على الشروط والأحكام</string>
     <string name="contact_us">تواصـل معنـا</string>
     <string name="about">عن التطبيق</string>

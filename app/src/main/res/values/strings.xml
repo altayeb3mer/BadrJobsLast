@@ -15,7 +15,7 @@
     <string name="app_name" translatable="false">CutShort</string>
     <string name="_8">Must contain char and more than 8</string>
     <string name="update_pass">Update Password</string>
-    <string name="email">Email</string>
+    <string name="email">Email :</string>
     <string name="send_link">Send Url to Email</string>
     <string name="new_pass">New Password</string>
     <string name="confirm_new_pass">Confirm New Password</string>
@@ -26,14 +26,14 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="welcome2">Welcome</string>
     <string name="register_txt2">Hope you to find your job short</string>
-    <string name="name">Name</string>
+    <string name="name">Name :</string>
     <string name="nicName">Nicename</string>
     <string name="used">Used</string>
     <string name="avilable">Avilable</string>
     <string name="confirm_email">Confirm Email</string>
-    <string name="phone">Phone no</string>
-    <string name="nationality">Nationality</string>
-    <string name="job">Job</string>
+    <string name="phone">Phone no :</string>
+    <string name="nationality">Nationality :</string>
+    <string name="job">Job :</string>
     <string name="term_and_policy">Agree with terms and policy</string>
     <string name="contact_us">Contact Us</string>
     <string name="about">About App</string>

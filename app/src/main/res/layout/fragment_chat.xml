@@ -20,7 +20,7 @@
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/ads_item"
+                tools:listitem="@layout/chat_list"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:itemCount="15"
                 app:spanCount="1"

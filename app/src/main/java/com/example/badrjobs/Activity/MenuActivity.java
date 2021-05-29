@@ -82,7 +82,7 @@ public class MenuActivity extends ToolbarClass {
     private void initSpinnerLang() {
 //        String[] array = {"اللغة","العربية", "English"};
         String[] array = getResources().getStringArray(R.array.lang);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item_txt_size_normal, array) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View v = null;

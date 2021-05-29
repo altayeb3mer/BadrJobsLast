@@ -244,7 +244,7 @@ public class FragmentAdd extends Fragment {
                     laySub.setVisibility(View.INVISIBLE);
                 }
 
-                Toast.makeText(context, ""+countryId, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, ""+countryId, Toast.LENGTH_SHORT).show();
 
             }
             @Override

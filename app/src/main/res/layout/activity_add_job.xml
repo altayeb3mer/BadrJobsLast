@@ -662,23 +662,24 @@
                 app:cardCornerRadius="@dimen/margin_large_size"
                 android:layout_marginTop="@dimen/margin_large_size">
                 <RelativeLayout
+                    android:layout_margin="@dimen/margin_small_size"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <EditText
+                        android:maxLength="120"
                         android:gravity="start"
                         android:background="@android:color/transparent"
                         android:id="@+id/edtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/margin_small_size"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:hint="علي احمد خالد مهندس كمبيوتر"/>
                     <TextView
+                        android:id="@+id/bioCount"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_margin="@dimen/margin_normal_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorAccent"

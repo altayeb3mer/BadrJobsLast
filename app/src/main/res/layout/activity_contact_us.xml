@@ -25,6 +25,8 @@
             android:gravity="center">
 
             <RelativeLayout
+                android:paddingLeft="@dimen/margin_large_size"
+                android:paddingRight="@dimen/margin_large_size"
                 android:background="@drawable/shape_btn_contact_us_bg"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="200dp"
@@ -34,10 +36,9 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_large_size"
-                    android:layout_marginRight="@dimen/margin_large_size"
                     android:id="@+id/ic1"/>
                 <TextView
+                    android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,6 +50,8 @@
                     android:layout_toRightOf="@+id/ic1" />
             </RelativeLayout>
             <RelativeLayout
+                android:paddingLeft="@dimen/margin_large_size"
+                android:paddingRight="@dimen/margin_large_size"
                 android:background="@drawable/shape_btn_contact_us_bg"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="200dp"
@@ -58,10 +61,9 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_large_size"
-                    android:layout_marginRight="@dimen/margin_large_size"
                     android:id="@+id/ic2"/>
                 <TextView
+                    android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,6 +75,8 @@
                     android:layout_toRightOf="@+id/ic2" />
             </RelativeLayout>
             <RelativeLayout
+                android:paddingLeft="@dimen/margin_large_size"
+                android:paddingRight="@dimen/margin_large_size"
                 android:background="@drawable/shape_btn_contact_us_bg"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="200dp"
@@ -82,10 +86,9 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_large_size"
-                    android:layout_marginRight="@dimen/margin_large_size"
                     android:id="@+id/ic3"/>
                 <TextView
+                    android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

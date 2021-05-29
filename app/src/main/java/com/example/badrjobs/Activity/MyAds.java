@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class MyAds extends AppCompatActivity implements SwipeRefreshLayout.OnRef
     GridLayoutManager gridLayoutManager;
     LinearLayout progressLay,noDataLay;
     EditText edtSearch;
+    ImageView icBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,13 @@ public class MyAds extends AppCompatActivity implements SwipeRefreshLayout.OnRef
     }
 
     private void init() {
+        icBack =  findViewById(R.id.icBack);
+        icBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         mSwipeRefreshLayout =  findViewById(R.id.swipeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
