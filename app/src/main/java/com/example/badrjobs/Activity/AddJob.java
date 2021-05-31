@@ -190,7 +190,6 @@ public class AddJob extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 // filter your list from your input
-                // TODO: 29/05/21
                 int length = s.length();
 
                 textViewBioCount.setText(length + "/" +"120");
