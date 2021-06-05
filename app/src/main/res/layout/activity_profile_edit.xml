@@ -205,6 +205,7 @@
                             android:textColor="@color/red"/>
 
                         <androidx.appcompat.widget.AppCompatButton
+                            android:visibility="gone"
                             android:layout_marginTop="30dp"
                             android:id="@+id/btn"
                             android:layout_width="match_parent"
