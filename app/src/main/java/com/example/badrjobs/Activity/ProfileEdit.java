@@ -19,6 +19,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +60,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ProfileEdit extends AppCompatActivity implements View.OnClickListener {
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
-            textViewPasswordReset, textViewPhone,textViewDescription;
+            textViewPasswordReset, textViewPhone,textViewDescription,txtLength;
     RelativeLayout profileImageLay;
     CircleImageView profileImage;
     CardView cardBio;
@@ -109,6 +111,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             textViewDescription = findViewById(R.id.description);
             if (!bio.isEmpty()&&!bio.equals("null")){
                 textViewDescription.setText(bio);
+                txtLength.setText(bio.length()+"/120");
             }else{
                 textViewDescription.setText("");
             }
@@ -116,6 +119,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     }
 
     private void init() {
+
+        txtLength = findViewById(R.id.txtLength);
 
         addHeaderImg = findViewById(R.id.addHeaderImg);
         addHeaderImg.setOnClickListener(this);
@@ -168,7 +173,38 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         no.setText("الغاء");
 
         EditText editTextField = dialog.findViewById(R.id.field);
+        TextView txtLength2 = dialog.findViewById(R.id.txtLength2);
+        txtLength2.setVisibility(View.GONE);
+        if (key.equals("bio")){
 
+            txtLength2.setVisibility(View.VISIBLE);
+            editTextField.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    // filter your list from your input
+                    int length = s.length();
+
+                    txtLength.setText(length + "/" +"120");
+                    txtLength2.setText(length + "/" +"120");
+
+
+                    //you can use runnable postDelayed like 500 ms to delay search text
+                }
+            });
+        }
 
 
         yes.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +277,13 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                             }
                             else if (key.equals("header_image")){
                                 warningMsg("تم اضافة صورة الغلاف");
-                            }else{
+                            }
+                            else if (key.equals("bio")){
+                                warningMsg("تم التعديل بنجاح\n"+value);
+                                textViewDescription.setText(value);
+                            }
+
+                            else{
                                 warningMsg("تم التعديل بنجاح\n"+value);
                             }
 //                            SharedPrefManager.getInstance(getContext()).storeAppToken("");

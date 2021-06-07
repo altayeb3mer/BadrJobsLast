@@ -117,6 +117,7 @@
                                     android:textStyle="bold"
                                     android:text=" علي احمد خالد مهندس كمبيوتر "/>
                                 <TextView
+                                    android:id="@+id/txtLength"
                                     android:layout_alignParentBottom="true"
                                     android:layout_alignParentEnd="true"
                                     android:layout_margin="@dimen/margin_normal_size"
@@ -145,52 +146,52 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:text="تعديل الاسم الثلاثي"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
                             android:id="@+id/passwordReset"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="35dp"
                             android:text="تعديل الرقم السري"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
                             android:id="@+id/phone"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="35dp"
                             android:text="تغيير رقم الهاتف"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
                             android:id="@+id/job"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="35dp"
                             android:text="تعديل المهنة"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
                             android:id="@+id/contracts"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="35dp"
                             android:text="عقود الاتفاق السابقة"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
                             android:id="@+id/blockedUser"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="35dp"
                             android:text="قائمة المحظورين"
-                            android:textSize="@dimen/txt_large_size"
+                            android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
@@ -200,7 +201,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:text="حذف الحساب"
-                            android:textSize="30sp"
+                            android:textSize="@dimen/txt_large_size"
                             android:textStyle="bold"
                             android:textColor="@color/red"/>
 

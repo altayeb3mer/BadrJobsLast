@@ -13,11 +13,12 @@ import android.widget.TextView;
 import com.example.badrjobs.Adapter.AdapterBlockedUser;
 import com.example.badrjobs.Model.ModelUserBlocked;
 import com.example.badrjobs.R;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import java.util.ArrayList;
 
-public class BlockedUsersActivity extends AppCompatActivity {
+public class BlockedUsersActivity extends ToolbarClass {
 
     TextView textViewTitle;
     RecyclerView recyclerView;
@@ -25,10 +26,11 @@ public class BlockedUsersActivity extends AppCompatActivity {
     ArrayList<ModelUserBlocked> arrayList;
     GridLayoutManager gridLayoutManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blocked_users);
+        super.onCreate(R.layout.activity_blocked_users, "");
         init();
     }
 

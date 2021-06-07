@@ -8,14 +8,15 @@ import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import android.os.Bundle;
 
 import com.example.badrjobs.R;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
-public class PaymentPackage extends AppCompatActivity {
+public class PaymentPackage extends ToolbarClass {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_package);
+        super.onCreate(R.layout.activity_payment_package, "");
     }
 
     //language controller
