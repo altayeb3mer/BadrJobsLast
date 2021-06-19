@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +28,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.Adapter.SlideShow_adapter;
+import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -56,11 +60,12 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     TextView addToFavorite, textViewName,textViewFixName,textViewType,textViewOwnerName,textViewBirthday,
     textViewJob,textViewExperience,textViewSalary,textViewBillingMoney,textViewSex,
     textViewReligion, textViewCountry,textViewDesc,textViewViews,
-    textViewReportAds,textViewOfficeName,textViewOfficeAddress,textViewDate;
+    textViewReportAds,textViewOfficeName,textViewOfficeAddress,textViewDate
+            ,textViewDept,textViewSubDept;
     CircleImageView circleImageViewOwner;
 
     String ownerId="",isActive="NO";
-    ImageView imgFlag,imageViewBack;
+    ImageView imgFlag,imageViewBack,ic_translation;
 
     ViewPager viewPager;
     SlideShow_adapter slideShow_adapter;
@@ -69,7 +74,14 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     LinearLayout layOwner,layOffice,layCall,layChat;
     AppCompatButton btnStopAd;
     NestedScrollView nestedScroll;
-    boolean isMyAd=false;
+    boolean isMyAd=false,baseTrans=true;
+    //listView
+    ListView listViewHousing;
+    ArrayAdapter<String> arrayAdapterHousing;
+    private void setHousing(ArrayList<String> list){
+        arrayAdapterHousing = new ArrayAdapter<String>(this,R.layout.spinner_item,list);
+        listViewHousing.setAdapter(arrayAdapterHousing);
+    }
 
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -77,7 +89,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_details);
+        setContentView(R.layout.ads_details);
         Bundle args = getIntent().getExtras();
         if (args != null) {
             id = args.getString("id");
@@ -104,7 +116,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
         yes.setText(getResources().getString(R.string.send));
-        no.setText("الغاء");
+        no.setText(R.string.cancel);
 
         EditText editTextField = dialog.findViewById(R.id.field);
 
@@ -118,7 +130,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     doEdition(key,value);
                     dialog.dismiss();
                 }else {
-                    editTextField.setError("يجب تحديد قيمة للتعديل");
+                    editTextField.setError(getString(R.string.edt_value));
                     editTextField.requestFocus();
                 }
 
@@ -179,7 +191,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             break;
                         }
                         default: {
-                            warningMsg("لقد قم بالابلاغ عن هذا الاعلان مسبقا");
+                            warningMsg("لقد قمت بالابلاغ عن هذا الاعلان مسبقا");
                             break;
                         }
                     }
@@ -194,12 +206,25 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);
-                warningMsg("time out");
+                warningMsg(getString(R.string.time_out));
             }
         });
     }
 
+    private void loadBreadCum() {
+        imgFlag = findViewById(R.id.imgFlag);
+        textViewDept = findViewById(R.id.txtDept);
+        textViewSubDept = findViewById(R.id.txtSupDept);
+        textViewDept.setText(new GlobalVar().underLinerTextView(AdsActivity.s_dept));
+        textViewSubDept.setText(new GlobalVar().underLinerTextView(AdsActivity.s_sub_dept));
+        Glide.with(this).load(AdsActivity.countryImage).into(imgFlag);
+    }
+
     private void init() {
+        loadBreadCum();
+        ic_translation = findViewById(R.id.ic_translation);
+        listViewHousing = findViewById(R.id.list);
+        ic_translation.setOnClickListener(this);
         layCall = findViewById(R.id.layCall);
         layCall.setOnClickListener(this);
         layChat = findViewById(R.id.layChat);
@@ -223,7 +248,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         textViewReportAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogEdit("الابلاغ عن اساءة","reason");
+                dialogEdit(getString(R.string.report_abuse),"reason");
             }
         });
         layOwner = findViewById(R.id.layOwner);
@@ -260,11 +285,13 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         textViewViews = findViewById(R.id.views);
         //imageView
         circleImageViewOwner = findViewById(R.id.img);
-        imgFlag = findViewById(R.id.imgFlag);
+
 
 
 
     }
+
+
 
     private void initSlider(ArrayList<String> list){
         viewPager = findViewById(R.id.viewpager);
@@ -290,15 +317,33 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 onBackPressed();
                 break;
             }
+            case R.id.ic_translation: {
+                doTranslate();
+                break;
+            }
             case R.id.layCall: {
                 if (!phone.equals("")&&!phone.equals("null")){
                     call(phone);
                 }else{
-                    warningMsg("لم يتم العثور على رقم الهاتف");
+                    warningMsg(getString(R.string.phone_not_found));
                 }
 
                 break;
             }
+        }
+    }
+
+    String baseBio="",baseJob="",
+    translatedBio="",translatedJob="";
+    private void doTranslate() {
+        if (baseTrans){
+            textViewDesc.setText(translatedBio);
+            textViewJob.setText(translatedJob);
+            baseTrans = false;
+        }else{
+            textViewDesc.setText(baseBio);
+            textViewJob.setText(baseJob);
+            baseTrans = true;
         }
     }
 
@@ -347,11 +392,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     String code = object.getString("code");
                     switch (code) {
                         case "200": {
-                            warningMsg("تم انشاء العقد في انتظار موافقة صاحب الاعلان");
+                            warningMsg(getString(R.string.contract_created));
                             break;
                         }
                         default: {
-                            warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                            warningMsg(getString(R.string.error_try_again));
                             break;
                         }
                     }
@@ -416,17 +461,17 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                         case "200": {
                             if (isActive.equals("YES")){
                                 isActive = "NO";
-                                btnStopAd.setText("تفعيل الاعلان");
-                                warningMsg("تم ايقاف الاعلان");
+                                btnStopAd.setText(R.string.activate_ads);
+                                warningMsg(getString(R.string.stop_ads));
                             }else{
                                 isActive = "YES";
-                                btnStopAd.setText("ايقاف مؤقت للاعلان");
-                                warningMsg("تم تفعيل الاعلان");
+                                btnStopAd.setText(R.string.stop2);
+                                warningMsg(getString(R.string.activate_ads2));
                             }
                             break;
                         }
                         default: {
-                            warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                            warningMsg(getString(R.string.error_try_again));
                             break;
                         }
                     }
@@ -489,17 +534,17 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
 
                             if (is_liked){
                                 is_liked = false;
-                                addToFavorite.setText("الى مفضلتي");
-                                warningMsg("تم ازالة الاعلان من المفضلة");
+                                addToFavorite.setText(R.string.to_favorite);
+                                warningMsg(getString(R.string.remove_from_fav));
                             }else{
                                 is_liked = true;
-                                addToFavorite.setText("ازالة من المفضلة");
-                                warningMsg("تم اضافة الاعلان للمفضلة");
+                                addToFavorite.setText(R.string.remove_fav2);
+                                warningMsg(getString(R.string.add_fav2));
                             }
                             break;
                         }
                         default: {
-                            warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                            warningMsg(getString(R.string.error_try_again));
                             break;
                         }
                     }
@@ -618,7 +663,10 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             textViewDate.setText(data.getString("before_x_days"));
 
                             textViewBirthday.setText(data.getString("birthday"));
-                            textViewJob.setText(data.getString("job_title"));
+                            //job
+                            translatedJob = data.getString("trans_job_title");
+                            baseJob = data.getString("job_title");
+                            textViewJob.setText(baseJob);
                             textViewExperience.setText(data.getString("experience"));
                             textViewSalary.setText(data.getString("salary"));
                             String bailing_money = data.getString("bailing_money");
@@ -632,7 +680,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             textViewSex.setText(data.getString("sex"));
                             textViewReligion.setText(data.getString("religion"));
                             textViewCountry.setText(data.getString("country_of_residencey"));
-                            textViewDesc.setText(data.getString("description"));
+
+                            //bio
+                            baseBio = data.getString("description");
+                            translatedBio =data.getString("trans_description");
+                            textViewDesc.setText(baseBio);
                             textViewViews.setText(data.getString("views"));
 
 
@@ -656,10 +708,24 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             if (is_liked){
                                 addToFavorite.setText("ازالة من المفضلة");
                             }
+
+
+                            JSONArray housing_types = data.getJSONArray("housing_types");
+                            if (housing_types.length()>0){
+                                ArrayList<String> list = new ArrayList<>();
+                                for (int i = 0; i < housing_types.length(); i++) {
+                                    list.add(housing_types.getString(i));
+                                }
+                                setHousing(list);
+                            }else{
+                                findViewById(R.id.housingLay).setVisibility(View.GONE);
+                            }
+
                             break;
+
                         }
                         default: {
-                            warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                            warningMsg(getString(R.string.error_try_again));
                             break;
                         }
                     }
@@ -670,7 +736,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                    warningMsg(getString(R.string.error_try_again));
                 }
                 progressLay.setVisibility(View.GONE);
             }
@@ -678,7 +744,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);
-                warningMsg("حدث خطأ الرجاء المحاولة مرة اخرى");
+                warningMsg(getString(R.string.error_try_again));
             }
         });
     }
@@ -702,7 +768,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
         no.setVisibility(View.GONE);
-        yes.setText("موافق");
+        yes.setText(getString(R.string.ok));
 
         yes.setOnClickListener(new View.OnClickListener() {
             @Override

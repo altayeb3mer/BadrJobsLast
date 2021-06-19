@@ -1,5 +1,7 @@
 package com.example.badrjobs.Utils;
 
+import com.example.badrjobs.Model.ModelHousingRequest;
+
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -63,7 +65,7 @@ public class Api {
     //add job
     public interface RetrofitAddJob {
         @POST("api/v1/job")
-        Call<String> putParam(@Body HashMap<String, String> param);
+        Call<String> putParam(@Body HashMap param);
     }
 
     //country
@@ -141,6 +143,10 @@ public class Api {
     public interface RetrofitDoActivation {
         @POST("api/v1/jobActivation")
         Call<String> putParam(@Body HashMap<String, String> param);
+    }
+    public interface RetrofitHousingList {
+        @GET("api/v1/housingTypes")
+        Call<String> putParam();
     }
 
 

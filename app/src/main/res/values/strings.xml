@@ -47,5 +47,34 @@
     <string name="confirm">Confirm</string>
     <string name="send">Send</string>
     <string name="no_images">No Images</string>
+    <string name="time_out">time out</string>
+    <string name="sent">Send done</string>
+    <string name="sent_error">Send error</string>
+    <string name="pls_type_new_phone">Type new phone nomber</string>
+    <string name="reset_phone_successfuly">Phone change successfully</string>
+    <string name="error_try_again">Error please try again</string>
+    <string name="fill_fields">Please fill in all fields</string>
+    <string name="login_error">Login information error, try again</string>
+    <string name="chose_country">Please select a country</string>
+    <string name="choose_dept">Please select a section</string>
+    <string name="choose_sub_dept">Please select a subsection</string>
+    <string name="choose_ads_region">Please choose the correct site to display your ads</string>
+    <string name="choose_country">Choose the country..</string>
+    <string name="chose_sub_dept2">Choose a subsection</string>
+    <string name="ok">Ok</string>
+    <string name="no_ads">Sorry, no ads found</string>
+    <string name="cancel">Cancel</string>
+    <string name="edt_value">You must specify a value for modification</string>
+    <string name="report_abuse">Report abuse</string>
+    <string name="phone_not_found">Phone number not found</string>
+    <string name="contract_created">The contract has been created pending the approval of the advertiser</string>
+    <string name="activate_ads">Activate the advertisement</string>
+    <string name="stop_ads">Ad has been suspended</string>
+    <string name="stop2">Pause advertising</string>
+    <string name="activate_ads2">The ad has been activated</string>
+    <string name="to_favorite">To my favourites</string>
+    <string name="remove_from_fav">This ad has been removed from favourites</string>
+    <string name="remove_fav2">Remove from favourites</string>
+    <string name="add_fav2">This ad has been added to your favourites</string>
 
 </resources>

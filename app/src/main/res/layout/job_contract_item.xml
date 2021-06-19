@@ -10,7 +10,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_normal_size"
+        android:layout_marginLeft="@dimen/margin_normal_size"
+        android:layout_marginRight="@dimen/margin_normal_size"
+        android:layout_marginTop="1dp"
         app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="@dimen/margin_normal_size"
         app:layout_constraintTop_toTopOf="parent">

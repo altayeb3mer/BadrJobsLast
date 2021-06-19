@@ -45,6 +45,35 @@
         <item >English</item>
     </array>
     <string name="no_images">لاتوجد صور</string>
+    <string name="sent">تم الارسال</string>
+    <string name="sent_error">تعذر الارسال</string>
+    <string name="pls_type_new_phone">الرجاء كتابة رقم الهاتف الجديد</string>
+    <string name="reset_phone_successfuly">\"تم تغيير قم الهاتف الخاص بك الى \"</string>
+    <string name="error_try_again">حدث خطأ حاول مجددا</string>
+    <string name="fill_fields">الرجاء ملئ كل الحقول</string>
+    <string name="login_error">خطأ في بيانات الدخول حاول مرة اخري</string>
+    <string name="chose_country">الرجاء اختيار الدولة</string>
+    <string name="choose_dept">الرجاء اختيار قسم</string>
+    <string name="choose_sub_dept">الرجاء اختيار قسم فرعي</string>
+    <string name="choose_ads_region">الرجاء اختيار الموقع الصحيح لعرض علانك</string>
+    <string name="choose_country">اختار البلد..</string>
+    <string name="chose_sub_dept2">اختر قسم فرعي</string>
+    <string name="ok">موافق</string>
+    <string name="no_ads">عفوا  لم يتم العثور على اعلانات</string>
+    <string name="cancel">الغاء</string>
+    <string name="edt_value">يجب تحديد قيمة للتعديل</string>
+    <string name="report_abuse">الابلاغ عن اساءة</string>
+    <string name="phone_not_found">لم يتم العثور على رقم الهاتف</string>
+    <string name="contract_created">تم انشاء العقد في انتظار موافقة صاحب الاعلان</string>
+    <string name="activate_ads">تفعيل الاعلان</string>
+    <string name="stop_ads">تم ايقاف الاعلان</string>
+    <string name="stop2">ايقاف مؤقت للاعلان</string>
+    <string name="activate_ads2">تم تفعيل الاعلان</string>
+    <string name="to_favorite">الى مفضلتي</string>
+    <string name="remove_from_fav">تم ازالة الاعلان من المفضلة</string>
+    <string name="remove_fav2">ازالة من المفضلة</string>
+    <string name="add_fav2">تم اضافة الاعلان للمفضلة</string>
+    <string name="time_out">تعذر الوصول للخادم</string>
 
 
 </resources>

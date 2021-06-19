@@ -85,15 +85,15 @@ public class FragmentAdd extends Fragment {
             @Override
             public void onClick(View view) {
                 if (countryId.isEmpty()){
-                    warningMsg("الرجاء اختيار الدولة");
+                    warningMsg(getString(R.string.chose_country));
                     return;
                 }
                 if (deptId.isEmpty()){
-                    warningMsg("الرجاء اختيار قسم");
+                    warningMsg(getString(R.string.choose_dept));
                     return;
                 }
                 if (subDeptId.isEmpty()&&hasSub){
-                    warningMsg("الرجاء اختيار قسم فرعي");
+                    warningMsg(getString(R.string.choose_sub_dept));
                     return;
                 }
                     Intent intent = new Intent(getActivity(), AddJob.class);
@@ -113,7 +113,7 @@ public class FragmentAdd extends Fragment {
             }
         });
         textViewTitle = view.findViewById(R.id.txtTitle);
-        textViewTitle.setText(new GlobalVar().underLinerTextView("الرجاء اختيار الموقع الصحيح لعرض علانك"));
+        textViewTitle.setText(new GlobalVar().underLinerTextView(getString(R.string.choose_ads_region)));
     }
 
     @Override
@@ -126,7 +126,7 @@ public class FragmentAdd extends Fragment {
     private void getCountries() {
         arrayListData = new ArrayList<>();
         arrayList = new ArrayList<>();
-        arrayList.add("اختار البلد..");
+        arrayList.add(getString(R.string.choose_country));
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -402,7 +402,7 @@ public class FragmentAdd extends Fragment {
     //get sub dept
     private void getSubDept() {
         arrayListSubDept = new ArrayList<>();
-        arrayListSubDept.add("اختر قسم فرعي");
+        arrayListSubDept.add(getString(R.string.chose_sub_dept2));
         arrayListSubDeptData = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -555,7 +555,7 @@ public class FragmentAdd extends Fragment {
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
         no.setVisibility(View.GONE);
-        yes.setText("موافق");
+        yes.setText(R.string.ok);
 
         yes.setOnClickListener(new View.OnClickListener() {
             @Override

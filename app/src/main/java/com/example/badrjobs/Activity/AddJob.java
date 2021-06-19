@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,22 +30,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.badrjobs.Adapter.AdapterHousing;
+import com.example.badrjobs.Model.ModelHousing;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -66,7 +73,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class AddJob extends AppCompatActivity {
+public class AddJob extends ToolbarClass {
 
     public static final int PICK_IMAGE = 1;
     CountryCodePicker ccp;
@@ -101,6 +108,13 @@ public class AddJob extends AppCompatActivity {
     int salaryType = 0;
     int imagePicker = 1;
     LinearLayout progressLay;
+    //housing
+    CardView housingCard;
+    RecyclerView recyclerViewHousing;
+    AdapterHousing adapterHousing;
+    CheckBox checkboxHousing;
+    boolean housing = false;
+    GridLayoutManager gridLayoutManager;
     private boolean additionPhone = false;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
@@ -116,10 +130,9 @@ public class AddJob extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_job);
+        super.onCreate(R.layout.activity_add_job, "");
         getBundles();
         init();
         initSpinnerSalary();
@@ -192,7 +205,7 @@ public class AddJob extends AppCompatActivity {
                 // filter your list from your input
                 int length = s.length();
 
-                textViewBioCount.setText(length + "/" +"120");
+                textViewBioCount.setText(length + "/" + "120");
 
 
                 //you can use runnable postDelayed like 500 ms to delay search text
@@ -373,12 +386,32 @@ public class AddJob extends AppCompatActivity {
             warningMsg("الصورة الاولى مطلوبة", false);
             return;
         }
+        if (housing&&adapterHousing.getModelHousingRequest().size()<0){
+            warningMsg("الرجاء تحديد العمالة المنزلية",false);
+            return;
+        }
 
         addJob();
 
     }
 
     private void init() {
+        checkboxHousing = findViewById(R.id.checkboxHousing);
+        checkboxHousing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    housing = true;
+                    housingCard.setVisibility(View.VISIBLE);
+                } else {
+                    housing = false;
+                    housingCard.setVisibility(View.GONE);
+                }
+            }
+        });
+        housingCard = findViewById(R.id.housingCard);
+        recyclerViewHousing = findViewById(R.id.housingRec);
+
         ccp = findViewById(R.id.ccp);
         layPhone = findViewById(R.id.layPhone);
         imageViewFlag = findViewById(R.id.imgFlag);
@@ -464,7 +497,7 @@ public class AddJob extends AppCompatActivity {
         });
 
 
-
+        getHousingList();
 
     }
 
@@ -707,7 +740,7 @@ public class AddJob extends AppCompatActivity {
 
         Api.RetrofitAddJob service = retrofit.create(Api.RetrofitAddJob.class);
 
-        HashMap<String, String> hashMap = new HashMap();
+        HashMap hashMap = new HashMap();
         hashMap.put("job_category", categoryId);
         hashMap.put("country", countryId);
         hashMap.put("job_title", job);
@@ -731,9 +764,14 @@ public class AddJob extends AppCompatActivity {
         hashMap.put("religion", religion);
         hashMap.put("sex", sex);
         hashMap.put("description", description);
-        hashMap.put("custom_phone", "00" + ccp.getFullNumber() + phone);
-        hashMap.put("housing", "YES");
+        hashMap.put("custom_phone", "00" + ccp.getFullNumber() +  phone);
         hashMap.put("birthday", birthDay);
+        if (housing){
+            hashMap.put("housing_types", adapterHousing.getModelHousingRequest());
+            hashMap.put("housing", "YES");
+        }else {
+            hashMap.put("housing", "NO");
+        }
         Call<String> call = service.putParam(hashMap);
         call.enqueue(new Callback<String>() {
             @Override
@@ -767,6 +805,94 @@ public class AddJob extends AppCompatActivity {
             }
         });
     }
+
+    private void getHousingList() {
+        progressLay.setVisibility(View.VISIBLE);
+        ArrayList<ModelHousing> housingArrayList = new ArrayList<>();
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
+                        ongoing.addHeader("Content-Type", "application/json;");
+                        ongoing.addHeader("Accept", "application/json");
+                        ongoing.addHeader("lang", SharedPrefManager.getInstance(getApplicationContext()).GetAppLanguage());
+//                        String token = SharedPrefManager.getInstance(getApplicationContext()).getAppToken();
+//                        ongoing.addHeader("Authorization", token);
+                        return chain.proceed(ongoing.build());
+                    }
+                })
+                .readTimeout(60 * 5, TimeUnit.SECONDS)
+                .connectTimeout(60 * 5, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.ROOT_URL)
+                .client(httpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api.RetrofitHousingList service = retrofit.create(Api.RetrofitHousingList.class);
+
+        Call<String> call = service.putParam();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                try {
+                    JSONObject object = new JSONObject(response.body());
+                    String statusCode = object.getString("code");
+                    switch (statusCode) {
+                        case "200": {
+                            JSONArray dataHousing = object.getJSONArray("response");
+                            for (int i = 0; i < dataHousing.length(); i++) {
+                                JSONObject itemData = dataHousing.getJSONObject(i);
+                                ModelHousing modelHousing = new ModelHousing();
+
+                                modelHousing.setId(itemData.getString("id"));
+                                modelHousing.setTransName(itemData.getString("trans_name"));
+
+                                housingArrayList.add(modelHousing);
+                            }
+                            if (housingArrayList.size() > 0) {
+                                initHousingAdapter(housingArrayList);
+
+                            } else {
+                                Toast.makeText(AddJob.this, "No housing data", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                            break;
+                        }
+
+                        default: {
+//                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
+                            warningMsg("حدث خطأ حاول مجددا", false);
+                            break;
+                        }
+                    }
+                    progressLay.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                progressLay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                progressLay.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void initHousingAdapter(ArrayList<ModelHousing> list) {
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+        recyclerViewHousing.setLayoutManager(gridLayoutManager);
+        adapterHousing = new AdapterHousing(this, list);
+        recyclerViewHousing.setAdapter(adapterHousing);
+    }
+
 
     //dialog message
     private void warningMsg(String message, boolean finish) {

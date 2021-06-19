@@ -37,6 +37,7 @@ import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONObject;
@@ -57,7 +58,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class ProfileEdit extends AppCompatActivity implements View.OnClickListener {
+public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
             textViewPasswordReset, textViewPhone,textViewDescription,txtLength;
@@ -68,10 +69,16 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     RelativeLayout layHeader;
     ImageButton addHeaderImg;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_profile_edit);
+//        init();
+//        loadImages();
+//    }
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        super.onCreate(R.layout.activity_profile_edit, "");
         init();
         loadImages();
     }

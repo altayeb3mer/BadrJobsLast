@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
                 if (!emailOrPhone.isEmpty() && !password.isEmpty()) {
                     doLogin();
                 } else {
-                    Toast.makeText(Login.this, "الرجاء ملئ كل الحقول", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.fill_fields, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -140,7 +140,7 @@ public class Login extends AppCompatActivity {
                             break;
                         }
                         default: {
-                            Toast.makeText(Login.this, "خطأ في بيانات الدخول حاول مرة اخري", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

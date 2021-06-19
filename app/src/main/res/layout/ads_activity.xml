@@ -126,7 +126,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/txt_large_size"
             android:textStyle="bold"
-            android:text="عفوا\n لم يتم العثور على اعلانات"
+            android:text="@string/no_ads"
             android:gravity="center"/>
     </LinearLayout>
 

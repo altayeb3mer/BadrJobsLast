@@ -122,6 +122,9 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
         });
     }
 
+
+    public static String countryImage = "",s_dept="",s_sub_dept="";
+
     private void getJobs(String page) {
         progressLay.setVisibility(View.VISIBLE);
         isLoading = false;
@@ -164,18 +167,19 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
                     JSONObject responseObj = object.getJSONObject("response");
                     //country_info
                     JSONObject countryObj = responseObj.getJSONObject("country_info");
-                    Glide.with(getApplicationContext()).load(countryObj.getString("image")).into(imageViewFlag);
+                    countryImage = countryObj.getString("image");
+                    Glide.with(getApplicationContext()).load(countryImage).into(imageViewFlag);
 
                     //bread_crumb
                     JSONArray deptInfoArray = responseObj.getJSONArray("bread_crumb");
                     JSONObject breadObj = deptInfoArray.getJSONObject(0);
-                    String dept = breadObj.getString("transName");
-                    textViewDept.setText(new GlobalVar().underLinerTextView(dept));
+                    s_dept = breadObj.getString("transName");
+                    textViewDept.setText(new GlobalVar().underLinerTextView(s_dept));
 
                     if (deptInfoArray.length()==2){
                         JSONObject breadObj2 = deptInfoArray.getJSONObject(1);
-                        String sub_dept = breadObj2.getString("transName");
-                        textViewSupDept.setText(new GlobalVar().underLinerTextView(sub_dept));
+                        s_sub_dept = breadObj2.getString("transName");
+                        textViewSupDept.setText(new GlobalVar().underLinerTextView(s_sub_dept));
                     }
 
 
@@ -222,7 +226,7 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
                         }
 
                         default: {
-                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.error_try_again, Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

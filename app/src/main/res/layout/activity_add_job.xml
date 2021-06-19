@@ -14,11 +14,7 @@
 
         <include layout="@layout/public_toolbar"
             />
-        <ProgressBar
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -372,6 +368,7 @@
                 android:text="تاريخ الميلاد"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="date"
                 android:id="@+id/edtBirthDate"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"
@@ -801,6 +798,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@android:color/darker_gray"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkboxHousing"
+                android:layout_margin="@dimen/margin_large_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="خاص بالعمالة المنزلية"
+                android:textSize="@dimen/txt_normal_size"
+                android:textStyle="bold"/>
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/housingCard"
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:layout_margin="@dimen/margin_small_size">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/housingRec"
+                    tools:listitem="@layout/housing_item"
+                    android:orientation="vertical"
+                    tools:itemCount="5"
+                    app:spanCount="1"
+                    />
+            </androidx.cardview.widget.CardView>
+
+
+
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkbox"

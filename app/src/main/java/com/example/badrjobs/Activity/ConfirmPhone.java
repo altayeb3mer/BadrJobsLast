@@ -57,6 +57,9 @@ public class ConfirmPhone extends AppCompatActivity {
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
+    private boolean phoneReset = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,9 @@ public class ConfirmPhone extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         //args
         Bundle args = getIntent().getExtras();
+        if (args.containsKey("phoneReset"))
+            phoneReset = true;
+
         phone = args.getString("phone");
         verifyId = args.getString("verifyId");
         try {
@@ -109,7 +115,12 @@ public class ConfirmPhone extends AppCompatActivity {
                             SharedPrefManager.getInstance(getApplicationContext()).storeFirebaseToken(user.getUid());
 
                             hashMap.put("fb_token", user.getUid());
-                            doRegister();
+                            if (phoneReset){
+                                doPhoneReset();
+                            }else {
+                                doRegister();
+                            }
+
 
                             // ...
                         } else {
@@ -190,6 +201,74 @@ public class ConfirmPhone extends AppCompatActivity {
         });
     }
 
+    private void doPhoneReset() {
+        progressLay.setVisibility(View.VISIBLE);
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
+                        ongoing.addHeader("Content-Type", "application/json;");
+                        ongoing.addHeader("Accept", "application/json");
+//                        ongoing.addHeader("Content-Type", "application/x-www-form-urlencoded");
+//                        String token = SharedPrefManager.getInstance(context).GetToken();
+//                        ongoing.addHeader("Authorization", token);
+                        return chain.proceed(ongoing.build());
+                    }
+                })
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.ROOT_URL)
+                .client(httpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api.RetrofitRegister service = retrofit.create(Api.RetrofitRegister.class);
+
+        Call<String> call = service.putParam(hashMap);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                try {
+                    JSONObject object = new JSONObject(response.body());
+                    String statusCode = object.getString("code");
+                    switch (statusCode) {
+                        case "200": {
+//                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            warningMsg(getString(R.string.reset_phone_successfuly)+"\n"+
+                                    hashMap.get("codeCountry")+hashMap.get("phone"));
+
+//                            finish();
+                            break;
+                        }
+
+                        default: {
+                            Toast.makeText(ConfirmPhone.this, R.string.error_try_again, Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                    progressLay.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                progressLay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                progressLay.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
     //dialog message
     private void warningMsg(String message) {
         final Dialog dialog = new Dialog(this);
@@ -213,7 +292,11 @@ public class ConfirmPhone extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                if (phoneReset){
+                    finish();
+                }else{
+                    startActivity(new Intent(getApplicationContext(), Login.class));
+                }
                 dialog.dismiss();
 
 
@@ -256,4 +339,8 @@ public class ConfirmPhone extends AppCompatActivity {
         super.onDestroy();
         ActivityRecreationHelper.onDestroy(this);
     }
+
+
+
+
 }
