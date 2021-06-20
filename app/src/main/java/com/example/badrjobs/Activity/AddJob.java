@@ -382,7 +382,7 @@ public class AddJob extends ToolbarClass {
             Toast.makeText(this, "لم توافق على صحة بياناتك!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (image1.isEmpty() && image2.isEmpty() && image3.isEmpty()) {
+        if (image1.isEmpty()) {
             warningMsg("الصورة الاولى مطلوبة", false);
             return;
         }
@@ -740,7 +740,7 @@ public class AddJob extends ToolbarClass {
 
         Api.RetrofitAddJob service = retrofit.create(Api.RetrofitAddJob.class);
 
-        HashMap hashMap = new HashMap();
+        HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("job_category", categoryId);
         hashMap.put("country", countryId);
         hashMap.put("job_title", job);
@@ -767,7 +767,7 @@ public class AddJob extends ToolbarClass {
         hashMap.put("custom_phone", "00" + ccp.getFullNumber() +  phone);
         hashMap.put("birthday", birthDay);
         if (housing){
-            hashMap.put("housing_types", adapterHousing.getModelHousingRequest());
+            hashMap.put("housing_types", adapterHousing.getModelHousingRequest().toString());
             hashMap.put("housing", "YES");
         }else {
             hashMap.put("housing", "NO");

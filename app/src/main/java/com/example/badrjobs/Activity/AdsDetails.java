@@ -79,7 +79,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     ListView listViewHousing;
     ArrayAdapter<String> arrayAdapterHousing;
     private void setHousing(ArrayList<String> list){
-        arrayAdapterHousing = new ArrayAdapter<String>(this,R.layout.spinner_item,list);
+        arrayAdapterHousing = new ArrayAdapter<>(this,R.layout.spinner_item,list);
         listViewHousing.setAdapter(arrayAdapterHousing);
     }
 

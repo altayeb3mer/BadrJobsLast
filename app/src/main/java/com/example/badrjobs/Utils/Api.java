@@ -65,7 +65,7 @@ public class Api {
     //add job
     public interface RetrofitAddJob {
         @POST("api/v1/job")
-        Call<String> putParam(@Body HashMap param);
+        Call<String> putParam(@Body HashMap<String,String> param);
     }
 
     //country
