@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.badrjobs.R;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -23,7 +24,7 @@ import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class ResetPhone extends AppCompatActivity implements View.OnClickListener {
+public class ResetPhone extends ToolbarClass implements View.OnClickListener {
 
     AppCompatButton button;
     CountryCodePicker ccp;
@@ -36,10 +37,50 @@ public class ResetPhone extends AppCompatActivity implements View.OnClickListene
 
 
     String phone = "";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_reset_phone);
+//        init();
+//        //callback method
+//        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+//
+//            @Override
+//            public void onVerificationCompleted(PhoneAuthCredential credential) {
+//                Toast.makeText(ResetPhone.this, R.string.sent_error, Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onVerificationFailed(FirebaseException e) {
+//                progressLay.setVisibility(View.GONE);
+//                Toast.makeText(ResetPhone.this, R.string.sent_error, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCodeSent(@NonNull String verificationId,
+//                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+//                HashMap<String, String> hashMap = new HashMap<>();
+//                hashMap.put("phone", phone);
+//                hashMap.put("codeCountry","00"+ccp.getFullNumber());
+//
+//                progressLay.setVisibility(View.GONE);
+//                Toast.makeText(ResetPhone.this, R.string.sent, Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
+//                intent.putExtra("phone", "00"+ccp.getFullNumber() + phone);
+//                intent.putExtra("verifyId", verificationId);
+//                intent.putExtra("phoneReset", true);
+//                intent.putExtra("hashMap", hashMap);
+//                startActivity(intent);
+//                finish();
+//
+//            }
+//        };
+//    }
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_phone);
+        super.onCreate(R.layout.activity_reset_phone, "");
         init();
         //callback method
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

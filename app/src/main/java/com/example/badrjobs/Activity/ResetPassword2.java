@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
 import org.json.JSONObject;
@@ -35,20 +36,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class ResetPassword2 extends AppCompatActivity implements View.OnClickListener {
+public class ResetPassword2 extends ToolbarClass implements View.OnClickListener {
 
     EditText editTextOldPass,editTextNewPass1,editTextNewPass2;
     AppCompatButton button;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_reset_password2);
+//
+//        init();
+//
+//
+//    }
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password2);
-
+        super.onCreate(R.layout.activity_reset_password2, "");
         init();
-
-
     }
 
     private void init() {

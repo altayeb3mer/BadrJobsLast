@@ -33,7 +33,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="الرجاء اختيار الموقع الصحيح لعرض علانك"
+                    android:text="@string/choose_right_region"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_normal_size"/>
 
@@ -70,7 +70,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="الدولة"
+                            android:text="@string/country_"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
 
@@ -113,7 +113,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="القسم الرئيسي"
+                            android:text="@string/main_dept"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
 
@@ -158,7 +158,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="القسم الفرعي"
+                            android:text="@string/sub_dept_"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/txt_normal_size"/>
 
@@ -199,7 +199,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="استمرار"
+                android:text="@string/countios"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/txt_large_size"

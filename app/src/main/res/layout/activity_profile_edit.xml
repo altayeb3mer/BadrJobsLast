@@ -92,7 +92,7 @@
                             android:layout_marginTop="@dimen/margin_normal_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="تعريف"
+                            android:text="@string/_about"
                             android:textSize="@dimen/txt_large_size"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>
@@ -114,8 +114,7 @@
                                     android:layout_marginTop="@dimen/margin_small_size"
                                     android:textColor="@android:color/black"
                                     android:textSize="@dimen/txt_normal_size"
-                                    android:textStyle="bold"
-                                    android:text=" علي احمد خالد مهندس كمبيوتر "/>
+                                    android:textStyle="bold" />
                                 <TextView
                                     android:id="@+id/txtLength"
                                     android:layout_alignParentBottom="true"
@@ -145,7 +144,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:text="تعديل الاسم الثلاثي"
+                            android:text="@string/edt_3d_name"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -154,7 +153,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:text="تعديل الرقم السري"
+                            android:text="@string/edt_pass_"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -163,7 +162,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:text="تغيير رقم الهاتف"
+                            android:text="@string/edt_phone_"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -172,7 +171,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:text="تعديل المهنة"
+                            android:text="@string/edt__job"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -181,7 +180,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:text="عقود الاتفاق السابقة"
+                            android:text="@string/prev_contracts"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -190,7 +189,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:text="قائمة المحظورين"
+                            android:text="@string/blocked_list"
                             android:textSize="@dimen/txt_normal_size"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -200,7 +199,7 @@
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:text="حذف الحساب"
+                            android:text="@string/delete_account"
                             android:textSize="@dimen/txt_large_size"
                             android:textStyle="bold"
                             android:textColor="@color/red"/>

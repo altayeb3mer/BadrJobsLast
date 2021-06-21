@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="35sp"
-                android:text="تقديم طلب عمل"/>
+                android:text="@string/add_ads_title"/>
 
 <!--            <RelativeLayout-->
 <!--                android:layout_width="match_parent"-->
@@ -122,7 +122,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_normal_size"
-                android:text="اختر ثلاث صور لإعلانك تكون عالية الدقة , ویمنع عرض الوثائق الرسمية"/>
+                android:text="@string/add_ads_warrning"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="نوع الطلب"/>
+                    android:text="@string/type"/>
                 <RadioGroup
                     android:id="@+id/radioGroupType"
                     android:layout_centerVertical="true"
@@ -231,7 +231,7 @@
                         android:id="@+id/radioBtnType1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="جديد"
+                        android:text="@string/_new"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -239,7 +239,7 @@
                         android:id="@+id/radioBtnType2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="تحويل"
+                        android:text="@string/transformatin"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -262,7 +262,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="مقدم الطلب"/>
+                    android:text="@string/who"/>
                 <RadioGroup
                     android:id="@+id/radioGroupApplication"
                     android:layout_centerVertical="true"
@@ -277,7 +277,7 @@
                         android:id="@+id/radioBtnOwnerType1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="شخصي"
+                        android:text="@string/personal"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -285,7 +285,7 @@
                         android:id="@+id/radioBtnOwnerType2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مكتب"
+                        android:text="@string/office"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -310,7 +310,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="اسم المكتب او المؤسسة"
+                    android:text="@string/name_ooffice"
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/edtOfficeName"
@@ -328,7 +328,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="عنوان المكتب او المؤسسة حسب الدولة"
+                    android:text="@string/office_address"
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/edtAddress"
@@ -347,7 +347,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="اسم صاحب العمل"
+                android:text="@string/name_owner"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/edtOwnerName"
@@ -365,7 +365,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="تاريخ الميلاد"
+                android:text="@string/birth"
                 android:textStyle="bold"/>
             <EditText
                 android:inputType="date"
@@ -385,7 +385,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="المهنة"
+                android:text="@string/job2"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/edtJob"
@@ -404,7 +404,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="عدد سنوات الخبرة"
+                android:text="@string/experience"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/edtExperience"
@@ -423,7 +423,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="حدد الراتب الشهري بالدولار الامريكي"
+                android:text="@string/choose_salary"
                 android:textStyle="bold"/>
             <RelativeLayout
                 android:layout_marginTop="@dimen/margin_normal_size"
@@ -479,7 +479,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="المبلغ المطلوب مقابل توفير المهنة"
+                android:text="@string/money_of_salary"
                 android:textStyle="bold"/>
             <RelativeLayout
                 android:layout_marginTop="@dimen/margin_normal_size"
@@ -534,7 +534,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="تتواجد الان في اي دولة"
+                android:text="@string/place_now"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/edtRegion"
@@ -563,7 +563,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="الديانة"/>
+                    android:text="@string/religion"/>
                 <RadioGroup
                     android:id="@+id/radioGroupReligion"
                     android:layout_centerVertical="true"
@@ -578,7 +578,7 @@
                         android:id="@+id/radioBtnReligion1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="مسلم"
+                        android:text="@string/muslim"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -586,7 +586,7 @@
                         android:id="@+id/radioBtnReligion2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="غير ذلك"
+                        android:text="@string/not_mislim"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -609,7 +609,7 @@
                     android:gravity="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_large_size"
-                    android:text="الجنس"/>
+                    android:text="@string/sex"/>
                 <RadioGroup
                     android:id="@+id/radioGroupSex"
                     android:layout_centerVertical="true"
@@ -624,7 +624,7 @@
                         android:id="@+id/radioBtnSex1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ذكر"
+                        android:text="@string/male"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -632,7 +632,7 @@
                         android:id="@+id/radioBtnSex2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="انثى"
+                        android:text="@string/female"
                         android:textSize="@dimen/txt_normal_size"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -651,7 +651,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
-                android:text="اضف خبرات وتعريف بنفسك"
+                android:text="@string/bio2"
                 android:textStyle="bold"/>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -671,8 +671,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/txt_normal_size"
-                        android:textStyle="bold"
-                        android:hint="علي احمد خالد مهندس كمبيوتر"/>
+                        android:textStyle="bold"/>
                     <TextView
                         android:id="@+id/bioCount"
                         android:layout_alignParentBottom="true"
@@ -699,7 +698,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_normal_size"
-                android:text="اضافة رقم للاتصال المباشر"/>
+                android:text="@string/add_phone"/>
             <RadioGroup
                 android:id="@+id/radioGroupContactPhone"
                 android:layout_width="match_parent"
@@ -712,7 +711,7 @@
                     android:id="@+id/radioBtnContactPhone1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نفس رقم الهاتف المسجل في الحساب"
+                    android:text="@string/same_reg_no"
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"/>
@@ -720,7 +719,7 @@
                     android:id="@+id/radioBtnContactPhone2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ادخال رقم هاتف جديد خاص بالاعلان فقط"
+                    android:text="@string/new_no"
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"/>
@@ -805,7 +804,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="خاص بالعمالة المنزلية"
+                android:text="@string/housing_sp"
                 android:textSize="@dimen/txt_normal_size"
                 android:textStyle="bold"/>
             <androidx.cardview.widget.CardView
@@ -837,7 +836,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="أنا المسئول عن صحة ودقة جميع\n بياناتي التي سوف انشرها في إعلاني"
+                android:text="@string/agree_add_ads"
                 android:textSize="@dimen/txt_normal_size"
                 android:textStyle="bold"/>
 
@@ -848,7 +847,7 @@
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:textColor="@android:color/white"
-                android:text="أنشر"
+                android:text="@string/post_ads"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_circle"
                 />
@@ -861,6 +860,7 @@
                 android:layout_height="50dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <LinearLayout
         android:id="@+id/progressLay"
         android:visibility="gone"

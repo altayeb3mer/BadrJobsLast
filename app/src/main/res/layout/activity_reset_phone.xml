@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/txt_extra_large_size"
-                    android:text="تغيير رقم الهاتف"
+                    android:text="@string/edt_phone_"
                     android:textColor="@android:color/black"/>
 
                 <TextView
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/txt_normal_size"
-                    android:text="ادخل رقم الهاتف الجديد"
+                    android:text="@string/_new_phone"
                     android:textStyle="bold"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layoutDirection="rtl"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/txt_normal_size"
-                    android:text="سوف تصل رسالة الى رقمك الجدید"
+                    android:text="@string/u_wel_recieve_msg"
                     android:textColor="@android:color/black"/>
 
 
@@ -107,7 +107,7 @@
                     android:layout_marginTop="100dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="موافق"
+                    android:text="@string/ok"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/txt_large_size"

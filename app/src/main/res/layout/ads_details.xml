@@ -520,10 +520,15 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/margin_large_size"
                     android:layout_margin="@dimen/margin_large_size">
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/list"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_margin="@dimen/margin_normal_size"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/list"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="1"/>
+
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

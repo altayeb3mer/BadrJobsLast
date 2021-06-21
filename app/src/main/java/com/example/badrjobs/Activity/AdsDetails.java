@@ -24,9 +24,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.badrjobs.Adapter.AdapterHousingSimple;
 import com.example.badrjobs.Adapter.SlideShow_adapter;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.R;
@@ -76,11 +78,12 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     NestedScrollView nestedScroll;
     boolean isMyAd=false,baseTrans=true;
     //listView
-    ListView listViewHousing;
-    ArrayAdapter<String> arrayAdapterHousing;
+
     private void setHousing(ArrayList<String> list){
-        arrayAdapterHousing = new ArrayAdapter<>(this,R.layout.spinner_item,list);
-        listViewHousing.setAdapter(arrayAdapterHousing);
+        RecyclerView listViewHousing = findViewById(R.id.list);
+//        ArrayAdapter<String> arrayAdapterHousing = new ArrayAdapter<>(this,R.layout.spinner_item,list);
+        AdapterHousingSimple adapterHousingSimple = new AdapterHousingSimple(this,list);
+        listViewHousing.setAdapter(adapterHousingSimple);
     }
 
     //language controller
@@ -223,7 +226,6 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     private void init() {
         loadBreadCum();
         ic_translation = findViewById(R.id.ic_translation);
-        listViewHousing = findViewById(R.id.list);
         ic_translation.setOnClickListener(this);
         layCall = findViewById(R.id.layCall);
         layCall.setOnClickListener(this);

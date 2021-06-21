@@ -332,7 +332,7 @@
                                 android:gravity="center"
                                 android:textSize="@dimen/txt_normal_size"
                                 android:textStyle="bold"
-                                android:text="اعلاناتي"
+                                android:text="@string/my_adsss"
                                 android:textColor="@android:color/white"/>                        </LinearLayout>
                         <LinearLayout
                             android:id="@+id/balance"
@@ -353,7 +353,7 @@
                                     android:gravity="center"
                                     android:textSize="@dimen/txt_small_size"
                                     android:textStyle="bold"
-                                    android:text="رصيد الاعلانات"
+                                    android:text="@string/balance"
                                     android:textColor="@android:color/white"/>
                                 <TextView
                                     android:id="@+id/credit"
@@ -380,7 +380,7 @@
                                 android:gravity="center"
                                 android:textSize="@dimen/txt_normal_size"
                                 android:textStyle="bold"
-                                android:text="باقة الدفع"
+                                android:text="@string/pay_package"
                                 android:textColor="@android:color/white"/>
                         </LinearLayout>
                     </LinearLayout>

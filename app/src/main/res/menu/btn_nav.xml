@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/btn_nav1"
-        android:title="الرئيسية"
+        android:title="@string/main"
         android:orderInCategory="1"
         android:icon="@drawable/ic_home"
         />
     <item android:id="@+id/btn_nav2"
-        android:title="المحادثات"
+        android:title="@string/chats"
         android:orderInCategory="2"
         android:icon="@drawable/ic_chat"
         />
     <item android:id="@+id/btn_nav3"
-        android:title="اضف اعلانك"
+        android:title="@string/ads_ads"
         android:orderInCategory="3"
         android:icon="@drawable/ic_plus"
         />
     <item android:id="@+id/btn_nav4"
-        android:title="المفضلة"
+        android:title="@string/favorite"
         android:orderInCategory="4"
         android:icon="@drawable/ic_favorite"
         />
     <item android:id="@+id/btn_nav5"
-        android:title="الحساب"
+        android:title="@string/account"
         android:orderInCategory="5"
         android:icon="@drawable/ic_account_circle_outline"
         />
