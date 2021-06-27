@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/txt_normal_size"
-            android:text="يجب ادخال كود التاكيد الذي تم ارسالة الى رقم هاتفك"
+            android:text="@string/confirm_phone_title"
             android:textColor="@android:color/black"
             android:gravity="center"/>
         <EditText

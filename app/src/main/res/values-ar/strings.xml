@@ -160,6 +160,7 @@
     <string name="exp_years">سنوات الخبرة :</string>
     <string name="read_more">اقرأ المزيد..</string>
     <string name="more_set">للتوضیح :</string>
+    <string name="confirm_phone_title">يجب ادخال كود التاكيد الذي تم ارسالة الى رقم هاتفك</string>
 
 
 </resources>

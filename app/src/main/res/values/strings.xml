@@ -161,5 +161,6 @@
     <string name="read_more">read more..</string>
     <string name="exp_years">Years of Experience :</string>
     <string name="more_set">To explain:</string>
+    <string name="confirm_phone_title">You must enter the confirmation code that was sent to your phone number</string>
 
 </resources>
