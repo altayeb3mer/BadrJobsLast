@@ -25,7 +25,7 @@ public class NotificationDetails extends ToolbarClass {
         if (args!=null){
             title = args.getString("title");
             body = args.getString("body");
-            date = args.getString("date");
+            date = args.getString("date").substring(0,10);
         }
         init();
     }

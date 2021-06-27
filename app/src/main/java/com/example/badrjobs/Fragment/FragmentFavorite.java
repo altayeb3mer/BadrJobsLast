@@ -103,7 +103,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
 //        SpannableString content = new SpannableString("عند ما يكون الإعلان منتهي سوف يتم حذفه من المفضلة تلقائي");
 //        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 //        textViewTitle.setText(content);
-        textViewTitle.setText(new GlobalVar().underLinerTextView("عند ما يكون الإعلان منتهي سوف يتم حذفه من المفضلة تلقائي"));
+        textViewTitle.setText(new GlobalVar().underLinerTextView(getString(R.string.fragment_favorite_title)));
     }
 
 

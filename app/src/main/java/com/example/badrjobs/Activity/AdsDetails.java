@@ -702,13 +702,17 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                                 btnStopAd.setVisibility(View.VISIBLE);
                             }
                             if (isActive.equals("YES")){
-                                btnStopAd.setText("ايقاف مؤقت للاعلان");
+                                btnStopAd.setText(R.string.stop2);
+//                                btnStopAd.setText("ايقاف مؤقت للاعلان");
                             }else {
-                                btnStopAd.setText("تفعيل الاعلان");
+                                btnStopAd.setText(R.string.activate_ads);
+//                                btnStopAd.setText("تفعيل الاعلان");
                             }
                             is_liked = data.getBoolean("is_liked");
                             if (is_liked){
-                                addToFavorite.setText("ازالة من المفضلة");
+                                addToFavorite.setText(R.string.remove_fav2);
+                            }else {
+                                addToFavorite.setText(R.string.to_favorite);
                             }
 
 

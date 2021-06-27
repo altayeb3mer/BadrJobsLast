@@ -32,6 +32,11 @@ public class Api {
         @POST("api/v1/auth/signIn")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+    //settings
+    public interface RetrofitSettings {
+        @GET("api/v1/settings")
+        Call<String> putParam();
+    }
     //logOut
     public interface RetrofitLogOut {
         @POST("api/v1/auth/logOut")

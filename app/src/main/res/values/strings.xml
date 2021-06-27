@@ -68,7 +68,7 @@
     <string name="report_abuse">Report abuse</string>
     <string name="phone_not_found">Phone number not found</string>
     <string name="contract_created">The contract has been created pending the approval of the advertiser</string>
-    <string name="activate_ads">Activate the advertisement</string>
+    <string name="activate_ads">Activate the ads</string>
     <string name="stop_ads">Ad has been suspended</string>
     <string name="stop2">Pause advertising</string>
     <string name="activate_ads2">The ad has been activated</string>
@@ -131,5 +131,35 @@
     <string name="_new_phone">Enter the new phone number</string>
     <string name="u_wel_recieve_msg">A message will be sent to your new number</string>
     <string name="insert_current_pass">Enter the password for your account</string>
+    <string name="fragment_favorite_title">When the ad is finished, it will be automatically deleted from your favourites</string>
+    <string name="pay_backage">Payment Packages</string>
+    <string name="ads_duration">The duration of the advertisement is one day from the beginning of its exposure, and each advertisement is independent of the other</string>
+    <string name="choose_your_package">Choose your favorite package</string>
+    <string name="usa_10">1 ad USA 10</string>
+    <string name="usa_40">5 ads USA 40</string>
+    <string name="usa_70">10 ads USA 70</string>
+    <string name="pay">Pay</string>
+    <string name="job_">Occupation :</string>
+    <string name="dollar_s">Monthly salary in US dollars:</string>
+    <string name="travil_fees">Amount required to provide the profession:</string>
+    <string name="sex__">Gender :</string>
+    <string name="religion_">Religion :</string>
+    <string name="region__">is online now at:</string>
+    <string name="advans">It is thus characterized by</string>
+    <string name="desc">Definition of :</string>
+    <string name="pause_ads_det">Pause is calculated within the duration of the advertisement and will not cancel your advertisement only, it will light red and the advertisement will not end until after its actual period has expired</string>
+    <string name="contact_with_ads_owner">Direct contact with the advertiser</string>
+    <string name="report_ads">Report abuse</string>
+    <string name="create_contract">make a deal</string>
+    <string name="choose_s_">Choose</string>
+    <string name="type_no">Type the number</string>
+    <string name="in_deel">According to the agreement</string>
+    <string name="travel_fees">travel procedures cost</string>
+    <string name="no_thing">Nothing</string>
+    <string name="add_done">Ad has been added</string>
+    <string name="choose_dept___">Choose a section</string>
+    <string name="read_more">read more..</string>
+    <string name="exp_years">Years of Experience :</string>
+    <string name="more_set">To explain:</string>
 
 </resources>

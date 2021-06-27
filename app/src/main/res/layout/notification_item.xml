@@ -65,7 +65,7 @@
             android:textSize="@dimen/txt_small_size"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:text="اقرأ المزيد.."/>
+            android:text="@string/read_more"/>
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

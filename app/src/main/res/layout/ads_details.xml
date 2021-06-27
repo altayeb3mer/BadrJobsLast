@@ -202,14 +202,13 @@
                 android:id="@+id/layOwnerName"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/margin_normal_size"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="الاسم : "
+                    android:text="@string/name"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -224,14 +223,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="نوع الطلب : "
+                    android:text="@string/type"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -251,14 +249,13 @@
                 android:id="@+id/layOffice">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
                     <TextView
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="اسم المكتب او المؤسسة : "
+                        android:text="@string/name_ooffice"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/txt_normal_size"/>
@@ -273,14 +270,14 @@
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
                     <TextView
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="موقع المكتب : "
+                        android:text="@string/office_address"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/txt_normal_size"/>
@@ -297,14 +294,13 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="اسم صاحب المهنة : "
+                    android:text="@string/name_owner"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -319,14 +315,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="تاريخ الميلاد : "
+                    android:text="@string/birth"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -341,14 +336,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="المهنة : "
+                    android:text="@string/job_"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -363,14 +357,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="سنوات الخبرة : "
+                    android:text="@string/exp_years"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -385,14 +378,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="الراتب الشهري بالدولار الامريكي : "
+                    android:text="@string/dollar_s"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -408,14 +400,13 @@
             <LinearLayout
                 android:id="@+id/laybailing_money"
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="المبلغ المطلوب لتوفير المهنة : "
+                    android:text="@string/travil_fees"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -430,7 +421,6 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
@@ -438,7 +428,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="الجنس : "
+                    android:text="@string/sex__"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold" />
@@ -453,14 +443,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="الديانة : "
+                    android:text="@string/religion_"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -475,14 +464,13 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layoutDirection="rtl"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="متواجد حاليا في : "
+                    android:text="@string/region__"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -507,7 +495,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="يتميز بالتالي"
+                    android:text="@string/advans"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -537,7 +525,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="تعريف : "
+                android:text="@string/desc"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/txt_normal_size"/>
@@ -577,9 +565,7 @@
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="الإیقاف المؤقت محسوب من ضمن مدة الإعلان ولن یلغي إعلانك
-فقط سوف یضیئ اللون الأحمر ولن ینتھي الإعلان الا بعد انتھاء
-مدتھ الفعلیة"
+                android:text="@string/pause_ads_det"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_normal_size"/>
@@ -587,7 +573,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="التواصل المباشر مع المعلن"
+                android:text="@string/contact_with_ads_owner"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_large_size"
@@ -698,7 +684,7 @@
                         android:layout_toStartOf="@+id/ic2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="ابلغ عن اساءة"/>
+                        android:text="@string/report_ads"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -722,7 +708,7 @@
                         android:gravity="center"
                         android:textSize="@dimen/txt_large_size"
                         android:textStyle="bold"
-                        android:text="عقد اتفاق"
+                        android:text="@string/create_contract"
                         android:textColor="@android:color/white"/>
                     <ImageView
                         android:layout_width="35dp"

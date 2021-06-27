@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="باقات الدفع"
+                android:text="@string/pay_backage"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="اختر باقتك المفضلة"
+                android:text="@string/choose_your_package"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txt_normal_size"
-                android:text="مدة الإعلان يوم من بداية عرضة وكل إعلان مستقل عن الأخر"
+                android:text="@string/ads_duration"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:gravity="center"/>
@@ -67,7 +67,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/margin_normal_size"
-                    android:text="إعلان واحد USA 10"/>
+                    android:text="@string/usa_10"/>
                 <RadioButton
                     android:background="@drawable/shape_notification_det_bg"
                     android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/margin_normal_size"
-                    android:text="خمس اعلانات USA 40"/>
+                    android:text="@string/usa_40"/>
                 <RadioButton
                     android:background="@drawable/shape_notification_det_bg"
                     android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/margin_normal_size"
-                    android:text="عشرة اعلانات USA 70"/>
+                    android:text="@string/usa_70"/>
 
 
             </RadioGroup>
@@ -96,7 +96,7 @@
                 android:id="@+id/btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="ادفع"
+                android:text="@string/pay"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/txt_large_size"

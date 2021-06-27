@@ -33,7 +33,7 @@
                     android:layout_gravity="center_horizontal"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_margin="@dimen/margin_normal_size"
+                    android:layout_marginTop="@dimen/margin_normal_size"
                     android:nestedScrollingEnabled="false"
                     android:id="@+id/recycler"
                     android:layout_width="match_parent"

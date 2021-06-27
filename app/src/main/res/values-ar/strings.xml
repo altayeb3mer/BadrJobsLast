@@ -130,6 +130,36 @@
     <string name="u_wel_recieve_msg">سوف تصل رسالة الى رقمك الجدید</string>
 
     <string name="insert_current_pass">ادخل كلمة المرور لحسابك</string>
+    <string name="fragment_favorite_title">عند ما يكون الإعلان منتهي سوف يتم حذفه من المفضلة تلقائي</string>
+    <string name="pay_backage">باقات الدفع</string>
+    <string name="choose_your_package">اختر باقتك المفضلة</string>
+    <string name="ads_duration">مدة الإعلان يوم من بداية عرضة وكل إعلان مستقل عن الأخر</string>
+    <string name="usa_10">إعلان واحد USA 10</string>
+    <string name="usa_40">خمس اعلانات USA 40</string>
+    <string name="usa_70">عشرة اعلانات USA 70</string>
+    <string name="pay">ادفع</string>
+    <string name="job_">المهنة :</string>
+    <string name="dollar_s">الراتب الشهري بالدولار الامريكي :</string>
+    <string name="travil_fees">المبلغ المطلوب لتوفير المهنة :</string>
+    <string name="sex__">الجنس :</string>
+    <string name="religion_">الديانة :</string>
+    <string name="region__">متواجد حاليا في :</string>
+    <string name="advans">يتميز بالتالي</string>
+    <string name="desc">تعريف :</string>
+    <string name="pause_ads_det">الإیقاف المؤقت محسوب من ضمن مدة الإعلان ولن یلغي إعلانك فقط سوف یضیئ اللون الأحمر ولن ینتھي الإعلان الا بعد انتھاء مدتھ الفعلیة</string>
+    <string name="contact_with_ads_owner">التواصل المباشر مع المعلن</string>
+    <string name="report_ads">ابلغ عن اساءة</string>
+    <string name="create_contract">عقد اتفاق</string>
+    <string name="choose_s_">اختر</string>
+    <string name="type_no">اكتب الرقم</string>
+    <string name="in_deel">حسب الاتفاق</string>
+    <string name="travel_fees">تكلفة اجراءات السفر</string>
+    <string name="no_thing">لاشئ</string>
+    <string name="add_done">تم اضافة الاعلان</string>
+    <string name="choose_dept___">اختر قسم</string>
+    <string name="exp_years">سنوات الخبرة :</string>
+    <string name="read_more">اقرأ المزيد..</string>
+    <string name="more_set">للتوضیح :</string>
 
 
 </resources>

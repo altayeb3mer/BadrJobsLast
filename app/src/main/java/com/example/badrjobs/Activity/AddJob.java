@@ -503,9 +503,9 @@ public class AddJob extends ToolbarClass {
 
     private void initSpinnerSalary() {
         ArrayList<String> array = new ArrayList<>();
-        array.add("اختر");
-        array.add("اكتب الرقم");
-        array.add("حسب الاتفاق");
+        array.add(getString(R.string.choose_s_));
+        array.add(getString(R.string.type_no));
+        array.add(getString(R.string.in_deel));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -531,7 +531,11 @@ public class AddJob extends ToolbarClass {
 
             @Override
             public int getCount() {
+                if (SharedPrefManager.getInstance(AddJob.this).GetAppLanguage().equals("ar"))
                 array.remove("اختر");
+                else {
+                    array.remove("Choose");
+                }
                 return array.size();
             }
         };
@@ -557,11 +561,11 @@ public class AddJob extends ToolbarClass {
     //    int billType=0;
     private void initSpinnerBill() {
         ArrayList<String> array = new ArrayList<>();
-        array.add("اختر");
-        array.add("اكتب الرقم");
-        array.add("تكلفة اجراءات السفر");
-        array.add("حسب الاتفاق");
-        array.add("لاشئ");
+        array.add(getString(R.string.choose_s_));
+        array.add(getString(R.string.type_no));
+        array.add(getString(R.string.travel_fees));
+        array.add(getString(R.string.in_deel));
+        array.add(getString(R.string.no_thing));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, array) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
@@ -587,7 +591,11 @@ public class AddJob extends ToolbarClass {
 
             @Override
             public int getCount() {
-                array.remove("اختر");
+                if (SharedPrefManager.getInstance(AddJob.this).GetAppLanguage().equals("ar"))
+                    array.remove("اختر");
+                else {
+                    array.remove("Choose");
+                }
                 return array.size();
             }
         };
@@ -781,13 +789,13 @@ public class AddJob extends ToolbarClass {
                     String statusCode = object.getString("code");
                     switch (statusCode) {
                         case "200": {
-                            warningMsg("تم اضافة الاعلان", true);
+                            warningMsg(getString(R.string.add_done), true);
                             break;
                         }
 
                         default: {
 //                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
-                            warningMsg("حدث خطأ حاول مجددا", false);
+                            warningMsg(getString(R.string.error_try_again), false);
                             break;
                         }
                     }
@@ -867,7 +875,7 @@ public class AddJob extends ToolbarClass {
 
                         default: {
 //                            Toast.makeText(getApplicationContext(), "حدث خطأ حاول مجددا", Toast.LENGTH_SHORT).show();
-                            warningMsg("حدث خطأ حاول مجددا", false);
+                            warningMsg(getString(R.string.error_try_again), false);
                             break;
                         }
                     }
@@ -911,7 +919,7 @@ public class AddJob extends ToolbarClass {
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
         no.setVisibility(View.GONE);
-        yes.setText("موافق");
+        yes.setText(getString(R.string.ok));
 
         yes.setOnClickListener(new View.OnClickListener() {
             @Override

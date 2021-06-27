@@ -258,7 +258,7 @@ public class FragmentAdd extends Fragment {
     ArrayList<ModelDept> arrayListDeptData;
     private void getDepts() {
         arrayListDept = new ArrayList<>();
-        arrayListDept.add("اختر قسم");
+        arrayListDept.add(getString(R.string.choose_dept___));
         arrayListDeptData = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()

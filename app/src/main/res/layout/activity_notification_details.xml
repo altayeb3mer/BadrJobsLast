@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txt_large_size"
                 android:textColor="@android:color/white"
-                android:text="للتوضیح : "/>
+                android:text="@string/more_set"/>
             <TextView
                 android:id="@+id/body"
                 android:layout_marginRight="@dimen/margin_normal_size"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txt_normal_size"
                 android:textColor="@android:color/white"
-                android:text="للتوضیح : "/>
+                android:text="@string/more_set"/>
 
 
         </LinearLayout>
