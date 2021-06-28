@@ -47,8 +47,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:text="ارسل ايميل"
-                    android:layout_toRightOf="@+id/ic1" />
+                    android:text="@string/sendEmail" />
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/whatsapp"
@@ -73,8 +72,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:text="محادثة واتساب"
-                    android:layout_toRightOf="@+id/ic2" />
+                    android:text="@string/sendWhatsapp" />
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/call"
@@ -99,8 +97,7 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:text="اتصل بنا"
-                    android:layout_toRightOf="@+id/ic3" />
+                    android:text="@string/callus" />
             </RelativeLayout>
 
 

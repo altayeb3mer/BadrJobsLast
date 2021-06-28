@@ -118,7 +118,8 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
             textViewDescription = findViewById(R.id.description);
             if (!bio.isEmpty()&&!bio.equals("null")){
                 textViewDescription.setText(bio);
-                txtLength.setText(bio.length()+"/120");
+                int length = 120 - bio.length();
+                txtLength.setText(String.valueOf(length));
             }else{
                 textViewDescription.setText("");
             }
@@ -176,8 +177,8 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
         textViewTitle.setText(title);
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
-        yes.setText("تعديل");
-        no.setText("الغاء");
+        yes.setText(R.string.edit);
+        no.setText(R.string.cancel);
 
         EditText editTextField = dialog.findViewById(R.id.field);
         TextView txtLength2 = dialog.findViewById(R.id.txtLength2);
@@ -204,8 +205,8 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
                     // filter your list from your input
                     int length = s.length();
 
-                    txtLength.setText(length + "/" +"120");
-                    txtLength2.setText(length + "/" +"120");
+                    txtLength.setText(String.valueOf(120-length));
+                    txtLength2.setText(String.valueOf(120-length));
 
 
                     //you can use runnable postDelayed like 500 ms to delay search text
@@ -222,7 +223,7 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
                     doEdition(key,value);
                     dialog.dismiss();
                 }else {
-                   editTextField.setError("يجب تحديد قيمة للتعديل");
+                   editTextField.setError(getString(R.string.edition_value_not_found));
                    editTextField.requestFocus();
                 }
 
@@ -280,18 +281,18 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
                     switch (statusCode) {
                         case "200": {
                             if (key.equals("image")){
-                                warningMsg("تم اضافة صورة البروفايل");
+                                warningMsg(getString(R.string.add_image_done));
                             }
                             else if (key.equals("header_image")){
-                                warningMsg("تم اضافة صورة الغلاف");
+                                warningMsg(getString(R.string.cover_added));
                             }
                             else if (key.equals("bio")){
-                                warningMsg("تم التعديل بنجاح\n"+value);
+                                warningMsg(getString(R.string.edit_done)+value);
                                 textViewDescription.setText(value);
                             }
 
                             else{
-                                warningMsg("تم التعديل بنجاح\n"+value);
+                                warningMsg(getString(R.string.edit_done)+"\n"+value);
                             }
 //                            SharedPrefManager.getInstance(getContext()).storeAppToken("");
 //                            startActivity(new Intent(getActivity(),Login.class));
@@ -364,15 +365,15 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
                 break;
             }
             case R.id.fullName:{
-                dialogEdit("تعديل الاسم","name");
+                dialogEdit(getString(R.string.edt__name),"name");
                 break;
             }
             case R.id.job:{
-                dialogEdit("تعديل المهنة","job");
+                dialogEdit(getString(R.string._job_edit),"job");
                 break;
             }
             case R.id.bio:{
-                dialogEdit("تعديل الوصف","bio");
+                dialogEdit(getString(R.string._bio_edit),"bio");
                 break;
             }
             case R.id.contracts:{
@@ -503,18 +504,6 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
         String baseString = Base64.encodeToString(byteArray,Base64.DEFAULT);
         return baseString;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

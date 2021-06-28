@@ -91,6 +91,9 @@
                         app:cardBackgroundColor="@color/grayCardEdt"
                         app:cardCornerRadius="@dimen/margin_normal_size">
                         <EditText
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:lines="1"
                             android:layout_marginLeft="@dimen/margin_normal_size"
                             android:layout_marginRight="@dimen/margin_normal_size"
                             android:id="@+id/edtPhoneOrEmail"
@@ -116,6 +119,8 @@
                             android:layout_height="match_parent"
                             app:passwordToggleEnabled="true">
                             <EditText
+                                android:maxLines="1"
+                                android:lines="1"
                                 android:layout_marginLeft="@dimen/margin_normal_size"
                                 android:layout_marginRight="@dimen/margin_normal_size"
                                 android:id="@+id/password"

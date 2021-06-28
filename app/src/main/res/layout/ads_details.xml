@@ -213,6 +213,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -229,11 +231,13 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/type"
+                    android:text="@string/type2"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -255,11 +259,13 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/name_ooffice"
+                        android:text="@string/name_ooffice2"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/txt_normal_size"/>
                     <TextView
+                        android:layout_marginRight="@dimen/margin_small_size"
+                        android:layout_marginLeft="@dimen/margin_small_size"
                         android:id="@+id/officeName"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -277,11 +283,13 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/office_address"
+                        android:text="@string/office_address2"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/txt_normal_size"/>
                     <TextView
+                        android:layout_marginRight="@dimen/margin_small_size"
+                        android:layout_marginLeft="@dimen/margin_small_size"
                         android:id="@+id/officeAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -300,11 +308,13 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/name_owner"
+                    android:text="@string/name_owner2"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/jobOwnerName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -321,11 +331,13 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/birth"
+                    android:text="@string/birth2"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -347,10 +359,12 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/job"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text=""
+                    android:text="..."
                     android:gravity="center_vertical"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/txt_normal_size"/>
@@ -368,6 +382,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/experience"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -389,6 +405,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/salary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -411,6 +429,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/bailing_money"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -433,6 +453,8 @@
                     android:textSize="@dimen/txt_normal_size"
                     android:textStyle="bold" />
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/sex"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -454,6 +476,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/religion"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -475,6 +499,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt_normal_size"/>
                 <TextView
+                    android:layout_marginRight="@dimen/margin_small_size"
+                    android:layout_marginLeft="@dimen/margin_small_size"
                     android:id="@+id/country"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

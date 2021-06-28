@@ -68,6 +68,9 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:lines="1"
                         android:id="@+id/name"
                         android:visibility="visible"
                         android:layout_marginRight="@dimen/margin_small_size"
@@ -92,6 +95,9 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:lines="1"
                         android:id="@+id/nicename"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -201,6 +207,8 @@
                         android:layout_height="match_parent"
                         app:passwordToggleEnabled="true">
                         <EditText
+                            android:maxLines="1"
+                            android:lines="1"
                             android:id="@+id/password1"
                             android:layout_marginRight="@dimen/margin_small_size"
                             android:layout_marginLeft="@dimen/margin_small_size"
@@ -233,6 +241,8 @@
                         android:layout_height="match_parent"
                         app:passwordToggleEnabled="true">
                         <EditText
+                            android:maxLines="1"
+                            android:lines="1"
                             android:id="@+id/password2"
                             android:layout_marginRight="@dimen/margin_small_size"
                             android:layout_marginLeft="@dimen/margin_small_size"
@@ -262,6 +272,9 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:lines="1"
                         android:id="@+id/email"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -287,6 +300,9 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:lines="1"
                         android:id="@+id/confirm_email"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
@@ -409,6 +425,9 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:lines="1"
                         android:hint="@string/option"
                         android:id="@+id/job"
                         android:layout_marginRight="@dimen/margin_small_size"

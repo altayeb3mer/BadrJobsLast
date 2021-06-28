@@ -2,6 +2,8 @@ package com.example.badrjobs.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -63,6 +65,21 @@ public class Login extends AppCompatActivity {
         progressLay = findViewById(R.id.progressLay);
         btnRegister = findViewById(R.id.btnRegister);
         editTextEmailPhone = findViewById(R.id.edtPhoneOrEmail);
+        editTextEmailPhone.setFilters(new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence cs, int start, int end, Spanned spanned, int dStart, int dEnd) {
+                        // TODO Auto-generated method stub
+                        if (cs.equals("")) { // for backspace
+                            return cs;
+                        }
+                        if (cs.toString().matches("[a-zA-Z]+")) {
+                            return cs;
+                        }
+                        return "";
+                    }
+                }
+        });
         editTextPassword = findViewById(R.id.password);
         btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {

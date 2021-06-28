@@ -26,7 +26,7 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="welcome2">Welcome</string>
     <string name="register_txt2">Hope you to find your job short</string>
-    <string name="name">Name :</string>
+    <string name="name">Name : </string>
     <string name="nicName">Nicename</string>
     <string name="used">Used</string>
     <string name="avilable">Avilable</string>
@@ -84,14 +84,19 @@
     <string name="add_ads_title">Submit a job application</string>
     <string name="add_ads_warrning">Choose three high-resolution images for your ad, and official documents are prohibited</string>
     <string name="type">Type of Request</string>
+    <string name="type2">Type of Request : </string>
     <string name="transformatin">Conversion</string>
     <string name="who">applicant</string>
     <string name="personal">Personal</string>
     <string name="office">Office</string>
     <string name="name_ooffice">The name of the office or institution</string>
+    <string name="name_ooffice2">The name of the office or institution : </string>
     <string name="office_address">Address of the office or institution by country</string>
+    <string name="office_address2">Address of the office or institution by country : </string>
     <string name="name_owner">business owners name</string>
+    <string name="name_owner2">business owners name : </string>
     <string name="birth">Date of Birth</string>
+    <string name="birth2">Date of Birth : </string>
     <string name="job2">Job</string>
     <string name="experience">Years of Experience</string>
     <string name="choose_salary">Determine your monthly salary in US dollars</string>
@@ -140,13 +145,13 @@
     <string name="usa_70">10 ads USA 70</string>
     <string name="pay">Pay</string>
     <string name="job_">Occupation :</string>
-    <string name="dollar_s">Monthly salary in US dollars:</string>
-    <string name="travil_fees">Amount required to provide the profession:</string>
+    <string name="dollar_s">Monthly salary in US dollars : </string>
+    <string name="travil_fees">Amount required to provide the profession : </string>
     <string name="sex__">Gender :</string>
     <string name="religion_">Religion :</string>
     <string name="region__">is online now at:</string>
     <string name="advans">It is thus characterized by</string>
-    <string name="desc">Definition of :</string>
+    <string name="desc">Definition of : </string>
     <string name="pause_ads_det">Pause is calculated within the duration of the advertisement and will not cancel your advertisement only, it will light red and the advertisement will not end until after its actual period has expired</string>
     <string name="contact_with_ads_owner">Direct contact with the advertiser</string>
     <string name="report_ads">Report abuse</string>
@@ -162,5 +167,24 @@
     <string name="exp_years">Years of Experience :</string>
     <string name="more_set">To explain:</string>
     <string name="confirm_phone_title">You must enter the confirmation code that was sent to your phone number</string>
+    <string name="sendEmail">Send Email</string>
+    <string name="sendWhatsapp">Whatsapp</string>
+    <string name="confirmAc1">To verify the validity of the employment contract</string>
+    <string name="confirmAc2">Official or authorized bodies have the right to verify the validity and integrity of the work contract data, approve and print it for a small fee.</string>
+    <string name="contractNo">Enter the contract number</string>
+    <string name="contractCode">Enter the contract code</string>
+    <string name="confirm_logout">Are you sure you want to log out</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="edit">Edit</string>
+    <string name="edition_value_not_found">You must specify a value for modification</string>
+    <string name="add_image_done">Profile picture added</string>
+    <string name="cover_added">Cover photo added</string>
+    <string name="edit_done">Edited successfully</string>
+    <string name="edt__name">Name editing</string>
+    <string name="_job_edit">Occupation change</string>
+    <string name="_bio_edit">Edit description</string>
+    <string name="contract">Contract</string>
+    <string name="callus">Call us</string>
 
 </resources>

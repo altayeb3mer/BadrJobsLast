@@ -39,29 +39,17 @@
 
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layoutDirection="rtl"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="3"
                     android:layout_marginTop="@dimen/margin_large_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
-                    <androidx.constraintlayout.widget.Guideline
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.33"
-                        android:id="@+id/g2"/>
-                    <androidx.constraintlayout.widget.Guideline
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.66"
-                        android:id="@+id/g3"/>
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/g2"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         android:gravity="center">
@@ -101,10 +89,9 @@
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintRight_toLeftOf="@+id/g2"
-                        app:layout_constraintLeft_toRightOf="@+id/g3"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         android:gravity="center">
@@ -144,12 +131,11 @@
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_weight="1"
                         android:visibility="invisible"
                         android:id="@+id/laySub"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintRight_toLeftOf="@+id/g3"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         android:gravity="center">
@@ -188,7 +174,7 @@
                                 android:minWidth="120dp"/>
                         </RelativeLayout>
                     </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
 
 

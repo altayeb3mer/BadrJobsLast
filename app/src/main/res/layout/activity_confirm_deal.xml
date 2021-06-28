@@ -45,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/txt_large_size"
-                        android:text="لتأكد من صحة عقد العمل"
+                        android:text="@string/confirmAc1"
                         android:textColor="@android:color/black"
                         android:textStyle="bold"/>
 
@@ -56,7 +56,7 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/txt_normal_size"
-                        android:text="یحق للجھات الرسمیة او المخولة بالتأكد من صحة وسلامة بیانات عقد العمل واعتماده وطباعتة مقابل رسوم رمزیة"
+                        android:text="@string/confirmAc2"
                         android:textColor="@android:color/black"
                         android:textStyle="normal"/>
                     <RelativeLayout
@@ -68,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/txt_normal_size"
-                            android:text="ادخل رقم العقد"
+                            android:text="@string/contractNo"
                             android:textStyle="bold"/>
                         <LinearLayout
                             android:id="@+id/lay1"
@@ -113,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/txt_normal_size"
-                            android:text="ادخل كود العقد"
+                            android:text="@string/contractCode"
                             android:textStyle="bold"/>
                         <LinearLayout
                             android:id="@+id/lay2"

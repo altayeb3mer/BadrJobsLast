@@ -32,6 +32,7 @@ import com.example.badrjobs.Model.ModelCountry;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
@@ -58,7 +59,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Register extends AppCompatActivity {
+public class Register extends ToolbarClass {
     LinearLayout progressLay;
     ConstraintLayout container;
     CountryCodePicker ccp;
@@ -81,10 +82,18 @@ public class Register extends AppCompatActivity {
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_register);
+//        init();
+//        getNationality();
+//    }
+
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        super.onCreate(R.layout.activity_register, "");
         init();
         getNationality();
     }

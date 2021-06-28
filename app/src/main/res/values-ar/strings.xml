@@ -19,7 +19,7 @@
     <string name="reset_pass1_hint">ادخل عنوان البريد الإلكتروني المرتبط بالحساب , وسوف نرسل إليك بالبريد رابطاً لإعادة تعيين كلمة المرورالخاصة بك</string>
     <string name="welcome2">مرحبا بكم..</string>
     <string name="register_txt2">نتمنى لكم الحصول على فرصة عمل في أقرب وقت</string>
-    <string name="name">الاسم :</string>
+    <string name="name">الاسم : </string>
     <string name="nicName">اسم المستخدم</string>
     <string name="used">مستخدم</string>
     <string name="avilable">متوفر</string>
@@ -82,15 +82,20 @@
     <string name="add_ads_title">تقديم طلب عمل</string>
     <string name="add_ads_warrning">اختر ثلاث صور لإعلانك تكون عالية الدقة , ویمنع عرض الوثائق الرسمية</string>
     <string name="type">نوع الطلب</string>
+    <string name="type2">نوع الطلب : </string>
     <string name="_new">جديد</string>
     <string name="transformatin">تحويل</string>
     <string name="who">مقدم الطلب</string>
     <string name="personal">شخصي</string>
     <string name="office">مكتب</string>
     <string name="name_ooffice">اسم المكتب او المؤسسة</string>
+    <string name="name_ooffice2">اسم المكتب او المؤسسة : </string>
     <string name="office_address">عنوان المكتب او المؤسسة حسب الدولة</string>
+    <string name="office_address2">عنوان المكتب او المؤسسة حسب الدولة : </string>
     <string name="name_owner">اسم صاحب العمل</string>
+    <string name="name_owner2">اسم صاحب العمل : </string>
     <string name="birth">تاريخ الميلاد</string>
+    <string name="birth2">تاريخ الميلاد : </string>
     <string name="job2">المهنة</string>
     <string name="experience">عدد سنوات الخبرة</string>
     <string name="choose_salary">حدد الراتب الشهري بالدولار الامريكي</string>
@@ -161,6 +166,25 @@
     <string name="read_more">اقرأ المزيد..</string>
     <string name="more_set">للتوضیح :</string>
     <string name="confirm_phone_title">يجب ادخال كود التاكيد الذي تم ارسالة الى رقم هاتفك</string>
+    <string name="sendEmail">ارسل ايميل</string>
+    <string name="sendWhatsapp">محادثة واتساب</string>
+    <string name="confirmAc1">لتأكد من صحة عقد العمل</string>
+    <string name="confirmAc2">یحق للجھات الرسمیة او المخولة بالتأكد من صحة وسلامة بیانات عقد العمل واعتماده وطباعتة مقابل رسوم رمزیة</string>
+    <string name="contractNo">ادخل رقم العقد</string>
+    <string name="contractCode">ادخل كود العقد</string>
+    <string name="confirm_logout">هل انت متأكد من انك تريد تسجيل الخروج</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="edit">تعديل</string>
+    <string name="edition_value_not_found">يجب تحديد قيمة للتعديل</string>
+    <string name="add_image_done">تم اضافة صورة البروفايل</string>
+    <string name="cover_added">تم اضافة صورة الغلاف</string>
+    <string name="edit_done">تم التعديل بنجاح\n</string>
+    <string name="edt__name">تعديل الاسم</string>
+    <string name="_job_edit">تعديل المهنة</string>
+    <string name="_bio_edit">تعديل الوصف</string>
+    <string name="contract">عقد</string>
+    <string name="callus">اتصل بنا</string>
 
 
 </resources>
