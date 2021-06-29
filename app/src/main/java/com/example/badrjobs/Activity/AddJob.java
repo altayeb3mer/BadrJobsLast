@@ -205,7 +205,7 @@ public class AddJob extends ToolbarClass {
                 // filter your list from your input
                 int length = s.length();
 
-                textViewBioCount.setText(length + "/" + "120");
+                textViewBioCount.setText(String.valueOf(120-length));
 
 
                 //you can use runnable postDelayed like 500 ms to delay search text

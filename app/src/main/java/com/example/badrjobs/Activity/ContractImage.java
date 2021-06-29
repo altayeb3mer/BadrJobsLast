@@ -379,7 +379,6 @@ public class ContractImage extends ToolbarClass {
                 }
                 progressLay.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);

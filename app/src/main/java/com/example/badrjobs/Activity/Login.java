@@ -73,10 +73,10 @@ public class Login extends AppCompatActivity {
                         if (cs.equals("")) { // for backspace
                             return cs;
                         }
-                        if (cs.toString().matches("[a-zA-Z]+")) {
+                        if (cs.toString().matches("[a-zA-Z0-9@._-]+")) {
                             return cs;
                         }
-                        return "";
+                        return cs.subSequence(0,cs.length()-1);
                     }
                 }
         });

@@ -92,7 +92,7 @@
     <string name="name_ooffice">The name of the office or institution</string>
     <string name="name_ooffice2">The name of the office or institution : </string>
     <string name="office_address">Address of the office or institution by country</string>
-    <string name="office_address2">Address of the office or institution by country : </string>
+    <string name="office_address2">Address of the office \n or institution by country : </string>
     <string name="name_owner">business owners name</string>
     <string name="name_owner2">business owners name : </string>
     <string name="birth">Date of Birth</string>
@@ -146,7 +146,7 @@
     <string name="pay">Pay</string>
     <string name="job_">Occupation :</string>
     <string name="dollar_s">Monthly salary in US dollars : </string>
-    <string name="travil_fees">Amount required to provide the profession : </string>
+    <string name="travil_fees">Amount required to \n provide the profession : </string>
     <string name="sex__">Gender :</string>
     <string name="religion_">Religion :</string>
     <string name="region__">is online now at:</string>

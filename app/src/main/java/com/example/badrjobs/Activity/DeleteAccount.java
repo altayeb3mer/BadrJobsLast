@@ -21,6 +21,7 @@ import com.example.badrjobs.Model.ModelDept;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
+import com.example.badrjobs.Utils.ToolbarClass;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -40,7 +41,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class DeleteAccount extends AppCompatActivity implements View.OnClickListener {
+public class DeleteAccount extends ToolbarClass implements View.OnClickListener {
 
     TextView textViewNicename;
     EditText editTextPass;
@@ -48,12 +49,13 @@ public class DeleteAccount extends AppCompatActivity implements View.OnClickList
     String password= "";
     TextInputLayout layPass;
     LinearLayout progressLay;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_account);
+        super.onCreate(R.layout.activity_delete_account, "");
         init();
     }
+
 
     private void init() {
         progressLay = findViewById(R.id.progressLay);

@@ -203,7 +203,8 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -226,7 +227,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -254,7 +256,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp">
                     <TextView
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -292,7 +295,7 @@
                         android:layout_marginLeft="@dimen/margin_small_size"
                         android:id="@+id/officeAddress"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="..."
                         android:gravity="center_vertical"
                         android:textColor="@android:color/black"
@@ -303,7 +306,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -326,7 +330,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -349,7 +354,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -372,7 +378,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -395,7 +402,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -419,7 +427,8 @@
                 android:id="@+id/laybailing_money"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -442,7 +451,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -466,7 +476,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -489,7 +500,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
