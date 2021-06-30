@@ -186,5 +186,7 @@
     <string name="_bio_edit">Edit description</string>
     <string name="contract">Contract</string>
     <string name="callus">Call us</string>
+    <string name="block_">Block</string>
+    <string name="unblock">Unblock</string>
 
 </resources>

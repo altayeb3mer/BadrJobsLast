@@ -2,6 +2,8 @@ package com.example.badrjobs.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.ToolbarClass;
+import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -174,6 +177,29 @@ public class ResetPhone extends ToolbarClass implements View.OnClickListener {
                 break;
             }
         }
+    }
+
+
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+    @NonNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        if (localeChangerAppCompatDelegate == null) {
+            localeChangerAppCompatDelegate = new LocaleChangerAppCompatDelegate(super.getDelegate());
+        }
+
+        return localeChangerAppCompatDelegate;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ActivityRecreationHelper.onResume(this);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityRecreationHelper.onDestroy(this);
     }
 
 

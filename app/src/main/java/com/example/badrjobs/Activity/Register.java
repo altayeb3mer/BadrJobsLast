@@ -495,7 +495,7 @@ public class Register extends ToolbarClass {
                 } else {
                     nationality = arrayListNationality.get(position - 1).getId();
                 }
-                Toast.makeText(Register.this, nationality, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Register.this, nationality, Toast.LENGTH_SHORT).show();
             }
 
             @Override

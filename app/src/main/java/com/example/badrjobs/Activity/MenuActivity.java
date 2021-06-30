@@ -65,14 +65,14 @@ public class MenuActivity extends ToolbarClass {
         layTerm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ConfirmDeal.class));
+//                startActivity(new Intent(getApplicationContext(), ConfirmDeal.class));
             }
         });
         layShare = findViewById(R.id.layShare);
         layShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), TestingAc.class));
+//                startActivity(new Intent(getApplicationContext(), TestingAc.class));
             }
         });
     }

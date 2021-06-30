@@ -185,6 +185,8 @@
     <string name="_bio_edit">تعديل الوصف</string>
     <string name="contract">عقد</string>
     <string name="callus">اتصل بنا</string>
+    <string name="block_">حظر</string>
+    <string name="unblock">الغاء الحظر</string>
 
 
 </resources>

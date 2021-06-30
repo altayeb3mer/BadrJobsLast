@@ -312,6 +312,9 @@
                     android:text="@string/name_ooffice"
                     android:textStyle="bold"/>
                 <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:id="@+id/edtOfficeName"
                     android:layout_marginTop="@dimen/margin_normal_size"
                     android:gravity="center_vertical"
@@ -330,6 +333,9 @@
                     android:text="@string/office_address"
                     android:textStyle="bold"/>
                 <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:id="@+id/edtAddress"
                     android:layout_marginTop="@dimen/margin_normal_size"
                     android:gravity="center_vertical"
@@ -349,6 +355,9 @@
                 android:text="@string/name_owner"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:lines="1"
                 android:id="@+id/edtOwnerName"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"
@@ -367,6 +376,8 @@
                 android:text="@string/birth"
                 android:textStyle="bold"/>
             <EditText
+                android:maxLines="1"
+                android:lines="1"
                 android:inputType="date"
                 android:id="@+id/edtBirthDate"
                 android:layout_marginTop="@dimen/margin_normal_size"
@@ -387,6 +398,9 @@
                 android:text="@string/job2"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:lines="1"
                 android:id="@+id/edtJob"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"
@@ -406,6 +420,9 @@
                 android:text="@string/experience"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:lines="1"
                 android:id="@+id/edtExperience"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"
@@ -457,6 +474,9 @@
                         android:minWidth="150dp"/>
                 </RelativeLayout>
                 <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:id="@+id/edtSalary"
                     android:layout_marginRight="@dimen/margin_small_size"
                     android:layout_marginLeft="@dimen/margin_small_size"
@@ -513,6 +533,9 @@
                         android:minWidth="150dp"/>
                 </RelativeLayout>
                 <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:id="@+id/edtBill"
                     android:layout_marginRight="@dimen/margin_small_size"
                     android:layout_marginLeft="@dimen/margin_small_size"
@@ -536,6 +559,9 @@
                 android:text="@string/place_now"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:lines="1"
                 android:id="@+id/edtRegion"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"
@@ -752,6 +778,8 @@
                     app:cardBackgroundColor="@color/grayCardEdt"
                     app:cardCornerRadius="@dimen/margin_normal_size">
                     <EditText
+                        android:maxLines="1"
+                        android:lines="1"
                         android:layout_marginRight="@dimen/margin_small_size"
                         android:layout_marginLeft="@dimen/margin_small_size"
                         android:id="@+id/edtPhone"

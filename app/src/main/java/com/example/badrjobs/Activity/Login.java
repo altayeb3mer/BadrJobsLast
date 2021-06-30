@@ -76,7 +76,11 @@ public class Login extends AppCompatActivity {
                         if (cs.toString().matches("[a-zA-Z0-9@._-]+")) {
                             return cs;
                         }
-                        return cs.subSequence(0,cs.length()-1);
+                        if (cs.length()>0){
+                            return cs.subSequence(0,cs.length()-1);
+                        }else{
+                            return cs;
+                        }
                     }
                 }
         });
@@ -101,7 +105,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), Register.class));
-                finish();
+//                finish();
             }
         });
     }

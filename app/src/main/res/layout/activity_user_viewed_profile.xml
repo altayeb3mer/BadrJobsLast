@@ -201,7 +201,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/shape_btn_block_bg"
-                                android:text="حظر"
+                                android:text="@string/block_"
                                 android:textSize="@dimen/txt_normal_size"
                                 android:textColor="@android:color/white"
                                 android:textStyle="bold"/>
