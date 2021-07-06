@@ -662,7 +662,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                                 textViewOfficeName.setText(data.getString("organization_name"));
                                 textViewOfficeAddress.setText(data.getString("country_of_residencey"));
                             }
-                            textViewDate.setText(data.getString("before_x_days"));
+                            textViewDate.setText(data.getString("delete_after_x_days"));
 
                             textViewBirthday.setText(data.getString("birthday"));
                             //job

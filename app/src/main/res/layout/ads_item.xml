@@ -90,11 +90,20 @@
             android:layout_height="wrap_content"
             android:text="فني اجهزة كهربائية"
             android:textSize="@dimen/txt_normal_size"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorPrimary"
             android:layout_toLeftOf="@+id/ic_favorite"
             android:ellipsize="end"
             android:maxEms="22"
             android:maxLines="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small_size"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/edtDate"
+            android:text="1 ساعة"/>
 
     </RelativeLayout>
 

@@ -205,6 +205,7 @@ public class AdsActivity extends ToolbarClass implements SwipeRefreshLayout.OnRe
                                 item.setOwnerImage(owner_info.getString("image"));
                                 item.setActive(arrayObj.getString("active"));
                                 item.setLiked(arrayObj.getBoolean("is_liked"));
+                                item.setDate(arrayObj.getString("before_x_days"));
 
                                 arrayList.add(item);
                             }

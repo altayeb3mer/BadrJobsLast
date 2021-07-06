@@ -117,6 +117,7 @@ public class AdapterAds extends RecyclerView.Adapter<AdapterAds.ViewHolder> {
                addToFavoriteFun(item,indx,holder.progressLay,holder.imageViewFavorite);
             }
         });
+        holder.textViewDate.setText(item.getDate());
 
 
     }
@@ -141,7 +142,8 @@ public class AdapterAds extends RecyclerView.Adapter<AdapterAds.ViewHolder> {
 
         CircleImageView imageViewProfile;
         ConstraintLayout container;
-        TextView textViewTitle,textViewOwnerName, textViewFixName;
+        TextView textViewTitle,textViewOwnerName, textViewFixName,
+        textViewDate;
         LinearLayout progressLay;
         ImageView imageViewFavorite;
         ViewHolder(View itemView) {
@@ -153,6 +155,7 @@ public class AdapterAds extends RecyclerView.Adapter<AdapterAds.ViewHolder> {
             textViewTitle = itemView.findViewById(R.id.title);
             textViewOwnerName = itemView.findViewById(R.id.name);
             textViewFixName = itemView.findViewById(R.id.fixName);
+            textViewDate = itemView.findViewById(R.id.edtDate);
 
         }
 
