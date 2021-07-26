@@ -188,5 +188,6 @@
     <string name="callus">Call us</string>
     <string name="block_">Block</string>
     <string name="unblock">Unblock</string>
+    <string name="no_favorite">You have no items in favourites</string>
 
 </resources>

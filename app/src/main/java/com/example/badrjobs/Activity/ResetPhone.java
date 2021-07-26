@@ -105,12 +105,12 @@ public class ResetPhone extends ToolbarClass implements View.OnClickListener {
                                    @NonNull PhoneAuthProvider.ForceResendingToken token) {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("phone", phone);
-                hashMap.put("codeCountry","00"+ccp.getFullNumber());
+                hashMap.put("codeCountry",ccp.getFullNumberWithPlus());
 
                 progressLay.setVisibility(View.GONE);
                 Toast.makeText(ResetPhone.this, R.string.sent, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
-                intent.putExtra("phone", "00"+ccp.getFullNumber() + phone);
+                intent.putExtra("phone", ccp.getFullNumberWithPlus() + phone);
                 intent.putExtra("verifyId", verificationId);
                 intent.putExtra("phoneReset", true);
                 intent.putExtra("hashMap", hashMap);

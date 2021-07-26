@@ -13,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.badrjobs.BuildConfig;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.example.badrjobs.Utils.ToolbarClass;
@@ -30,7 +32,6 @@ public class MenuActivity extends ToolbarClass {
     Spinner spinnerLanguage;
     String lang="";
     @Override
-
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_menu, "");
@@ -58,14 +59,18 @@ public class MenuActivity extends ToolbarClass {
         layAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+                Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                intent.putExtra("acType","about");
+                startActivity(intent);
             }
         });
         layTerm = findViewById(R.id.layTerm);
         layTerm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), ConfirmDeal.class));
+                Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                intent.putExtra("acType","term");
+                startActivity(intent);
             }
         });
         layShare = findViewById(R.id.layShare);
@@ -73,6 +78,7 @@ public class MenuActivity extends ToolbarClass {
             @Override
             public void onClick(View view) {
 //                startActivity(new Intent(getApplicationContext(), TestingAc.class));
+                shareAppLink();
             }
         });
     }
@@ -139,6 +145,23 @@ public class MenuActivity extends ToolbarClass {
         ActivityRecreationHelper.recreate(this,true);
     }
 
+
+    private void shareAppLink(){
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+            String shareMessage= "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch(Exception e) {
+            Toast.makeText(getApplicationContext(), "حدث خطأ الرجاء المحاولة مرة اخرى", Toast.LENGTH_SHORT).show();
+            //e.toString();
+        }
+    }
+
+
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull
@@ -160,5 +183,6 @@ public class MenuActivity extends ToolbarClass {
         super.onDestroy();
         ActivityRecreationHelper.onDestroy(this);
     }
+
 
 }

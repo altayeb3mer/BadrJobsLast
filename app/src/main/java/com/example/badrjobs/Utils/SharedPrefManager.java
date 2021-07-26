@@ -31,24 +31,36 @@ public class SharedPrefManager {
         editor.apply();
     }
 
-
-
     public String getFireBaseToken() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_ACCESS_TOKEN, "");
     }
+
+
     public void storeAppToken(String token) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_APP_TOKEN, token);
         editor.apply();
     }
-
-
     public String getAppToken() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_APP_TOKEN, "");
     }
+
+    public void storeFixName(String fixName) {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("fixName", fixName);
+        editor.apply();
+    }
+    public String getFixName() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("fixName", "");
+    }
+
+
+
     //FCM token
     public void storeFcmToken(String token) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -56,7 +68,6 @@ public class SharedPrefManager {
         editor.putString("FCM", token);
         editor.apply();
     }
-
 
     public String getFcmToken() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -220,7 +220,7 @@ public class Register extends ToolbarClass {
                 hashMap.put("fixName", nickname);
                 hashMap.put("email", email1);
                 hashMap.put("phone", phone);
-                hashMap.put("codeCountry","00"+ccp.getFullNumber());
+                hashMap.put("codeCountry",ccp.getFullNumberWithPlus());
                 hashMap.put("password", password1);
                 hashMap.put("password_confirmation", password2);
                 hashMap.put("nationality_id", nationality);
@@ -229,7 +229,7 @@ public class Register extends ToolbarClass {
                 progressLay.setVisibility(View.GONE);
                 Toast.makeText(Register.this, "تم الارسال", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
-                intent.putExtra("phone", "00"+ccp.getFullNumber() + phone);
+                intent.putExtra("phone", ccp.getFullNumberWithPlus() + phone);
                 intent.putExtra("verifyId", verificationId);
                 intent.putExtra("hashMap", hashMap);
                 startActivity(intent);
@@ -328,7 +328,7 @@ public class Register extends ToolbarClass {
 
     private void preRegister() {
         if (!name.equals("") && !nickname.equals("") && !password1.equals("") && !password2.equals("") &&
-                !email1.equals("") && !email2.equals("") && !job.equals("") && !phone.equals("")) {
+                !email1.equals("") && !email2.equals("") && !phone.equals("")) {
             if (agreeWithTerm) {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
                     editTextEmail.setError("الرجاء كتابة بريد الكتروني صحيح");

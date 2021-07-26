@@ -1,6 +1,7 @@
 package com.example.badrjobs.Activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -8,11 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +42,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import me.relex.circleindicator.CircleIndicator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -53,41 +55,50 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.dao.Thread;
+import sdk.chat.core.dao.User;
+import sdk.chat.core.session.ChatSDK;
+import sdk.guru.common.RX;
 
 public class AdsDetails extends AppCompatActivity implements View.OnClickListener {
 
     CardView cardSignature;
     String id = "";
     LinearLayout progressLay;
-    TextView addToFavorite, textViewName,textViewFixName,textViewType,textViewOwnerName,textViewBirthday,
-    textViewJob,textViewExperience,textViewSalary,textViewBillingMoney,textViewSex,
-    textViewReligion, textViewCountry,textViewDesc,textViewViews,
-    textViewReportAds,textViewOfficeName,textViewOfficeAddress,textViewDate
-            ,textViewDept,textViewSubDept;
+    TextView addToFavorite, textViewName, textViewFixName, textViewType, textViewOwnerName, textViewBirthday,
+            textViewJob, textViewExperience, textViewSalary, textViewBillingMoney, textViewSex,
+            textViewReligion, textViewCountry, textViewDesc, textViewViews,
+            textViewReportAds, textViewOfficeName, textViewOfficeAddress, textViewDate, textViewDept, textViewSubDept;
     CircleImageView circleImageViewOwner;
 
-    String ownerId="",isActive="NO";
-    ImageView imgFlag,imageViewBack,ic_translation;
+    String ownerId = "", isActive = "NO";
+    ImageView imgFlag, imageViewBack, ic_translation;
 
     ViewPager viewPager;
     SlideShow_adapter slideShow_adapter;
     ArrayList<String> arrayListImages;
     CircleIndicator circleIndicator;
-    LinearLayout layOwner,layOffice,layCall,layChat;
+    LinearLayout layOwner, layOffice, layCall, layChat;
     AppCompatButton btnStopAd;
     NestedScrollView nestedScroll;
-    boolean isMyAd=false,baseTrans=true;
+    boolean isMyAd = false, baseTrans = true;
     //listView
-
-    private void setHousing(ArrayList<String> list){
-        RecyclerView listViewHousing = findViewById(R.id.list);
-//        ArrayAdapter<String> arrayAdapterHousing = new ArrayAdapter<>(this,R.layout.spinner_item,list);
-        AdapterHousingSimple adapterHousingSimple = new AdapterHousingSimple(this,list);
-        listViewHousing.setAdapter(adapterHousingSimple);
-    }
-
+    Dialog dialog;
+//    Thread thread1;
+    String baseBio = "", baseJob = "",
+            translatedBio = "", translatedJob = "";
+    String phone = "";
+    String fixName = "";
+    boolean is_liked = false;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+
+    private void setHousing(ArrayList<String> list) {
+        RecyclerView listViewHousing = findViewById(R.id.list);
+//        ArrayAdapter<String> arrayAdapterHousing = new ArrayAdapter<>(this,R.layout.spinner_item,list);
+        AdapterHousingSimple adapterHousingSimple = new AdapterHousingSimple(this, list);
+        listViewHousing.setAdapter(adapterHousingSimple);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +112,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         getJobDetails();
     }
 
-
-    Dialog dialog;
-    private void dialogEdit(String title,String key) {
+    private void dialogEdit(String title, String key) {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -124,15 +133,14 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         EditText editTextField = dialog.findViewById(R.id.field);
 
 
-
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String value = editTextField.getText().toString().trim();
-                if (!value.isEmpty()){
-                    doEdition(key,value);
+                if (!value.isEmpty()) {
+                    doEdition(key, value);
                     dialog.dismiss();
-                }else {
+                } else {
                     editTextField.setError(getString(R.string.edt_value));
                     editTextField.requestFocus();
                 }
@@ -178,9 +186,9 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 .build();
 
         Api.RetrofitReportJob service = retrofit.create(Api.RetrofitReportJob.class);
-        HashMap<String,String> hashMap = new HashMap<>();
-        hashMap.put(key,value);
-        hashMap.put("job_id",id);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(key, value);
+        hashMap.put("job_id", id);
         Call<String> call = service.putParam(hashMap);
         call.enqueue(new Callback<String>() {
             @Override
@@ -250,15 +258,15 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         textViewReportAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogEdit(getString(R.string.report_abuse),"reason");
+                dialogEdit(getString(R.string.report_abuse), "reason");
             }
         });
         layOwner = findViewById(R.id.layOwner);
         layOwner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AdsDetails.this,UserViewedProfile.class);
-                i.putExtra("userId",ownerId);
+                Intent i = new Intent(AdsDetails.this, UserViewedProfile.class);
+                i.putExtra("userId", ownerId);
                 startActivity(i);
             }
         });
@@ -289,16 +297,12 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         circleImageViewOwner = findViewById(R.id.img);
 
 
-
-
     }
 
-
-
-    private void initSlider(ArrayList<String> list){
+    private void initSlider(ArrayList<String> list) {
         viewPager = findViewById(R.id.viewpager);
         circleIndicator = findViewById(R.id.indicator);
-        slideShow_adapter = new SlideShow_adapter(this,list);
+        slideShow_adapter = new SlideShow_adapter(this, list);
         viewPager.setAdapter(slideShow_adapter);
         circleIndicator.setViewPager(viewPager);
     }
@@ -323,10 +327,19 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 doTranslate();
                 break;
             }
+            case R.id.layChat: {
+
+                User user = ChatSDK.core().getUserNowForEntityID(fixName);
+//                User user = ChatSDK.core().getUserNowForEntityID("57RbHQC9RsZ9ocBn19nwPR95kyI2");
+
+                createThread(user);
+
+                break;
+            }
             case R.id.layCall: {
-                if (!phone.equals("")&&!phone.equals("null")){
+                if (!phone.equals("") && !phone.equals("null")) {
                     call(phone);
-                }else{
+                } else {
                     warningMsg(getString(R.string.phone_not_found));
                 }
 
@@ -335,24 +348,45 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    String baseBio="",baseJob="",
-    translatedBio="",translatedJob="";
+    public void createThread (User user) {
+        Disposable d = ChatSDK.thread().createThread(user.getName(), user, ChatSDK.currentUser())
+                .observeOn(RX.main())
+                .doFinally(() -> {
+                    // Runs when process completed from error or success
+                })
+                .subscribe(thread -> {
+                    try {
+                        openChatActivityWithThread(AdsDetails.this,thread);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }, throwable -> {
+                    // If there type an error
+                    Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
+    }
+    public void openChatActivityWithThread (Context context, Thread thread) {
+        ChatSDK.ui().startChatActivityForID(context, thread.getEntityID());
+    }
+
+
+
     private void doTranslate() {
-        if (baseTrans){
+        if (baseTrans) {
             textViewDesc.setText(translatedBio);
             textViewJob.setText(translatedJob);
             baseTrans = false;
-        }else{
+        } else {
             textViewDesc.setText(baseBio);
             textViewJob.setText(baseJob);
             baseTrans = true;
         }
     }
 
-    String phone="";
-    private void call(String _phone){
+    private void call(String _phone) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:"+_phone));
+        intent.setData(Uri.parse("tel:" + _phone));
         startActivity(intent);
     }
 
@@ -461,11 +495,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     String code = object.getString("code");
                     switch (code) {
                         case "200": {
-                            if (isActive.equals("YES")){
+                            if (isActive.equals("YES")) {
                                 isActive = "NO";
                                 btnStopAd.setText(R.string.activate_ads);
                                 warningMsg(getString(R.string.stop_ads));
-                            }else{
+                            } else {
                                 isActive = "YES";
                                 btnStopAd.setText(R.string.stop2);
                                 warningMsg(getString(R.string.activate_ads2));
@@ -534,11 +568,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     switch (code) {
                         case "200": {
 
-                            if (is_liked){
+                            if (is_liked) {
                                 is_liked = false;
                                 addToFavorite.setText(R.string.to_favorite);
                                 warningMsg(getString(R.string.remove_from_fav));
-                            }else{
+                            } else {
                                 is_liked = true;
                                 addToFavorite.setText(R.string.remove_fav2);
                                 warningMsg(getString(R.string.add_fav2));
@@ -612,7 +646,8 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             JSONObject data = object.getJSONObject("response");
                             //owner info
                             JSONObject owner_info = data.getJSONObject("owner_info");
-                            textViewFixName.setText(owner_info.getString("fixName"));
+                            fixName = owner_info.getString("fixName");
+                            textViewFixName.setText(fixName);
                             String ownerImgProfile = owner_info.getString("image");
                             phone = owner_info.getString("full_phone");
 
@@ -628,36 +663,36 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             }
 
                             ownerId = owner_info.getString("id");
-                            textViewName.setText( owner_info.getString("name"));
+                            textViewName.setText(owner_info.getString("name"));
                             //job info
 
                             String img1 = data.getString("image1");
-                            if (!img1.isEmpty()&&!img1.equals("null")){
+                            if (!img1.isEmpty() && !img1.equals("null")) {
                                 arrayListImages.add(img1);
                             }
                             String img2 = data.getString("image2");
-                            if (!img2.isEmpty()&&!img2.equals("null")){
+                            if (!img2.isEmpty() && !img2.equals("null")) {
                                 arrayListImages.add(img2);
                             }
                             String img3 = data.getString("image3");
-                            if (!img3.isEmpty()&&!img3.equals("null")){
+                            if (!img3.isEmpty() && !img3.equals("null")) {
                                 arrayListImages.add(img3);
                             }
-                            if (arrayListImages.size()>0){
+                            if (arrayListImages.size() > 0) {
                                 initSlider(arrayListImages);
                             }
 
                             String owner_name = data.getString("owner_name");
-                            if (!owner_name.isEmpty()&&!owner_name.equals("null")){
+                            if (!owner_name.isEmpty() && !owner_name.equals("null")) {
                                 textViewOwnerName.setText(owner_name);
-                            }else{
+                            } else {
                                 findViewById(R.id.layOwnerName).setVisibility(View.GONE);
                             }
-                            String owner_type=data.getString("owner_type");
+                            String owner_type = data.getString("owner_type");
                             textViewType.setText(owner_type);
-                            if (owner_type.equals("PERSONAL")){
+                            if (owner_type.equals("PERSONAL")) {
                                 layOffice.setVisibility(View.GONE);
-                            }else if(owner_type.equals("OFFICE")){
+                            } else if (owner_type.equals("OFFICE")) {
                                 layOffice.setVisibility(View.VISIBLE);
                                 textViewOfficeName.setText(data.getString("organization_name"));
                                 textViewOfficeAddress.setText(data.getString("country_of_residencey"));
@@ -672,58 +707,54 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             textViewExperience.setText(data.getString("experience"));
                             textViewSalary.setText(data.getString("salary"));
                             String bailing_money = data.getString("bailing_money");
-                            if (!bailing_money.isEmpty()&&!bailing_money.equals("null")){
+                            if (!bailing_money.isEmpty() && !bailing_money.equals("null")) {
                                 textViewBillingMoney.setText(bailing_money);
-                            }else{
+                            } else {
                                 findViewById(R.id.laybailing_money).setVisibility(View.GONE);
                             }
 
-                            isActive =  data.getString("active");
+                            isActive = data.getString("active");
                             textViewSex.setText(data.getString("sex"));
                             textViewReligion.setText(data.getString("religion"));
                             textViewCountry.setText(data.getString("country_of_residencey"));
 
                             //bio
                             baseBio = data.getString("description");
-                            translatedBio =data.getString("trans_description");
+                            translatedBio = data.getString("trans_description");
                             textViewDesc.setText(baseBio);
                             textViewViews.setText(data.getString("views"));
 
 
-
-
-
-
                             isMyAd = data.getBoolean("is_owner");
-                            if (isMyAd||isActive.equals("NO")){
+                            if (isMyAd || isActive.equals("NO")) {
                                 cardSignature.setVisibility(View.GONE);
                             }
-                            if (isMyAd){
+                            if (isMyAd) {
                                 btnStopAd.setVisibility(View.VISIBLE);
                             }
-                            if (isActive.equals("YES")){
+                            if (isActive.equals("YES")) {
                                 btnStopAd.setText(R.string.stop2);
 //                                btnStopAd.setText("ايقاف مؤقت للاعلان");
-                            }else {
+                            } else {
                                 btnStopAd.setText(R.string.activate_ads);
 //                                btnStopAd.setText("تفعيل الاعلان");
                             }
                             is_liked = data.getBoolean("is_liked");
-                            if (is_liked){
+                            if (is_liked) {
                                 addToFavorite.setText(R.string.remove_fav2);
-                            }else {
+                            } else {
                                 addToFavorite.setText(R.string.to_favorite);
                             }
 
 
                             JSONArray housing_types = data.getJSONArray("housing_types");
-                            if (housing_types.length()>0){
+                            if (housing_types.length() > 0) {
                                 ArrayList<String> list = new ArrayList<>();
                                 for (int i = 0; i < housing_types.length(); i++) {
                                     list.add(housing_types.getString(i));
                                 }
                                 setHousing(list);
-                            }else{
+                            } else {
                                 findViewById(R.id.housingLay).setVisibility(View.GONE);
                             }
 
@@ -754,8 +785,6 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
-
-    boolean is_liked = false;
 
     //dialog message
     private void warningMsg(String message) {

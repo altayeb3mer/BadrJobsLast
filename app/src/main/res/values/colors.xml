@@ -8,6 +8,8 @@
     <color name="mainBg">#F3F2FD</color>
 
 
+    //chatSdk
+    <color name="incomingDefaultBubble">#9684F4</color>
 
     //green
     <color name="colorGreen1">#0EB208</color>

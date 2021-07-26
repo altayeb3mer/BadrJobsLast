@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.Gallery"></activity>
+        <activity android:name=".Activity.Gallery"/>
         <activity
             android:name=".Activity.Splash2"
             android:theme="@style/SplashScreenTheme" />
@@ -36,6 +36,7 @@
         <activity android:name=".Activity.AdsDetails" />
         <activity android:name=".Activity.ChattingActivity" />
         <activity android:name=".Activity.TestingAc" />
+        <activity android:name=".ChatClasses.MainCustomChatList" />
         <activity
             android:name=".Activity.AddJob"
             android:windowSoftInputMode="adjustPan" />

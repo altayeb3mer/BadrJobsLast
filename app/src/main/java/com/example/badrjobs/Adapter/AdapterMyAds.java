@@ -76,6 +76,8 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
 
         if (item.isActive().equals("YES"))
             holder.imageViewProfile.setBorderColor(activity.getResources().getColor(R.color.colorGreen1));
+
+//        holder.textViewDate.setText(item.getDate());
 //
 //
 //
@@ -108,7 +110,7 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
 
         CircleImageView imageViewProfile;
         ConstraintLayout container;
-        TextView textViewTitle, textViewOwnerName, textViewFixName;
+        TextView textViewTitle, textViewOwnerName, textViewFixName,textViewDate;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -118,6 +120,7 @@ public class AdapterMyAds extends RecyclerView.Adapter<AdapterMyAds.ViewHolder> 
             textViewTitle = itemView.findViewById(R.id.title);
             textViewOwnerName = itemView.findViewById(R.id.name);
             textViewFixName = itemView.findViewById(R.id.fixName);
+//            textViewDate = itemView.findViewById(R.id.edtDate);
 
         }
 

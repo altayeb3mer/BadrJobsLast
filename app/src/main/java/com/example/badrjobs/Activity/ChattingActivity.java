@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.badrjobs.Adapter.AdapterChatList;
 import com.example.badrjobs.Adapter.AdapterChatMsg;
@@ -16,17 +19,20 @@ import com.example.badrjobs.Model.ModelChatList;
 import com.example.badrjobs.Model.ModelChatMsg;
 import com.example.badrjobs.R;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
+import sdk.chat.ui.activities.ChatActivity;
+import sdk.chat.ui.activities.MainActivity;
 
-public class ChattingActivity extends AppCompatActivity {
+
+public class ChattingActivity extends ChatActivity {
     //recycler
     RecyclerView recyclerView;
     AdapterChatMsg adapterChatMsg;
     ArrayList<ModelChatMsg> arrayList;
     GridLayoutManager gridLayoutManager;
-
 
 //    protected @LayoutRes
 //    int getLayout() {
@@ -34,12 +40,15 @@ public class ChattingActivity extends AppCompatActivity {
 //    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_chating);
-//        initAdapter();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
 
     private void initAdapter(){
         arrayList = new ArrayList<>();
@@ -60,25 +69,42 @@ public class ChattingActivity extends AppCompatActivity {
 
 
 
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
-    @NonNull
-    @Override
-    public AppCompatDelegate getDelegate() {
-        if (localeChangerAppCompatDelegate == null) {
-            localeChangerAppCompatDelegate = new LocaleChangerAppCompatDelegate(super.getDelegate());
-        }
 
-        return localeChangerAppCompatDelegate;
-    }
     @Override
-    protected void onResume() {
-        super.onResume();
-        ActivityRecreationHelper.onResume(this);
+    protected int getLayout() {
+        return  R.layout.activity_chat;
+//        return  R.layout.activity_chating;
     }
+
+
+//
+//    //language controller
+//    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+//    @NonNull
+//    @Override
+//    public AppCompatDelegate getDelegate() {
+//        if (localeChangerAppCompatDelegate == null) {
+//            localeChangerAppCompatDelegate = new LocaleChangerAppCompatDelegate(super.getDelegate());
+//        }
+//
+//        return localeChangerAppCompatDelegate;
+//    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        ActivityRecreationHelper.onResume(this);
+//    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        ActivityRecreationHelper.onDestroy(this);
+//    }
+
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityRecreationHelper.onDestroy(this);
+    public void onBackPressed() {
+        finish();
+//        super.onBackPressed();
+
     }
 }

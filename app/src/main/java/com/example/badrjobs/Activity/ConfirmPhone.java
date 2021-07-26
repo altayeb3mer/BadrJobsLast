@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.badrjobs.App;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
@@ -38,6 +39,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -45,6 +48,9 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.api.SimpleAPI;
+import sdk.chat.core.session.ChatSDK;
+import sdk.chat.core.types.AccountDetails;
 
 public class ConfirmPhone extends AppCompatActivity {
 
@@ -113,8 +119,9 @@ public class ConfirmPhone extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             //store token
                             SharedPrefManager.getInstance(getApplicationContext()).storeFirebaseToken(user.getUid());
+                            hashMap.put("firebase_uid", user.getUid());
+                            hashMap.put("fcm_token", SharedPrefManager.getInstance(ConfirmPhone.this).getFcmToken());
 
-                            hashMap.put("fb_token", user.getUid());
                             if (phoneReset){
                                 doPhoneReset();
                             }else {
@@ -175,7 +182,25 @@ public class ConfirmPhone extends AppCompatActivity {
                         case "200": {
 //                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                            warningMsg("تم اتمام تسجيلك\n قم بتجيل الدخول");
+                            warningMsg("تم اتمام تسجيلك\n قم بتسجيل الدخول");
+
+                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
+                            if (!fireBaseToken.isEmpty()){
+                                AccountDetails details = AccountDetails.token(hashMap.get("fixName"));
+                                ChatSDK.auth().authenticate(details).subscribe(new Action() {
+                                    @Override
+                                    public void run() throws Exception {
+                                        Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+//                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                            }
 
 //                            finish();
                             break;
@@ -259,7 +284,6 @@ public class ConfirmPhone extends AppCompatActivity {
                 }
                 progressLay.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);

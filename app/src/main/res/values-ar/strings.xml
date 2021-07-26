@@ -187,6 +187,7 @@
     <string name="callus">اتصل بنا</string>
     <string name="block_">حظر</string>
     <string name="unblock">الغاء الحظر</string>
+    <string name="no_favorite">عفوا\n ليس لديك عناصر في المفضلة</string>
 
 
 </resources>

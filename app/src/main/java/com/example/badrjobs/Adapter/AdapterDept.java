@@ -60,13 +60,13 @@ public class AdapterDept extends RecyclerView.Adapter<AdapterDept.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (item.isHasSub()){
-                    Toast.makeText(activity, "has sub category", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "has sub category", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(activity, SubDeptActivity.class);
                     intent.putExtra("categoryId",item.getId());
                     intent.putExtra("countryId",countryId);
                     activity.startActivity(intent);
                 }else{
-                    Toast.makeText(activity, "has not", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "has not", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(activity, AdsActivity.class);
                     intent.putExtra("categoryId", item.getId());
                     intent.putExtra("countryId", countryId);
@@ -75,7 +75,9 @@ public class AdapterDept extends RecyclerView.Adapter<AdapterDept.ViewHolder> {
             }
         });
         holder.textViewTitle.setText(item.getName());
+        if (!item.getBgColor().equals("")&&!item.getBgColor().equals("null"))
         holder.cardView.setCardBackgroundColor(Color.parseColor(item.getBgColor()));
+        if (!item.getTextColor().equals("")&&!item.getTextColor().equals("null"))
         holder.textViewTitle.setTextColor(Color.parseColor(item.getTextColor()));
 
 //

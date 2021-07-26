@@ -34,6 +34,7 @@
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginRight="@dimen/margin_normal_size"
                 android:layout_marginLeft="@dimen/margin_normal_size"
                 android:textStyle="bold"
@@ -44,6 +45,7 @@
                 android:textColor="@android:color/white"
                 android:text="للتوضیح : "/>
             <TextView
+                android:id="@+id/about"
                 android:layout_marginRight="@dimen/margin_normal_size"
                 android:layout_marginLeft="@dimen/margin_normal_size"
                 android:layout_marginTop="@dimen/margin_normal_size"
@@ -51,9 +53,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txt_normal_size"
                 android:textColor="@android:color/white"
-                android:text="نرجو عدم تسلیم رمز الكود الخاص بالعقد الا  للشخص المتفق معھ في العمل وذلك لحفظ بیناتك"/>
+                />
 
             <TextView
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="@dimen/margin_normal_size"
                 android:layout_marginLeft="@dimen/margin_normal_size"
@@ -81,7 +84,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:visibility="visible"
-            app:indicatorColor="@color/colorPrimary"
+            app:indicatorColor="@android:color/white"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

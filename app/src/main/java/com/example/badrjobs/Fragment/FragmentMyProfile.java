@@ -46,6 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.api.SimpleAPI;
 
 public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -60,6 +61,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
             textViewNationality,textViewFixName;
 
     CircleImageView circleImageViewMyImg;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -273,7 +275,11 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                             JSONObject jsonObjectOfArray = responseArray.getJSONObject(0);
                             JSONObject dataObject = jsonObjectOfArray.getJSONObject("user");
 
-                            textViewFixName.setText(dataObject.getString("fixName"));
+                            String fixName = dataObject.getString("fixName");
+                            if (!fixName.isEmpty()){
+                                SharedPrefManager.getInstance(getContext()).storeFixName(fixName);
+                            }
+                            textViewFixName.setText(fixName);
                             bio = dataObject.getString("bio");
                             if (!bio.isEmpty()&&!bio.equals("null")){
                                 textViewDesc.setText(bio);
@@ -301,6 +307,9 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
 
                                 e.printStackTrace();
                             }
+
+                            SimpleAPI.updateUser(dataObject.getString("fixcoName"),imgProfileUrl);
+
 
                             try {
                                 if (!imgHeaderUrl.isEmpty()&&!imgHeaderUrl.equals("null")){

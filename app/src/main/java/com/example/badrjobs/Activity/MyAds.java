@@ -152,6 +152,7 @@ public class MyAds extends AppCompatActivity implements SwipeRefreshLayout.OnRef
                                 item.setOwnerName(owner_info.getString("name"));
                                 item.setOwnerNiceName(owner_info.getString("fixName"));
                                 item.setOwnerImage(owner_info.getString("image"));
+//                                item.setDate(itemData.getString("before_x_days"));
 
                                 arrayList .add(item);
                             }

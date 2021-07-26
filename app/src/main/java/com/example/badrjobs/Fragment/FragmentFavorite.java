@@ -191,6 +191,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
                                 item.setOwnerImage(owner_info.getString("image"));
                                 item.setLiked(job.getBoolean("is_liked"));
                                 item.setActive(job.getString("active"));
+                                item.setDate("");
 
                                 arrayList.add(item);
                             }

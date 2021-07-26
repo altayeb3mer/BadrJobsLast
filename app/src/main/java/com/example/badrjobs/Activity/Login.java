@@ -169,6 +169,7 @@ public class Login extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                 }
                 progressLay.setVisibility(View.GONE);
             }

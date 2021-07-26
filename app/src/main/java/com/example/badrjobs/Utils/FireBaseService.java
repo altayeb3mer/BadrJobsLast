@@ -11,9 +11,9 @@ public class FireBaseService extends FirebaseMessagingService {
         super.onNewToken(token);
         Log.e("newToken", token);
 //Add your token in your sharepreferences.
-        if (SharedPrefManager.getInstance(getApplicationContext()).getFcmToken().isEmpty()) {
+//        if (SharedPrefManager.getInstance(getApplicationContext()).getFcmToken().isEmpty()) {
             SharedPrefManager.getInstance(getApplicationContext()).storeFcmToken(token);
-        }
+//        }
     }
 
     @Override

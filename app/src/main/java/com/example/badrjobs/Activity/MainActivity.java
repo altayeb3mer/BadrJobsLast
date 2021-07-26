@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.badrjobs.Adapter.ViewPagerAdapter;
+import com.example.badrjobs.ChatClasses.MainCustomChatList;
 import com.example.badrjobs.Fragment.FragmentAdd;
 import com.example.badrjobs.Fragment.FragmentChat;
 import com.example.badrjobs.Fragment.FragmentFavorite;
@@ -24,8 +25,11 @@ import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.CustomViewPager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+import sdk.chat.core.session.ChatSDK;
+
+public class MainActivity extends sdk.chat.ui.activities.MainActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     ImageView btnMenu, icNotification;
     private CustomViewPager viewPager;
@@ -38,6 +42,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         overridePendingTransition(R.anim.in_right,R.anim.out_right);
 //        Animatoo.animateSlideRight(this);
         init();
+    }
+
+    @Override
+    protected boolean searchEnabled() {
+        return false;
+    }
+
+    @Override
+    protected void search(String s) {
+
+    }
+
+    @Override
+    protected MaterialSearchView searchView() {
+        return null;
     }
 
     private void init() {
@@ -88,6 +107,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
             case R.id.btn_nav2: {
                 switchToFragment(2);
+
+//                try {
+////                    Intent i = new Intent(MainActivity.this, MainCustomChatList.class);
+////                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+////                    startActivity(i);
+//                    ChatSDK.ui().startMainActivity(MainActivity.this);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 break;
             }
             case R.id.btn_nav3: {
@@ -171,6 +199,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Animatoo.animateSlideLeft(this);
         }
         animVar++;
+    }
+
+    @Override
+    protected void reloadData() {
+
+    }
+
+    @Override
+    protected void clearData() {
+
+    }
+
+    @Override
+    protected void updateLocalNotificationsForTab() {
+
+    }
+
+    @Override
+    protected int getLayout() {
+        return 0;
     }
 
     @Override
