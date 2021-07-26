@@ -1,13 +1,7 @@
 package com.example.badrjobs.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,6 +11,13 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
@@ -29,10 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.disposables.Disposable;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -40,18 +41,25 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.dao.Thread;
+import sdk.chat.core.dao.User;
+import sdk.chat.core.session.ChatSDK;
+import sdk.guru.common.RX;
 
 public class UserViewedProfile extends ToolbarClass {
 
-    private String userId="",fcmToken="",
-    name="",fixName="",image="";
-    ImageView imageViewHeader,imageViewFlag;
+    ImageView imageViewHeader, imageViewFlag;
     CircleImageView circleImageViewProfile;
-    TextView textViewFix, textViewBio,textViewName,textViewEmail,textViewJob;
+    TextView textViewFix, textViewBio, textViewName, textViewEmail, textViewJob;
     AppCompatButton buttonBlock;
-    LinearLayout layoutChat,layContainer;
-
-
+    LinearLayout layoutChat, layContainer;
+    LinearLayout progressLay;
+    String firebase_uid = "";
+    private String userId = "", fcmToken = "",
+            name = "", fixName = "", image = "";
+    boolean isMyProfile = false;
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
     private void init() {
         layContainer = findViewById(R.id.layContainer);
@@ -67,22 +75,59 @@ public class UserViewedProfile extends ToolbarClass {
         textViewJob = findViewById(R.id.job);
         buttonBlock = findViewById(R.id.btnBlock);
         layoutChat = findViewById(R.id.layChat);
+        layoutChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!firebase_uid.isEmpty() && firebase_uid.equals("null")) {
+                    User user = ChatSDK.core().getUserNowForEntityID(firebase_uid);
+//                    User user = ChatSDK.core().getUserNowForEntityID("57RbHQC9RsZ9ocBn19nwPR95kyI2");
 
+                    createThread(user);
+                }
+            }
+        });
+
+    }
+    public void createThread (User user) {
+        Disposable d = ChatSDK.thread().createThread(user.getName(), user, ChatSDK.currentUser())
+                .observeOn(RX.main())
+                .doFinally(() -> {
+                    // Runs when process completed from error or success
+                })
+                .subscribe(thread -> {
+                    try {
+                        openChatActivityWithThread(UserViewedProfile.this,thread);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }, throwable -> {
+                    // If there type an error
+                    Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
+    }
+    public void openChatActivityWithThread (Context context, Thread thread) {
+        ChatSDK.ui().startChatActivityForID(context, thread.getEntityID());
     }
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_user_viewed_profile, "");
         Bundle args = getIntent().getExtras();
-        if (args!=null){
+        if (args != null) {
             userId = args.getString("userId");
+            isMyProfile = args.getBoolean("isMyProfile");
         }
         init();
         getProfile();
+        if (isMyProfile){
+//            layoutChat.setVisibility(View.INVISIBLE);
+            try {
+                findViewById(R.id.layCallChat);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-
-
-
-    LinearLayout progressLay;
 
     private void getProfile() {
         progressLay.setVisibility(View.VISIBLE);
@@ -126,39 +171,36 @@ public class UserViewedProfile extends ToolbarClass {
                             JSONObject userData = objectData.getJSONObject("user");
 
 
-
-
                             String header_image = userData.getString("header_image");
-
-                                if (!header_image.isEmpty()&&!header_image.equals("null")){
-                                    Glide.with(UserViewedProfile.this).load(header_image).into(imageViewHeader);
-                                }else{
-                                    Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this,R.drawable.shape_btn_nav_bg))
-                                            .into(imageViewHeader);
-                                }
+                            firebase_uid = userData.getString("firebase_uid");
+                            if (!header_image.isEmpty() && !header_image.equals("null")) {
+                                Glide.with(UserViewedProfile.this).load(header_image).into(imageViewHeader);
+                            } else {
+                                Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this, R.drawable.shape_btn_nav_bg))
+                                        .into(imageViewHeader);
+                            }
 
 
                             Glide.with(UserViewedProfile.this).
                                     load(userData.getString("nationality_flag")).into(imageViewFlag);
 
                             image = userData.getString("image");
-                            if (!image.isEmpty()&&!image.equals("null")){
+                            if (!image.isEmpty() && !image.equals("null")) {
                                 Glide.with(UserViewedProfile.this).load(image).into(circleImageViewProfile);
-                            }else{
-                                Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this,R.drawable.ic_baseline_account_circle_24))
+                            } else {
+                                Glide.with(UserViewedProfile.this).load(ContextCompat.getDrawable(UserViewedProfile.this, R.drawable.ic_baseline_account_circle_24))
                                         .into(circleImageViewProfile);
                             }
 //                            Glide.with(UserViewedProfile.this).
 //                                    load(image).into(circleImageViewProfile);
 
 
-
                             fixName = userData.getString("fixName");
                             textViewFix.setText(fixName);
                             String bio = userData.getString("bio");
-                            if (!bio.isEmpty()&&!bio.equals("null")){
+                            if (!bio.isEmpty() && !bio.equals("null")) {
                                 textViewBio.setText(bio);
-                            }else{
+                            } else {
                                 textViewBio.setText("");
                             }
 
@@ -170,15 +212,14 @@ public class UserViewedProfile extends ToolbarClass {
                             fcmToken = userData.getString("job");
 
 
-
                             break;
                         }
 
                         default: {
-                            Intent intent = new Intent(UserViewedProfile.this,BlockedUser.class);
-                            intent.putExtra("name",name);
-                            intent.putExtra("fixName",fixName);
-                            intent.putExtra("image",image);
+                            Intent intent = new Intent(UserViewedProfile.this, BlockedUser.class);
+                            intent.putExtra("name", name);
+                            intent.putExtra("fixName", fixName);
+                            intent.putExtra("image", image);
                             startActivity(intent);
                             break;
                         }
@@ -199,7 +240,6 @@ public class UserViewedProfile extends ToolbarClass {
             }
         });
     }
-
 
     //dialog message
     private void warningMsg(String message) {
@@ -247,12 +287,6 @@ public class UserViewedProfile extends ToolbarClass {
 
     }
 
-
-
-
-
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull
     @Override
     public AppCompatDelegate getDelegate() {
@@ -262,11 +296,13 @@ public class UserViewedProfile extends ToolbarClass {
 
         return localeChangerAppCompatDelegate;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

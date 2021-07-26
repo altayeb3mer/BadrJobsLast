@@ -619,6 +619,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layCallChat"
                 android:layoutDirection="rtl"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:layout_width="match_parent"

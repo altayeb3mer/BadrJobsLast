@@ -134,10 +134,13 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
         return true;
     }
 
+
+
     @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
-            super.onBackPressed();
+            //super.onBackPressed();
+            finish();
         } else {
             switchToFragment(1);
         }
@@ -226,6 +229,7 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
         super.onDestroy();
         ActivityRecreationHelper.onDestroy(this);
     }
+
 
 
 }

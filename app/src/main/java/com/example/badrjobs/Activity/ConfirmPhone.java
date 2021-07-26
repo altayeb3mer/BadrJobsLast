@@ -186,7 +186,7 @@ public class ConfirmPhone extends AppCompatActivity {
 
                             String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
                             if (!fireBaseToken.isEmpty()){
-                                AccountDetails details = AccountDetails.token(hashMap.get("fixName"));
+                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
                                 ChatSDK.auth().authenticate(details).subscribe(new Action() {
                                     @Override
                                     public void run() throws Exception {

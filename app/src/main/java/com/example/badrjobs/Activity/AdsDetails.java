@@ -267,6 +267,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             public void onClick(View view) {
                 Intent i = new Intent(AdsDetails.this, UserViewedProfile.class);
                 i.putExtra("userId", ownerId);
+                i.putExtra("isMyProfile", isMyAd);
                 startActivity(i);
             }
         });
@@ -329,7 +330,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             }
             case R.id.layChat: {
 
-                User user = ChatSDK.core().getUserNowForEntityID(fixName);
+                User user = ChatSDK.core().getUserNowForEntityID(firebase_uid);
 //                User user = ChatSDK.core().getUserNowForEntityID("57RbHQC9RsZ9ocBn19nwPR95kyI2");
 
                 createThread(user);
@@ -604,7 +605,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
-
+    String firebase_uid="";
     private void getJobDetails() {
         arrayListImages = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
@@ -646,6 +647,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             JSONObject data = object.getJSONObject("response");
                             //owner info
                             JSONObject owner_info = data.getJSONObject("owner_info");
+                            firebase_uid = owner_info.getString("firebase_uid");
                             fixName = owner_info.getString("fixName");
                             textViewFixName.setText(fixName);
                             String ownerImgProfile = owner_info.getString("image");
@@ -731,6 +733,12 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                             }
                             if (isMyAd) {
                                 btnStopAd.setVisibility(View.VISIBLE);
+//                                layChat.setVisibility(View.INVISIBLE);
+                                try {
+                                    findViewById(R.id.layCallChat).setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                             if (isActive.equals("YES")) {
                                 btnStopAd.setText(R.string.stop2);

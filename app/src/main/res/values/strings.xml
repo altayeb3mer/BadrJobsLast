@@ -189,5 +189,6 @@
     <string name="block_">Block</string>
     <string name="unblock">Unblock</string>
     <string name="no_favorite">You have no items in favourites</string>
+    <string name="_register">Register</string>
 
 </resources>
