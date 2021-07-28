@@ -190,5 +190,8 @@
     <string name="unblock">Unblock</string>
     <string name="no_favorite">You have no items in favourites</string>
     <string name="_register">Register</string>
+    <string name="no_list_found">No list found</string>
+    <string name="click_again_exit">Click BACK again to exit</string>
+    <string name="user_blocked">Added to black list successful</string>
 
 </resources>

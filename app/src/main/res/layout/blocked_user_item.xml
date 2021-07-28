@@ -40,6 +40,7 @@
             android:layout_toRightOf="@+id/img"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/name"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -47,6 +48,7 @@
                 android:text="احمد علي"
                 android:textSize="@dimen/txt_normal_size"/>
             <TextView
+                android:id="@+id/fixName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ahmed@"
@@ -70,7 +72,7 @@
             android:layout_margin="@dimen/margin_normal_size"
             android:layout_alignParentEnd="true"
             android:gravity="center"
-            android:id="@+id/title"
+            android:id="@+id/blockBtn"
             android:layout_toStartOf="@+id/ic_favorite"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"

@@ -190,6 +190,8 @@
     <string name="no_favorite">عفوا\n ليس لديك عناصر في المفضلة</string>
     <string name="_register">التسجيل</string>
     <string name="user_blocked">نم اضافة المستخدم الي قائمة المحظورين</string>
+    <string name="no_list_found">ليس لديك مستخدمين محظورين</string>
+    <string name="click_again_exit">اضغط مرة اخرى للخروج</string>
 
 
 </resources>

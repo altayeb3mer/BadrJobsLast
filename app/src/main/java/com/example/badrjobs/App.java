@@ -81,16 +81,20 @@ public class App extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            //config
             ChatSDK.ui().setChatActivity(ChattingActivity.class);
             ChatSDK.ui().setPrivateThreadsFragment(new FragmentChat());
             UIModule.config().overrideTheme();
             UIModule.config().setMessageForwardingEnabled(false);
-
             AudioMessageModule.shared().activate(getApplicationContext());
-//            Icon icon = getResources().getDrawable(R.mipmap.ic_launcher);
-//            Icons.shared().dummy = new IconicsDrawable(getApplicationContext(), FontAwesome.);
-//            Icons.shared().dummy = Icons.get(getResources().getDrawable(R.mipmap.ic_launcher),getColor(R.color.colorPrimary));
-//            Icons.shared().dummy = new IconicsDrawable(getApplicationContext(),FontAwesome.Icon.cht)
+            ChatSDK.config().logoDrawableResourceID = R.mipmap.ic_launcher;
+            ChatSDK.builder()
+                    .setPushNotificationColor(R.color.colorPrimary)
+                    .setPushNotificationImageDefaultResourceId(R.mipmap.ic_launcher);
+
+
+
 
 
         } catch (Exception e) {

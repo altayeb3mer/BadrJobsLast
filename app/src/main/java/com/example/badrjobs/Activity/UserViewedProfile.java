@@ -56,9 +56,10 @@ public class UserViewedProfile extends ToolbarClass {
     LinearLayout layoutChat, layContainer;
     LinearLayout progressLay;
     String firebase_uid = "";
+    boolean isMyProfile = false;
+    boolean blocked = false;
     private String userId = "", fcmToken = "",
             name = "", fixName = "", image = "";
-    boolean isMyProfile = false;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
@@ -95,7 +96,8 @@ public class UserViewedProfile extends ToolbarClass {
         });
 
     }
-    public void createThread (User user) {
+
+    public void createThread(User user) {
         Disposable d = ChatSDK.thread().createThread(user.getName(), user, ChatSDK.currentUser())
                 .observeOn(RX.main())
                 .doFinally(() -> {
@@ -103,7 +105,7 @@ public class UserViewedProfile extends ToolbarClass {
                 })
                 .subscribe(thread -> {
                     try {
-                        openChatActivityWithThread(UserViewedProfile.this,thread);
+                        openChatActivityWithThread(UserViewedProfile.this, thread);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -113,9 +115,11 @@ public class UserViewedProfile extends ToolbarClass {
                 });
 
     }
-    public void openChatActivityWithThread (Context context, Thread thread) {
+
+    public void openChatActivityWithThread(Context context, Thread thread) {
         ChatSDK.ui().startChatActivityForID(context, thread.getEntityID());
     }
+
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.onCreate(R.layout.activity_user_viewed_profile, "");
@@ -126,7 +130,7 @@ public class UserViewedProfile extends ToolbarClass {
         }
         init();
         getProfile();
-        if (isMyProfile){
+        if (isMyProfile) {
 //            layoutChat.setVisibility(View.INVISIBLE);
             try {
                 findViewById(R.id.layCallChat);
@@ -136,8 +140,6 @@ public class UserViewedProfile extends ToolbarClass {
         }
     }
 
-
-    boolean blocked = false;
     private void blockUser(String userId) {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -177,9 +179,9 @@ public class UserViewedProfile extends ToolbarClass {
                     boolean success = object.getBoolean("success");
                     switch (code) {
                         case "200": {
-                            if (success){
-                                warningMsg(fixName+"\n"+getString(R.string.user_blocked));
-                               uiBlock();
+                            if (success) {
+                                warningMsg(fixName + "\n" + getString(R.string.user_blocked));
+                                uiBlock();
                                 blocked = true;
                             }
                             break;
@@ -210,7 +212,7 @@ public class UserViewedProfile extends ToolbarClass {
         });
     }
 
-    private void uiBlock(){
+    private void uiBlock() {
         findViewById(R.id.layBlocked).setVisibility(View.VISIBLE);
         findViewById(R.id.layNotBlocked).setVisibility(View.GONE);
     }

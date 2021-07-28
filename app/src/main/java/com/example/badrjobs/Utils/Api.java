@@ -155,10 +155,21 @@ public class Api {
         Call<String> putParam(@Body HashMap<String, String> param);
     }
 
+    //blacklist
     public interface RetrofitBlockSomeone {
         @POST("api/v1/blackList")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+    public interface RetrofitGetBlockedList {
+        @GET("api/v1/blackList")
+        Call<String> putParam();
+    }
+    public interface RetrofitUnBlockUser {
+        @PUT("api/v1/unBlackList/{userId}")
+        Call<String> putParam(@Path("userId") String search);
+    }
+
+    //housing
     public interface RetrofitHousingList {
         @GET("api/v1/housingTypes")
         Call<String> putParam();

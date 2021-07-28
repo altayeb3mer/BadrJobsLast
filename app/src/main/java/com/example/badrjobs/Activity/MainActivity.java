@@ -3,9 +3,11 @@ package com.example.badrjobs.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -135,15 +137,32 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
     }
 
 
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
-            //super.onBackPressed();
-            finish();
+            if (doubleBackToExitPressedOnce) {
+//                super.onBackPressed();
+                finish();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, R.string.click_again_exit, Toast.LENGTH_SHORT).show();
+
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         } else {
             switchToFragment(1);
         }
+
+
+
 //        super.onBackPressed();
     }
 
