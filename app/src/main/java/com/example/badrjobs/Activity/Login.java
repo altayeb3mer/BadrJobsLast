@@ -39,6 +39,8 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.session.ChatSDK;
+import sdk.chat.core.types.AccountDetails;
 
 public class Login extends AppCompatActivity {
 
@@ -76,9 +78,9 @@ public class Login extends AppCompatActivity {
                         if (cs.toString().matches("[a-zA-Z0-9@._-]+")) {
                             return cs;
                         }
-                        if (cs.length()>0){
-                            return cs.subSequence(0,cs.length()-1);
-                        }else{
+                        if (cs.length() > 0) {
+                            return cs.subSequence(0, cs.length() - 1);
+                        } else {
                             return cs;
                         }
                     }
@@ -155,8 +157,12 @@ public class Login extends AppCompatActivity {
                         case "200": {
                             JSONObject responseObj = object.getJSONObject("response");
                             String appToken = responseObj.getString("access_token");
-                            SharedPrefManager.getInstance(getApplicationContext()).storeAppToken("Bearer" + " " +appToken);
+                            SharedPrefManager.getInstance(getApplicationContext()).storeAppToken("Bearer" + " " + appToken);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                            if (responseObj.has("firebase_uid"))
+                                authSdkChat(responseObj.getString("firebase_uid"));
+
                             finish();
                             break;
                         }
@@ -182,6 +188,10 @@ public class Login extends AppCompatActivity {
     }
 
 
+    private void authSdkChat(String firebase_uid) {
+        AccountDetails details = AccountDetails.token(firebase_uid);
+        ChatSDK.auth().authenticate(details).subscribe();
+    }
 
     private void initSpinnerLang() {
 //        String[] array = {"اختر اللغة","العربية", "English"};
@@ -240,7 +250,7 @@ public class Login extends AppCompatActivity {
     private void changeLocale(String language) {
         Locale locale = new Locale(language);
         LocaleChanger.setLocale(locale);
-        ActivityRecreationHelper.recreate(this,true);
+        ActivityRecreationHelper.recreate(this, true);
     }
 
 
@@ -253,11 +263,13 @@ public class Login extends AppCompatActivity {
 
         return localeChangerAppCompatDelegate;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

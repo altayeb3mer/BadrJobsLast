@@ -154,6 +154,11 @@ public class Api {
         @POST("api/v1/jobActivation")
         Call<String> putParam(@Body HashMap<String, String> param);
     }
+
+    public interface RetrofitBlockSomeone {
+        @POST("api/v1/blackList")
+        Call<String> putParam(@Body HashMap<String, String> param);
+    }
     public interface RetrofitHousingList {
         @GET("api/v1/housingTypes")
         Call<String> putParam();

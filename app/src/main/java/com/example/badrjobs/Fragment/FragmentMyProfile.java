@@ -47,6 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import sdk.chat.core.api.SimpleAPI;
+import sdk.chat.core.session.ChatSDK;
 
 public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -207,6 +208,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                         case "200": {
                             SharedPrefManager.getInstance(getContext()).storeAppToken("");
                             startActivity(new Intent(getActivity(), Login.class));
+                            ChatSDK.auth().logout().subscribe();
                             getActivity().finish();
                             break;
                         }

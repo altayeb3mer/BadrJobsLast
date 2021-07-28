@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -74,6 +75,12 @@ public class UserViewedProfile extends ToolbarClass {
         textViewEmail = findViewById(R.id.email);
         textViewJob = findViewById(R.id.job);
         buttonBlock = findViewById(R.id.btnBlock);
+        buttonBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                blockUser(userId);
+            }
+        });
         layoutChat = findViewById(R.id.layChat);
         layoutChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +134,85 @@ public class UserViewedProfile extends ToolbarClass {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    boolean blocked = false;
+    private void blockUser(String userId) {
+        progressLay.setVisibility(View.VISIBLE);
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
+                        ongoing.addHeader("Content-Type", "application/json;");
+                        ongoing.addHeader("Accept", "application/json");
+                        ongoing.addHeader("lang", SharedPrefManager.getInstance(getApplicationContext()).GetAppLanguage());
+                        String token = SharedPrefManager.getInstance(getApplicationContext()).getAppToken();
+                        ongoing.addHeader("Authorization", token);
+                        return chain.proceed(ongoing.build());
+                    }
+                })
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.ROOT_URL)
+                .client(httpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api.RetrofitBlockSomeone service = retrofit.create(Api.RetrofitBlockSomeone.class);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("bad_user_id", userId);
+        Call<String> call = service.putParam(hashMap);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                try {
+                    JSONObject object = new JSONObject(response.body());
+                    String code = object.getString("code");
+                    boolean success = object.getBoolean("success");
+                    switch (code) {
+                        case "200": {
+                            if (success){
+                                warningMsg(fixName+"\n"+getString(R.string.user_blocked));
+                               uiBlock();
+                                blocked = true;
+                            }
+                            break;
+                        }
+                        default: {
+                            warningMsg(getString(R.string.error_try_again));
+                            break;
+                        }
+                    }
+
+
+                    progressLay.setVisibility(View.GONE);
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                progressLay.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                progressLay.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+    private void uiBlock(){
+        findViewById(R.id.layBlocked).setVisibility(View.VISIBLE);
+        findViewById(R.id.layNotBlocked).setVisibility(View.GONE);
     }
 
     private void getProfile() {

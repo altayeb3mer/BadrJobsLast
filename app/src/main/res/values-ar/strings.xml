@@ -189,6 +189,7 @@
     <string name="unblock">الغاء الحظر</string>
     <string name="no_favorite">عفوا\n ليس لديك عناصر في المفضلة</string>
     <string name="_register">التسجيل</string>
+    <string name="user_blocked">نم اضافة المستخدم الي قائمة المحظورين</string>
 
 
 </resources>

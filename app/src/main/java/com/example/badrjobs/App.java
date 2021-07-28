@@ -2,12 +2,15 @@ package com.example.badrjobs;
 
 import android.app.Application;
 import android.content.res.Configuration;
+import android.graphics.drawable.Icon;
 
 import com.example.badrjobs.Activity.ChattingActivity;
 import com.example.badrjobs.Fragment.FragmentChat;
 import com.franmontiel.localechanger.LocaleChanger;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import sdk.chat.firebase.ui.FirebaseUIModule;
 import sdk.chat.firebase.upload.FirebaseUploadModule;
 import sdk.chat.message.audio.AudioMessageModule;
 import sdk.chat.message.audio.BaseAudioMessageHandler;
+import sdk.chat.ui.icons.Icons;
 import sdk.chat.ui.module.UIModule;
 
 public class App extends Application {
@@ -83,7 +87,10 @@ public class App extends Application {
             UIModule.config().setMessageForwardingEnabled(false);
 
             AudioMessageModule.shared().activate(getApplicationContext());
-
+//            Icon icon = getResources().getDrawable(R.mipmap.ic_launcher);
+//            Icons.shared().dummy = new IconicsDrawable(getApplicationContext(), FontAwesome.);
+//            Icons.shared().dummy = Icons.get(getResources().getDrawable(R.mipmap.ic_launcher),getColor(R.color.colorPrimary));
+//            Icons.shared().dummy = new IconicsDrawable(getApplicationContext(),FontAwesome.Icon.cht)
 
 
         } catch (Exception e) {

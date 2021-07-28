@@ -458,6 +458,8 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+
+
     private void activateJob() {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
