@@ -42,39 +42,63 @@
         android:layout_height="0dp"
         android:id="@+id/swipeContainer"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txtTitle"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="@string/fragment_favorite_title"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/txt_normal_size"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_margin="@dimen/margin_normal_size"
-                    android:nestedScrollingEnabled="false"
-                    android:id="@+id/recycler"
+                android:layout_height="match_parent">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/ads_item"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:itemCount="15"
-                    app:spanCount="1"
-                    />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtTitle"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/fragment_favorite_title"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txt_normal_size"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_margin="@dimen/margin_normal_size"
+                        android:nestedScrollingEnabled="false"
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/ads_item"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        tools:itemCount="15"
+                        app:spanCount="1"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:id="@+id/noDataLay"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large_size"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txt_large_size"
+                    android:textStyle="bold"
+                    android:text="@string/no_favorite"
+                    android:gravity="center"/>
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
@@ -93,23 +117,6 @@
             app:indicatorColor="@color/colorPrimary"
             />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/noDataLay"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:clickable="true"
-        android:focusable="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large_size"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/txt_large_size"
-            android:textStyle="bold"
-            android:text="@string/no_favorite"
-            android:gravity="center"/>
-    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

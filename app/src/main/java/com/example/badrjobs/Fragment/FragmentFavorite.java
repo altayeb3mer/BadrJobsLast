@@ -138,6 +138,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
 
     private void getFavorite() {
         arrayList = new ArrayList<>();
+        arrayList.clear();
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -197,12 +198,16 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
                             }
 
 
+
+                            initAdapter(arrayList);
                             if (arrayList.size()>0){
 //                                setRecycler(arrayList);
-                               initAdapter(arrayList);
+//                               initAdapter(arrayList);
                                 noDataLay.setVisibility(View.GONE);
                             }else{
                                 noDataLay.setVisibility(View.VISIBLE);
+//                                if (adapterJobs!=null)
+//                                adapterJobs.notifyDataSetChanged();
                             }
                             break;
                         }
