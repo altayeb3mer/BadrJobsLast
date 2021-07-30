@@ -83,6 +83,7 @@ public class App extends Application {
             }
 
             //config
+//            ChatSDK.config().defaultUserAvatarURL =
             ChatSDK.ui().setChatActivity(ChattingActivity.class);
             ChatSDK.ui().setPrivateThreadsFragment(new FragmentChat());
             UIModule.config().overrideTheme();

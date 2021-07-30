@@ -183,24 +183,27 @@ public class ConfirmPhone extends AppCompatActivity {
 //                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             warningMsg("تم اتمام تسجيلك\n قم بتسجيل الدخول");
+                            signUpChatSdk(hashMap.get("email"),hashMap.get("password"));
 
-                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
-                            if (!fireBaseToken.isEmpty()){
-                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
-                                ChatSDK.auth().authenticate(details).subscribe(new Action() {
-                                    @Override
-                                    public void run() throws Exception {
-                                        Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+//                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
+//                            if (!fireBaseToken.isEmpty()){
+//                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
+//                                ChatSDK.auth().authenticate(details).subscribe(new Action() {
+//                                    @Override
+//                                    public void run() throws Exception {
+//                                        Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
 //                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
-                                    }
-                                }, new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
-                                        Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                            }
+////                                        signUpChatSdk(hashMap);
+//                                        Logout();
+//                                    }
+//                                }, new Consumer<Throwable>() {
+//                                    @Override
+//                                    public void accept(Throwable throwable) throws Exception {
+//                                        Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+//
+//                                    }
+//                                });
+//                            }
 
 //                            finish();
                             break;
@@ -222,6 +225,41 @@ public class ConfirmPhone extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable throwable) {
                 progressLay.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void signUpChatSdk(String username,String password) {
+        ChatSDK.auth().authenticate(AccountDetails.signUp(username+"@chatSdk.com",password)).subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+                SimpleAPI.updateUser(hashMap.get("fixName"),"");
+                Logout();
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    private void Logout(){
+        ChatSDK.auth().logout().subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(ConfirmPhone.this, "logged out from chatSdk", Toast.LENGTH_SHORT).show();
+//                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(ConfirmPhone.this, "logged out error", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

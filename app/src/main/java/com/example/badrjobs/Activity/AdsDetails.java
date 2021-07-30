@@ -42,11 +42,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import me.relex.circleindicator.CircleIndicator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -55,6 +56,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.dao.Keys;
 import sdk.chat.core.dao.Thread;
 import sdk.chat.core.dao.User;
 import sdk.chat.core.session.ChatSDK;
@@ -330,10 +332,20 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
             }
             case R.id.layChat: {
 
-                User user = ChatSDK.core().getUserNowForEntityID(firebase_uid);
+                progressLay.setVisibility(View.VISIBLE);
+                User user1 = ChatSDK.core().getUserNowForEntityID(firebase_uid);
 //                User user = ChatSDK.core().getUserNowForEntityID("57RbHQC9RsZ9ocBn19nwPR95kyI2");
 
-                createThread(user);
+//                ChatSDK.search().usersForIndex("",1, Keys.Name).subscribe(User user).
+//                 ChatSDK.search().usersForIndex(fixName, 1, Keys.Name).subscribe(user -> {
+//                     progressLay.setVisibility(View.GONE);
+//                     createThread(user);
+//                }, throwable -> {
+//                     Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+//                     progressLay.setVisibility(View.GONE);
+//                });
+
+                createThread(user1);
 
                 break;
             }
@@ -354,6 +366,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 .observeOn(RX.main())
                 .doFinally(() -> {
                     // Runs when process completed from error or success
+                    progressLay.setVisibility(View.GONE);
                 })
                 .subscribe(thread -> {
                     try {
@@ -361,9 +374,11 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    progressLay.setVisibility(View.GONE);
                 }, throwable -> {
                     // If there type an error
                     Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressLay.setVisibility(View.GONE);
                 });
 
     }

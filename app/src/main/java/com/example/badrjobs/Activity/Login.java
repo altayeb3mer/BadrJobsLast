@@ -1,16 +1,21 @@
 package com.example.badrjobs.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +37,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -60,6 +68,41 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         init();
         initSpinnerLang();
+//        chatNewUser();
+    }
+
+    private void chatNewUser() {
+
+        AccountDetails details = AccountDetails.signUp("Joe@a.com", "Joe123");
+        ChatSDK.auth().authenticate(details).subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(Login.this, "no", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }    private void chatNewUserAuth() {
+
+        AccountDetails details = AccountDetails.username("Joe@a.com", "Joe123");
+        ChatSDK.auth().authenticate(details).subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(Login.this, "no", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void init() {
@@ -160,8 +203,13 @@ public class Login extends AppCompatActivity {
                             SharedPrefManager.getInstance(getApplicationContext()).storeAppToken("Bearer" + " " + appToken);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                            if (responseObj.has("firebase_uid"))
-                                authSdkChat(responseObj.getString("firebase_uid"));
+                            JSONObject userObj = responseObj.getJSONObject("user");
+//                            if (userObj.has("firebase_uid"))
+//                                loginChatSdk(userObj.getString("firebase_uid"));
+
+                            loginChatSdk(userObj.getString("email"), hashMap.get("password"));
+
+//                            chatNewUserAuth();
 
                             finish();
                             break;
@@ -175,7 +223,8 @@ public class Login extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                    warningMsg(getString(R.string.login_error), false);
                 }
                 progressLay.setVisibility(View.GONE);
             }
@@ -187,10 +236,20 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void loginChatSdk(String userName, String pass) {
+        AccountDetails details = AccountDetails.username(userName, pass);
+        ChatSDK.auth().authenticate(details).subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
 
-    private void authSdkChat(String firebase_uid) {
-        AccountDetails details = AccountDetails.token(firebase_uid);
-        ChatSDK.auth().authenticate(details).subscribe();
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(Login.this, "no", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initSpinnerLang() {
@@ -247,6 +306,49 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
+    private void warningMsg(String message, boolean finish) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_yes_no);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TextView textViewMsg = dialog.findViewById(R.id.msg);
+        textViewMsg.setText(message);
+        AppCompatButton yes = dialog.findViewById(R.id.yes);
+        AppCompatButton no = dialog.findViewById(R.id.no);
+        no.setVisibility(View.GONE);
+        yes.setText("موافق");
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (finish) {
+                    finish();
+                } else {
+                    dialog.dismiss();
+                }
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    //lang controller
     private void changeLocale(String language) {
         Locale locale = new Locale(language);
         LocaleChanger.setLocale(locale);

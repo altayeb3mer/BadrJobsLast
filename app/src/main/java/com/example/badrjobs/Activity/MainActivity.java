@@ -29,7 +29,10 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import sdk.chat.core.session.ChatSDK;
+import sdk.chat.core.types.AccountDetails;
 
 public class MainActivity extends sdk.chat.ui.activities.MainActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
@@ -44,6 +47,19 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
         overridePendingTransition(R.anim.in_right,R.anim.out_right);
 //        Animatoo.animateSlideRight(this);
         init();
+//        AccountDetails details = AccountDetails.signUp("mhmdd@a.com", "123456");
+//        ChatSDK.auth().authenticate(details).subscribe(new Action() {
+//            @Override
+//            public void run() throws Exception {
+//                Toast.makeText(MainActivity.this, "yes", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                Toast.makeText(MainActivity.this, "no", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override

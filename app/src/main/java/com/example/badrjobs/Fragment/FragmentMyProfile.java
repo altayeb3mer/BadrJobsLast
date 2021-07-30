@@ -24,6 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.badrjobs.Activity.ConfirmDeal;
+import com.example.badrjobs.Activity.ConfirmPhone;
 import com.example.badrjobs.Activity.Login;
 import com.example.badrjobs.Activity.MyAds;
 import com.example.badrjobs.Activity.PaymentPackage;
@@ -39,6 +40,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -208,7 +211,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                         case "200": {
                             SharedPrefManager.getInstance(getContext()).storeAppToken("");
                             startActivity(new Intent(getActivity(), Login.class));
-                            ChatSDK.auth().logout().subscribe();
+                            Logout();
                             getActivity().finish();
                             break;
                         }
@@ -232,6 +235,22 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
         });
     }
 
+
+    private void Logout(){
+        ChatSDK.auth().logout().subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                Toast.makeText(context, "logged out from chatSdk", Toast.LENGTH_SHORT).show();
+//                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Toast.makeText(context, "logged out error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
 
     String imgProfileUrl="",imgHeaderUrl="",bio="";
 
