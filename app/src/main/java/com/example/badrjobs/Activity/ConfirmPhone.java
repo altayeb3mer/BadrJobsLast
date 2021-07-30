@@ -185,6 +185,7 @@ public class ConfirmPhone extends AppCompatActivity {
                             warningMsg("تم اتمام تسجيلك\n قم بتسجيل الدخول");
                             signUpChatSdk(hashMap.get("email"),hashMap.get("password"));
 
+                            Logout();
 //                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
 //                            if (!fireBaseToken.isEmpty()){
 //                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
@@ -235,7 +236,7 @@ public class ConfirmPhone extends AppCompatActivity {
             public void run() throws Exception {
                 Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
                 SimpleAPI.updateUser(hashMap.get("fixName"),"");
-                Logout();
+//                Logout();
 
             }
         }, new Consumer<Throwable>() {
