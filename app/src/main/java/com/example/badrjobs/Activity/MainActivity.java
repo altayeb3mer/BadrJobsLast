@@ -47,19 +47,8 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
         overridePendingTransition(R.anim.in_right,R.anim.out_right);
 //        Animatoo.animateSlideRight(this);
         init();
-//        AccountDetails details = AccountDetails.signUp("mhmdd@a.com", "123456");
-//        ChatSDK.auth().authenticate(details).subscribe(new Action() {
-//            @Override
-//            public void run() throws Exception {
-//                Toast.makeText(MainActivity.this, "yes", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                Toast.makeText(MainActivity.this, "no", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+
     }
 
     @Override

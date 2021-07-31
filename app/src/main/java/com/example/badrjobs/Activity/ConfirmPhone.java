@@ -63,7 +63,9 @@ public class ConfirmPhone extends AppCompatActivity {
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
-    private boolean phoneReset = false;
+    private boolean phoneReset = false,firebaseAuth=false;
+
+
 
 
     @Override
@@ -76,6 +78,9 @@ public class ConfirmPhone extends AppCompatActivity {
         Bundle args = getIntent().getExtras();
         if (args.containsKey("phoneReset"))
             phoneReset = true;
+
+        if (args.containsKey("firebaseAuth"))
+            firebaseAuth = args.getBoolean("firebaseAuth");
 
         phone = args.getString("phone");
         verifyId = args.getString("verifyId");
@@ -125,7 +130,14 @@ public class ConfirmPhone extends AppCompatActivity {
                             if (phoneReset){
                                 doPhoneReset();
                             }else {
-                                doRegister();
+                                if (firebaseAuth){
+                                    SharedPrefManager.getInstance(ConfirmPhone.this).storeAppToken(hashMap.get("token"));
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    finish();
+                                }else{
+                                    doRegister();
+                                }
+
                             }
 
 
@@ -183,28 +195,32 @@ public class ConfirmPhone extends AppCompatActivity {
 //                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             warningMsg("تم اتمام تسجيلك\n قم بتسجيل الدخول");
-                            signUpChatSdk(hashMap.get("email"),hashMap.get("password"));
+//                          signUpChatSdk(hashMap.get("phone"),hashMap.get("password"));
 
-                            Logout();
-//                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
-//                            if (!fireBaseToken.isEmpty()){
-//                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
-//                                ChatSDK.auth().authenticate(details).subscribe(new Action() {
-//                                    @Override
-//                                    public void run() throws Exception {
-//                                        Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
-//                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
-////                                        signUpChatSdk(hashMap);
+
+                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
+                            if (!fireBaseToken.isEmpty()){
+                                AccountDetails details = AccountDetails.token(hashMap.get("firebase_uid"));
+                                ChatSDK.auth().authenticate(details).subscribe(new Action() {
+                                    @Override
+                                    public void run() throws Exception {
+                                        Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
+//                                        signUpChatSdk(hashMap);
 //                                        Logout();
-//                                    }
-//                                }, new Consumer<Throwable>() {
-//                                    @Override
-//                                    public void accept(Throwable throwable) throws Exception {
-//                                        Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
-//
-//                                    }
-//                                });
-//                            }
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ConfirmPhone.this, "خطأ في تفعيل الدردشة", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                            }
+
+
+//                            Logout();
+
 
 //                            finish();
                             break;
@@ -231,11 +247,12 @@ public class ConfirmPhone extends AppCompatActivity {
     }
 
     private void signUpChatSdk(String username,String password) {
-        ChatSDK.auth().authenticate(AccountDetails.signUp(username+"@chatSdk.com",password)).subscribe(new Action() {
+        ChatSDK.auth().authenticate(AccountDetails.signUp(username,password)).subscribe(new Action() {
             @Override
             public void run() throws Exception {
                 Toast.makeText(ConfirmPhone.this, "تم تفعيل الدردشة", Toast.LENGTH_SHORT).show();
                 SimpleAPI.updateUser(hashMap.get("fixName"),"");
+//                String id = ChatSDK.auth().getCurrentUserEntityID();
 //                Logout();
 
             }

@@ -83,7 +83,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
     LinearLayout layOwner, layOffice, layCall, layChat;
     AppCompatButton btnStopAd;
     NestedScrollView nestedScroll;
-    boolean isMyAd = false, baseTrans = true;
+    boolean isMyAd = false, baseTrans = true,in_black_list=false;
     //listView
     Dialog dialog;
 //    Thread thread1;
@@ -270,6 +270,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                 Intent i = new Intent(AdsDetails.this, UserViewedProfile.class);
                 i.putExtra("userId", ownerId);
                 i.putExtra("isMyProfile", isMyAd);
+                i.putExtra("blocked", in_black_list);
                 startActivity(i);
             }
         });
@@ -337,7 +338,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
 //                User user = ChatSDK.core().getUserNowForEntityID("57RbHQC9RsZ9ocBn19nwPR95kyI2");
 
 //                ChatSDK.search().usersForIndex("",1, Keys.Name).subscribe(User user).
-//                 ChatSDK.search().usersForIndex(fixName, 1, Keys.Name).subscribe(user -> {
+//                 ChatSDK.search().usersForIndexes("altayeb3mer@gmail.com", 1, "name","email").subscribe(user -> {
 //                     progressLay.setVisibility(View.GONE);
 //                     createThread(user);
 //                }, throwable -> {
@@ -346,6 +347,8 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
 //                });
 
                 createThread(user1);
+
+
 
                 break;
             }
@@ -745,6 +748,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
 
 
                             isMyAd = data.getBoolean("is_owner");
+                            in_black_list = data.getBoolean("in_black_list");
                             if (isMyAd || isActive.equals("NO")) {
                                 cardSignature.setVisibility(View.GONE);
                             }

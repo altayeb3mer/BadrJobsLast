@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,6 +28,11 @@ import com.example.badrjobs.Utils.Api;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.LocaleChanger;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.json.JSONObject;
 
@@ -37,7 +41,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import okhttp3.Interceptor;
@@ -47,6 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.dao.User;
 import sdk.chat.core.session.ChatSDK;
 import sdk.chat.core.types.AccountDetails;
 
@@ -60,21 +64,83 @@ public class Login extends AppCompatActivity {
 
 
     Spinner spinner;
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    String phone = "";
+    String s_token = "";
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+    private FirebaseAuth mAuth;
+
+    private void firebaseAuth() {
+        progressLay.setVisibility(View.VISIBLE);
+
+//        try {
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phone)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(Login.this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(false);
+
         init();
         initSpinnerLang();
 //        chatNewUser();
+
+        //callback method
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential credential) {
+                progressLay.setVisibility(View.GONE);
+                Toast.makeText(Login.this, "تعذر الارسال", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                progressLay.setVisibility(View.GONE);
+                Toast.makeText(Login.this, "تعذر الارسال", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String verificationId,
+                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("phone", phone);
+                hashMap.put("token", s_token);
+
+                progressLay.setVisibility(View.GONE);
+                Toast.makeText(Login.this, "تم الارسال", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
+                intent.putExtra("phone", phone);
+                intent.putExtra("verifyId", verificationId);
+                intent.putExtra("hashMap", hashMap);
+                intent.putExtra("firebaseAuth", true);
+                startActivity(intent);
+                finish();
+
+            }
+        };
     }
 
     private void chatNewUser() {
 
-        AccountDetails details = AccountDetails.signUp("Joe@a.com", "Joe123");
-        ChatSDK.auth().authenticate(details).subscribe(new Action() {
+        User user = ChatSDK.core().getUserNowForEntityID("");
+        AccountDetails details1 = AccountDetails.token("cuAzJpPf7tbv7nci6tLfuxjwtKp3");
+
+        AccountDetails details = AccountDetails.signUp("+249116774941", "123456");
+        ChatSDK.auth().authenticate(details1).subscribe(new Action() {
             @Override
             public void run() throws Exception {
                 Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
@@ -87,8 +153,9 @@ public class Login extends AppCompatActivity {
             }
         });
 
-    }    private void chatNewUserAuth() {
+    }
 
+    private void chatNewUserAuth() {
         AccountDetails details = AccountDetails.username("Joe@a.com", "Joe123");
         ChatSDK.auth().authenticate(details).subscribe(new Action() {
             @Override
@@ -199,19 +266,22 @@ public class Login extends AppCompatActivity {
                     switch (statusCode) {
                         case "200": {
                             JSONObject responseObj = object.getJSONObject("response");
-                            String appToken = responseObj.getString("access_token");
-                            SharedPrefManager.getInstance(getApplicationContext()).storeAppToken("Bearer" + " " + appToken);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            s_token = "Bearer" + " " + responseObj.getString("access_token");
+//                            SharedPrefManager.getInstance(getApplicationContext()).storeAppToken("Bearer" + " " + appToken);
+//                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
 
                             JSONObject userObj = responseObj.getJSONObject("user");
 //                            if (userObj.has("firebase_uid"))
 //                                loginChatSdk(userObj.getString("firebase_uid"));
 
-                            loginChatSdk(userObj.getString("email"), hashMap.get("password"));
+                            phone = userObj.getString("codeCountry") + userObj.getString("phone");
+                            firebaseAuth();
+//                            loginChatSdk(userObj.getString("phone"), hashMap.get("password"));
 
 //                            chatNewUserAuth();
 
-                            finish();
+//                            finish();
                             break;
                         }
                         default: {
@@ -237,6 +307,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginChatSdk(String userName, String pass) {
+        // TODO: 31/07/2021 when user change his phone ==> ChatSDK.currentUser().setEntityID("");
         AccountDetails details = AccountDetails.username(userName, pass);
         ChatSDK.auth().authenticate(details).subscribe(new Action() {
             @Override

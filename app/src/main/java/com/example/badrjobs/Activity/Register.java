@@ -222,8 +222,10 @@ public class Register extends ToolbarClass {
                 hashMap.put("phone", phone);
                 hashMap.put("codeCountry",ccp.getFullNumberWithPlus());
                 hashMap.put("password", password1);
-                hashMap.put("password_confirmation", password2);
-                hashMap.put("nationality_id", nationality);
+                hashMap.put("password_caonfirmation", password2);
+                hashMap.put("nationality", nationality);
+                hashMap.put("job", job);
+
 
 
                 progressLay.setVisibility(View.GONE);

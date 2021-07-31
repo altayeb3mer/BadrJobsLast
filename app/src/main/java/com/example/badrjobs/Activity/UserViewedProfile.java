@@ -127,17 +127,19 @@ public class UserViewedProfile extends ToolbarClass {
         if (args != null) {
             userId = args.getString("userId");
             isMyProfile = args.getBoolean("isMyProfile");
+            blocked = args.getBoolean("blocked");
         }
         init();
         getProfile();
         if (isMyProfile) {
 //            layoutChat.setVisibility(View.INVISIBLE);
             try {
-                findViewById(R.id.layCallChat);
+                findViewById(R.id.layCallChat).setVisibility(View.GONE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        uiBlock(blocked);
     }
 
     private void blockUser(String userId) {
@@ -181,8 +183,8 @@ public class UserViewedProfile extends ToolbarClass {
                         case "200": {
                             if (success) {
                                 warningMsg(fixName + "\n" + getString(R.string.user_blocked));
-                                uiBlock();
                                 blocked = true;
+                                uiBlock(blocked);
                             }
                             break;
                         }
@@ -212,9 +214,12 @@ public class UserViewedProfile extends ToolbarClass {
         });
     }
 
-    private void uiBlock() {
-        findViewById(R.id.layBlocked).setVisibility(View.VISIBLE);
-        findViewById(R.id.layNotBlocked).setVisibility(View.GONE);
+    private void uiBlock(boolean b) {
+        if (b){
+            findViewById(R.id.layBlocked).setVisibility(View.VISIBLE);
+            findViewById(R.id.layNotBlocked).setVisibility(View.GONE);
+        }
+
     }
 
     private void getProfile() {
@@ -346,7 +351,7 @@ public class UserViewedProfile extends ToolbarClass {
         AppCompatButton yes = dialog.findViewById(R.id.yes);
         AppCompatButton no = dialog.findViewById(R.id.no);
         no.setVisibility(View.GONE);
-        yes.setText("موافق");
+        yes.setText(R.string.ok);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
