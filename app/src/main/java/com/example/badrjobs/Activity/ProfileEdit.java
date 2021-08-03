@@ -472,7 +472,7 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
-                selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
+//                selectedImage = Bitmap.createScaledBitmap(selectedImage, 500, 500, false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
                 if (imageType.equals("profile")){
