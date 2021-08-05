@@ -329,7 +329,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                                 e.printStackTrace();
                             }
 
-                            SimpleAPI.updateUser(dataObject.getString("fixcoName"),imgProfileUrl);
+                            SimpleAPI.updateUser(dataObject.getString("fixName"),imgProfileUrl);
 
 
                             try {

@@ -11,12 +11,12 @@
     <string name="update_pass">تحديث كلمة المرور</string>
     <string name="_8">يجب تضمين رمز او رقم على الأقل وان لا تقل عن 8 احرف</string>
     <string name="email">البريد الالكتروني :</string>
-    <string name="send_link">إرسال رابط إعادة التعيين</string>
+    <string name="send_link">إعادة التعيين</string>
     <string name="new_pass">كلمة المرور الجديدة</string>
     <string name="confirm_new_pass">تأكيد كلمة المرور الجديدة</string>
     <string name="update">تحديث</string>
     <string name="reset_password">اعادة تعيين كلمة المرور</string>
-    <string name="reset_pass1_hint">ادخل عنوان البريد الإلكتروني المرتبط بالحساب , وسوف نرسل إليك بالبريد رابطاً لإعادة تعيين كلمة المرورالخاصة بك</string>
+    <string name="reset_pass1_hint">ادخل رقم الهاتف المرتبط بالحساب , وسوف نرسل إليك رسالة تاكيد لإعادة تعيين كلمة المرورالخاصة بك</string>
     <string name="welcome2">مرحبا بكم..</string>
     <string name="register_txt2">نتمنى لكم الحصول على فرصة عمل في أقرب وقت</string>
     <string name="name">الاسم : </string>
@@ -192,6 +192,7 @@
     <string name="user_blocked">نم اضافة المستخدم الي قائمة المحظورين</string>
     <string name="no_list_found">ليس لديك مستخدمين محظورين</string>
     <string name="click_again_exit">اضغط مرة اخرى للخروج</string>
+    <string name="country_code">يحتوي مفتاح البلد</string>
 
 
 </resources>

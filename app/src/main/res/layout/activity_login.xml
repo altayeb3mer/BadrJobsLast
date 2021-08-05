@@ -157,6 +157,9 @@
                             android:textStyle="bold"
                             android:checked="true"/>
                         <TextView
+                            android:id="@+id/forgetPassword"
+                            android:gravity="center"
+                            android:minHeight="40dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="@dimen/margin_large_size"
                             android:layout_width="wrap_content"

@@ -25,9 +25,12 @@ import com.example.badrjobs.Fragment.FragmentMain;
 import com.example.badrjobs.Fragment.FragmentMyProfile;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.CustomViewPager;
+import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import java.util.Locale;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -47,7 +50,6 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
         overridePendingTransition(R.anim.in_right,R.anim.out_right);
 //        Animatoo.animateSlideRight(this);
         init();
-
 
     }
 

@@ -52,6 +52,8 @@ import sdk.chat.core.api.SimpleAPI;
 import sdk.chat.core.session.ChatSDK;
 import sdk.chat.core.types.AccountDetails;
 
+import static android.content.ContentValues.TAG;
+
 public class ConfirmPhone extends AppCompatActivity {
 
     EditText edtCode;
@@ -64,6 +66,9 @@ public class ConfirmPhone extends AppCompatActivity {
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
     private boolean phoneReset = false,firebaseAuth=false;
+    String newPassword="";
+
+
 
 
 
@@ -76,8 +81,10 @@ public class ConfirmPhone extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         //args
         Bundle args = getIntent().getExtras();
-        if (args.containsKey("phoneReset"))
+        if (args.containsKey("phoneReset")) {
             phoneReset = true;
+            newPassword = args.getString("newPassword");
+        }
 
         if (args.containsKey("firebaseAuth"))
             firebaseAuth = args.getBoolean("firebaseAuth");
@@ -122,9 +129,9 @@ public class ConfirmPhone extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
-                            //firebase
-                            user.updateEmail(hashMap.get("email"));
-                            user.updatePassword(hashMap.get("password"));
+
+
+
 
                             //store token
                             SharedPrefManager.getInstance(getApplicationContext()).storeFirebaseToken(user.getUid());
@@ -132,13 +139,16 @@ public class ConfirmPhone extends AppCompatActivity {
                             hashMap.put("fcm_token", SharedPrefManager.getInstance(ConfirmPhone.this).getFcmToken());
 
                             if (phoneReset){
-                                doPhoneReset();
+                                doPhoneReset(user,credential);
                             }else {
                                 if (firebaseAuth){
                                     SharedPrefManager.getInstance(ConfirmPhone.this).storeAppToken(hashMap.get("token"));
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                     finish();
                                 }else{
+                                    //firebase
+                                    user.updateEmail(hashMap.get("email"));
+                                    user.updatePassword(hashMap.get("password"));
                                     doRegister();
                                 }
 
@@ -192,7 +202,6 @@ public class ConfirmPhone extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 try {
-
                     if (response.code() == 200){
                         JSONObject object = new JSONObject(response.body());
                         String statusCode = object.getString("code");
@@ -204,9 +213,9 @@ public class ConfirmPhone extends AppCompatActivity {
                                 warningMsg("تم اتمام تسجيلك\n قم بتسجيل الدخول",token);
 
 
-                                signUpChatSdk(hashMap.get("phone"),hashMap.get("password"));
+//                                signUpChatSdk(hashMap.get("email"),hashMap.get("password"));
 
-                            Logout();
+//                            Logout();
 
 //                            String fireBaseToken = SharedPrefManager.getInstance(ConfirmPhone.this).getFireBaseToken();
 //                            if (!fireBaseToken.isEmpty()){
@@ -242,7 +251,8 @@ public class ConfirmPhone extends AppCompatActivity {
                             }
                         }
                     }else if (response.code() == 422){
-                        JSONObject object = new JSONObject(response.toString());
+                        JSONObject object = new JSONObject(response.errorBody().string());
+                        Log.e("ERROR",object.toString());
                     }
 
 
@@ -297,69 +307,31 @@ public class ConfirmPhone extends AppCompatActivity {
         });
     }
 
-    private void doPhoneReset() {
+    private void doPhoneReset(FirebaseUser currentUser,PhoneAuthCredential credential) {
         progressLay.setVisibility(View.VISIBLE);
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
+        currentUser.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        okhttp3.Request.Builder ongoing = chain.request().newBuilder();
-                        ongoing.addHeader("Content-Type", "application/json;");
-                        ongoing.addHeader("Accept", "application/json");
-//                        ongoing.addHeader("Content-Type", "application/x-www-form-urlencoded");
-//                        String token = SharedPrefManager.getInstance(context).GetToken();
-//                        ongoing.addHeader("Authorization", token);
-                        return chain.proceed(ongoing.build());
-                    }
-                })
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.ROOT_URL)
-                .client(httpClient)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api.RetrofitRegister service = retrofit.create(Api.RetrofitRegister.class);
-
-        Call<String> call = service.putParam(hashMap);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                try {
-                    JSONObject object = new JSONObject(response.body());
-                    String statusCode = object.getString("code");
-                    switch (statusCode) {
-                        case "200": {
-//                            Toast.makeText(ConfirmPhone.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                            warningMsg(getString(R.string.reset_phone_successfuly)+"\n"+
-//                                    hashMap.get("codeCountry")+hashMap.get("phone"));
-
-//                            finish();
-                            break;
-                        }
-
-                        default: {
-                            Toast.makeText(ConfirmPhone.this, R.string.error_try_again, Toast.LENGTH_SHORT).show();
-                            break;
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            currentUser.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        progressLay.setVisibility(View.VISIBLE);
+                                        Log.d(TAG, "Password updated");
+                                        warningMsg("Password updated","");
+                                    } else {
+                                        Log.d(TAG, "Error password not updated");
+                                    }
+                                }
+                            });
+                        } else {
+                            Log.d(TAG, "Error auth failed");
+                            progressLay.setVisibility(View.VISIBLE);
                         }
                     }
-                    progressLay.setVisibility(View.GONE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-//                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                progressLay.setVisibility(View.GONE);
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable throwable) {
-                progressLay.setVisibility(View.GONE);
-            }
-        });
+                });
     }
 
     //dialog message
@@ -386,13 +358,14 @@ public class ConfirmPhone extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (phoneReset){
-//                    finish();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }else{
                     SharedPrefManager.getInstance(ConfirmPhone.this).storeAppToken(_token);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
                 }
-
+                finish();
                 dialog.dismiss();
 
 

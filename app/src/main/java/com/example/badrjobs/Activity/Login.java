@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity {
     String s_token = "";
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     private FirebaseAuth mAuth;
+    TextView forgetPassword;
 
     private void firebaseAuth() {
         progressLay.setVisibility(View.VISIBLE);
@@ -120,7 +121,7 @@ public class Login extends AppCompatActivity {
                 hashMap.put("phone", phone);
                 hashMap.put("token", s_token);
 
-                progressLay.setVisibility(View.GONE);
+
                 Toast.makeText(Login.this, "تم الارسال", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ConfirmPhone.class);
                 intent.putExtra("phone", phone);
@@ -128,10 +129,27 @@ public class Login extends AppCompatActivity {
                 intent.putExtra("hashMap", hashMap);
                 intent.putExtra("firebaseAuth", true);
                 startActivity(intent);
+                progressLay.setVisibility(View.GONE);
                 finish();
 
             }
         };
+
+        languageBik();
+    }
+
+    private void languageBik() {
+        try {
+            String lang = Locale.getDefault().getLanguage();
+            if (lang.equals("en") || lang.equals("ar")) {
+                SharedPrefManager.getInstance(getApplicationContext()).storeAppLanguage(lang);
+            } else {
+                SharedPrefManager.getInstance(getApplicationContext()).storeAppLanguage("en");
+            }
+//            Toast.makeText(this, lang, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void chatNewUser() {
@@ -173,6 +191,13 @@ public class Login extends AppCompatActivity {
     }
 
     private void init() {
+        forgetPassword = findViewById(R.id.forgetPassword);
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ResetPassword1.class));
+            }
+        });
         spinner = findViewById(R.id.spinner);
         progressLay = findViewById(R.id.progressLay);
         btnRegister = findViewById(R.id.btnRegister);
@@ -289,14 +314,15 @@ public class Login extends AppCompatActivity {
                             break;
                         }
                     }
-                    progressLay.setVisibility(View.GONE);
+//                    progressLay.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                     warningMsg(getString(R.string.login_error), false);
+                    progressLay.setVisibility(View.GONE);
                 }
-                progressLay.setVisibility(View.GONE);
+//                progressLay.setVisibility(View.GONE);
             }
 
             @Override

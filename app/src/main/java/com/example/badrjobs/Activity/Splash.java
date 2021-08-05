@@ -1,32 +1,34 @@
 package com.example.badrjobs.Activity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.badrjobs.GlobalVar;
 import com.example.badrjobs.R;
 import com.example.badrjobs.Utils.SharedPrefManager;
 import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 
+import java.util.Locale;
+
 public class Splash extends AppCompatActivity {
+
+    //language controller
+    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_splash);
 
-        new GlobalVar().changeStatusBarColor(this,getColor(R.color.colorPrimary));
+        new GlobalVar().changeStatusBarColor(this, getColor(R.color.colorPrimary));
 
-            startActivity(new Intent(getApplicationContext(), Splash2.class));
-
-
-
+        startActivity(new Intent(getApplicationContext(), Splash2.class));
 
 //        String token = SharedPrefManager.getInstance(this).getAppToken();
 //        Animatoo.animateSlideRight(this);
@@ -38,8 +40,6 @@ public class Splash extends AppCompatActivity {
         finish();
     }
 
-    //language controller
-    private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
     @NonNull
     @Override
     public AppCompatDelegate getDelegate() {
@@ -49,11 +49,13 @@ public class Splash extends AppCompatActivity {
 
         return localeChangerAppCompatDelegate;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         ActivityRecreationHelper.onResume(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
