@@ -247,6 +247,8 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
+
     private void doLogin() {
         progressLay.setVisibility(View.VISIBLE);
         OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -310,7 +312,8 @@ public class Login extends AppCompatActivity {
                             break;
                         }
                         default: {
-                            Toast.makeText(Login.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                            warningMsg(getString(R.string.login_error), false);
+                            progressLay.setVisibility(View.GONE);
                             break;
                         }
                     }

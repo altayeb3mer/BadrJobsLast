@@ -7,7 +7,8 @@
     tools:context=".Activity.ResetPassword1">
 
     <include layout="@layout/public_toolbar"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/txt_extra_large_size"
-                    android:text="تغيير رقم الهاتف"
+                    android:text="@string/change_phonee"
                     android:textColor="@android:color/black"/>
 
                 <TextView
@@ -37,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/txt_normal_size"
-                    android:text="ادخل الارقام هنا"
+                    android:text="@string/enter_no_here"
                     android:textStyle="bold"/>
                 <androidx.cardview.widget.CardView
                     android:layout_marginTop="@dimen/margin_small_size"
@@ -50,16 +51,20 @@
                         android:layout_height="match_parent"
                         >
                         <EditText
+                            android:paddingStart="@dimen/margin_small_size"
+                            android:paddingEnd="@dimen/margin_small_size"
+                            android:id="@+id/edtOtp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="textPassword"
                             android:background="@android:color/transparent"
-                            android:text="123456"
+                            android:hint="123456"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginLeft="@dimen/margin_large_size"
                     android:layout_marginRight="@dimen/margin_large_size"
                     android:layout_marginTop="@dimen/margin_large_size"
@@ -71,6 +76,7 @@
                     android:textColor="@android:color/black"/>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/reSend"
                     android:layout_marginTop="@dimen/margin_normal_size"
                     android:layout_width="wrap_content"
@@ -86,7 +92,7 @@
                     android:layout_marginTop="100dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="موافق"
+                    android:text="@string/ok"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/txt_large_size"
@@ -97,5 +103,22 @@
         </ScrollView>
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:id="@+id/progressLay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            app:indicatorColor="@color/colorPrimary"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

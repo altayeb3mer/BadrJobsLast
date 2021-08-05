@@ -193,6 +193,12 @@
     <string name="no_list_found">ليس لديك مستخدمين محظورين</string>
     <string name="click_again_exit">اضغط مرة اخرى للخروج</string>
     <string name="country_code">يحتوي مفتاح البلد</string>
+    <string name="change_phonee">تغيير رقم الهاتف</string>
+    <string name="enter_no_here">ادخل الارقام هنا</string>
+    <string name="enter_6_digit">الرجاء كتابة الكود</string>
+    <string name="otp_must6">يجب ان يكون 6 ارقام</string>
+    <string name="digit6error">الكود خاطئ</string>
+    <string name="done_phone_changed">تم تغير رقم الهاتف بنجاح</string>
 
 
 </resources>

@@ -194,5 +194,11 @@
     <string name="click_again_exit">Click BACK again to exit</string>
     <string name="user_blocked">Added to black list successful</string>
     <string name="country_code">phone with coutry code</string>
+    <string name="digit6error">6 digit code error</string>
+    <string name="done_phone_changed">Phone number updated successfully</string>
+    <string name="change_phonee">Change phone number</string>
+    <string name="enter_no_here">Enter code here</string>
+    <string name="enter_6_digit">please enter code</string>
+    <string name="otp_must6">code must be 6 digit</string>
 
 </resources>
