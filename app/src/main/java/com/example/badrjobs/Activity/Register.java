@@ -119,7 +119,7 @@ public class Register extends ToolbarClass {
                         if (cs.equals("")) { // for backspace
                             return cs;
                         }
-                        if (cs.toString().matches("[a-zA-Z]+")) {
+                        if (cs.toString().matches("[a-zA-Z0-9]+")) {
                             return cs;
                         }
                         return "";

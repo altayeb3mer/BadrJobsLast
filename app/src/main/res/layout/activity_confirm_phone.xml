@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ConfirmPhone">
 
+    <include layout="@layout/public_toolbar"/>
+
     <LinearLayout
+        android:layout_marginTop="?actionBarSize"
         android:padding="@dimen/margin_large_size"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -40,9 +43,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:minWidth="200dp"/>
-
-
+            android:minWidth="200dp"
+            />
 
 
     </LinearLayout>
