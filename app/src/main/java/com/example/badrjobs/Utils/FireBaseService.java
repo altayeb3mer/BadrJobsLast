@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+
 public class FireBaseService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
@@ -19,6 +20,7 @@ public class FireBaseService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 //       startActivity(new Intent(getApplicationContext(),));
+//        Badgify.setBadge(getApplicationContext(),1);
         super.onMessageReceived(remoteMessage);
     }
 

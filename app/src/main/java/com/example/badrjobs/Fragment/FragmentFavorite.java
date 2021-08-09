@@ -48,7 +48,7 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
     TextView textViewTitle;
     RecyclerView recyclerView;
     AdapterAds adapterJobs;
-    ArrayList<ModelJob> arrayList;
+    ArrayList<ModelJob> arrayList= new ArrayList<>();
     GridLayoutManager gridLayoutManager;
     EditText edtSearch;
 
@@ -66,17 +66,10 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        adapterJobs = new AdapterAds(getActivity(),arrayList);
         init();
+        initAdapter(arrayList);
         getFavorite();
-        return view;
-    }
-
-    private void init() {
-        noDataLay = view. findViewById(R.id.noDataLay);
-        mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        //textView title
-        edtSearch = view.findViewById(R.id.edtSearch);
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -98,6 +91,15 @@ public class FragmentFavorite extends Fragment implements SwipeRefreshLayout.OnR
                 //you can use runnable postDelayed like 500 ms to delay search text
             }
         });
+        return view;
+    }
+
+    private void init() {
+        noDataLay = view. findViewById(R.id.noDataLay);
+        mSwipeRefreshLayout = view. findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        //textView title
+        edtSearch = view.findViewById(R.id.edtSearch);
         textViewTitle = view.findViewById(R.id.txtTitle);
         progressLay = view.findViewById(R.id.progressLay);
 //        SpannableString content = new SpannableString("عند ما يكون الإعلان منتهي سوف يتم حذفه من المفضلة تلقائي");

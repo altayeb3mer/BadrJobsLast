@@ -70,6 +70,7 @@
 
 
     <LinearLayout
+        android:layout_marginTop="60dp"
         android:id="@+id/progressLay"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -86,6 +87,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="60dp"
         android:id="@+id/noDataLay"
         android:visibility="gone"
         android:layout_width="match_parent"

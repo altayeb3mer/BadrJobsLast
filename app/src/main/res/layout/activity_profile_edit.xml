@@ -59,7 +59,6 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/flag"
                             android:id="@+id/img"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/margin_normal_size"
@@ -75,10 +74,11 @@
 
                     </RelativeLayout>
                     <TextView
+                        android:id="@+id/fixename"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ahmed@"
+                        android:text="-"
                         android:textSize="@dimen/txt_normal_size"
                         android:textColor="@android:color/black"/>
 

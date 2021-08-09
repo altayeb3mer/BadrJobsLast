@@ -1,9 +1,13 @@
 package com.example.badrjobs.Fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,7 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -36,7 +45,11 @@ import com.example.badrjobs.Utils.SharedPrefManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -52,6 +65,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import sdk.chat.core.api.SimpleAPI;
 import sdk.chat.core.session.ChatSDK;
 
+import static android.app.Activity.RESULT_OK;
+
 public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
@@ -65,7 +80,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
             textViewNationality,textViewFixName;
 
     CircleImageView circleImageViewMyImg;
-
+    ActivityResultLauncher<Intent> someActivityResultLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +89,19 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
         view = inflater.inflate(R.layout.fragment_account, container, false);
         init();
         getMyProfile();
+        //activity for result
+        someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+                            getMyProfile();
+                        }
+                    }
+                });
         return view;
     }
 
@@ -121,7 +149,8 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                 intent.putExtra("profile",imgProfileUrl);
                 intent.putExtra("header",imgHeaderUrl);
                 intent.putExtra("bio",bio);
-                startActivity(intent);
+//                startActivityForResult(intent,REQUEST_CODE);
+                someActivityResultLauncher.launch(intent);
             }
         });
         imgLogOut = view.findViewById(R.id.imgLogOut);
@@ -240,13 +269,13 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
         ChatSDK.auth().logout().subscribe(new Action() {
             @Override
             public void run() throws Exception {
-                Toast.makeText(context, "logged out from chatSdk", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "logged out from chatSdk", Toast.LENGTH_SHORT).show();
 //                                        SimpleAPI.updateUser(hashMap.get("fixName"),"");
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Toast.makeText(context, "logged out error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "logged out error", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -387,4 +416,14 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
             }
         }, 1000);
     }
+
+//    static final int REQUEST_CODE = 1;
+//    @Override
+//    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+//        super.onActivityResult(reqCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK) {
+//            getMyProfile();
+//        }
+//    }
 }

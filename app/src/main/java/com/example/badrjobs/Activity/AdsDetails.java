@@ -244,7 +244,9 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         nestedScroll = findViewById(R.id.nestedScroll);
         nestedScroll.setVisibility(View.GONE);
         btnStopAd = findViewById(R.id.btnStopAd);
-        btnStopAd.setVisibility(View.GONE);
+        layStopAd = findViewById(R.id.layStopAd);
+//        btnStopAd.setVisibility(View.GONE);
+        layStopAd.setVisibility(View.GONE);
         btnStopAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -626,6 +628,7 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
         });
     }
     String firebase_uid="";
+    LinearLayout layStopAd;
     private void getJobDetails() {
         arrayListImages = new ArrayList<>();
         progressLay.setVisibility(View.VISIBLE);
@@ -753,7 +756,8 @@ public class AdsDetails extends AppCompatActivity implements View.OnClickListene
                                 cardSignature.setVisibility(View.GONE);
                             }
                             if (isMyAd) {
-                                btnStopAd.setVisibility(View.VISIBLE);
+//                                btnStopAd.setVisibility(View.VISIBLE);
+                                layStopAd.setVisibility(View.VISIBLE);
 //                                layChat.setVisibility(View.INVISIBLE);
                                 try {
                                     findViewById(R.id.layCallChat).setVisibility(View.GONE);

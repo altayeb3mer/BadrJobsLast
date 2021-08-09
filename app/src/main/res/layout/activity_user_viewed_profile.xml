@@ -2,15 +2,78 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_container_lay_bg">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:background="@android:color/transparent"
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:minHeight="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="true"
+            android:minHeight="0dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true">
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="fitXY"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.4">
+
+                <ImageView
+                    android:id="@+id/headerImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/margin_normal_size"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/margin_normal_size"
+                        android:layout_marginRight="@dimen/margin_normal_size" />
+                    <TextView
+                        android:id="@+id/fixName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txt_normal_size" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/public_toolbar" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_small_size"
         android:layout_marginTop="@dimen/margin_small_size"
         android:layout_marginRight="@dimen/margin_small_size"
-        android:background="@drawable/shape_container_lay_bg"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
@@ -18,7 +81,8 @@
             android:id="@+id/layContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large_size"
+            android:layout_marginLeft="@dimen/margin_large_size"
+            android:layout_marginRight="@dimen/margin_large_size"
             android:orientation="vertical">
 
             <LinearLayout
@@ -137,11 +201,15 @@
                         android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layCallChat"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="50dp">
+                    android:layout_marginTop="30dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -223,71 +291,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e91e63"
-        android:fitsSystemWindows="true"
-        android:minHeight="0dp">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:fitsSystemWindows="true"
-            android:minHeight="0dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="true">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@android:color/white"
-                android:scaleType="fitXY"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.4">
-
-                <ImageView
-                    android:id="@+id/headerImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="@dimen/margin_normal_size"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="@dimen/margin_normal_size"
-                        android:layout_marginRight="@dimen/margin_normal_size" />
-                    <TextView
-                        android:id="@+id/fixName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/txt_normal_size" />
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-            <include layout="@layout/public_toolbar" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:id="@+id/progressLay"
         android:layout_width="match_parent"

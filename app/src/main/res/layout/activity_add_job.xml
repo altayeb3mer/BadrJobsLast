@@ -376,9 +376,11 @@
                 android:text="@string/birth"
                 android:textStyle="bold"/>
             <EditText
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:clickable="false"
                 android:maxLines="1"
                 android:lines="1"
-                android:inputType="date"
                 android:id="@+id/edtBirthDate"
                 android:layout_marginTop="@dimen/margin_normal_size"
                 android:gravity="center_vertical"

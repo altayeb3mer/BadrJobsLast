@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.badrjobs"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -92,6 +92,7 @@ dependencies {
 
     //animate activity
     implementation 'com.github.mohammadatif:Animatoo:master'
+//    implementation 'me.pie:android-badgify:1.0.2'
 
 
 

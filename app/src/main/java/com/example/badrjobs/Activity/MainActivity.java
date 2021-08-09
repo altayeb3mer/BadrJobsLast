@@ -1,6 +1,9 @@
 package com.example.badrjobs.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.LocaleChangerAppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -51,7 +56,9 @@ public class MainActivity extends sdk.chat.ui.activities.MainActivity implements
 //        Animatoo.animateSlideRight(this);
         init();
 
+
     }
+
 
     @Override
     protected boolean searchEnabled() {

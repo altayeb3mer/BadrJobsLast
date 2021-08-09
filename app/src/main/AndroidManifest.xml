@@ -31,10 +31,12 @@
             android:name=".Activity.SignatureForm2"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.PrevContracts" />
+        <activity android:name=".Activity.CustomProfileActivity" />
         <activity android:name=".Activity.ProfileEdit" />
         <activity android:name=".Activity.PaymentPackage" />
         <activity android:name=".Activity.AdsDetails" />
-        <activity android:name=".Activity.ChattingActivity" />
+        <activity android:name=".Activity.ChattingActivity"
+            />
         <activity android:name=".Activity.TestingAc" />
         <activity android:name=".ChatClasses.MainCustomChatList" />
         <activity
@@ -113,5 +115,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+
+
 
 </manifest>

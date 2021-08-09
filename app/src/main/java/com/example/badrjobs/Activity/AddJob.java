@@ -1,12 +1,14 @@
 package com.example.badrjobs.Activity;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,6 +65,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,7 +90,7 @@ public class AddJob extends ToolbarClass {
     RelativeLayout imgBtn1, imgBtn2, imgBtn3;
     ImageView imageViewBtn1, imageViewBtn2, imageViewBtn3;
     CircleImageView circleImageView1, circleImageView2, circleImageView3;
-
+    final Calendar myCalendar = Calendar.getInstance();
     //value
     String categoryId = "", countryId = "";
     //image
@@ -118,6 +122,9 @@ public class AddJob extends ToolbarClass {
     private boolean additionPhone = false;
     //language controller
     private LocaleChangerAppCompatDelegate localeChangerAppCompatDelegate;
+
+
+    DatePickerDialog.OnDateSetListener date;
 
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
@@ -160,7 +167,12 @@ public class AddJob extends ToolbarClass {
 
         }
     }
+    private void updateLabel() {
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+        edtBirthDay.setText(sdf.format(myCalendar.getTime()));
+    }
     private void initRadios() {
         checkBoxTermAndPolicy = findViewById(R.id.checkbox);
         checkBoxTermAndPolicy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -176,7 +188,32 @@ public class AddJob extends ToolbarClass {
         edtOfficeName = findViewById(R.id.edtOfficeName);
         edtAddress = findViewById(R.id.edtAddress);
         edtOwnerName = findViewById(R.id.edtOwnerName);
+
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+
+        };
         edtBirthDay = findViewById(R.id.edtBirthDate);
+        edtBirthDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                new DatePickerDialog(AddJob.this, date, myCalendar
+//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(AddJob.this, date, 1990, 1,
+                        1).show();
+            }
+        });
+
         edtJob = findViewById(R.id.edtJob);
         edtExperience = findViewById(R.id.edtExperience);
         edtSalary = findViewById(R.id.edtSalary);

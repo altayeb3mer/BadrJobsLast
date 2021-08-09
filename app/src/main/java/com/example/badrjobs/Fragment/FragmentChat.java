@@ -1,6 +1,8 @@
 package com.example.badrjobs.Fragment;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import com.example.badrjobs.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.Single;
@@ -45,6 +48,8 @@ public class FragmentChat extends PrivateThreadsFragment {
         // Required empty public constructor
     }
 
-
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 }

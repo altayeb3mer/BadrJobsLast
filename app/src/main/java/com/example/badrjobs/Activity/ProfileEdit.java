@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -61,7 +62,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
-            textViewPasswordReset, textViewPhone,textViewDescription,txtLength;
+            textViewPasswordReset, textViewPhone,textViewDescription,txtLength,fixename;
     RelativeLayout profileImageLay;
     CircleImageView profileImage;
     CardView cardBio;
@@ -128,6 +129,8 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
 
     private void init() {
 
+        fixename = findViewById(R.id.fixename);
+        fixename.setText(SharedPrefManager.getInstance(this).getFixName());
         txtLength = findViewById(R.id.txtLength);
 
         addHeaderImg = findViewById(R.id.addHeaderImg);
@@ -530,10 +533,11 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
     }
 
 
-
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
 }
