@@ -10,14 +10,14 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.badrjobs"
+        applicationId "bader.cutShort.badrjobs"
         minSdkVersion 23
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -94,6 +94,8 @@ dependencies {
     implementation 'com.github.mohammadatif:Animatoo:master'
 //    implementation 'me.pie:android-badgify:1.0.2'
 
+//    implementation "me.leolin:ShortcutBadger:1.1.22"
+    implementation 'com.github.whytot:BadgeForAppIcon:v1.0.0-beta.2'
 
 
 

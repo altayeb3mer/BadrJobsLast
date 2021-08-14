@@ -8,6 +8,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:563206235791:android:42a1fc5b6b1dbfc8c9b2fa",
+        "android_client_info": {
+          "package_name": "bader.cutShort.badrjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563206235791-mmsns8htlp31hjcpcb31ehqkdpcpnc1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bader.cutShort.badrjobs",
+            "certificate_hash": "163027644b700f47acd3cbe9361cea7092a7ef81"
+          }
+        },
+        {
+          "client_id": "563206235791-ktt28rrvjm5p8hgddte4usiija3bomkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8LmgeUt0MrmK7v0VwBA4vB6VoMPw9V78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563206235791-ktt28rrvjm5p8hgddte4usiija3bomkd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "563206235791-im9fkk9emq7qnec0gjeeaf2p54fk66p2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Jobs.badr"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:563206235791:android:734d219010c290cac9b2fa",
         "android_client_info": {
           "package_name": "com.example.badrjobs"
@@ -20,6 +64,14 @@
           "android_info": {
             "package_name": "com.example.badrjobs",
             "certificate_hash": "163027644b700f47acd3cbe9361cea7092a7ef81"
+          }
+        },
+        {
+          "client_id": "563206235791-ip0bhdvoenp14tkc13inqbtif2kpojqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.badrjobs",
+            "certificate_hash": "6cc1fc5e38660a6a663e5b1d9d0b6f4f18c85009"
           }
         },
         {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context="bader.cutShort.badrjobs.Activity.MainActivity">
 
     <RelativeLayout
         android:id="@+id/layToolbar"
@@ -33,7 +33,7 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
-    <com.example.badrjobs.Utils.CustomViewPager
+    <bader.cutShort.badrjobs.Utils.CustomViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

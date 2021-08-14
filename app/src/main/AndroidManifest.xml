@@ -4,7 +4,7 @@
     package="com.example.badrjobs">
 
     <application
-        android:name=".App"
+        android:name="bader.cutShort.badrjobs.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,47 +13,47 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.Gallery"/>
+        <activity android:name="bader.cutShort.badrjobs.Activity.Gallery"/>
         <activity
-            android:name=".Activity.Splash2"
+            android:name="bader.cutShort.badrjobs.Activity.Splash2"
             android:theme="@style/SplashScreenTheme" />
-        <activity android:name=".Activity.ImageViewer" />
-        <activity android:name=".Activity.ContractImage" />
-        <activity android:name=".Activity.MyAds" />
-        <activity android:name=".Activity.ConfirmPhoneReset" />
-        <activity android:name=".Activity.ResetPhone" />
-        <activity android:name=".Activity.NickNameEdit" />
-        <activity android:name=".Activity.SignatureForm1" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ImageViewer" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ContractImage" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.MyAds" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ConfirmPhoneReset" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ResetPhone" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.NickNameEdit" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.SignatureForm1" />
         <activity
-            android:name=".Activity.SignatureDraw"
+            android:name="bader.cutShort.badrjobs.Activity.SignatureDraw"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activity.SignatureForm2"
+            android:name="bader.cutShort.badrjobs.Activity.SignatureForm2"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.PrevContracts" />
-        <activity android:name=".Activity.CustomProfileActivity" />
-        <activity android:name=".Activity.ProfileEdit" />
-        <activity android:name=".Activity.PaymentPackage" />
-        <activity android:name=".Activity.AdsDetails" />
-        <activity android:name=".Activity.ChattingActivity"
+        <activity android:name="bader.cutShort.badrjobs.Activity.PrevContracts" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.CustomProfileActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ProfileEdit" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.PaymentPackage" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.AdsDetails" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ChattingActivity"
             />
-        <activity android:name=".Activity.TestingAc" />
-        <activity android:name=".ChatClasses.MainCustomChatList" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.TestingAc" />
+        <activity android:name="bader.cutShort.badrjobs.ChatClasses.MainCustomChatList" />
         <activity
-            android:name=".Activity.AddJob"
+            android:name="bader.cutShort.badrjobs.Activity.AddJob"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.BlockedUsersActivity" />
-        <activity android:name=".Activity.FavoriteActivity" />
-        <activity android:name=".Activity.UserViewedProfile" />
-        <activity android:name=".Activity.BlockedUser" />
-        <activity android:name=".Activity.DeleteAccount" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.BlockedUsersActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.FavoriteActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.UserViewedProfile" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.BlockedUser" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.DeleteAccount" />
         <activity
-            android:name=".Activity.ConfirmDeal"
+            android:name="bader.cutShort.badrjobs.Activity.ConfirmDeal"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.AboutActivity" />
-        <activity android:name=".Activity.ContactUs" />
-        <activity android:name=".Activity.NotificationDetails" />
-        <activity android:name=".Activity.NotificationActivity">
+        <activity android:name="bader.cutShort.badrjobs.Activity.AboutActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ContactUs" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.NotificationDetails" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.NotificationActivity">
             <intent-filter>
                 <action android:name="NotificationActivity" />
 
@@ -61,14 +61,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.ConfirmPhone"
+            android:name="bader.cutShort.badrjobs.Activity.ConfirmPhone"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activity.MenuActivity" />
-        <activity android:name=".Activity.AdsActivity" />
-        <activity android:name=".Activity.SubDeptActivity" />
-        <activity android:name=".Activity.DeptsActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.MenuActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.AdsActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.SubDeptActivity" />
+        <activity android:name="bader.cutShort.badrjobs.Activity.DeptsActivity" />
         <activity
-            android:name=".Activity.Splash"
+            android:name="bader.cutShort.badrjobs.Activity.Splash"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,23 +77,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.ResetPassword2"
+            android:name="bader.cutShort.badrjobs.Activity.ResetPassword2"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.ResetPassword1"
+            android:name="bader.cutShort.badrjobs.Activity.ResetPassword1"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.Register"
+            android:name="bader.cutShort.badrjobs.Activity.Register"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.Login"
+            android:name="bader.cutShort.badrjobs.Activity.Login"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name="bader.cutShort.badrjobs.Activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
 
         <provider
-            android:name=".Utils.GenericFileProvider"
+            android:name="bader.cutShort.badrjobs.Utils.GenericFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -103,12 +103,20 @@
         </provider>
 
         <service
-            android:name=".Utils.FireBaseService"
+            android:name="bader.cutShort.badrjobs.Utils.FireBaseService"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+<!--        <service-->
+<!--            android:name="bader.cutShort.badrjobs.Utils.MessageHandler"-->
+<!--            android:stopWithTask="false"-->
+<!--            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.service.notification.NotificationListenerService" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
     </application>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -116,14 +124,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
-    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
-    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
-    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE "/>
 
 
 

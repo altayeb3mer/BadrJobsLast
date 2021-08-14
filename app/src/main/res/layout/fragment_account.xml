@@ -198,6 +198,7 @@
                         android:layout_marginRight="@dimen/margin_normal_size"
                         android:layout_marginLeft="@dimen/margin_normal_size">
                         <TextView
+                            android:textDirection="ltr"
                             android:text="-"
                             android:id="@+id/phone"
                             android:layout_width="wrap_content"
@@ -232,6 +233,7 @@
                         android:layout_marginLeft="@dimen/margin_normal_size"
                         android:layout_height="match_parent">
                         <TextView
+                            android:textDirection="locale"
                             android:text="-"
                             android:id="@+id/email"
                             android:layout_width="wrap_content"
@@ -240,7 +242,7 @@
                             app:layout_constraintRight_toLeftOf="@+id/g1"
                             android:gravity="center_vertical"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/txt_normal_size"/>
+                            android:textSize="@dimen/txt_normal_size14"/>
 
                     </LinearLayout>
 
@@ -351,7 +353,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:textSize="@dimen/txt_small_size"
+                                    android:textSize="@dimen/txt_normal_size14"
                                     android:textStyle="bold"
                                     android:text="@string/balance"
                                     android:textColor="@android:color/white"/>
