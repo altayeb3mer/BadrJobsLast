@@ -11,6 +11,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -53,6 +57,11 @@ public class EmailUpdate extends ToolbarClass {
         progressLay = findViewById(R.id.progressLay);
         newEmail1 = findViewById(R.id.newEmail1);
         newEmail2 = findViewById(R.id.newEmail2);
+        //disable copy & paste
+        disableCopyPaste(newEmail1);
+        disableCopyPaste(newEmail2);
+
+
         button = findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +110,25 @@ public class EmailUpdate extends ToolbarClass {
 
 
 
+    private void disableCopyPaste(EditText editText){
+        editText.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+        });
+    }
 
     private void warningMsg(String message, boolean finish) {
         final Dialog dialog = new Dialog(this);

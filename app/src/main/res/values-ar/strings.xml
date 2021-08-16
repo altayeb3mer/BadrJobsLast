@@ -203,9 +203,9 @@
     <string name="email_update_sub_title">ادخل البريد الالكتروني الجديد في الاسفل وقم بتاكيدة</string>
     <string name="email_update_new_email">البريد الالكتروني الجديد</string>
     <string name="email_update_confirm">تأكيد البريد الالكتروني</string>
-    <string name="update">تحديث</string>
     <string name="email_update_empty_feilds">الرجاء كتابة البريد الالكتروني وتأكيدة</string>
     <string name="email_update_done">تم تحديث البريد الالكتروني</string>
+    <string name="edit_email">تحديث البريد الالكتروني</string>
 
 
 </resources>
