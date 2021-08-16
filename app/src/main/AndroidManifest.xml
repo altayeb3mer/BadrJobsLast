@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="bader.cutShort.badrjobs.Activity.Gallery"/>
+        <activity android:name="bader.cutShort.badrjobs.Activity.EmailUpdate"></activity>
+        <activity android:name="bader.cutShort.badrjobs.Activity.Gallery" />
         <activity
             android:name="bader.cutShort.badrjobs.Activity.Splash2"
             android:theme="@style/SplashScreenTheme" />
@@ -35,8 +36,7 @@
         <activity android:name="bader.cutShort.badrjobs.Activity.ProfileEdit" />
         <activity android:name="bader.cutShort.badrjobs.Activity.PaymentPackage" />
         <activity android:name="bader.cutShort.badrjobs.Activity.AdsDetails" />
-        <activity android:name="bader.cutShort.badrjobs.Activity.ChattingActivity"
-            />
+        <activity android:name="bader.cutShort.badrjobs.Activity.ChattingActivity" />
         <activity android:name="bader.cutShort.badrjobs.Activity.TestingAc" />
         <activity android:name="bader.cutShort.badrjobs.ChatClasses.MainCustomChatList" />
         <activity
@@ -109,24 +109,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-<!--        <service-->
-<!--            android:name="bader.cutShort.badrjobs.Utils.MessageHandler"-->
-<!--            android:stopWithTask="false"-->
-<!--            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.service.notification.NotificationListenerService" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
     </application>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE " />
 
-
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE "/>
-
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

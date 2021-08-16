@@ -57,11 +57,12 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import sdk.chat.core.ui.ProfileFragmentProvider;
 
 public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
 
     TextView textViewNickName,textViewFullName,textViewJob,textViewContracts,textViewBlockedUser,textViewDeleteAccount,
-            textViewPasswordReset, textViewPhone,textViewDescription,txtLength,fixename;
+            textViewPasswordReset, textViewPhone,textViewDescription,txtLength,fixename,emailReset;
     RelativeLayout profileImageLay;
     CircleImageView profileImage;
     CardView cardBio;
@@ -127,7 +128,8 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
     }
 
     private void init() {
-
+        emailReset = findViewById(R.id.emailReset);
+        emailReset.setOnClickListener(this);
         fixename = findViewById(R.id.fixename);
         fixename.setText(SharedPrefManager.getInstance(this).getFixName());
         txtLength = findViewById(R.id.txtLength);
@@ -417,6 +419,10 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
             case R.id.addHeaderImg:{
                 imageType = "header";
                 checkPermission();
+                break;
+            }
+            case R.id.emailReset:{
+                startActivity(new Intent(ProfileEdit.this,EmailUpdate.class));
                 break;
             }
         }

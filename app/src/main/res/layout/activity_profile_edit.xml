@@ -158,6 +158,15 @@
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
                         <TextView
+                            android:id="@+id/emailReset"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:text="@string/edit_email"
+                            android:textSize="@dimen/txt_normal_size"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
+                        <TextView
                             android:id="@+id/phone"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"

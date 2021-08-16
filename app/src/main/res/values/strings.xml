@@ -200,5 +200,6 @@
     <string name="enter_no_here">Enter code here</string>
     <string name="enter_6_digit">please enter code</string>
     <string name="otp_must6">code must be 6 digit</string>
+    <string name="edit_email">Edit email</string>
 
 </resources>
