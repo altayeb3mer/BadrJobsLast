@@ -202,10 +202,12 @@
     <string name="otp_must6">code must be 6 digit</string>
     <string name="edit_email">Edit email</string>
     <string name="email_update_title">Email Update</string>
-    <string name="email_update_sub_title">Insert email below and confirm it</string>
+    <string name="email_update_sub_title">Insert current email and password first then type the new email</string>
     <string name="email_update_new_email">The new email</string>
     <string name="email_update_confirm">Confirm new email</string>
-    <string name="email_update_empty_feilds">please insert the email and confirm it</string>
+    <string name="email_update_empty_feilds">all fields are required</string>
     <string name="email_update_done">Email updated done</string>
+    <string name="image_vi">Image Viewer</string>
+    <string name="current_email">Current email</string>
 
 </resources>

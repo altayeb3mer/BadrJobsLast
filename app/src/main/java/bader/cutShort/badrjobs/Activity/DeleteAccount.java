@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.badrjobs.R;
 import bader.cutShort.badrjobs.Utils.Api;
 import bader.cutShort.badrjobs.Utils.SharedPrefManager;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -46,6 +48,7 @@ public class DeleteAccount extends ToolbarClass implements View.OnClickListener 
     String password= "";
     TextInputLayout layPass;
     LinearLayout progressLay;
+    CircleImageView circleImageView;
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,7 @@ public class DeleteAccount extends ToolbarClass implements View.OnClickListener 
 
 
     private void init() {
+        circleImageView = findViewById(R.id.img);
         progressLay = findViewById(R.id.progressLay);
         layPass = findViewById(R.id.layPass);
         textViewNicename = findViewById(R.id.nicename);
@@ -218,6 +222,7 @@ public class DeleteAccount extends ToolbarClass implements View.OnClickListener 
                             JSONObject dataObject = jsonObjectOfArray.getJSONObject("user");
 
                             textViewNicename.setText(dataObject.getString("fixName"));
+                            Glide.with(DeleteAccount.this).load(dataObject.getString("image")).into(circleImageView);
 //                            textViewDesc.setText(dataObject.getString("fixName"));
 //                            textViewName.setText(dataObject.getString("name"));
 //                            textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));

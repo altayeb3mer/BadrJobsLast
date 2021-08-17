@@ -17,12 +17,13 @@ public class ImageViewer extends ToolbarClass {
 
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(R.layout.activity_image_viewer, "");
+        super.onCreate(R.layout.activity_image_viewer, getString(R.string.image_vi));
         changeStatusBarColor();
         init();
         Bundle args = getIntent().getExtras();
         if (args != null) {
             imgUrl = args.getString("imgUrl");
+
 
             Glide.with(getApplicationContext())
                     .load(imgUrl)

@@ -83,11 +83,11 @@ public class ProfileEdit extends ToolbarClass implements View.OnClickListener {
         init();
         loadImages();
     }
-
+    String imgProfileUrl="";
     private void loadImages() {
         Bundle args = getIntent().getExtras();
         if (args!=null){
-            String imgProfileUrl = args.getString("profile");
+            imgProfileUrl = args.getString("profile");
             String imgHeaderUrl = args.getString("header");
             String bio = args.getString("bio");
 

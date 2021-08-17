@@ -1,9 +1,11 @@
 package bader.cutShort.badrjobs.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,8 @@ import com.example.badrjobs.R;
 import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
+
+import bader.cutShort.badrjobs.Activity.ImageViewer;
 
 
 public class AdapterGallery extends RecyclerView.Adapter<AdapterGallery.ViewHolder> {
@@ -52,6 +56,15 @@ public class AdapterGallery extends RecyclerView.Adapter<AdapterGallery.ViewHold
             e.printStackTrace();
         }
 
+        holder.zoomageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ImageViewer.class);
+                intent.putExtra("imgUrl",arrayList.get(indx));
+                activity.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -73,7 +86,7 @@ public class AdapterGallery extends RecyclerView.Adapter<AdapterGallery.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ZoomageView zoomageView;
+        ImageView zoomageView;
 
         ViewHolder(View itemView) {
             super(itemView);

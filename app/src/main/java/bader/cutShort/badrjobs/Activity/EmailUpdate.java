@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -29,6 +30,8 @@ import com.franmontiel.localechanger.utils.ActivityRecreationHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -38,12 +41,14 @@ import java.util.HashMap;
 
 import bader.cutShort.badrjobs.Utils.ToolbarClass;
 
+import static android.content.ContentValues.TAG;
+
 public class EmailUpdate extends ToolbarClass {
 
 
-    EditText newEmail1,newEmail2;
+    EditText newEmail1,newEmail2,edt_currentEmail,edt_password;
     AppCompatButton button;
-    String email1="",email2="";
+    String email1="",email2="",currentEmail="",password="";
     LinearLayout progressLay;
 
     protected final void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,9 @@ public class EmailUpdate extends ToolbarClass {
     }
 
     private  void init(){
+        edt_currentEmail = findViewById(R.id.currentEmail);
+        edt_password = findViewById(R.id.password);
+        progressLay = findViewById(R.id.progressLay);
         progressLay = findViewById(R.id.progressLay);
         newEmail1 = findViewById(R.id.newEmail1);
         newEmail2 = findViewById(R.id.newEmail2);
@@ -68,7 +76,9 @@ public class EmailUpdate extends ToolbarClass {
             public void onClick(View v) {
                 email1 = newEmail1.getText().toString().trim();
                 email2 = newEmail2.getText().toString().trim();
-                if (!email1.isEmpty()&&!email2.isEmpty()){
+                currentEmail = edt_currentEmail.getText().toString().trim();
+                password = edt_password.getText().toString().trim();
+                if (!email1.isEmpty()&&!email2.isEmpty()&&!currentEmail.isEmpty()&&!password.isEmpty()){
                     if (!Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
                         newEmail1.setError("الرجاء كتابة بريد الكتروني صحيح");
                         newEmail1.requestFocus();
@@ -85,20 +95,42 @@ public class EmailUpdate extends ToolbarClass {
                         return;
                     }
 
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
                     progressLay.setVisibility(View.VISIBLE);
-                    user.updateEmail(email1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressLay.setVisibility(View.GONE);
-                            if (task.isSuccessful()){
-                                warningMsg(getString(R.string.email_update_done),true);
-                            }else{
-                                warningMsg(getString(R.string.error_try_again),false);
-                            }
-                        }
-                    });
+
+
+
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    // Get auth credentials from the user for re-authentication
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(currentEmail, password); // Current Login Credentials \\
+                    // Prompt the user to re-provide their sign-in credentials
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Log.d(TAG, "User re-authenticated.");
+                                    //Now change your email address \\
+                                    //----------------Code for Changing Email Address----------\\
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    user.updateEmail(email1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            progressLay.setVisibility(View.GONE);
+                                            if (task.isSuccessful()){
+                                                warningMsg(getString(R.string.email_update_done),true);
+                                            }else{
+                                                warningMsg(getString(R.string.error_try_again),false);
+                                            }
+                                        }
+                                    });
+                                    //----------------------------------------------------------\\
+                                }
+                            });
+
+
+
+
 
 
                 }else{

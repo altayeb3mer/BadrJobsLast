@@ -29,6 +29,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 
+import bader.cutShort.badrjobs.Activity.ImageViewer;
 import bader.cutShort.badrjobs.Activity.Login;
 import bader.cutShort.badrjobs.Activity.MyAds;
 import bader.cutShort.badrjobs.Activity.PaymentPackage;
@@ -150,6 +151,26 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                 warningMsg();
             }
         });
+
+
+
+        circleImageViewMyImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ImageViewer.class);
+                intent.putExtra("imgUrl",imgProfileUrl);
+                startActivity(intent);
+            }
+        });
+        coverImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ImageViewer.class);
+                intent.putExtra("imgUrl",imgHeaderUrl);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -327,7 +348,7 @@ public class FragmentMyProfile extends Fragment implements SwipeRefreshLayout.On
                                 textViewDesc.setText("");
                             }
                             textViewName.setText(dataObject.getString("name"));
-                            textViewPhone.setText(dataObject.getString("codeCountry")+dataObject.getString("phone"));
+                            textViewPhone.setText(dataObject.getString("phone"));
                             textViewEmail.setText(dataObject.getString("email"));
                             textViewJob.setText(dataObject.getString("job"));
                             textViewNationality.setText(dataObject.getString("nationality"));

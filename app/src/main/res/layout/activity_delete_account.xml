@@ -52,9 +52,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/flag"
                         android:id="@+id/img"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/margin_normal_size"
                         android:layout_marginRight="@dimen/margin_normal_size"/>
                     <TextView
@@ -62,7 +60,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ahmed@"
                         android:textSize="@dimen/txt_normal_size"
                         android:textColor="@android:color/black"/>
 
